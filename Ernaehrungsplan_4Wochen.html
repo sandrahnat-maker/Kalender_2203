@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ern&#228;hrungsplan</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#F5F0EA;color:#1A1A2E;padding-bottom:2rem}
+header{background:#1A1A2E;color:#F5F0EA;padding:.85rem 1rem .7rem}
+h1{font-size:1.1rem;font-weight:600;margin-bottom:.45rem}
+.mt{display:flex;gap:.28rem;flex-wrap:wrap}
+.mtb{padding:.24rem .65rem;border:1.5px solid #444;border-radius:20px;background:transparent;color:#aaa;font-size:.66rem;cursor:pointer;font-family:inherit;transition:all .15s}
+.mv{display:none}.mv.active{display:block}
+main{max-width:600px;margin:0 auto;padding:.8rem}
+.wt{display:flex;gap:.28rem;flex-wrap:wrap;margin-bottom:.7rem}
+.wtb{padding:.24rem .65rem;border:1.5px solid #555;border-radius:20px;background:transparent;color:#aaa;font-size:.66rem;cursor:pointer;font-family:inherit;transition:all .15s}
+.wk{display:none}.wk.active{display:block}
+.wl{font-size:.57rem;letter-spacing:.15em;text-transform:uppercase;color:var(--wc);margin-bottom:.6rem;font-weight:700}
+.dc{background:#fff;border-radius:10px;margin-bottom:.5rem;border:1px solid rgba(0,0,0,.07);overflow:hidden}
+.dh{display:flex;align-items:center;justify-content:space-between;padding:.42rem .75rem;background:rgba(0,0,0,.02);border-bottom:1px solid rgba(0,0,0,.05)}
+.dn{font-weight:700;font-size:.8rem}
+.b{font-size:.55rem;padding:.09rem .42rem;border-radius:10px;font-weight:700}
+.bh{background:#E8F5EE;color:#2E7D4F}.bi{background:#FFF3E0;color:#C0703A}.bt{background:#EDE7F6;color:#7B5EA7}
+.ms{padding:.2rem 0}
+.mr{display:flex;align-items:baseline;gap:.45rem;padding:.28rem .75rem}
+.lb{font-size:.56rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#bbb;width:2.7rem;flex-shrink:0}
+.mc{flex:1}
+.mn{font-size:.78rem;font-weight:600;line-height:1.3}
+.mn.g{color:#C0703A}
+.md{font-size:.68rem;color:#777;margin-top:.05rem;line-height:1.35}
+.dv{height:1px;background:rgba(0,0,0,.04);margin:0 .75rem}
+.stit{font-size:.58rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;margin:.85rem 0 .42rem .1rem}
+.ib{border-radius:10px;padding:.5rem .75rem;margin-bottom:.65rem;font-size:.68rem;line-height:1.5;border:1px solid}
+.ib.g{background:#E8F5EE;color:#2E7D4F;border-color:#b8ddc0}
+.ib.o{background:#FFF3E0;color:#C0703A;border-color:#f0d0a0}
+.ib.b{background:#E3F2FD;color:#1565C0;border-color:#90CAF9}
+.nc{background:#fff;border-radius:10px;margin-bottom:.48rem;border:1px solid rgba(0,0,0,.07);overflow:hidden}
+.nh{display:flex;align-items:center;gap:.5rem;padding:.46rem .75rem;border-bottom:1px solid rgba(0,0,0,.05)}
+.ni{font-size:.95rem;flex-shrink:0}
+.ntit{font-weight:700;font-size:.8rem}
+.nsub{font-size:.65rem;color:#666;margin-top:.03rem}
+.nb{padding:.4rem .75rem .45rem}
+.nr{display:flex;gap:.4rem;margin-bottom:.25rem;align-items:baseline}
+.nlab{font-size:.64rem;font-weight:700;width:4.8rem;flex-shrink:0}
+.ntxt{font-size:.66rem;color:#444;line-height:1.4;flex:1}
+.nw{font-size:.62rem;margin-top:.2rem;background:#FFF3E0;border-radius:6px;padding:.25rem .45rem;color:#C0703A;line-height:1.4}
+.tc{background:#fff;border-radius:10px;margin-bottom:.48rem;border:1px solid rgba(0,0,0,.07);padding:.46rem .75rem}
+.tnm{font-weight:700;font-size:.8rem;margin-bottom:.1rem}
+.tds{font-size:.67rem;color:#444;line-height:1.4}
+.tdose{font-size:.63rem;color:#2E7D4F;font-weight:600;margin-top:.13rem}
+.twarn{font-size:.61rem;color:#C0703A;margin-top:.1rem}
+.pct{display:inline-block;background:#E8F5EE;color:#2E7D4F;border-radius:6px;padding:.06rem .3rem;font-size:.6rem;font-weight:700;margin-left:.25rem}
+.ldlb{display:inline-block;background:#c8e6f8;color:#0d5c8c;border-radius:6px;padding:.06rem .3rem;font-size:.58rem;font-weight:700;margin-left:.25rem}
+</style>
+</head>
+<body>
+<header>
+  <h1>&#x1F957; Ern&#228;hrungsplan &#183; Lp(a) &#183; LDL &#183; Blutdruck</h1>
+  <div class="mt" id="mt">
+    <button class="mtb" onclick="sM('plan',this)">&#x1F4C5; Wochenplan</button>
+    <button class="mtb" onclick="sM('ldl',this)">&#x1F4C9; LDL senken</button>
+    <button class="mtb" onclick="sM('nem',this)">&#x1F48A; Nahrungserg.</button>
+    <button class="mtb" onclick="sM('tee',this)">&#x1F375; Tee &amp; Kr&#228;uter</button>
+  </div>
+</header>
+<main>
+
+<div class="mv" id="mv-plan">
+<div class="wt" id="wt">
+    <button class="wtb" onclick="sW(1,this)">Woche 1</button>
+    <button class="wtb" onclick="sW(2,this)">Woche 2</button>
+    <button class="wtb" onclick="sW(3,this)">Woche 3</button>
+    <button class="wtb" onclick="sW(4,this)">Woche 4</button>
+  </div>
+<div class="wk" id="wk1" style="--wc:#8B6020">
+<div class="wl">Woche 1 &#183; Hafer & H&#252;lsenfr&#252;chte</div>
+<div class="dc"><div class="dh"><span class="dn">Montag</span><span class="b bh">gesund</span></div><div class="ms">
+    <div class="mr"><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Haferbrei mit Apfel & Zimt</div><div class="md">Leinsamen &#183; unges&#252;&#223;t</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Linsensuppe</div><div class="md">Rote Linsen, Karotte, Ingwer, Cumin &#183; kein Salz</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Kr&#228;uterfrischk&#228;se-Brot</div><div class="md">Gurke & Tomate &#183; frische Kr&#228;uter</div></div></div>
+</div></div>
+<div class="dc"><div class="dh"><span class="dn">Dienstag</span><span class="b bh">gesund</span></div><div class="ms">
+    <div class="mr"><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Haferbrei mit Waln&#252;ssen & Zimt</div><div class="md">1 EL Leinsamen</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Zucchini-Tomaten-Pfanne mit Kichererbsen</div><div class="md">Oliven&#246;l, Knoblauch</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Topfen mit Schnittlauch</div><div class="md">Roggenkn&#228;ckebrot &#183; Radieschen</div></div></div>
+</div></div>
+<div class="dc"><div class="dh"><span class="dn">Mittwoch</span><span class="b bi">Genuss</span></div><div class="ms">
+    <div class="mr"><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Joghurt (natur) mit Beeren &</div><div class="md">Waln&#252;sse</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn g">Pasta mit frischer Tomatensauce & Basilikum</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Ricotta auf Vollkornbrot</div><div class="md">Gurke & Kr&#228;uter</div></div></div>
+</div></div>
+<div class="dc"><div class="dh"><span class="dn">Donnerstag</span><span class="b bh">gesund</span></div><div class="ms">
+    <div class="mr"><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Vollkornbrot mit Frischk&#228;se & Tomate</div><div class="md">Schnittlauch</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Gem&#252;sesuppe</div><div class="md">Karotte, Sellerie, Lauch, Petersilie &#183; ohne Salz</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Spiegelei mit Spinat</div><div class="md">Vollkorntoast</div></div></div>
+</div></div>
+<div class="dc"><div class="dh"><span class="dn">Freitag</span><span class="b bh">gesund</span></div><div class="ms">
+    <div class="mr"><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Porridge mit Heidelbeeren & Leinsamen</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Quinoa-Bowl</div><div class="md">Kichererbsen, Paprika, Gurke, Zitronendressing</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Frischk&#228;se-Toast</div><div class="md">Tomate & Rucola &#183; Oliven&#246;l</div></div></div>
+</div></div>
+<div class="dc"><div class="dh"><span class="dn">Samstag</span><span class="b bt">Unterwegs</span></div><div class="ms">
+    <div class="mr"><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Vollkornbrot mit Topfen & Schnittlauch (vor Abfahrt)</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Jause: Frischk&#228;se-Wrap, Apfel, Waln&#252;sse</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Gem&#252;sepfanne mit Ei</div><div class="md">Zucchini, Paprika, Kr&#228;uter</div></div></div>
+</div></div>
+<div class="dc"><div class="dh"><span class="dn">Sonntag</span><span class="b bi">Genuss</span></div><div class="ms">
+    <div class="mr"><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn g">R&#252;hrei mit Gem&#252;se</div><div class="md">Vollkornbrot</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Rote-Linsen-Dal</div><div class="md">Cumin, Koriander, Ingwer &#183; Reis</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Joghurt mit Beeren</div></div></div>
+</div></div>
+</div>
+<div class="wk" id="wk2" style="--wc:#2E7D4F">
+<div class="wl">Woche 2 &#183; Linsen & Vollkorn</div>
+<div class="dc"><div class="dh"><span class="dn">Montag</span><span class="b bh">gesund</span></div><div class="ms">
+    <div class="mr"><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Haferbrei mit Birne & Waln&#252;ssen</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Tomatensuppe (frisch)</div><div class="md">Basilikum &#183; ohne Sahne</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Mascarpone light auf Vollkornbrot</div><div class="md">Kr&#228;uter & Tomate</div></div></div>
+</div></div>
+<div class="dc"><div class="dh"><span class="dn">Dienstag</span><span class="b bi">Genuss</span></div><div class="ms">
+    <div class="mr"><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Joghurt (natur) mit Himbeeren & Haferflocken</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn g">Pasta mit Gem&#252;se-Oliven&#246;l-Sauce</div><div class="md">Knoblauch</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">H&#252;ttenk&#228;se mit Gurke & Kr&#228;utern</div><div class="md">Kn&#228;ckebrot</div></div></div>
+</div></div>
+<div class="dc"><div class="dh"><span class="dn">Mittwoch</span><span class="b bh">gesund</span></div><div class="ms">
+    <div class="mr"><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">R&#252;hrei</div><div class="md">Vollkornbrot &#183; Tomate & Schnittlauch</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Linsensalat</div><div class="md">gr&#252;ne Linsen, Paprika, Zitrone, Petersilie</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Ricotta-Toast mit Gurke & Dill</div></div></div>
+</div></div>
+<div class="dc"><div class="dh"><span class="dn">Donnerstag</span><span class="b bh">gesund</span></div><div class="ms">
+    <div class="mr"><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Porridge mit Aprikose & Zimt</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Brokkoli-Kartoffel-P&#252;ree</div><div class="md">Oliven&#246;l &#183; kein Salz extra</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Frischk&#228;se & Rohkost</div><div class="md">Karotte, Gurke, Paprika</div></div></div>
+</div></div>
+<div class="dc"><div class="dh"><span class="dn">Freitag</span><span class="b bh">gesund</span></div><div class="ms">
+    <div class="mr"><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Vollkornbrot mit Frischk&#228;se-Kr&#228;uter & Tomate</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Rote-Bete-Salat</div><div class="md">Waln&#252;sse, Apfel, Zitronendressing</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Joghurt mit Waln&#252;ssen & Honig</div></div></div>
+</div></div>
+<div class="dc"><div class="dh"><span class="dn">Samstag</span><span class="b bt">Unterwegs</span></div><div class="ms">
+    <div class="mr"><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Joghurt mit M&#252;sli (vor Abfahrt)</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Jause: Topfen-Vollkornbrot, N&#252;sse, Obst</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">R&#252;hrei mit Kr&#228;utern</div><div class="md">Vollkorntoast</div></div></div>
+</div></div>
+<div class="dc"><div class="dh"><span class="dn">Sonntag</span><span class="b bi">Genuss</span></div><div class="ms">
+    <div class="mr"><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn g">Frischk&#228;se-Bagel mit Tomate & Rucola</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Gem&#252;se-Flammkuchen</div><div class="md">Sauerrahm light, Zwiebel, Zucchini</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Joghurt mit Fr&#252;chten</div></div></div>
+</div></div>
+</div>
+<div class="wk" id="wk3" style="--wc:#7B5EA7">
+<div class="wl">Woche 3 &#183; Quinoa & Beeren</div>
+<div class="dc"><div class="dh"><span class="dn">Montag</span><span class="b bh">gesund</span></div><div class="ms">
+    <div class="mr"><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Haferbrei mit Apfel & Chiasamen</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">K&#252;rbissuppe</div><div class="md">Ingwer & Kurkuma &#183; ohne Salz</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Kr&#228;uterfrischk&#228;se-Brot</div><div class="md">Radieschen & Gurke</div></div></div>
+</div></div>
+<div class="dc"><div class="dh"><span class="dn">Dienstag</span><span class="b bh">gesund</span></div><div class="ms">
+    <div class="mr"><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Haferbrei mit Leinsamen & Apfel</div><div class="md">unges&#252;&#223;t</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Quinoa mit Ofengem&#252;se</div><div class="md">Zucchini, Paprika, Oliven&#246;l</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Topfenbrot mit Dill & Gurke</div></div></div>
+</div></div>
+<div class="dc"><div class="dh"><span class="dn">Mittwoch</span><span class="b bi">Genuss</span></div><div class="ms">
+    <div class="mr"><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Joghurt mit gemischten Beeren & Waln&#252;ssen</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn g">K&#228;ssp&#228;tzle light</div><div class="md">wenig Salz &#183; mit Salat</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Joghurt mit Fr&#252;chten</div></div></div>
+</div></div>
+<div class="dc"><div class="dh"><span class="dn">Donnerstag</span><span class="b bh">gesund</span></div><div class="ms">
+    <div class="mr"><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Vollkornbrot mit Frischk&#228;se & Tomaten</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Gr&#252;ner Salat</div><div class="md">hartgekochtes Ei, Kr&#228;uter-Vinaigrette</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Frischk&#228;se-Toast mit Rucola & Oliven&#246;l</div></div></div>
+</div></div>
+<div class="dc"><div class="dh"><span class="dn">Freitag</span><span class="b bh">gesund</span></div><div class="ms">
+    <div class="mr"><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Porridge mit Himbeeren & Leinsamen</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Minestrone</div><div class="md">frisches Gem&#252;se, ohne Salz, viel Kr&#228;uter</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Ricotta mit Tomate & Basilikum</div><div class="md">Kn&#228;ckebrot</div></div></div>
+</div></div>
+<div class="dc"><div class="dh"><span class="dn">Samstag</span><span class="b bt">Unterwegs</span></div><div class="ms">
+    <div class="mr"><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Joghurt mit M&#252;sli (vor Abfahrt)</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Jause: Frischk&#228;se-Vollkornbrot, N&#252;sse, Birne</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Gem&#252;sepfanne mit Ei</div><div class="md">10 Min</div></div></div>
+</div></div>
+<div class="dc"><div class="dh"><span class="dn">Sonntag</span><span class="b bi">Genuss</span></div><div class="ms">
+    <div class="mr"><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn g">Pfannkuchen mit frischen Beeren</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Gem&#252;sepizza selbst</div><div class="md">Vollkornteig, viel Gem&#252;se &#183; wenig K&#228;se</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Joghurt oder Fr&#252;chte</div></div></div>
+</div></div>
+</div>
+<div class="wk" id="wk4" style="--wc:#C0703A">
+<div class="wl">Woche 4 &#183; Kichererbsen & Kurkuma</div>
+<div class="dc"><div class="dh"><span class="dn">Montag</span><span class="b bh">gesund</span></div><div class="ms">
+    <div class="mr"><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Haferbrei mit Heidelbeeren & Waln&#252;ssen</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Kichererbsen-Salat</div><div class="md">Gurke, Tomate, Zitronendressing</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Frischk&#228;se-Brot mit Kr&#228;utern & Radieschen</div></div></div>
+</div></div>
+<div class="dc"><div class="dh"><span class="dn">Dienstag</span><span class="b bh">gesund</span></div><div class="ms">
+    <div class="mr"><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Joghurt mit Granola, Beeren & Waln&#252;ssen</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Gem&#252;se-Omelette</div><div class="md">Zucchini, Paprika &#183; Oliven&#246;l</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Ricotta mit Honig auf Toast & Joghurt</div></div></div>
+</div></div>
+<div class="dc"><div class="dh"><span class="dn">Mittwoch</span><span class="b bi">Genuss</span></div><div class="ms">
+    <div class="mr"><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">R&#252;hrei</div><div class="md">Vollkornbrot &#183; Tomate & Schnittlauch</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn g">Tortellini mit frischer Tomatensauce</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Joghurt oder Obst</div></div></div>
+</div></div>
+<div class="dc"><div class="dh"><span class="dn">Donnerstag</span><span class="b bh">gesund</span></div><div class="ms">
+    <div class="mr"><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Porridge mit Apfel & Leinsamen</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Brokkoli-Suppe</div><div class="md">Oliven&#246;l, Kurkuma & Kr&#228;uter &#183; ohne Sahne</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">H&#252;ttenk&#228;se-Brot</div><div class="md">Gurke & Kr&#228;uter</div></div></div>
+</div></div>
+<div class="dc"><div class="dh"><span class="dn">Freitag</span><span class="b bi">Genuss</span></div><div class="ms">
+    <div class="mr"><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Vollkornbrot mit Frischk&#228;se & Tomate</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn g">Pizza vegetarisch</div><div class="md">wenig K&#228;se, viel Gem&#252;se</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Joghurt oder Obst</div></div></div>
+</div></div>
+<div class="dc"><div class="dh"><span class="dn">Samstag</span><span class="b bt">Unterwegs</span></div><div class="ms">
+    <div class="mr"><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Joghurt mit M&#252;sli (vor Abfahrt)</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Jause: Frischk&#228;se-Sandwich, N&#252;sse, Apfel</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">R&#252;hrei</div><div class="md">Vollkorntoast &#183; 10 Min</div></div></div>
+</div></div>
+<div class="dc"><div class="dh"><span class="dn">Sonntag</span><span class="b bi">Genuss</span></div><div class="ms">
+    <div class="mr"><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn g">Gro&#223;es vegetarisches Fr&#252;hst&#252;ck</div><div class="md">Eier, Frischk&#228;se, Gem&#252;se</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">R&#246;sti mit Spiegelei & Kr&#228;uter-Sauerrahm</div><div class="md">wenig Salz</div></div></div>
+    <div class="dv"></div>
+    <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Joghurt oder Fr&#252;chte</div></div></div>
+</div></div>
+</div>
+</div>
+
+<div class="mv" id="mv-ldl">
+<div class="ib g">&#x2705; <b>Gute Nachricht:</b> Durch Ern&#228;hrung l&#228;sst sich LDL um 20&#8211;35% senken. Die drei wichtigsten Hebel: <b>Hafer t&#228;glich &middot; ges&#228;ttigte Fette reduzieren &middot; Ballaststoffe erh&#246;hen.</b></div>
+
+<div class="stit" style="color:#0d5c8c">&#x2B50; Die 4 st&#228;rksten LDL-Senker</div>
+
+<div class="nc">
+  <div class="nh"><span class="ni">&#x1F33E;</span><div><div class="ntit">Hafer-Beta-Glucan <span class="pct">&#x2212;5 bis &#x2212;15%</span></div><div class="nsub">St&#228;rkste Evidenz &middot; EU-Health-Claim &middot; FDA-zugelassen seit 1997</div></div></div>
+  <div class="nb">
+    <div class="nr"><span class="nlab" style="color:#0d5c8c">Wirkung</span><span class="ntxt">Bindet Gallens&#228;uren im Darm &rarr; Leber baut mehr Cholesterin ab &rarr; weniger LDL im Blut</span></div>
+    <div class="nr"><span class="nlab" style="color:#0d5c8c">Dosis</span><span class="ntxt"><b>3 g Beta-Glucan t&#228;glich</b> = ca. 70&#8211;90 g Haferflocken (1 gro&#223;e Sch&#252;ssel Porridge)</span></div>
+    <div class="nr"><span class="nlab" style="color:#0d5c8c">Studie 2020</span><span class="ntxt">Bologna: nach 8 Wochen LDL &#x2212;15,1% &middot; Gesamtcholesterin &#x2212;8,9%</span></div>
+    <div class="nr"><span class="nlab" style="color:#0d5c8c">Im Plan</span><span class="ntxt">Haferbrei t&#228;glich an Mo/Do/Fr (Wk.1), Mo/Sa (Wk.2), Mo/Fr (Wk.3), Mo/Do (Wk.4) &#x2713;</span></div>
+  </div>
+</div>
+
+<div class="nc">
+  <div class="nh"><span class="ni">&#x1FAD8;</span><div><div class="ntit">Phytosterole (Pflanzenstanole) <span class="pct">&#x2212;7 bis &#x2212;10%</span></div><div class="nsub">ESC/EAS-Leitlinie empfiehlt als Erg&#228;nzung zur Lipidtherapie</div></div></div>
+  <div class="nb">
+    <div class="nr"><span class="nlab" style="color:#0d5c8c">Wirkung</span><span class="ntxt">Konkurrieren mit LDL im Darm um Aufnahme &rarr; weniger Cholesterin ins Blut</span></div>
+    <div class="nr"><span class="nlab" style="color:#0d5c8c">Nat&#252;rlich</span><span class="ntxt">H&#252;lsenfr&#252;chte, N&#252;sse, Sonnenblumenkerne, Weizenkeim&#246;l, Soja</span></div>
+    <div class="nr"><span class="nlab" style="color:#0d5c8c">Supplement</span><span class="ntxt">Angereicherte Margarine (z.B. Becel pro.activ) oder Kapseln &middot; 2 g/Tag</span></div>
+    <div class="nw">&#x26A0;&#xFE0F; Nicht bei Phytosterol&#228;mie &middot; wirkt nur bei t&#228;glicher Einnahme</div>
+  </div>
+</div>
+
+<div class="nc">
+  <div class="nh"><span class="ni">&#x1F34E;</span><div><div class="ntit">L&#246;sliche Ballaststoffe <span class="pct">&#x2212;5 bis &#x2212;10%</span></div><div class="nsub">Pektin (&#196;pfel), Flohsamenschalen, H&#252;lsenfr&#252;chte</div></div></div>
+  <div class="nb">
+    <div class="nr"><span class="nlab" style="color:#0d5c8c">T&#228;glich</span><span class="ntxt">1&#8211;2 &#196;pfel mit Schale &middot; H&#252;lsenfr&#252;chte 4&#8211;5&times;/Woche &middot; Leinsamen 1&#8211;2 EL</span></div>
+    <div class="nr"><span class="nlab" style="color:#0d5c8c">Flohsamen</span><span class="ntxt">1 TL Flohsamenschalen in 400 ml Wasser t&#228;glich &rarr; +3&#8211;5% zus&#228;tzliche Senkung</span></div>
+    <div class="nr"><span class="nlab" style="color:#0d5c8c">Im Plan</span><span class="ntxt">Linsensuppe, Kichererbsen, Quinoa, &#196;pfel t&#228;glich vorhanden &#x2713;</span></div>
+  </div>
+</div>
+
+<div class="nc">
+  <div class="nh"><span class="ni">&#x1F330;</span><div><div class="ntit">N&#252;sse & Mandeln t&#228;glich <span class="pct">&#x2212;4 bis &#x2212;8%</span></div><div class="nsub">Portfolio-Di&#228;t (Jenkins): Mandeln t&#228;glich als Teil der 35%-LDL-Senkung</div></div></div>
+  <div class="nb">
+    <div class="nr"><span class="nlab" style="color:#0d5c8c">Dosis</span><span class="ntxt">30 g Waln&#252;sse oder Mandeln t&#228;glich (eine Handvoll)</span></div>
+    <div class="nr"><span class="nlab" style="color:#0d5c8c">Warum</span><span class="ntxt">Unges&#228;ttigte Fetts&#228;uren + Phytosterole + Ballaststoffe &rarr; dreifache Wirkung</span></div>
+    <div class="nr"><span class="nlab" style="color:#0d5c8c">Tipp</span><span class="ntxt">Waln&#252;sse: extra Omega-3 &middot; Mandeln: Vitamin E (sch&#252;tzt LDL vor Oxidation)</span></div>
+  </div>
+</div>
+
+<div class="stit" style="color:#C0703A">&#x1F6AB; Was LDL erh&#246;ht</div>
+<div class="nc">
+  <div class="nh"><span class="ni">&#x26A0;&#xFE0F;</span><div><div class="ntit">Ges&#228;ttigte Fetts&#228;uren</div><div class="nsub">Wichtigster Ern&#228;hrungsfaktor f&#252;r hohes LDL</div></div></div>
+  <div class="nb">
+    <div class="nr"><span class="nlab" style="color:#C0703A">Weniger</span><span class="ntxt">Butter, Sahne, Vollfett-K&#228;se, Kokos&#246;l &middot; max. 1&#8211;2 Eier/Tag</span></div>
+    <div class="nr"><span class="nlab" style="color:#C0703A">Ersetzen</span><span class="ntxt">&rarr; Oliven&#246;l, Raps&#246;l &middot; Magerquark statt Sahne &middot; H&#252;ttenk&#228;se statt Butter</span></div>
+    <div class="nr"><span class="nlab" style="color:#2E7D4F">Im Plan</span><span class="ntxt">Oliven&#246;l als Standard &#x2713; &middot; K&#228;se nur als Genuss-Mahlzeit &#x2713; &middot; Ei max. 1/Tag &#x2713;</span></div>
+  </div>
+</div>
+<div class="nc">
+  <div class="nh"><span class="ni">&#x1F6AB;</span><div><div class="ntit">Trans-Fetts&#228;uren</div><div class="nsub">Erh&#246;hen LDL UND senken HDL gleichzeitig</div></div></div>
+  <div class="nb">
+    <div class="nr"><span class="nlab" style="color:#C0703A">Vermeiden</span><span class="ntxt">Fertiggeb&#228;ck, Chips, Fast Food, "geh&#228;rtete Fette" auf Zutatenliste</span></div>
+    <div class="nr"><span class="nlab" style="color:#2E7D4F">Im Plan</span><span class="ntxt">Keine Trans-Fette im Wochenplan &#x2713;</span></div>
+  </div>
+</div>
+
+<div class="ib b">&#x1F4A1; <b>Portfolio-Di&#228;t (Jenkins):</b> Hafer + Phytosterole + Soja + Mandeln kombiniert &rarr; LDL &#x2212;35% &ndash; vergleichbar mit niedrig dosiertem Statin. Alle 4 Elemente sind im Wochenplan.</div>
+</div>
+
+<div class="mv" id="mv-nem">
+<div class="ib o">&#x26A0;&#xFE0F; Lp(a) ist genetisch bedingt und kaum durch Ern&#228;hrung senkbar. Ziel: alle anderen Risikofaktoren minimieren. Alle NEM mit Arzt besprechen!</div>
+
+<div class="stit" style="color:#7B5EA7">F&#252;r Lp(a) & Herzschutz</div>
+<div class="nc">
+  <div class="nh"><span class="ni">&#x1F41F;</span><div><div class="ntit">Omega-3 EPA/DHA <span class="ldlb">LDL + Lp(a)</span></div><div class="nsub">Fisch&#246;l / Algen&#246;l &middot; senkt Triglyzeride + Entz&#252;ndungsschutz</div></div></div>
+  <div class="nb">
+    <div class="nr"><span class="nlab" style="color:#7B5EA7">Dosis</span><span class="ntxt">mind. 2 g EPA+DHA t&#228;glich &middot; Kapseln mit Vitamin E w&#228;hlen</span></div>
+    <div class="nr"><span class="nlab" style="color:#7B5EA7">Wann</span><span class="ntxt">zur Mahlzeit &middot; am besten abends</span></div>
+    <div class="nr"><span class="nlab" style="color:#7B5EA7">Alternativ</span><span class="ntxt">t&#228;glich Waln&#252;sse, Leinsamen, Chiasamen (ALA-Vorstufe)</span></div>
+  </div>
+</div>
+<div class="nc">
+  <div class="nh"><span class="ni">&#x1F331;</span><div><div class="ntit">Ingwer 1,6 g/Tag <span class="ldlb">Lp(a) + Entz&#252;ndung</span></div><div class="nsub">Studie 2020: senkte Lp(a) + hs-CRP nach 8 Wochen</div></div></div>
+  <div class="nb">
+    <div class="nr"><span class="nlab" style="color:#7B5EA7">Dosis</span><span class="ntxt">1,6 g Ingwerpulver t&#228;glich oder frisch im Tee / Essen</span></div>
+    <div class="nr"><span class="nlab" style="color:#7B5EA7">Im Plan</span><span class="ntxt">Ingwer in K&#252;rbissuppe, Linsensuppe &#x2713; &middot; Morgen-Tee erg&#228;nzen</span></div>
+  </div>
+</div>
+<div class="nc">
+  <div class="nh"><span class="ni">&#x2600;&#xFE0F;</span><div><div class="ntit">Vitamin D3 + K2 <span class="ldlb">Lp(a) + Blutdruck</span></div><div class="nsub">Mangel korreliert mit h&#246;herem Lp(a) + erh&#246;htem Blutdruckrisiko</div></div></div>
+  <div class="nb">
+    <div class="nr"><span class="nlab" style="color:#7B5EA7">Dosis</span><span class="ntxt">1.000&#8211;2.000 IE D3 + K2 t&#228;glich (Winter!) &middot; zur fettreichen Mahlzeit morgens</span></div>
+    <div class="nr"><span class="nlab" style="color:#7B5EA7">Test</span><span class="ntxt">25-OH-D3 messen lassen &middot; Zielwert 40&#8211;60 ng/ml</span></div>
+  </div>
+</div>
+<div class="nc">
+  <div class="nh"><span class="ni">&#x1F33E;</span><div><div class="ntit">Leinsamen geschrotet <span class="ldlb">Lp(a) + LDL</span></div><div class="nsub">40 g/Tag: &#x2212;14% Lp(a) in Studie + Beta-Glucan + Omega-3</div></div></div>
+  <div class="nb">
+    <div class="nr"><span class="nlab" style="color:#7B5EA7">Dosis</span><span class="ntxt">1&#8211;2 EL geschrotet t&#228;glich ins M&#252;sli / Porridge &middot; viel Wasser</span></div>
+    <div class="nr"><span class="nlab" style="color:#7B5EA7">Im Plan</span><span class="ntxt">Leinsamen in fast allen Hafer-Fr&#252;hst&#252;cken &#x2713;</span></div>
+  </div>
+</div>
+
+<div class="stit" style="color:#7B5EA7">F&#252;r LDL zus&#228;tzlich</div>
+<div class="nc">
+  <div class="nh"><span class="ni">&#x1F34B;</span><div><div class="ntit">Bergamotte-Extrakt <span class="pct">&#x2212;22 bis &#x2212;31%</span></div><div class="nsub">Zitrus-Polyphenole hemmen LDL-Produktion &#228;hnlich wie Statine</div></div></div>
+  <div class="nb">
+    <div class="nr"><span class="nlab" style="color:#0d5c8c">Dosis</span><span class="ntxt">500&#8211;1.000 mg Extrakt t&#228;glich (standardisiert auf Brutelidin/Melitidin)</span></div>
+    <div class="nw">&#x26A0;&#xFE0F; Wechselwirkungen mit Statinen m&#246;glich &middot; Arzt fragen</div>
+  </div>
+</div>
+<div class="nc">
+  <div class="nh"><span class="ni">&#x1F7E1;</span><div><div class="ntit">Kurkuma / Curcumin <span class="pct">&#x2212;12% LDL</span></div><div class="nsub">Verhindert LDL-Oxidation &middot; entz&#252;ndungshemmend</div></div></div>
+  <div class="nb">
+    <div class="nr"><span class="nlab" style="color:#0d5c8c">Dosis</span><span class="ntxt">500 mg Curcumin t&#228;glich oder t&#228;glich frisch kochen</span></div>
+    <div class="nr"><span class="nlab" style="color:#0d5c8c">Tipp</span><span class="ntxt">Mit schwarzem Pfeffer (Piperin) &rarr; 20&times; bessere Aufnahme</span></div>
+    <div class="nr"><span class="nlab" style="color:#0d5c8c">Im Plan</span><span class="ntxt">Kurkuma in Linsen-, K&#252;rbis- und Brokkolisuppe &#x2713;</span></div>
+  </div>
+</div>
+
+<div class="stit" style="color:#7B5EA7">F&#252;r Blutdruck</div>
+<div class="nc">
+  <div class="nh"><span class="ni">&#x1F9F2;</span><div><div class="ntit">Magnesium 300&#8211;400 mg <span class="ldlb">Blutdruck</span></div><div class="nsub">Mangel erh&#246;ht Blutdruck direkt &middot; h&#228;ufigster Mangel in &#214;sterreich</div></div></div>
+  <div class="nb">
+    <div class="nr"><span class="nlab" style="color:#7B5EA7">Dosis</span><span class="ntxt">300&#8211;400 mg Magnesiumcitrat abends</span></div>
+    <div class="nr"><span class="nlab" style="color:#7B5EA7">Nat&#252;rlich</span><span class="ntxt">K&#252;rbiskerne, Mandeln, Leinsamen, H&#252;lsenfr&#252;chte</span></div>
+  </div>
+</div>
+<div class="ib o">&#x26A0;&#xFE0F; Kein Supplement ersetzt &#228;rztliche Behandlung! Blutdruckmedikamente immer laut Arzt nehmen.</div>
+</div>
+
+<div class="mv" id="mv-tee">
+<div class="ib g">&#x1F375; Tee kann Blutdruck mild unterst&#252;tzen und LDL-Oxidation hemmen &ndash; als Erg&#228;nzung zu Ern&#228;hrung und Medikamenten.</div>
+
+<div class="stit" style="color:#2E7D4F">Blutdruck senken</div>
+<div class="tc"><div class="tnm">&#x1F33A; Hibiskustee <span class="pct">&#x2212;7 bis &#x2212;13 mmHg</span></div><div class="tds">St&#228;rkste Evidenz: Anthocyane wirken gef&#228;&#223;erweiternd. 3 Tassen t&#228;glich senkten systolischen Druck um 7&#8211;13 mmHg.</div><div class="tdose">3 Tassen/Tag &middot; 1,25 g pro Tasse &middot; 6 Min. ziehen &middot; kalt oder warm</div><div class="twarn">&#x26A0;&#xFE0F; Nicht bei Hydrochlorothiazid (Diuretikum) &#8211; Wechselwirkung! Mit Arzt besprechen.</div></div>
+<div class="tc"><div class="tnm">&#x1F375; Gr&#252;ntee (Sencha) <span class="pct">&#x2212;3 bis &#x2212;5 mmHg</span></div><div class="tds">Catechine verbessern Gef&#228;&#223;elastizit&#228;t. Herzstiftung: 1&#8211;2 Tassen t&#228;glich. Hemmt zus&#228;tzlich LDL-Oxidation.</div><div class="tdose">1&#8211;2 Tassen/Tag &middot; 70&#8211;80&deg;C &middot; 2&#8211;3 Min. ziehen</div><div class="twarn">&#x26A0;&#xFE0F; Kann Betablocker (z.B. Metoprolol) um bis zu 85% abschw&#228;chen! Arzt fragen.</div></div>
+<div class="tc"><div class="tnm">&#x1F339; Wei&#223;dorntee</div><div class="tds">Traditionelles Herzmittel. Erweitert Herzkranzgef&#228;&#223;e, Phenole verbessern Sauerstoffversorgung.</div><div class="tdose">1&#8211;2 Tassen/Tag &middot; aus Bl&#252;ten + Bl&#228;ttern</div></div>
+
+<div class="stit" style="color:#2E7D4F">LDL & Cholesterin</div>
+<div class="tc"><div class="tnm">&#x1F7E1; Kurkuma-Ingwer-Tee</div><div class="tds">Curcumin hemmt LDL-Oxidation + entz&#252;ndungshemmend. Ingwer senkt Lp(a) + hs-CRP. T&#228;glich morgens ideal.</div><div class="tdose">1 TL Kurkuma + 1 cm Ingwer + Prise Pfeffer + Zitrone &middot; 1 Tasse t&#228;glich</div></div>
+<div class="tc"><div class="tnm">&#x1F7E2; Artischockentee <span class="pct">&#x2212;10 bis &#x2212;15% LDL</span></div><div class="tds">Cynarin f&#246;rdert Gallenproduktion &rarr; mehr Cholesterin wird abgebaut.</div><div class="tdose">1&#8211;2 Tassen/Tag &middot; vor den Mahlzeiten</div></div>
+
+<div class="stit" style="color:#2E7D4F">Kr&#228;uter t&#228;glich</div>
+<div class="tc"><div class="tnm">&#x1F9C4; Knoblauch (frisch)</div><div class="tds">Allicin entspannt Blutgef&#228;&#223;e. Regelm&#228;&#223;ig: nachweislich blutdrucksenkend.</div><div class="tdose">1 Zehe t&#228;glich &middot; in Suppen, Saucen, Dressings</div></div>
+<div class="tc"><div class="tnm">&#x1F33F; Petersilie, Schnittlauch</div><div class="tds">Reich an Magnesium + Kalium &middot; t&#228;glich frisch &ndash; bereits im Plan &#x2713;</div></div>
+</div>
+
+</main>
+<script>
+var WCA=["#8B6020", "#2E7D4F", "#7B5EA7", "#C0703A"];
+var WCM={"plan":"#8B6020","ldl":"#0d5c8c","nem":"#7B5EA7","tee":"#2E7D4F"};
+function sM(id,btn){
+  document.querySelectorAll('.mv').forEach(function(v){v.classList.remove('active')});
+  document.querySelectorAll('.mtb').forEach(function(b){b.style.background='transparent';b.style.color='#aaa';b.style.borderColor='#444'});
+  document.getElementById('mv-'+id).classList.add('active');
+  var c=WCM[id]||'#444';
+  btn.style.background=c;btn.style.color='#fff';btn.style.borderColor=c;
+}
+function sW(n,btn){
+  document.querySelectorAll('.wk').forEach(function(w){w.classList.remove('active')});
+  document.querySelectorAll('#wt .wtb').forEach(function(b){b.style.background='transparent';b.style.color='#aaa';b.style.borderColor='#555'});
+  document.getElementById('wk'+String(n)).classList.add('active');
+  btn.style.background=WCA[n-1];btn.style.color='#fff';btn.style.borderColor=WCA[n-1];
+}
+(function(){
+  sM('plan',document.querySelectorAll('.mtb')[0]);
+  sW(1,document.querySelectorAll('#wt .wtb')[0]);
+})();
+window.addEventListener('message', function(e) {
+  if (!e.data || e.data.type !== 'nav') return;
+  var week = e.data.week;
+  var dow = e.data.dow;
+  sM('plan', document.querySelectorAll('.mtb')[0]);
+  var wbtn = document.querySelectorAll('#wt .wtb')[week-1];
+  if (wbtn) sW(week, wbtn);
+  setTimeout(function() {
+    var dayNames = ['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
+    var target = dayNames[dow];
+    var headers = document.querySelectorAll('.dc .dn');
+    for (var i=0; i<headers.length; i++) {
+      if (headers[i].textContent === target) {
+        var card = headers[i].closest('.dc');
+        card.scrollIntoView({behavior:'smooth', block:'start'});
+        var orig = card.style.boxShadow;
+        card.style.boxShadow = '0 0 0 3px #8B6020';
+        setTimeout(function(c,o){ c.style.boxShadow=o; }, 1500, card, orig);
+        break;
+      }
+    }
+  }, 250);
+});
+
+</script>
+</body>
+</html>

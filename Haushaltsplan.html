@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Haushaltsplan</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
+:root{
+  --bg:#F8F4EF; --surface:#FFF; --border:rgba(160,130,90,.15);
+  --accent:#8B6A3E; --g:#5C8A5E; --p:#7B5EA7; --t:#3A8C7C;
+  --red:#C0392B; --text:#1C160E; --muted:rgba(60,45,20,.45);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);font-family:'DM Sans',system-ui,sans-serif;color:var(--text);min-height:100vh;padding-bottom:5rem}
+
+/* HEADER */
+header{background:rgba(248,244,239,.97);border-bottom:1px solid var(--border);padding:.75rem 1rem .6rem;position:sticky;top:0;z-index:30;backdrop-filter:blur(12px)}
+.htop{display:flex;align-items:center;justify-content:space-between;margin-bottom:.45rem}
+.htitle{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;letter-spacing:.03em}
+.hbadge{font-size:.58rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-top:.1rem}
+.hright{text-align:right}
+.total-min{font-size:1.1rem;font-weight:600;color:var(--accent);font-variant-numeric:tabular-nums}
+.total-lbl{font-size:.55rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+
+/* WOCHENTAG */
+.daystrip{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;padding:.05rem 0 .4rem}
+.dbtn{background:transparent;border:none;cursor:pointer;padding:.22rem 0;display:flex;flex-direction:column;align-items:center;gap:.18rem}
+.dname{font-size:.54rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);transition:color .2s}
+.dnum{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:500;transition:all .2s}
+.dbtn.active .dname{color:var(--accent)}
+.dbtn.active .dnum{background:var(--accent);color:#fff}
+.dbtn.today .dnum{outline:2px solid var(--accent);outline-offset:2px}
+.ddot{width:3px;height:3px;border-radius:50%;background:var(--accent);opacity:.3}
+.dbtn.active .ddot{opacity:1}
+
+/* MAIN */
+main{padding:.8rem .9rem 1rem;max-width:540px;margin:0 auto}
+
+/* PROGRESS */
+.prog-row{display:flex;justify-content:space-between;font-size:.6rem;color:var(--muted);margin-bottom:.25rem}
+.prog-wrap{background:rgba(160,130,90,.1);border-radius:3px;height:3px;margin-bottom:.8rem;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--g));border-radius:3px;transition:width .4s}
+
+/* AUDIO CONTROLLER */
+.audio-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:.9rem 1rem;margin-bottom:.9rem;box-shadow:0 2px 12px rgba(150,110,50,.07)}
+.audio-now{margin-bottom:.6rem}
+.audio-label{font-size:.56rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.18rem}
+.audio-task{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:400;color:var(--text);line-height:1.3;min-height:1.5rem}
+.audio-sub{font-size:.67rem;color:var(--muted);margin-top:.12rem;line-height:1.4}
+.audio-timer{display:flex;align-items:center;justify-content:space-between;margin-bottom:.65rem}
+.timer-display{font-size:2rem;font-weight:600;color:var(--accent);font-variant-numeric:tabular-nums;letter-spacing:-.02em;line-height:1}
+.timer-of{font-size:.6rem;color:var(--muted);margin-top:.15rem}
+.timer-bar-wrap{flex:1;margin-left:.8rem}
+.timer-bar-bg{background:rgba(160,130,90,.1);border-radius:4px;height:6px;overflow:hidden}
+.timer-bar-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--g));border-radius:4px;transition:width .5s linear}
+.next-label{font-size:.58rem;color:var(--muted);margin-top:.3rem}
+.audio-btns{display:flex;gap:.5rem}
+.btn-main{flex:1;padding:.65rem;border:none;border-radius:10px;background:var(--accent);color:#fff;font-size:.85rem;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;display:flex;align-items:center;justify-content:center;gap:.4rem}
+.btn-main:active{transform:scale(.97)}
+.btn-main.running{background:var(--g)}
+.btn-main.done-all{background:#2E7D4F}
+.btn-skip{padding:.65rem .8rem;border:1px solid var(--border);border-radius:10px;background:transparent;color:var(--muted);font-size:.78rem;cursor:pointer;font-family:inherit;transition:all .15s}
+.btn-skip:active{background:rgba(0,0,0,.04)}
+.btn-prev{padding:.65rem .8rem;border:1px solid var(--border);border-radius:10px;background:transparent;color:var(--muted);font-size:.78rem;cursor:pointer;font-family:inherit;transition:all .15s}
+.voice-bar{display:flex;align-items:center;justify-content:space-between;margin-top:.55rem;padding-top:.55rem;border-top:1px solid var(--border)}
+.voice-lbl{font-size:.6rem;color:var(--muted)}
+.voice-toggle{display:flex;align-items:center;gap:.5rem}
+.toggle-sw{width:32px;height:18px;border-radius:9px;background:rgba(160,130,90,.2);border:none;cursor:pointer;position:relative;transition:background .2s;flex-shrink:0}
+.toggle-sw.on{background:var(--accent)}
+.toggle-sw::after{content:'';position:absolute;width:14px;height:14px;background:#fff;border-radius:50%;top:2px;left:2px;transition:left .2s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.toggle-sw.on::after{left:16px}
+
+/* AUFGABENLISTE */
+.section-day{font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin:.85rem 0 .4rem .05rem}
+.task-row{display:flex;align-items:center;gap:.55rem;background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:.5rem .7rem;margin-bottom:.3rem;transition:all .2s;position:relative;overflow:hidden}
+.task-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:9px 0 0 9px}
+.task-row.current::before{background:var(--accent);width:4px}
+.task-row.current{border-color:rgba(139,106,62,.4);background:rgba(251,240,224,.4)}
+.task-row.done-t{opacity:.38}
+.task-row.done-t .tname{text-decoration:line-through}
+.task-row.monthly::before{background:var(--p)}
+.tnr{font-size:.6rem;color:var(--muted);width:1.2rem;flex-shrink:0;text-align:center}
+.tinfo2{flex:1;min-width:0}
+.tname{font-size:.79rem;font-weight:500;line-height:1.3}
+.ttip2{font-size:.64rem;color:var(--muted);margin-top:.05rem;line-height:1.35}
+.tmin2{font-size:.56rem;color:var(--accent);font-weight:600;flex-shrink:0;background:rgba(139,106,62,.08);padding:.07rem .3rem;border-radius:5px;white-space:nowrap}
+.freq-chip{display:inline-flex;font-size:.52rem;background:#F0E8FB;color:#7B5EA7;padding:.05rem .32rem;border-radius:5px;margin-left:.25rem;font-weight:600;vertical-align:middle}
+
+/* DONE BANNER */
+.done-banner{background:linear-gradient(135deg,#2E7D4F,#3A8C7C);border-radius:14px;padding:1.2rem 1rem;text-align:center;margin-bottom:.8rem;display:none}
+.done-banner.show{display:block}
+.done-banner h2{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:#fff;font-weight:400;margin-bottom:.3rem}
+.done-banner p{font-size:.72rem;color:rgba(255,255,255,.8)}
+</style>
+</head>
+<body>
+<header>
+  <div class="htop">
+    <div>
+      <div class="htitle">&#x1F3E0; Haushaltsblock</div>
+      <div class="hbadge">Ein Durchgang &middot; max. 30 Min.</div>
+    </div>
+    <div class="hright">
+      <div class="total-min" id="totalMin">0</div>
+      <div class="total-lbl">Min heute</div>
+    </div>
+  </div>
+  <div class="daystrip" id="ds"></div>
+</header>
+<main>
+  <div class="prog-row"><span id="plbl">0 von 0 erledigt</span><span id="ppct">0%</span></div>
+  <div class="prog-wrap"><div class="prog-fill" id="pb" style="width:0%"></div></div>
+
+  <div class="audio-card" id="audioCard">
+    <div class="audio-now">
+      <div class="audio-label">Aktuelle Aufgabe</div>
+      <div class="audio-task" id="curTask">Tippe Start zum Beginnen</div>
+      <div class="audio-sub" id="curTip"></div>
+    </div>
+    <div class="audio-timer">
+      <div>
+        <div class="timer-display" id="timerDisp">0:00</div>
+        <div class="timer-of" id="timerOf"></div>
+      </div>
+      <div class="timer-bar-wrap">
+        <div class="timer-bar-bg"><div class="timer-bar-fill" id="timerBar" style="width:0%"></div></div>
+        <div class="next-label" id="nextLbl"></div>
+      </div>
+    </div>
+    <div class="audio-btns">
+      <button class="btn-prev" id="btnPrev" onclick="prevTask()">&#x23EE;</button>
+      <button class="btn-main" id="btnMain" onclick="mainAction()">&#x25B6; Start</button>
+      <button class="btn-skip" id="btnSkip" onclick="skipTask()">&#x23ED; &#xFE0E;</button>
+    </div>
+    <div class="voice-bar">
+      <span class="voice-lbl" id="voiceLbl">&#x1F50A; Ansage: Aus</span>
+      <div class="voice-toggle">
+        <button class="toggle-sw" id="voiceSw" onclick="toggleVoice()"></button>
+        <span style="font-size:.62rem;color:var(--muted)">Ansage</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="done-banner" id="doneBanner">
+    <h2>&#x2728; Fertig!</h2>
+    <p id="doneText">Alle Aufgaben erledigt.</p>
+  </div>
+
+  <div id="taskList"></div>
+</main>
+<script>var DAILY = [
+  {id:5, t:"L\u00fcften: alle Fenster auf",          m:2,  tip:"Alle Zimmer Fenster \u00f6ffnen \u2013 5 Min sto\u00dfl\u00fcften",
+   voice:"L\u00fcften. Alle Fenster in allen Zimmern \u00f6ffnen. F\u00fcnf Minuten Sto\u00dfl\u00fcften. Zwei Minuten."},
+  {id:6, t:"Heizung abdrehen",                    m:1,  tip:"Alle Heizk\u00f6rper auf 0 oder Frostschutz w\u00e4hrend L\u00fcften",
+   voice:"Heizung abdrehen. Alle Heizk\u00f6rper auf Null stellen w\u00e4hrend die Fenster offen sind."},
+  {id:3, t:"Katzenklo reinigen",               m:3,  tip:"T\u00e4glich ausmisten",
+   voice:"Katzenklo reinigen. Ausmisten, frisches Streu nachf\u00fcllen. Drei Minuten."},
+  {id:1, t:"Bett machen",                      m:2,  tip:"Sofort nach dem Aufstehen",
+   voice:"Bett machen. Decke aufsch\u00fctteln, Polster zurechtlegen. Zwei Minuten."},
+  {id:2, t:"K\u00fcche aufr\u00e4umen + Herd abwischen", m:4,  tip:"Arbeitsfl\u00e4chen frei, Herd sauber",
+   voice:"K\u00fcche aufr\u00e4umen. Arbeitsfl\u00e4chen freir\u00e4umen und Herd abwischen. Vier Minuten."},
+];
+
+// W\u00e4sche als allererste Aufgabe (Di=2, Sa=5)
+var WAESCHE_DAYS = [1,2,3,4,5,6];
+var WAESCHE_TYPES = {
+  1: {t:"W\u00e4sche: Dunkel",  tip:"Schwarz & dunkle Farben \u2013 30\u00b0",  voice:"W\u00e4sche starten. Heute dunkle W\u00e4sche."},
+  2: {t:"W\u00e4sche: Dunkel",  tip:"Schwarz & dunkle Farben \u2013 30\u00b0",  voice:"W\u00e4sche starten. Heute dunkle W\u00e4sche."},
+  3: {t:"W\u00e4sche: Hell",    tip:"Wei\u00df & helle Farben \u2013 60\u00b0 m\u00f6glich",  voice:"W\u00e4sche starten. Heute helle W\u00e4sche."},
+  4: {t:"W\u00e4sche: Hell",    tip:"Wei\u00df & helle Farben \u2013 60\u00b0 m\u00f6glich",  voice:"W\u00e4sche starten. Heute helle W\u00e4sche."},
+  5: {t:"W\u00e4sche: Bunt",    tip:"Bunte Farben gemischt \u2013 40\u00b0",               voice:"W\u00e4sche starten. Heute bunte W\u00e4sche."},
+  6: {t:"W\u00e4sche: Bunt",    tip:"Bunte Farben gemischt \u2013 40\u00b0",               voice:"W\u00e4sche starten. Heute bunte W\u00e4sche."},
+};
+var WAESCHE_TASK = {id:22, t:"W\u00e4sche starten", m:5, tip:"Maschine einf\u00fcllen \u2013 l\u00e4uft w\u00e4hrend du putzt",
+  voice:"W\u00e4sche starten. Maschine einf\u00fcllen und Programm starten. Sie l\u00e4uft w\u00e4hrend du putzt. F\u00fcnf Minuten."};
+
+
+// ── AUFGABEN PRO WOCHENTAG ────────────────────────────────────────────────
+// Reihenfolge = Durchgangsreihenfolge (wie man durch die Wohnung geht)
+// voice = Ansagetext (Deutsch, natürlich)
+// 0=So,1=Mo,2=Di,3=Mi,4=Do,5=Fr,6=Sa
+var DAILY = [
+  {id:1, t:"Bett machen",                      m:2,  tip:"Sofort nach dem Aufstehen",
+   voice:"Bett machen. Decke aufschütteln, Polster zurechtlegen. Zwei Minuten."},
+  {id:2, t:"K\u00fcche aufr\u00e4umen + Herd abwischen", m:4,  tip:"Arbeitsfl\u00e4chen frei, Herd sauber",
+   voice:"K\u00fcche aufr\u00e4umen. Arbeitsfl\u00e4chen freir\u00e4umen und Herd abwischen. Vier Minuten."},
+  {id:3, t:"Katzenklo reinigen",                m:3,  tip:"T\u00e4glich ausmisten",
+   voice:"Katzenklo reinigen. Ausmisten, frisches Streu nachf\u00fcllen. Drei Minuten."},
+];
+
+var WEEKLY = {
+  1: [ // MONTAG
+    {id:10,t:"Wohnzimmer: Staub wischen",       m:5,  tip:"Von oben nach unten \u2013 Regale, TV, Tisch",
+     voice:"Wohnzimmer. Staub wischen. Von oben nach unten \u2013 Regale, Fernseher, Tisch. F\u00fcnf Minuten."},
+    {id:11,t:"Wohnzimmer saugen",               m:8,  tip:"Unter Couch & Sessel",
+     voice:"Wohnzimmer saugen. Unter der Couch und den Sesseln nicht vergessen. Acht Minuten."},
+    {id:12,t:"Vorzimmer fegen",                 m:4,  tip:"Schuhe wegr\u00e4umen, Boden fegen",
+     voice:"Vorzimmer. Schuhe wegr\u00e4umen und Boden fegen. Vier Minuten."},
+    {id:13,t:"Mist rausbringen",                m:3,  tip:"Alle Eimer leeren",
+     voice:"M\u00fcll rausbringen. Alle Eimer leeren und neue S\u00e4cke einlegen. Drei Minuten."},
+  ],
+  2: [ // DIENSTAG
+    {id:20,t:"Schlafzimmer: Staub wischen",     m:5,  tip:"Schr\u00e4nke oben, Nachttische, Spiegel",
+     voice:"Schlafzimmer. Staub wischen. Schr\u00e4nke, Nachttische und Spiegel. F\u00fcnf Minuten."},
+    {id:21,t:"Schlafzimmer saugen",             m:8,  tip:"Unter dem Bett \u2013 Staubsammler",
+     voice:"Schlafzimmer saugen. Bitte unter das Bett saugen \u2013 dort sammelt sich am meisten Staub. Acht Minuten."},
+  ],
+  3: [ // MITTWOCH
+    {id:30,t:"Bad: Badewanne reinigen",         m:6,  tip:"Reiniger einwirken lassen, dann schrubben",
+     voice:"Badezimmer. Badewanne reinigen. Reiniger einsprühen, kurz einwirken lassen, dann schrubben. Sechs Minuten."},
+    {id:31,t:"Bad: Waschbecken & Armaturen",    m:4,  tip:"Kalkflecken mit Zitronenreiniger",
+     voice:"Waschbecken und Armaturen putzen. Danach trocken polieren f\u00fcr keine Kalkflecken. Vier Minuten."},
+    {id:32,t:"Bad: Spiegel + Boden wischen",    m:5,  tip:"Glasreiniger streifenfrei",
+     voice:"Bad. Spiegel mit Glasreiniger, dann Boden wischen. F\u00fcnf Minuten."},
+    {id:33,t:"Klo: Becken innen & au\u00dfen",  m:4,  tip:"WC-Reiniger innen, au\u00dfen abwischen",
+     voice:"Klo reinigen. WC-Reiniger innen einwirken lassen. Au\u00dfen und Sitz abwischen. Vier Minuten."},
+    {id:34,t:"Klo: Boden wischen",             m:3,  tip:"Immer letzter Schritt",
+     voice:"Klo-Boden wischen. Immer der letzte Schritt. Drei Minuten."},
+  ],
+  4: [ // DONNERSTAG
+    {id:40,t:"K\u00fcche: Arbeitfl\u00e4chen & Ger\u00e4te", m:5, tip:"Toaster, Mikrowelle, Kaffeemaschine",
+     voice:"K\u00fcche. Arbeitsfl\u00e4chen abwischen. Toaster, Mikrowelle und Kaffeemaschine au\u00dfen reinigen. F\u00fcnf Minuten."},
+    {id:41,t:"K\u00fcche: Teppich saugen",      m:5,  tip:"K\u00fcchenteppich gr\u00fcndlich absaugen",
+     voice:"K\u00fcchenteppich saugen. Gr\u00fcndlich, beide Seiten wenn n\u00f6tig. F\u00fcnf Minuten."},
+    {id:42,t:"K\u00fcche: Boden wischen",       m:7,  tip:"Um den Teppich herum wischen",
+     voice:"K\u00fcchenboden wischen. Teppich zur Seite, Boden wischen, dann Teppich zur\u00fcck. Sieben Minuten."},
+    {id:43,t:"Sp\u00fclmaschine aus-/einr\u00e4umen",m:5,tip:"Beim Warten auf den Kaffee",
+     voice:"Sp\u00fclmaschine ausräumen und neu einr\u00e4umen. F\u00fcnf Minuten."},
+  ],
+  5: [ // FREITAG
+    {id:50,t:"Handtücher wechseln",             m:3,  tip:"Bad- & K\u00fcchenhandt\u00fccher",
+     voice:"Handt\u00fccher wechseln. Bad- und K\u00fcchenhandt\u00fccher tauschen, in die W\u00e4sche geben. Drei Minuten."},
+    {id:51,t:"Geschirrt\u00fccher wechseln",     m:2,  tip:"W\u00f6chentlich \u2013 Bakterienherd wenn feucht",
+     voice:"Geschirrt\u00fccher wechseln. Frische einlegen. Zwei Minuten."},
+    {id:52,t:"Vorzimmer aufr\u00e4umen",         m:4,  tip:"Schuhe, Jacken, Taschen",
+     voice:"Vorzimmer aufr\u00e4umen. Schuhe ins Regal, Jacken aufh\u00e4ngen, Taschen verstauen. Vier Minuten."},
+    {id:53,t:"W\u00e4sche aufh\u00e4ngen",       m:5,  tip:"Von Di-W\u00e4sche",
+     voice:"W\u00e4sche aufh\u00e4ngen. Die Wäsche von Dienstag fertig aufh\u00e4ngen oder zusammenlegen. F\u00fcnf Minuten."},
+    {id:54,t:"Mist rausbringen",                m:3,  tip:"Vor dem Wochenende",
+     voice:"M\u00fcll rausbringen. Alle Eimer vor dem Wochenende leeren. Drei Minuten."},
+  ],
+  6: [ // SAMSTAG
+    {id:60,t:"Handtücher wechseln (2. Wechsel)",m:3, tip:"Sa = 2. Wechsel der Woche",
+     voice:"Handt\u00fccher wechseln. Zweiter Wechsel der Woche. Drei Minuten."},
+    {id:61,t:"Klo: Schnellreinigung",           m:5,  tip:"WC-Sitz + Becken innen",
+     voice:"Klo. Schnellreinigung. Sitz und Becken innen. F\u00fcnf Minuten."},
+    {id:62,t:"Tierbetten aussch\u00fctteln",     m:5,  tip:"Decken & Kissen \u2013 Tierhaare entfernen",
+     voice:"Tierbetten aussch\u00fctteln. Decken und Kissen abklopfen, Tierhaare entfernen. F\u00fcnf Minuten."},
+    {id:63,t:"W\u00e4sche aufh\u00e4ngen",       m:5,  tip:"Sa-W\u00e4sche fertig machen",
+     voice:"W\u00e4sche aufh\u00e4ngen. Samstags-W\u00e4sche fertig versorgen. F\u00fcnf Minuten."},
+  ],
+  0: [ // SONNTAG
+    {id:70,t:"Alle B\u00f6den saugen",           m:12, tip:"Alle R\u00e4ume in einem Durchgang",
+     voice:"Alle B\u00f6den saugen. Wohnzimmer, Schlafzimmer, K\u00fcche, Vorzimmer \u2013 ein Durchgang. Zw\u00f6lf Minuten."},
+    {id:71,t:"Bad, Klo & K\u00fcche: Boden wischen",m:8,tip:"Die wichtigsten B\u00f6den nach dem Saugen",
+     voice:"B\u00f6den wischen. Bad, Klo und K\u00fcche nach dem Saugen feucht wischen. Acht Minuten."},
+  ],
+};
+
+var MONTHLY = [
+  {id:80,t:"Bettw\u00e4sche wechseln",          m:10, freq:"2\u00d7 / Monat", type:"textilien",
+   tip:"Alle 2 Wochen So",
+   voice:"Bettw\u00e4sche wechseln. Alle Bez\u00fcge ab, frische drauf. Zehn Minuten."},
+  {id:81,t:"Fugen: Schimmelspray",              m:5,  freq:"2\u00d7 / Monat", type:"putzen",
+   tip:"Alle 2 Wochen Mi",
+   voice:"Fugen behandeln. Schimmelspray einsprühen und zehn Minuten einwirken lassen. F\u00fcnf Minuten."},
+  {id:82,t:"Bettdecken & Polster l\u00fcften",  m:5,  freq:"2\u00d7 / Monat", type:"textilien",
+   tip:"2h am offenen Fenster",
+   voice:"Bettdecken und Polster l\u00fcften. Zwei Stunden ans offene Fenster. F\u00fcnf Minuten."},
+  {id:90,t:"K\u00fchlschrank reinigen",          m:15, freq:"1\u00d7 / Monat", type:"putzen",
+   tip:"Vor dem Gro\u00dfeinkauf",
+   voice:"K\u00fchlschrank ausräumen und reinigen. Vor dem Gro\u00dfeinkauf erledigen. F\u00fcnfzehn Minuten."},
+  {id:91,t:"Fenster putzen (innen)",             m:20, freq:"1\u00d7 / Monat", type:"putzen",
+   tip:"Glasreiniger + Zeitungspapier",
+   voice:"Fenster putzen. Alle Fenster innen mit Glasreiniger und Zeitungspapier. Zwanzig Minuten."},
+  {id:92,t:"Couch & Polster absaugen",           m:10, freq:"1\u00d7 / Monat", type:"putzen",
+   tip:"Tier-/Haaraufsatz verwenden",
+   voice:"Couch und Polster absaugen. Tier- und Haaraufsatz verwenden. Zehn Minuten."},
+  {id:93,t:"Handt\u00fccher bei 60\u00b0C waschen",m:5,freq:"1\u00d7 / Monat", type:"textilien",
+   tip:"Hygienische Tiefenreinigung",
+   voice:"Handt\u00fccher bei sechzig Grad waschen. Hygienische Tiefenreinigung. F\u00fcnf Minuten."},
+  {id:94,t:"Herd & Backrohr reinigen",           m:20, freq:"1\u00d7 / Monat", type:"putzen",
+   tip:"Entfetter einwirken lassen",
+   voice:"Herd und Backrohr reinigen. Entfetter einsprühen und einwirken lassen. Zwanzig Minuten."},
+];
+
+// ── STATE ─────────────────────────────────────────────────────────────────
+var DN = ['So','Mo','Di','Mi','Do','Fr','Sa'];
+var KEY = 'haushalt_v5';
+var today = new Date(); today.setHours(0,0,0,0);
+var selDay = today.getDay();
+var checked = {};
+var voiceOn = false;
+var isRunning = false;
+var isPaused = false;
+var curIdx = -1;   // aktueller Task-Index in getTasks()
+var timerSec = 0;
+var timerTotal = 0;
+var timerInterval = null;
+var synth = window.speechSynthesis;
+var germanVoice = null;
+
+function loadVoices() {
+  if (!synth) return;
+  var voices = synth.getVoices();
+  var pref = ['Anna', 'Helena', 'Katrin', 'Marlene', 'Google Deutsch'];
+  germanVoice = null;
+  for (var pi=0; pi<pref.length; pi++) {
+    for (var vi=0; vi<voices.length; vi++) {
+      if (voices[vi].name.indexOf(pref[pi]) >= 0) { germanVoice = voices[vi]; break; }
+    }
+    if (germanVoice) break;
+  }
+  if (!germanVoice) {
+    for (var vi2=0; vi2<voices.length; vi2++) {
+      if (voices[vi2].lang && voices[vi2].lang.startsWith('de')) { germanVoice = voices[vi2]; break; }
+    }
+  }
+  var lbl = document.getElementById('voiceLbl');
+  if (lbl) lbl.textContent = voiceOn ? (germanVoice ? '\uD83D\uDD0A Ansage: An \u2013 ' + germanVoice.name.split(' ')[0] : '\uD83D\uDD0A Ansage: An') : '\uD83D\uDD08 Ansage: Aus';
+}
+if (typeof speechSynthesis !== 'undefined' && speechSynthesis.onvoiceschanged !== undefined) {
+  speechSynthesis.onvoiceschanged = loadVoices;
+}
+setTimeout(loadVoices, 500);
+
+function speak(text) {
+  if (!voiceOn || !synth) return;
+  try {
+    synth.cancel();
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = 'de-DE';
+    u.rate = 0.9;
+    u.pitch = 1.0;
+    u.volume = 1.0;
+    if (germanVoice) u.voice = germanVoice;
+    synth.speak(u);
+  } catch(e) {}
+}
+
+// ── STORAGE ───────────────────────────────────────────────────────────────
+function load() {
+  try {
+    var raw = localStorage.getItem(KEY);
+    if (raw) checked = JSON.parse(raw);
+    var sd = localStorage.getItem(KEY+'_d');
+    var td = today.toISOString().slice(0,10);
+    if (sd !== td) {
+      var nc = {};
+      for (var k in checked) { if (k.indexOf('m_')===0) nc[k]=checked[k]; }
+      checked = nc;
+      save(); localStorage.setItem(KEY+'_d', td);
+    }
+  } catch(e) {}
+}
+function save() {
+  try { localStorage.setItem(KEY, JSON.stringify(checked)); } catch(e){}
+  try { if(window.parent) window.parent._haushalt_data = JSON.stringify(checked); } catch(e){}
+}
+function isDone(id, monthly) { return !!checked[(monthly?'m_':'t_')+id]; }
+function setDone(id, monthly, val) { checked[(monthly?'m_':'t_')+id] = val; save(); }
+
+// ── TASKS ─────────────────────────────────────────────────────────────────
+function getTasks() {
+  var out = [];
+  // 1. Wäsche zuerst (nur an Wäsche-Tagen)
+  if (WAESCHE_DAYS.indexOf(selDay) >= 0) {
+    var wt = WAESCHE_TYPES[selDay];
+    var wtask = wt ? {id:22, t:wt.t, m:5, tip:wt.tip, voice:wt.voice} : WAESCHE_TASK;
+    out.push({task:wtask, monthly:false});
+  }
+  // 2. Wochenschwerpunkt
+  var weekly = WEEKLY[selDay] || [];
+  weekly.forEach(function(t){ out.push({task:t, monthly:false}); });
+  // 3. Täglich (Lüften, Katzenklo, Bett, Küche)
+  DAILY.forEach(function(t){ out.push({task:t, monthly:false}); });
+  return out;
+}
+function getMonthlyForDay() {
+  return MONTHLY.filter(function(t){
+    var dow = [80,82].indexOf(t.id)>=0 ? 0 : [81].indexOf(t.id)>=0 ? 3 :
+              [90,94].indexOf(t.id)>=0 ? 4 : [91].indexOf(t.id)>=0 ? 6 :
+              [92].indexOf(t.id)>=0 ? 1 : 5;
+    return dow === selDay;
+  });
+}
+
+function getDayMin() {
+  return getTasks().filter(function(e){ return !isDone(e.task.id, false); })
+    .reduce(function(s,e){ return s+e.task.m; }, 0);
+}
+function getTotalMin() {
+  return getTasks().reduce(function(s,e){ return s+e.task.m; }, 0);
+}
+
+// ── NAVIGATION ────────────────────────────────────────────────────────────
+function getNextUndone(from) {
+  var tasks = getTasks();
+  for (var i = from; i < tasks.length; i++) {
+    if (!isDone(tasks[i].task.id, false)) return i;
+  }
+  return -1;
+}
+
+function mainAction() {
+  if (curIdx === -1 || !isRunning) {
+    startBlock();
+  } else {
+    togglePause();
+  }
+}
+
+function startBlock() {
+  if (isRunning && !isPaused) return;
+  var tasks = getTasks();
+  if (curIdx === -1) curIdx = 0;
+  var next = getNextUndone(curIdx);
+  if (next === -1) {
+    finishAll();
+    return;
+  }
+  curIdx = next;
+  isRunning = true;
+  isPaused = false;
+  startTask(curIdx);
+}
+
+function startTask(idx) {
+  var tasks = getTasks();
+  if (idx >= tasks.length) { finishAll(); return; }
+  var entry = tasks[idx];
+  var t = entry.task;
+  timerTotal = t.m * 60;
+  timerSec = 0;
+
+  document.getElementById('curTask').textContent = t.t;
+  document.getElementById('curTip').textContent = t.tip || '';
+  document.getElementById('timerOf').textContent = 'von ' + t.m + ' Min';
+
+  // Nächste Aufgabe
+  var nextEntry = null;
+  for (var i = idx+1; i < tasks.length; i++) {
+    if (!isDone(tasks[i].task.id, false)) { nextEntry = tasks[i]; break; }
+  }
+  document.getElementById('nextLbl').textContent = nextEntry ?
+    'Danach: ' + nextEntry.task.t : 'Letzte Aufgabe!';
+
+  var btn = document.getElementById('btnMain');
+  btn.className = 'btn-main running';
+  btn.innerHTML = '&#x23F8; Pause';
+
+  if (timerInterval) clearInterval(timerInterval);
+  timerInterval = setInterval(tickTimer, 1000);
+
+  if (voiceOn) speak(t.voice || t.t + '. ' + t.m + ' Minuten.');
+
+  updateTimerUI();
+  renderList();
+}
+
+function tickTimer() {
+  if (isPaused) return;
+  timerSec++;
+  updateTimerUI();
+  if (timerSec >= timerTotal) {
+    clearInterval(timerInterval);
+    // Aufgabe als erledigt markieren
+    var tasks = getTasks();
+    if (curIdx < tasks.length) {
+      setDone(tasks[curIdx].task.id, false, true);
+      if (voiceOn) {
+        setTimeout(function() {
+          var tasks2 = getTasks();
+          var next = getNextUndone(curIdx+1);
+          if (next === -1) {
+            speak('Fertig! Alle Aufgaben erledigt. Großartig!');
+          } else {
+            speak('Zeit abgelaufen. Weiter mit: ' + tasks2[next].task.t);
+          }
+        }, 300);
+      }
+    }
+    curIdx++;
+    var next2 = getNextUndone(curIdx);
+    if (next2 === -1) {
+      finishAll();
+    } else {
+      curIdx = next2;
+      setTimeout(function(){ startTask(curIdx); }, 800);
+    }
+    renderProgress();
+    renderList();
+  }
+}
+
+function updateTimerUI() {
+  var rem = Math.max(0, timerTotal - timerSec);
+  var m = Math.floor(rem/60);
+  var s = rem%60;
+  document.getElementById('timerDisp').textContent = m + ':' + (s<10?'0':'')+s;
+  var pct = timerTotal > 0 ? Math.min(100, timerSec/timerTotal*100) : 0;
+  document.getElementById('timerBar').style.width = pct + '%';
+}
+
+function togglePause() {
+  isPaused = !isPaused;
+  var btn = document.getElementById('btnMain');
+  if (isPaused) {
+    btn.className = 'btn-main';
+    btn.innerHTML = '&#x25B6; Weiter';
+    if (voiceOn) speak('Pause.');
+  } else {
+    btn.className = 'btn-main running';
+    btn.innerHTML = '&#x23F8; Pause';
+    if (voiceOn) speak('Weiter.');
+  }
+}
+
+function skipTask() {
+  if (!isRunning) return;
+  clearInterval(timerInterval);
+  var tasks = getTasks();
+  if (curIdx < tasks.length) {
+    if (voiceOn) speak(tasks[curIdx].task.t + ' übersprungen.');
+  }
+  curIdx++;
+  var next = getNextUndone(curIdx);
+  if (next === -1) { finishAll(); return; }
+  curIdx = next;
+  startTask(curIdx);
+}
+
+function prevTask() {
+  if (curIdx <= 0) return;
+  clearInterval(timerInterval);
+  curIdx = Math.max(0, curIdx-1);
+  // Aufgabe als nicht erledigt markieren
+  var tasks = getTasks();
+  if (curIdx < tasks.length) setDone(tasks[curIdx].task.id, false, false);
+  isRunning = true; isPaused = false;
+  startTask(curIdx);
+}
+
+function finishAll() {
+  clearInterval(timerInterval);
+  isRunning = false;
+  curIdx = -1;
+  var btn = document.getElementById('btnMain');
+  btn.className = 'btn-main done-all';
+  btn.innerHTML = '&#x21BA; Nochmal';
+  document.getElementById('curTask').textContent = 'Alle Aufgaben erledigt!';
+  document.getElementById('curTip').textContent = '';
+  document.getElementById('timerDisp').textContent = '0:00';
+  document.getElementById('timerBar').style.width = '100%';
+  document.getElementById('nextLbl').textContent = '';
+  document.getElementById('doneBanner').className = 'done-banner show';
+  var tasks = getTasks();
+  var totalM = tasks.reduce(function(s,e){ return s+e.task.m; }, 0);
+  document.getElementById('doneText').textContent =
+    'Super! ' + totalM + ' Minuten Haushaltsblock abgeschlossen.';
+  renderProgress();
+  renderList();
+}
+
+function toggleVoice() {
+  voiceOn = !voiceOn;
+  var sw = document.getElementById('voiceSw');
+  sw.className = 'toggle-sw' + (voiceOn?' on':'');
+  loadVoices();
+  if (voiceOn && synth) {
+    setTimeout(function(){ speak('Ansage aktiviert.'); }, 200);
+  }
+}
+
+// ── RENDER ────────────────────────────────────────────────────────────────
+function renderStrip() {
+  var h=''; var ord=[1,2,3,4,5,6,0];
+  ord.forEach(function(d){
+    var isSel=d===selDay, isToday=d===today.getDay();
+    var has = (WEEKLY[d]||[]).length > 0;
+    h+='<button class="dbtn'+(isSel?' active':'')+(isToday?' today':'')+'" onclick="selD('+d+')">'
+      +'<span class="dname">'+DN[d]+'</span>'
+      +'<span class="dnum">'+DN[d][0]+'</span>'
+      +(has?'<span class="ddot"></span>':'<span style="height:3px"></span>')
+      +'</button>';
+  });
+  document.getElementById('ds').innerHTML = h;
+}
+function selD(d) {
+  if (isRunning) { if(!confirm('Laufenden Block abbrechen?')) return; clearInterval(timerInterval); isRunning=false; curIdx=-1; }
+  selDay = d;
+  renderStrip();
+  renderProgress();
+  renderAll();
+}
+
+function renderProgress() {
+  var tasks = getTasks();
+  var done = tasks.filter(function(e){ return isDone(e.task.id,false); }).length;
+  var total = tasks.length;
+  var pct = total ? Math.round(done/total*100) : 0;
+  document.getElementById('plbl').textContent = done + ' von ' + total + ' erledigt';
+  document.getElementById('ppct').textContent = pct + '%';
+  document.getElementById('pb').style.width = pct + '%';
+  document.getElementById('totalMin').textContent = getTotalMin();
+}
+
+function renderList() {
+  var tasks = getTasks();
+  var monthly = getMonthlyForDay();
+  var h = '';
+
+  // W\u00e4sche zuerst anzeigen (Di + Sa)
+  if (WAESCHE_DAYS.indexOf(selDay) >= 0) {
+    var wDone = isDone(WAESCHE_TASK.id, false);
+    var isCurW = isRunning && curIdx === 0;
+    h += '<div class="section-day">&#x1F9FA; Zuerst: W\u00e4sche</div>';
+    h += '<div class="task-row'+(wDone?' done-t':'')+(isCurW?' current':'') +'">'
+      +'<span class="tnr">1</span>'
+      +'<div class="tinfo2"><div class="tname">'+WAESCHE_TASK.t+'</div><div class="ttip2">'+WAESCHE_TASK.tip+'</div></div>'
+      +'<span class="tmin2">'+WAESCHE_TASK.m+' Min</span>'
+      +'</div>';
+  }
+  // Wochenschwerpunkt
+  var weekly = WEEKLY[selDay] || [];
+  if (weekly.length) {
+    h += '<div class="section-day">Wochenschwerpunkt ' + DN[selDay] + '</div>';
+    weekly.forEach(function(t, wi) {
+      var globalIdx = wi;
+      var done = isDone(t.id, false);
+      var isCur = isRunning && curIdx === wi;
+      h += '<div class="task-row'+(done?' done-t':'')+(isCur?' current':'') +'">'
+        +'<span class="tnr">'+(wi+1)+'</span>'
+        +'<div class="tinfo2"><div class="tname">'+t.t+'</div><div class="ttip2">'+t.tip+'</div></div>'
+        +'<span class="tmin2">'+t.m+' Min</span>'
+        +'</div>';
+    });
+  }
+
+  // Tägliche Aufgaben (Lüften + Katzenklo + Bett + Küche)
+  h += '<div class="section-day">&#x1F4A8; T\u00e4glich: L\u00fcften + Routine</div>';
+  var wlen = weekly.length;
+  DAILY.forEach(function(t, di) {
+    var globalIdx = wlen + di;
+    var done = isDone(t.id, false);
+    var isCur = isRunning && curIdx === globalIdx;
+    h += '<div class="task-row'+(done?' done-t':'')+(isCur?' current':'') +'">'
+      +'<span class="tnr">'+(wlen+di+1)+'</span>'
+      +'<div class="tinfo2"><div class="tname">'+t.t+'</div><div class="ttip2">'+t.tip+'</div></div>'
+      +'<span class="tmin2">'+t.m+' Min</span>'
+      +'</div>';
+  });
+
+  // Monatliche
+  if (monthly.length) {
+    h += '<div class="section-day" style="color:var(--p)">Monatlich</div>';
+    monthly.forEach(function(t) {
+      var done = isDone(t.id, true);
+      h += '<div class="task-row monthly'+(done?' done-t':'')+'">'
+        +'<span class="tnr" style="color:var(--p)">&#9675;</span>'
+        +'<div class="tinfo2"><div class="tname">'+t.t+'<span class="freq-chip">'+t.freq+'</span></div><div class="ttip2">'+t.tip+'</div></div>'
+        +'<span class="tmin2" style="color:var(--p)">~'+t.m+' Min</span>'
+        +'</div>';
+    });
+  }
+
+  document.getElementById('taskList').innerHTML = h;
+}
+
+function renderAll() {
+  var btn = document.getElementById('btnMain');
+  if (!isRunning) { btn.className='btn-main'; btn.innerHTML='&#x25B6; Start'; }
+  document.getElementById('curTask').textContent = 'Tippe Start zum Beginnen';
+  document.getElementById('curTip').textContent = '';
+  document.getElementById('timerDisp').textContent = '0:00';
+  document.getElementById('timerOf').textContent = '';
+  document.getElementById('timerBar').style.width = '0%';
+  document.getElementById('nextLbl').textContent = '';
+  document.getElementById('doneBanner').className = 'done-banner';
+  renderList();
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────
+load(); renderStrip(); renderProgress(); renderAll();
+</script>
+</body>
+</html>
