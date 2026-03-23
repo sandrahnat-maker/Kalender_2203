@@ -1497,9 +1497,6 @@ function getEvs(date){
   UE.filter(function(e){return e.date===date}).forEach(function(e){evs.push(e)});
   return evs.sort(function(a,b){return hm(a.from)-hm(b.from)});
 }
-// In-Memory Speicher (funktioniert in allen Umgebungen)
-var APPS = {};
-
 // ── WIEGEN STORAGE BRIDGE ─────────────────────────────────────────────────
 (function(){
   var WG_KEY = 'wg_entries_v1';
