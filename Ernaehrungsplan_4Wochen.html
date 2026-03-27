@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ernährungsplan</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#F5F0EA;color:#1A1A2E;padding-bottom:2rem}
+header{background:#1A1A2E;color:#F5F0EA;padding:.85rem 1rem .7rem}
+h1{font-size:1.1rem;font-weight:600;margin-bottom:.45rem}
+.mt{display:flex;gap:.28rem;flex-wrap:wrap}
+.mtb{padding:.24rem .65rem;border:1.5px solid #444;border-radius:20px;background:transparent;color:#aaa;font-size:.66rem;cursor:pointer;font-family:inherit;transition:all .15s}
+.mtb.on{border-color:#8B6020;color:#F5F0EA;background:#8B6020}
+.mv{display:none}.mv.active{display:block}
+main{max-width:600px;margin:0 auto;padding:.8rem}
+.wt{display:flex;gap:.28rem;flex-wrap:wrap;margin-bottom:.7rem}
+.wtb{padding:.24rem .65rem;border:1.5px solid #555;border-radius:20px;background:transparent;color:#aaa;font-size:.66rem;cursor:pointer;font-family:inherit;transition:all .15s}
+.wtb.on{border-color:var(--wc);color:#fff;background:var(--wc)}
+.wk{display:none}.wk.active{display:block}
+.wl{font-size:.57rem;letter-spacing:.15em;text-transform:uppercase;color:var(--wc);margin-bottom:.6rem;font-weight:700}
+.dc{background:#fff;border-radius:10px;margin-bottom:.5rem;border:1px solid rgba(0,0,0,.07);overflow:hidden}
+.dh{display:flex;align-items:center;justify-content:space-between;padding:.42rem .75rem;background:rgba(0,0,0,.02);border-bottom:1px solid rgba(0,0,0,.05)}
+.dn{font-weight:700;font-size:.8rem}
+.b{font-size:.55rem;padding:.09rem .42rem;border-radius:10px;font-weight:700}
+.bh{background:#E8F5EE;color:#2E7D4F}.bi{background:#FFF3E0;color:#C0703A}.bt{background:#EDE7F6;color:#7B5EA7}
+.ms{padding:.2rem 0}
+.mr{display:flex;align-items:baseline;gap:.45rem;padding:.28rem .75rem}
+.lb{font-size:.56rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#bbb;width:3.2rem;flex-shrink:0}
+.mc{flex:1}
+.mn{font-size:.78rem;font-weight:600;line-height:1.3}
+.mn.g{color:#C0703A}
+.md{font-size:.68rem;color:#777;margin-top:.05rem;line-height:1.35}
+.dv{height:1px;background:rgba(0,0,0,.04);margin:0 .75rem}
+.dd-bar{background:#E8F5EE;border-radius:8px;padding:.4rem .75rem;margin:.3rem .5rem .1rem;font-size:.62rem;color:#2E7D4F;line-height:1.6}
+.dd-bar strong{color:#1A5E38}
+.ib{border-radius:10px;padding:.5rem .75rem;margin-bottom:.65rem;font-size:.68rem;line-height:1.5;border:1px solid}
+.ib.g{background:#E8F5EE;color:#2E7D4F;border-color:#b8ddc0}
+.ib.o{background:#FFF3E0;color:#C0703A;border-color:#f0d0a0}
+</style>
+</head>
+<body>
+<header>
+  <h1>🥗 Ernährungsplan · Daily Dozen · vegetarisch</h1>
+  <div class="mt" id="mt">
+    <button class="mtb" onclick="sM('plan',this)">📅 Wochenplan</button>
+    <button class="mtb" onclick="sM('dozen',this)">✅ Daily Dozen</button>
+  </div>
+</header>
+<main>
+
+<div class="mv" id="mv-plan">
+<div class="wt" id="wt">
+  <button class="wtb" onclick="sW(1,this)">Woche 1</button>
+  <button class="wtb" onclick="sW(2,this)">Woche 2</button>
+  <button class="wtb" onclick="sW(3,this)">Woche 3</button>
+  <button class="wtb" onclick="sW(4,this)">Woche 4</button>
+</div>
+
+<!-- WOCHE 1 -->
+<div class="wk" id="wk1" style="--wc:#8B6020">
+<div class="wl">Woche 1 · Hafer & Hülsenfrüchte</div>
+
+<div class="dc"><div class="dh"><span class="dn">Montag</span><span class="b bh">gesund</span></div><div class="ms">
+  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Haferbrei mit Apfel & Zimt</div><div class="md">1 EL Leinsamen · 1 EL Mandelmus · ungesüßt</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Vomittag</span><div class="mc"><div class="mn">Apfel + Walnüsse</div><div class="md">4–5 Walnusshälften</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Rote-Linsen-Bowl</div><div class="md">Reis · rote Linsen · Karotte · Spinat · Cumin · Zitrone</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Kiwi + Chiasamen</div><div class="md">1 TL Chiasamen eingerührt</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Vollkornbrot mit Hummus & Rohkost</div><div class="md">Gurke · Radieschen · Paprika · frische Kräuter</div></div></div>
+</div></div>
+
+<div class="dc"><div class="dh"><span class="dn">Dienstag</span><span class="b bh">gesund</span></div><div class="ms">
+  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Joghurt (natur) mit Beeren & Haferflocken</div><div class="md">1 EL Leinsamen · 1 TL Hanfsamen</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Vomittag</span><div class="mc"><div class="mn">Birne + Mandelmus</div><div class="md">1 EL Mandelmus</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Kichererbsen-Bowl</div><div class="md">Quinoa · Kichererbsen · Brokkoli · Paprika · Tahini-Dressing</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Beeren + Joghurt</div><div class="md">Handvoll Heidelbeeren oder Erdbeeren</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Zucchini-Tomaten-Pfanne</div><div class="md">Vollkornreis · Knoblauch · Olivenöl · Basilikum</div></div></div>
+</div></div>
+
+<div class="dc"><div class="dh"><span class="dn">Mittwoch</span><span class="b bi">Genuss</span></div><div class="ms">
+  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Porridge mit Beeren & Walnüssen</div><div class="md">1 EL Chiasamen · Zimt</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Vomittag</span><div class="mc"><div class="mn">Apfel + Walnüsse</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn g">Pasta mit frischer Tomatensauce</div><div class="md">Vollkornnudeln · Rucola · Knoblauch · wenig Parmesan</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Orange + Walnüsse</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Rote-Bete-Suppe</div><div class="md">Ingwer · Kurkuma · Vollkornbrot</div></div></div>
+</div></div>
+
+<div class="dc"><div class="dh"><span class="dn">Donnerstag</span><span class="b bh">gesund</span></div><div class="ms">
+  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Haferbrei mit Birne & Zimt</div><div class="md">1 EL Leinsamen · 1 EL Walnüsse</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Vomittag</span><div class="mc"><div class="mn">Beeren + Chiasamen</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Brokkoli-Süßkartoffel-Bowl</div><div class="md">Dinkelreis · Brokkoli · Süßkartoffel · Sesam · Sojasoße (wenig)</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Birne + Mandelmus</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Topfen mit Schnittlauch & Rohkost</div><div class="md">Roggenbrot · Gurke · Paprika · Radieschen</div></div></div>
+</div></div>
+
+<div class="dc"><div class="dh"><span class="dn">Freitag</span><span class="b bh">gesund</span></div><div class="ms">
+  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Porridge mit Himbeeren & Leinsamen</div><div class="md">1 TL Hanfsamen · ungesüßt</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Vomittag</span><div class="mc"><div class="mn">Kiwi + Leinsamen</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Quinoa-Buddha-Bowl</div><div class="md">Quinoa · Kichererbsen · Blattgemüse · Gurke · Tahini · Zitrone</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Apfel + Chiasamen</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Linsensuppe mit Vollkornbrot</div><div class="md">rote Linsen · Karotte · Ingwer · Petersilie</div></div></div>
+</div></div>
+
+<div class="dc"><div class="dh"><span class="dn">Samstag</span><span class="b bt">entspannt</span></div><div class="ms">
+  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Vollkorntoast mit Mandelmus & Beeren</div><div class="md">1 EL Chiasamen · Hibiskustee</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Vomittag</span><div class="mc"><div class="mn">Beeren + Joghurt</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Kürbis-Linsen-Bowl</div><div class="md">Vollkornreis · Kürbis · rote Linsen · Kreuzkümmel · Koriander</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Orange + Walnüsse</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Ofengemüse mit Kräuterquark</div><div class="md">Zucchini · Paprika · Karotte · Vollkornbrot</div></div></div>
+</div></div>
+
+<div class="dc"><div class="dh"><span class="dn">Sonntag</span><span class="b bi">Genuss</span></div><div class="ms">
+  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn g">Pancakes aus Haferflocken</div><div class="md">Beeren · 1 EL Leinsamen · Ahornsirup (wenig)</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Vomittag</span><div class="mc"><div class="mn">Apfel + Mandelmus</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Rote-Linsen-Dal mit Basmatireis</div><div class="md">Spinat · Kurkuma · Ingwer · Koriander · Kokosmilch (light)</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Beeren + Chiasamen</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Joghurt mit Walnüssen & Beeren</div><div class="md">1 TL Leinsamen · wenig Honig</div></div></div>
+</div></div>
+</div>
+
+<!-- WOCHE 2 -->
+<div class="wk" id="wk2" style="--wc:#2E7D4F">
+<div class="wl">Woche 2 · Quinoa & Blattgemüse</div>
+
+<div class="dc"><div class="dh"><span class="dn">Montag</span><span class="b bh">gesund</span></div><div class="ms">
+  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Haferbrei mit Birne & Walnüssen</div><div class="md">1 EL Leinsamen · Zimt</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Vomittag</span><div class="mc"><div class="mn">Kiwi + Leinsamen</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Spinat-Kichererbsen-Bowl</div><div class="md">Quinoa · Babyspinat · Kichererbsen · Tomate · Zitrone · Olivenöl</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Beeren + Joghurt</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Tomatensuppe (frisch)</div><div class="md">Basilikum · Vollkornbrot · ohne Sahne</div></div></div>
+</div></div>
+
+<div class="dc"><div class="dh"><span class="dn">Dienstag</span><span class="b bi">Genuss</span></div><div class="ms">
+  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Joghurt mit Himbeeren & Haferflocken</div><div class="md">1 EL Chiasamen · 1 EL Hanfsamen</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Vomittag</span><div class="mc"><div class="mn">Apfel + Walnüsse</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn g">Pasta mit Gemüse-Pesto</div><div class="md">Vollkornnudeln · Rucola · Walnuss-Pesto · Kirschtomaten</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Birne + Mandelmus</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Rote-Bete-Salat</div><div class="md">Walnüsse · Apfel · Zitronendressing · Vollkornbrot</div></div></div>
+</div></div>
+
+<div class="dc"><div class="dh"><span class="dn">Mittwoch</span><span class="b bh">gesund</span></div><div class="ms">
+  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Porridge mit Aprikose & Chiasamen</div><div class="md">1 EL Mandelmus</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Vomittag</span><div class="mc"><div class="mn">Orange + Walnüsse</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Brokkoli-Kartoffel-Bowl</div><div class="md">Vollkornreis · Brokkoli · Kartoffel · Sesam · Zitrone · Olivenöl</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Kiwi + Chiasamen</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Linsensalat mit Vollkornbrot</div><div class="md">grüne Linsen · Paprika · Petersilie · Zitronendressing</div></div></div>
+</div></div>
+
+<div class="dc"><div class="dh"><span class="dn">Donnerstag</span><span class="b bh">gesund</span></div><div class="ms">
+  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Haferbrei mit Apfel & Leinsamen</div><div class="md">1 TL Hanfsamen · ungesüßt</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Vomittag</span><div class="mc"><div class="mn">Beeren + Chiasamen</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Marokkanische Kichererbsen-Bowl</div><div class="md">Couscous · Kichererbsen · Paprika · Kreuzkümmel · Petersilie · Zitrone</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Apfel + Mandelmus</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Kürbissuppe</div><div class="md">Ingwer · Kurkuma · Vollkornbrot · kein Salz extra</div></div></div>
+</div></div>
+
+<div class="dc"><div class="dh"><span class="dn">Freitag</span><span class="b bh">gesund</span></div><div class="ms">
+  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Porridge mit Beeren & Walnüssen</div><div class="md">1 EL Leinsamen</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Vomittag</span><div class="mc"><div class="mn">Birne + Walnüsse</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Grüne Buddha-Bowl</div><div class="md">Dinkelreis · Erbsen · Spinat · Gurke · Sesam · Tahini-Zitronendressing</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Orange + Chiasamen</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Rührei mit Spinat & Tomate</div><div class="md">Vollkorntoast · Kräuter</div></div></div>
+</div></div>
+
+<div class="dc"><div class="dh"><span class="dn">Samstag</span><span class="b bt">entspannt</span></div><div class="ms">
+  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Vollkornbrot mit Hummus & Tomate</div><div class="md">Rucola · Olivenöl · Hibiskustee</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Vomittag</span><div class="mc"><div class="mn">Beeren + Joghurt</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Süßkartoffel-Linsen-Bowl</div><div class="md">Hirse · Süßkartoffel · rote Linsen · Kurkuma · Koriander · Zitrone</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Kiwi + Leinsamen</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Ofengemüse mit Joghurt-Kräuterdip</div><div class="md">Zucchini · Paprika · Zwiebel · Vollkornbrot</div></div></div>
+</div></div>
+
+<div class="dc"><div class="dh"><span class="dn">Sonntag</span><span class="b bi">Genuss</span></div><div class="ms">
+  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn g">Overnight Oats mit Beeren</div><div class="md">Chiasamen · Joghurt · Leinsamen · über Nacht ziehen lassen</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Vomittag</span><div class="mc"><div class="mn">Apfel + Walnüsse</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn g">Gemüse-Flammkuchen</div><div class="md">Vollkornteig · Joghurt-Basis · Zucchini · Zwiebel · Kräuter</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Beeren + Chiasamen</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Joghurt mit Walnüssen & Beeren</div><div class="md">1 TL Leinsamen</div></div></div>
+</div></div>
+</div>
+
+<!-- WOCHE 3 -->
+<div class="wk" id="wk3" style="--wc:#7B5EA7">
+<div class="wl">Woche 3 · Beeren & Vollkorn</div>
+
+<div class="dc"><div class="dh"><span class="dn">Montag</span><span class="b bh">gesund</span></div><div class="ms">
+  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Haferbrei mit Apfel & Chiasamen</div><div class="md">1 EL Leinsamen · Zimt · ungesüßt</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Vomittag</span><div class="mc"><div class="mn">Beeren + Joghurt</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Tofu-Gemüse-Bowl</div><div class="md">Vollkornreis · Tofu (gebraten) · Brokkoli · Karotte · Ingwer · Sesam</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Kiwi + Chiasamen</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Vollkornbrot mit Rote-Linsen-Aufstrich</div><div class="md">Paprika · Gurke · Kräuter</div></div></div>
+</div></div>
+
+<div class="dc"><div class="dh"><span class="dn">Dienstag</span><span class="b bh">gesund</span></div><div class="ms">
+  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Porridge mit gemischten Beeren & Walnüssen</div><div class="md">1 EL Hanfsamen</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Vomittag</span><div class="mc"><div class="mn">Birne + Mandelmus</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Kürbis-Kichererbsen-Bowl</div><div class="md">Quinoa · Kürbis · Kichererbsen · Rucola · Kurkuma · Zitrone</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Apfel + Walnüsse</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Zucchini-Suppe</div><div class="md">Knoblauch · Basilikum · Vollkornbrot</div></div></div>
+</div></div>
+
+<div class="dc"><div class="dh"><span class="dn">Mittwoch</span><span class="b bi">Genuss</span></div><div class="ms">
+  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Joghurt mit Beeren & Haferflocken</div><div class="md">1 EL Leinsamen · 1 TL Chiasamen</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Vomittag</span><div class="mc"><div class="mn">Orange + Walnüsse</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn g">Käsespätzle (light)</div><div class="md">wenig Käse · viel Röstzwiebel · grüner Salat dazu</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Beeren + Chiasamen</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Rührei mit Spinat & Tomate</div><div class="md">Vollkorntoast · frische Kräuter</div></div></div>
+</div></div>
+
+<div class="dc"><div class="dh"><span class="dn">Donnerstag</span><span class="b bh">gesund</span></div><div class="ms">
+  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Haferbrei mit Leinsamen & Apfel</div><div class="md">1 EL Walnüsse · ungesüßt</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Vomittag</span><div class="mc"><div class="mn">Kiwi + Leinsamen</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Linsen-Spinat-Bowl</div><div class="md">Hirse · braune Linsen · Babyspinat · Tomate · Tahini · Zitrone</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Birne + Chiasamen</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Brokkoli-Kartoffelsuppe</div><div class="md">Olivenöl · Knoblauch · Vollkornbrot</div></div></div>
+</div></div>
+
+<div class="dc"><div class="dh"><span class="dn">Freitag</span><span class="b bh">gesund</span></div><div class="ms">
+  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Porridge mit Heidelbeeren & Hanfsamen</div><div class="md">1 EL Leinsamen</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Vomittag</span><div class="mc"><div class="mn">Apfel + Mandelmus</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Mexikanische Bowl</div><div class="md">Vollkornreis · schwarze Bohnen · Mais · Paprika · Koriander · Limette</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Beeren + Joghurt</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Hummus mit Gemüsesticks & Vollkornbrot</div><div class="md">Karotte · Gurke · Paprika · Radieschen</div></div></div>
+</div></div>
+
+<div class="dc"><div class="dh"><span class="dn">Samstag</span><span class="b bt">entspannt</span></div><div class="ms">
+  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Vollkorntoast mit Mandelmus & Beeren</div><div class="md">1 EL Chiasamen · Hibiskustee</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Vomittag</span><div class="mc"><div class="mn">Orange + Walnüsse</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Indische Linsen-Bowl (Dal)</div><div class="md">Basmati · rote Linsen · Kurkuma · Ingwer · Spinat · Kokosmilch light</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Beeren + Chiasamen</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Gemischter Salat mit Walnüssen & Ei</div><div class="md">Rucola · Tomate · Gurke · Vollkornbrot</div></div></div>
+</div></div>
+
+<div class="dc"><div class="dh"><span class="dn">Sonntag</span><span class="b bi">Genuss</span></div><div class="ms">
+  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn g">Waffeln aus Hafermehl</div><div class="md">Beeren · 1 EL Leinsamen · wenig Ahornsirup</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Vomittag</span><div class="mc"><div class="mn">Birne + Mandelmus</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Kichererbsen-Tomaten-Curry</div><div class="md">Basmati · Spinat · Kurkuma · Koriander · Ingwer</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Apfel + Walnüsse</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Joghurt mit Beeren & Leinsamen</div><div class="md">wenig Honig</div></div></div>
+</div></div>
+</div>
+
+<!-- WOCHE 4 -->
+<div class="wk" id="wk4" style="--wc:#C0703A">
+<div class="wl">Woche 4 · Hirse & Bowls</div>
+
+<div class="dc"><div class="dh"><span class="dn">Montag</span><span class="b bh">gesund</span></div><div class="ms">
+  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Haferbrei mit Walnüssen & Leinsamen</div><div class="md">1 Kiwi dazu · ungesüßt</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Vomittag</span><div class="mc"><div class="mn">Beeren + Chiasamen</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Hirse-Gemüse-Bowl</div><div class="md">Hirse · Zucchini · Paprika · Spinat · Sesam · Zitronendressing</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Apfel + Mandelmus</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Rote-Linsen-Suppe</div><div class="md">Karotte · Ingwer · Kurkuma · Vollkornbrot</div></div></div>
+</div></div>
+
+<div class="dc"><div class="dh"><span class="dn">Dienstag</span><span class="b bh">gesund</span></div><div class="ms">
+  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Joghurt mit Beeren & Haferflocken</div><div class="md">1 EL Leinsamen · 1 TL Hanfsamen</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Vomittag</span><div class="mc"><div class="mn">Birne + Walnüsse</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Falafel-Bowl</div><div class="md">Vollkornreis · Falafel (gebacken) · Gurke · Tomate · Tahini · Petersilie</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Orange + Chiasamen</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Vollkornbrot mit Hummus & Rohkost</div><div class="md">Karotte · Paprika · Gurke</div></div></div>
+</div></div>
+
+<div class="dc"><div class="dh"><span class="dn">Mittwoch</span><span class="b bh">gesund</span></div><div class="ms">
+  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Porridge mit Chiasamen & Aprikose</div><div class="md">1 EL Mandelmus</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Vomittag</span><div class="mc"><div class="mn">Kiwi + Leinsamen</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Brokkoli-Kichererbsen-Bowl</div><div class="md">Dinkelreis · Brokkoli · Kichererbsen · Ingwer · Sojasoße (wenig) · Sesam</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Beeren + Joghurt</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Spinat-Ei-Pfanne</div><div class="md">Vollkorntoast · Knoblauch · Olivenöl</div></div></div>
+</div></div>
+
+<div class="dc"><div class="dh"><span class="dn">Donnerstag</span><span class="b bh">gesund</span></div><div class="ms">
+  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Haferbrei mit Beeren & Hanfsamen</div><div class="md">1 EL Chiasamen · Zimt</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Vomittag</span><div class="mc"><div class="mn">Apfel + Walnüsse</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Mediterrane Bowl</div><div class="md">Couscous · Linsen · Rucola · Tomate · Gurke · Olivenöl · Zitrone</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Birne + Chiasamen</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Kürbissuppe mit Ingwer</div><div class="md">Kurkuma · Vollkornbrot · kein Salz extra</div></div></div>
+</div></div>
+
+<div class="dc"><div class="dh"><span class="dn">Freitag</span><span class="b bh">gesund</span></div><div class="ms">
+  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Porridge mit Walnüssen & Leinsamen</div><div class="md">1 Kiwi · ungesüßt</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Vomittag</span><div class="mc"><div class="mn">Beeren + Chiasamen</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Süßkartoffel-Spinat-Bowl</div><div class="md">Quinoa · Süßkartoffel · Babyspinat · Kichererbsen · Tahini · Kurkuma</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Orange + Walnüsse</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Gemüsesticks mit Hummus & Joghurt-Dip</div><div class="md">Vollkornbrot · Rucola · Tomate</div></div></div>
+</div></div>
+
+<div class="dc"><div class="dh"><span class="dn">Samstag</span><span class="b bt">entspannt</span></div><div class="ms">
+  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Vollkorntoast mit Mandelmus & Beeren</div><div class="md">1 EL Leinsamen · Hibiskustee</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Vomittag</span><div class="mc"><div class="mn">Kiwi + Chiasamen</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Rote-Bete-Linsen-Bowl</div><div class="md">Hirse · rote Bete · Linsen · Walnüsse · Feldsalat · Zitronendressing</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Apfel + Mandelmus</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Ofengemüse mit Kräuterjoghurt</div><div class="md">Paprika · Zucchini · Karotte · Vollkornbrot</div></div></div>
+</div></div>
+
+<div class="dc"><div class="dh"><span class="dn">Sonntag</span><span class="b bi">Genuss</span></div><div class="ms">
+  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn g">Pizza auf Vollkornteig</div><div class="md">Tomatensauce · wenig Mozzarella · Rucola · Tomate · Basilikum</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Vomittag</span><div class="mc"><div class="mn">Beeren + Joghurt</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn g">Tortellini mit Gemüse</div><div class="md">Spinat-Ricotta-Tortellini · Tomatensauce · Basilikum · wenig Parmesan</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Orange + Chiasamen</div></div></div>
+  <div class="dv"></div>
+  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Joghurt mit Walnüssen & Beeren</div><div class="md">1 EL Leinsamen · wenig Honig</div></div></div>
+</div></div>
+</div>
+</div><!-- end mv-plan -->
+
+<!-- DAILY DOZEN -->
+<div class="mv" id="mv-dozen">
+<div class="ib g">
+  <strong>✅ Daily Dozen – Dr. Greger</strong><br>
+  Täglich anstreben – im Ernährungsplan eingebaut
+</div>
+
+<div class="dc"><div class="dh"><span class="dn">🫐 Beeren</span><span class="b bh">1 Portion täglich</span></div>
+<div class="ms"><div class="mr"><span class="lb"></span><div class="mc"><div class="md">Heidelbeeren · Himbeeren · Erdbeeren · Brombeeren · ½ Tasse = 1 Portion<br>→ Frühstück oder Snack täglich</div></div></div></div></div>
+
+<div class="dc"><div class="dh"><span class="dn">🍎 Obst</span><span class="b bh">3 Portionen täglich</span></div>
+<div class="ms"><div class="mr"><span class="lb"></span><div class="mc"><div class="md">Apfel · Birne · Orange · Kiwi · kein Obst mit sehr viel Zucker<br>→ Vormittag + Nachmittag + Frühstück abdecken</div></div></div></div></div>
+
+<div class="dc"><div class="dh"><span class="dn">🥦 Kreuzblütler</span><span class="b bh">1 Portion täglich</span></div>
+<div class="ms"><div class="mr"><span class="lb"></span><div class="mc"><div class="md">Brokkoli · Rucola · Radieschen · Kohl · Rote Bete-Blätter<br>→ in Bowls oder Abendessen einbauen</div></div></div></div></div>
+
+<div class="dc"><div class="dh"><span class="dn">🥬 Blattgemüse</span><span class="b bh">2 Portionen täglich</span></div>
+<div class="ms"><div class="mr"><span class="lb"></span><div class="mc"><div class="md">Spinat · Rucola · Feldsalat · Mangold · 1 Tasse roh = 1 Portion<br>→ Mittagsbowl + Abendessen</div></div></div></div></div>
+
+<div class="dc"><div class="dh"><span class="dn">🥕 Anderes Gemüse</span><span class="b bh">2 Portionen täglich</span></div>
+<div class="ms"><div class="mr"><span class="lb"></span><div class="mc"><div class="md">Karotte · Paprika · Zucchini · Kürbis · Süßkartoffel · Tomate<br>→ Mittag + Abend</div></div></div></div></div>
+
+<div class="dc"><div class="dh"><span class="dn">🫘 Hülsenfrüchte</span><span class="b bh">3 Portionen täglich</span></div>
+<div class="ms"><div class="mr"><span class="lb"></span><div class="mc"><div class="md">Linsen · Kichererbsen · Bohnen · Hummus · ½ Tasse = 1 Portion<br>→ Mittagsbowl + Abendessen + Snack (Hummus)</div></div></div></div></div>
+
+<div class="dc"><div class="dh"><span class="dn">🌰 Nüsse & Samen</span><span class="b bh">1 Portion täglich</span></div>
+<div class="ms"><div class="mr"><span class="lb"></span><div class="mc"><div class="md">Walnüsse · Mandeln · Leinsamen · Chiasamen · Hanfsamen · Sesam<br>→ täglich in Frühstück + Snacks eingebaut<br>⚠️ Walnüsse besonders gut für LDL & Blutdruck</div></div></div></div></div>
+
+<div class="dc"><div class="dh"><span class="dn">🌾 Vollkorn</span><span class="b bh">3 Portionen täglich</span></div>
+<div class="ms"><div class="mr"><span class="lb"></span><div class="mc"><div class="md">Haferflocken · Vollkornbrot · Vollkornnudeln · Reis · Quinoa · Hirse · Dinkel<br>→ Frühstück (Hafer) + Mittag (Bowl) + Abend (Brot)</div></div></div></div></div>
+
+<div class="dc"><div class="dh"><span class="dn">🌿 Kräuter & Gewürze</span><span class="b bh">täglich</span></div>
+<div class="ms"><div class="mr"><span class="lb"></span><div class="mc"><div class="md">Kurkuma · Ingwer · Knoblauch · Basilikum · Petersilie · Koriander<br>⚠️ Kurkuma + Pfeffer = stärkere Wirkung · entzündungshemmend</div></div></div></div></div>
+
+<div class="dc"><div class="dh"><span class="dn">💧 Getränke</span><span class="b bh">5 Gläser täglich</span></div>
+<div class="ms"><div class="mr"><span class="lb"></span><div class="mc"><div class="md">Wasser · Hibiskustee (RR-senkend!) · Grüntee · Kräutertee<br>⚠️ kein Alkohol · wenig Kaffee (max. 1–2/Tag)</div></div></div></div></div>
+
+<div class="dc"><div class="dh"><span class="dn">💊 B12 & Vit. D</span><span class="b bh">täglich</span></div>
+<div class="ms"><div class="mr"><span class="lb"></span><div class="mc"><div class="md">B12: mit Frühstück · Vitamin D: mit fetthaltiger Mahlzeit<br>→ bereits im Medikamentenplan</div></div></div></div></div>
+
+<div class="dc"><div class="dh"><span class="dn">🏃 Bewegung</span><span class="b bh">täglich</span></div>
+<div class="ms"><div class="mr"><span class="lb"></span><div class="mc"><div class="md">Spaziergang mit Lotte · Muskeltraining · Yoga · Balanceboard<br>→ bereits im Kalender</div></div></div></div></div>
+
+<div class="ib o" style="margin-top:.8rem">
+  <strong>⚠️ Blutdruck & Cholesterin beachten:</strong><br>
+  Kein extra Salz · wenig Käse (max. 2–3× /Woche) · kein Kokosöl · Olivenöl bevorzugen · Walnüsse täglich · Hibiskustee täglich · Leinsamen täglich
+</div>
+</div><!-- end mv-dozen -->
+
+</main>
+<script>
+function sM(id,btn){
+  document.querySelectorAll('.mv').forEach(e=>e.classList.remove('active'));
+  document.querySelectorAll('.mtb').forEach(b=>b.classList.remove('on'));
+  document.getElementById('mv-'+id).classList.add('active');
+  btn.classList.add('on');
+  if(id==='plan') sW(1,document.querySelector('.wtb'));
+}
+function sW(n,btn){
+  document.querySelectorAll('.wk').forEach(e=>e.classList.remove('active'));
+  document.querySelectorAll('.wtb').forEach(b=>b.classList.remove('on'));
+  document.getElementById('wk'+n).classList.add('active');
+  if(btn) btn.classList.add('on');
+}
+window.onload=function(){
+  sM('plan',document.querySelector('.mtb'));
+};
+</script>
+</body>
+</html>
