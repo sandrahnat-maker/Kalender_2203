@@ -408,6 +408,17 @@ function sW(n,btn){
 window.onload=function(){
   sW(1,document.querySelector('.wtb'));
 };
+window.addEventListener('message', function(e) {
+  if (e.data && e.data.type === 'nav') {
+    var week = e.data.week;
+    var dow = e.data.dow;
+    var btn = document.querySelectorAll('.wtb')[week-1];
+    sW(week, btn);
+    var idx = dow === 0 ? 6 : dow - 1;
+    var cards = document.querySelectorAll('#wk'+week+' .dc');
+    if (cards[idx]) setTimeout(function(){ cards[idx].scrollIntoView({behavior:'smooth',block:'start'}); }, 100);
+  }
+});
 </script>
 </body>
 </html>
