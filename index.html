@@ -216,7 +216,9 @@ body{background:var(--bg);font-family:var(--font-dm);color:var(--text);display:f
 <script>
 var CATS={morgen:{l:'Morgen',c:'#7B5EA7'},unipraesenz:{l:'Uni-Präsenz',c:'#2E5FA8'},uniaufgaben:{l:'Uni-Aufgaben',c:'#C9A800'},vhs:{l:'VHS/Unterricht',c:'#3A8C5C'},schreibtisch:{l:'Schreibtischblock',c:'#2A9D8F'},mittagspause:{l:'Mittagspause',c:'#8B6A3E'},haushalt:{l:'Haushalt/Familie',c:'#D4845A'},fitness:{l:'Ich',c:'#7B5EA7'},abend:{l:'Abend',c:'#9B6BB5'},weidlingbach:{l:'Weidlingbach',c:'#C0392B'},freizeit:{l:'Freizeit/Soziales',c:'#9B6BB5'},extra:{l:'Extra',c:'#4A7FA8'},block:{l:'Blockzeit',c:'#999999'}};
 var RR=[
+  {t:'🐾 Lotte – Waldspaziergang heute?',f:'07:28',e:'07:30',c:'morgen',w:[1,3,5],n:'Jeden 2. Tag · heute wäre ein Spaziergang-Tag 🐕'},
   {t:'Euthyrox (nüchtern)',f:'07:30',e:'07:35',c:'morgen',w:[1,2,3,4,5]},
+  {t:'🐾 Lotte – Waldspaziergang heute?',f:'08:58',e:'09:00',c:'morgen',w:[0],n:'Jeden 2. Tag · heute wäre ein Spaziergang-Tag 🐕'},
   {t:'Euthyrox (nüchtern)',f:'09:00',e:'09:05',c:'morgen',w:[0]},
 
   {t:'Rückenübungen',f:'07:35',e:'07:50',c:'morgen',w:[1,2,3,4,5]},
@@ -277,15 +279,15 @@ var RR=[
   {t:'Waldspaziergang Lotte',f:'15:07',e:'16:07',c:'fitness',w:[0]},
   {t:'🛁 Sitzbad',f:'20:05',e:'20:17',c:'fitness',w:[1]},
   {t:'🚿 Körperpflege-Block',f:'20:17',e:'21:57',c:'fitness',w:[1],n:'🦴 Kalkschulter-Übungen (15 Min)\n🚿 Duschen + Haare waschen (25 Min)\n🧴 Körperöl + Selbstmassage (15 Min)\n🌸 Beckenboden (3 Min)\n🧖 Gesichtsyoga (15 Min)\n🧘 Meditation (15 Min)'},
-  {t:'🚿 Körperpflege-Block',f:'19:00',e:'20:30',c:'fitness',w:[2],n:'🌸 Beckenboden (3 Min)\n🦴 Kalkschulter-Übungen (15 Min)\n🚿 Duschen (15 Min)\n🧴 Körperöl + Selbstmassage (15 Min)\n🧖 Gesichtsyoga (15 Min)\n🧘 Meditation (15 Min)'},
+  {t:'🚿 Körperpflege-Block',f:'19:17',e:'20:47',c:'fitness',w:[2],n:'🌸 Beckenboden (3 Min)\n🦴 Kalkschulter-Übungen (15 Min)\n🚿 Duschen (15 Min)\n🧴 Körperöl + Selbstmassage (15 Min)\n🧖 Gesichtsyoga (15 Min)\n🧘 Meditation (15 Min)'},
   {t:'🛁 Sitzbad',f:'19:48',e:'20:00',c:'fitness',w:[3]},
   {t:'🚿 Körperpflege-Block',f:'20:00',e:'21:35',c:'fitness',w:[3],n:'🦴 Kalkschulter-Übungen (15 Min)\n🚿 Duschen + Haare waschen (20 Min)\n🌸 Beckenboden (3 Min)\n🧴 Körperöl + Selbstmassage (15 Min)\n🧖 Gesichtsyoga (15 Min)\n🧘 Meditation (15 Min)'},
   {t:'🛁 Sitzbad',f:'19:18',e:'19:30',c:'fitness',w:[4]},
   {t:'🚿 Körperpflege-Block',f:'19:30',e:'20:45',c:'fitness',w:[4],n:'🦴 Kalkschulter-Übungen (15 Min)\n🚿 Duschen (15 Min)\n🧴 Körperöl + Selbstmassage (15 Min)\n🌸 Beckenboden (3 Min)\n🧖 Gesichtsyoga (15 Min)\n🧘 Meditation (15 Min)'},
   {t:'🚿 Körperpflege-Block',f:'20:04',e:'21:39',c:'fitness',w:[5],n:'🦴 Kalkschulter-Übungen (15 Min)\n🚿 Duschen + Haare waschen (20 Min)\n🧴 Körperöl + Selbstmassage (15 Min)\n🌸 Beckenboden (3 Min)\n🧖 Gesichtsyoga (15 Min)\n🧘 Meditation (15 Min)'},
-  {t:'🚿 Körperpflege-Block',f:'12:50',e:'14:35',c:'fitness',w:[0],n:'🚿 Duschen + Haare waschen (20 Min)\n🧴 Körperöl + Selbstmassage (15 Min)\n🧘 Meditation (nach Yoga)'},
-  {t:'🌸 Beckenboden-Übungen',f:'11:50',e:'11:53',c:'fitness',w:[0],n:'3 Min · Beckenbodenmuskel anspannen · 5 Sek halten · 10x · schnelle Impulse 10x'},
-  {t:'🧘 Cool-Down Dehnen',f:'11:53',e:'12:03',c:'fitness',w:[0],n:'10 Min · Dehnplan · Yoga Cool-Down'},
+  {t:'🚿 Körperpflege-Block',f:'19:15',e:'21:00',c:'fitness',w:[0],n:'🚿 Duschen + Haare waschen (20 Min)\n🧴 Körperöl + Selbstmassage (15 Min)\n🧘 Meditation (nach Yoga)'},
+  {t:'🌸 Beckenboden-Übungen',f:'18:40',e:'18:43',c:'fitness',w:[0],n:'3 Min · Beckenbodenmuskel anspannen · 5 Sek halten · 10x · schnelle Impulse 10x'},
+  {t:'🧘 Cool-Down Dehnen',f:'18:53',e:'19:03',c:'fitness',w:[0],n:'10 Min · Dehnplan · Yoga Cool-Down'},
   {t:'Tag planen',f:'16:42',e:'16:57',c:'schreibtisch',w:[0]},
   {t:'Katzen versorgen',f:'22:00',e:'22:05',c:'abend',w:[0,1,2,3,4,5]},
   {t:'Lotte füttern',f:'22:05',e:'22:15',c:'abend',w:[0,1,2,3,4,5]},
@@ -298,13 +300,12 @@ var RR=[
   {t:'Muskeltraining 20 Min',f:'19:47',e:'20:07',c:'fitness',w:[1]},
   {t:'Muskeltraining 20 Min',f:'19:07',e:'19:27',c:'fitness',w:[5]},
   {t:'Surfbalanceboard 30 Min',f:'19:05',e:'19:35',c:'fitness',w:[3]},
-  {t:'Yoga Mady Morrison',f:'11:05',e:'11:35',c:'fitness',w:[0]},
+  {t:'Yoga Mady Morrison',f:'18:10',e:'18:40',c:'fitness',w:[0]},
   {t:'🏠 Wohnung',f:'18:45',e:'19:30',c:'haushalt',w:[1]},
   {t:'🏠 Wohnung',f:'18:00',e:'18:45',c:'haushalt',w:[2]},
   {t:'👔 Bügeln',f:'18:00',e:'18:30',c:'haushalt',w:[1]},
   // Sa 28.3. – Schreibtischblock Erledigungen
   // Sa 28.3. – Ich-Block: Muskeltraining + Haarmaske
-  // So 29.3. – Migration Abschnitt 2 + 3 + Einleitung (im Schreibtischblock)
   // So 29.3. – Surfbalanceboard im Ich-Block
 
   {t:'🏠 Wohnung',f:'18:05',e:'18:50',c:'haushalt',w:[3]},
@@ -321,18 +322,19 @@ var RR=[
   {t:'Mittagessen und Pause',f:'12:35',e:'13:05',c:'mittagspause',w:[2]},
 
 
-  {t:'Ruhetag Entspannung',f:'19:30',e:'20:30',c:'fitness',w:[2,4]},
+  {t:'Ruhetag Entspannung',f:'20:47',e:'21:47',c:'fitness',w:[2]},
+  {t:'Ruhetag Entspannung',f:'19:30',e:'20:30',c:'fitness',w:[4]},
   {t:'Abendessen mit Thomas',f:'19:00',e:'19:30',c:'freizeit',w:[0,1,2,3,4,5,6]},
   {t:'🔒 Freizeit',f:'21:00',e:'22:00',c:'block',w:[0,1,2,3,4,5,6]},
   {t:'Meditation',f:'14:47',e:'15:02',c:'fitness',w:[0]},
-  {t:'Kunstzeit',f:'19:05',e:'21:05',c:'fitness',w:[0]},
+  {t:'Kunstzeit',f:'21:00',e:'23:00',c:'fitness',w:[0]},
 
   // Donnerstag: Einkaufsliste
   {t:'🏠 Haushaltsblock',f:'16:35',e:'17:35',c:'haushalt',w:[4],n:'🏠 Wohnung aufräumen (45 Min)\n🛒 Einkaufsliste erstellen (15 Min)'},
   // Wöchentliche Pflege Sonntag
-  {t:'Dusche & Körperpeeling (1×/Woche)',f:'13:10',e:'13:30',c:'morgen',w:[0]},
-  {t:'Wochenpflege Gesicht: Peeling + Maske + Heimneedling',f:'13:30',e:'14:00',c:'morgen',w:[0]},
-  {t:'Fußpflege – Hornhaut & Fersen (1×/Woche)',f:'14:00',e:'14:20',c:'morgen',w:[0]},
+  {t:'Dusche & Körperpeeling (1×/Woche)',f:'21:35',e:'21:55',c:'morgen',w:[0]},
+  {t:'Wochenpflege Gesicht: Peeling + Maske + Heimneedling',f:'21:55',e:'22:25',c:'morgen',w:[0]},
+  {t:'Fußpflege – Hornhaut & Fersen (1×/Woche)',f:'22:25',e:'22:27',c:'morgen',w:[0]},
   // SAMSTAG (Uni-Tag)
 
   {t:'Katzen versorgen',f:'22:00',e:'22:05',c:'abend',w:[6]},
@@ -367,15 +369,15 @@ var RR=[
   {t:'Haar-Ölbehandlung (Arganöl intensiv, 1×/Woche)',f:'19:37',e:'19:52',c:'fitness',w:[5]},
 
   // So: Nagelpflege-Ritual (nach Fußpflege)
-  {t:'Nagelpflege: Olivenöl-Bad · Nagelhaut · Feilen · Handpflege',f:'14:35',e:'14:47',c:'morgen',w:[0]},
+  {t:'Nagelpflege: Olivenöl-Bad · Nagelhaut · Feilen · Handpflege',f:'22:26',e:'22:28',c:'morgen',w:[0]},
 
   // ── MONATLICHE PFLEGE (1. Sonntag im Monat) ─────────────────
   // Proteinmaske Haare: 1× monatlich (So ~13:55 nach Fußpflege)
-  {t:'Haarmaske Protein – DIY (Ei+Honig+Olivenöl, 30 Min)',f:'12:03',e:'12:33',c:'morgen',w:[0],n:'Nur 1× pro Monat! Danach Feuchtigkeitsmaske verwenden'},
+  {t:'Haarmaske Protein – DIY (Ei+Honig+Olivenöl, 30 Min)',f:'21:00',e:'21:30',c:'morgen',w:[0],n:'Nur 1× pro Monat! Danach Feuchtigkeitsmaske verwenden'},
 
   // Kopfhautmassage: 1× monatlich (So ~14:25)
-  {t:'Kopfhautmassage mit Süßmandelöl (5 Min)',f:'12:33',e:'12:38',c:'morgen',w:[0],n:'Kreisende Bewegungen – fördert Haarwachstum ab Mitte 50'},
-  {t:'🛁 Sitzbad',f:'12:38',e:'12:50',c:'fitness',w:[0],n:'10 Min · warmes Wasser (37°C) · entspannt & fördert Durchblutung'},
+  {t:'Kopfhautmassage mit Süßmandelöl (5 Min)',f:'21:30',e:'21:35',c:'morgen',w:[0],n:'Kreisende Bewegungen – fördert Haarwachstum ab Mitte 50'},
+  {t:'🛁 Sitzbad',f:'19:03',e:'19:15',c:'fitness',w:[0],n:'10 Min · warmes Wasser (37°C) · entspannt & fördert Durchblutung'},
 
   // ── BECKENBODEN (täglich außer Samstag) ─────────────────────────────────
 
@@ -402,7 +404,7 @@ var RR=[
   {t:'💧 Trinken – Glas 3 VOR Sport (300ml)',f:'19:45',e:'19:47',c:'fitness',w:[1],n:'Vor Muskeltraining trinken · hydratisiert trainiert es sich besser!'},
   {t:'💧 Trinken – Glas 3 VOR Sport (300ml)',f:'19:05',e:'19:07',c:'fitness',w:[5],n:'Vor Muskeltraining trinken · hydratisiert trainiert es sich besser!'},
   {t:'💧 Trinken – Glas 3 VOR Sport (300ml)',f:'19:00',e:'19:02',c:'fitness',w:[3],n:'Vor Balanceboard trinken · Konzentration braucht Wasser!'},
-  {t:'💧 Trinken – Glas 3 VOR Yoga (300ml)',f:'10:58',e:'11:00',c:'fitness',w:[0],n:'Vor Yoga & Waldspaziergang trinken · rehydrieren'},
+  {t:'💧 Trinken – Glas 3 VOR Yoga (300ml)',f:'18:07',e:'18:09',c:'fitness',w:[0],n:'Vor Yoga & Waldspaziergang trinken · rehydrieren'},
 
   // 💧 Glas 3: Normaltage ohne Sport (Di, Do)
   {t:'💧 Trinken – Glas 3 (300ml)',f:'10:45',e:'10:47',c:'morgen',w:[2,4],n:'Vormittags · vor der Mittagspause'},
@@ -411,7 +413,7 @@ var RR=[
   {t:'💧 Trinken – Glas 4 NACH Sport (300ml)',f:'18:38',e:'18:40',c:'morgen',w:[1],n:'Nach Muskeltraining rehydrieren · sofort nach dem Training'},
   {t:'💧 Trinken – Glas 4 NACH Sport (300ml)',f:'15:30',e:'15:32',c:'morgen',w:[5],n:'Nach Muskeltraining rehydrieren · sofort nach dem Training'},
   {t:'💧 Trinken – Glas 4 NACH Sport (300ml)',f:'19:37',e:'19:39',c:'morgen',w:[3],n:'Nach Balanceboard rehydrieren'},
-  {t:'💧 Trinken – Glas 4 NACH Sport (300ml)',f:'12:05',e:'12:07',c:'morgen',w:[0],n:'Nach Yoga/Waldspaziergang · gut rehydrieren'},
+  {t:'💧 Trinken – Glas 4 NACH Sport (300ml)',f:'18:43',e:'18:45',c:'morgen',w:[0],n:'Nach Yoga/Waldspaziergang · gut rehydrieren'},
   {t:'💧 Trinken – Glas 4 zum Mittag (300ml)',f:'12:32',e:'12:34',c:'morgen',w:[2,4],n:'Zum Mittagessen · Wasser zum Essen'},
 
   // 💧 Glas 5: Nachmittags (alle Tage)
@@ -428,7 +430,7 @@ var RR=[
   {t:'💧 EXTRA Glas – Sporttag (300ml)',f:'20:07',e:'20:09',c:'fitness',w:[1],n:'Extra-Hydration nach Muskeltraining · du hast heute mehr geschwitzt!'},
   {t:'💧 EXTRA Glas – Sporttag (300ml)',f:'19:37',e:'19:39',c:'fitness',w:[5],n:'Extra-Hydration nach Muskeltraining · du hast heute mehr geschwitzt!'},
   {t:'💧 EXTRA Glas – Sporttag (300ml)',f:'19:35',e:'19:37',c:'fitness',w:[3],n:'Extra-Hydration nach Balanceboard'},
-  {t:'💧 EXTRA Glas – Sporttag (300ml)',f:'13:57',e:'13:59',c:'fitness',w:[0],n:'Extra-Hydration nach Yoga + Waldspaziergang'},
+  {t:'💧 EXTRA Glas – Sporttag (300ml)',f:'18:45',e:'18:47',c:'fitness',w:[0],n:'Extra-Hydration nach Yoga + Waldspaziergang'},
 
   // ── PFLANZEN GIESSSEN – wöchentlich vor Haushalt ──────────
   // Mo: vor Staubsaugen (10:20) → 10:05
@@ -475,7 +477,7 @@ var RR=[
 
 
   // ── SITZBAD (Di + Fr, nach dem Duschen) ──────────────────────────────────
-  {t:'🛁 Sitzbad',f:'18:48',e:'19:00',c:'fitness',w:[2],n:'10 Min · warmes Wasser (37°C) · Hamamelis-Zusatz möglich · entspannt & fördert Durchblutung · danach sanft trocken tupfen'},
+  {t:'🛁 Sitzbad',f:'19:05',e:'19:17',c:'fitness',w:[2],n:'10 Min · warmes Wasser (37°C) · Hamamelis-Zusatz möglich · entspannt & fördert Durchblutung · danach sanft trocken tupfen'},
   {t:'🛁 Sitzbad',f:'19:52',e:'20:04',c:'fitness',w:[5],n:'10 Min · warmes Wasser (37°C) · Hamamelis-Zusatz möglich · entspannt & fördert Durchblutung · danach sanft trocken tupfen'},
 
   {t:'🏠 Wohnung schrittweise gestalten',f:'19:30',e:'19:45',c:'haushalt',w:[1],n:'15 Min täglich · einen kleinen Bereich verschönern · aufräumen · dekorieren · kein Stress'},
@@ -787,10 +789,9 @@ var FF=[
   {d:'2026-03-28',t:'Haarmaske – Feuchtigkeitsmaske (15 Min einwirken)',f:'20:50',e:'21:05',c:'fitness',n:'Nachgeholt von Mo 23.3.'},
   {d:'2026-03-28',t:'🛁 Sitzbad',f:'21:05',e:'21:17',c:'fitness',n:'10 Min · warmes Wasser (37°C) · entspannt & fördert Durchblutung'},
   {d:'2026-03-28',t:'🚿 Körperpflege-Block',f:'21:17',e:'22:47',c:'fitness',n:'Duschen + Haare waschen · Körperöl · Beckenboden · Gesichtsyoga · Meditation'},
-  {d:'2026-03-29',t:'✍️ Migration: Einleitung + Abschnitt 1',f:'11:10',e:'13:10',c:'uniaufgaben',n:'Migration, Flucht, Trauma · Einleitung + Abschnitt 1\nNachgeholt von Mi 25.3.'},
-  {d:'2026-03-29',t:'✍️ Migration: Abschnitt 2 schreiben',f:'13:10',e:'14:30',c:'uniaufgaben',n:'Abschnitt 2 schreiben (Don Bosco & Logbuch Neuland)\nModul: Migration, Flucht, Trauma · Nachgeholt von Mi 25.3.'},
-  {d:'2026-03-29',t:'✍️ Migration: Abschnitt 2 + 3',f:'14:30',e:'16:00',c:'uniaufgaben',n:'Migration, Flucht, Trauma · Abschnitt 2 + 3\nNachgeholt von Do 26.3.'},
   {d:'2026-03-29',t:'Surfbalanceboard 30 Min',f:'16:30',e:'17:00',c:'fitness',n:'Nachgeholt von Mi 25.3.'},
+  {d:'2026-03-31',t:'🐣 Osterputz & Osterdeko',f:'10:30',e:'11:15',c:'haushalt',n:'Wohnung für Ostern herrichten · Deko aufstellen · gehört zum Haushaltsblock (Wohnung)'},
+  {d:'2026-03-31',t:'✍️ Hospitationsprotokoll schreiben – Di 24.3.',f:'09:00',e:'10:30',c:'uniaufgaben',n:'Noch nicht erledigt – nachholen!\nInhalte: Datum · Ort · Beobachter*in · Niveau · Unterrichtsstruktur (AVIVA) · Lernziele · Methoden · Sozialformen · eigene Beobachtungen & Fragen\n→ Abgabe bis 16.4. auf Moodle\nhttps://moodle.univie.ac.at/course/section.php?id=4673180'},
   {d:'2026-03-31',t:'📋 Unterlagen fertigstellen + Kopieren',f:'11:15',e:'12:45',c:'vhs',n:'Unterlagen fertig · Kopien für alle Kurse machen\n🏫 Singrienergasse · Rosasgasse · Johann Hoffmann Platz'},
   {d:'2026-03-31',t:'🎒 Fertigmachen & Tasche packen',f:'13:00',e:'13:30',c:'morgen',n:'30 Min vor VHS-Abfahrt · Tasche checken · fertig machen'},
   {d:'2026-03-31',t:'🚗 Fahrt zur VHS',f:'13:30',e:'14:30',c:'block'},
@@ -1032,14 +1033,13 @@ var FF=[
   {d:'2026-06-27',t:'Abfahrt Uni',f:'08:45',e:'09:00',c:'unipraesenz'},
   {d:'2026-06-27',t:'🍱 Mittagspause',f:'13:00',e:'14:00',c:'mittagspause'},
   {d:'2026-06-27',t:'Rückfahrt Uni',f:'18:00',e:'18:30',c:'unipraesenz'},
-  {d:'2026-03-28',t:'✍️ Migration: Synthese + roter Faden',f:'12:45',e:'13:45',c:'uniaufgaben',n:'Nachgeholt von Fr 27.3.'},
-  {d:'2026-03-28',t:'✍️ Migration: Überarbeiten + Zitate + Quellen',f:'14:45',e:'15:45',c:'uniaufgaben',n:'Nachgeholt von Fr 27.3.'},
-  {d:'2026-03-28',t:'✍️ Migration: Korrekturlesen + Layout',f:'15:45',e:'16:15',c:'uniaufgaben',n:'Nachgeholt von Fr 27.3.'},
   {d:'2026-03-29',t:'🎨 Ästhetisches Lernen: Kommentar schreiben',f:'11:10',e:'12:10',c:'uniaufgaben',n:'Nachgeholt von Fr 27.3.'},
   {d:'2026-03-29',t:'✍️ Selbstreflexion schreiben – Unterricht 25.3.',f:'12:10',e:'13:10',c:'uniaufgaben',n:'Nachgeholt von Fr 27.3.'},
   {d:'2026-03-28',t:'📋 Erledigungen – Anrufe & Mails',f:'11:00',e:'11:15',c:'schreibtisch',n:'📞 Augenarzt Flo + ich (Dr. Seher)\n📞 Friseur (Juni/Juli)\n📧 Re Strafregisterauszug an VHS'},
   {d:'2026-03-28',t:'🛒 Einkaufen: BIPA + Unterwäsche + Fressnapf',f:'11:15',e:'12:45',c:'haushalt',n:'🐾 Fressnapf: Katzenfutter + Bedarf\n🌱 Katzengras kaufen + austauschen\n🛒 BIPA: Pflegeprodukte\n👕 Unterwäsche + Socken kaufen'},
+  {d:'2026-03-30',t:'✍️ Selbstreflexion schreiben – Unterricht 25.3.',f:'12:00',e:'13:30',c:'uniaufgaben',n:'⚠️ Abgabe: 1 Woche nach Unterricht auf Moodle (bis 1.4.)!\nLeitfragen:\n• Was ist gut gelaufen?\n• Was würde ich anders machen?\n• Haben die Lernenden die Lernziele erreicht?\n• Wie habe ich auf Unerwartetes reagiert?\n• Was nehme ich für Runde 2 mit?\nhttps://moodle.univie.ac.at/course/section.php?id=4673180'},
   {d:'2026-03-30',t:'📋 Erledigungen – Anrufe',f:'11:00',e:'11:30',c:'schreibtisch',n:'📞 ZA + Mundhygiene Flo vereinbaren\n📞 Dr. Pressevertrieb anrufen'},
+  {d:'2026-03-31',t:'📋 Erledigungen – Anrufe & Mails',f:'10:30',e:'11:15',c:'schreibtisch',n:'📞 Augenarzt Flo + ich – Dr. Seher\n📞 Friseur (Termin Juni/Juli)\n📧 Re Strafregisterauszug an VHS senden'},
   {d:'2026-04-04',t:'Euthyrox (nüchtern)',f:'09:00',e:'09:05',c:'morgen'},
   {d:'2026-04-04',t:'Rückenübungen',f:'09:05',e:'09:20',c:'morgen'},
   {d:'2026-04-04',t:'Rudi Magenschutz',f:'09:10',e:'09:15',c:'morgen'},
@@ -1396,6 +1396,9 @@ var FF=[
   // ── APRIL: Umtopfen ────────────────────────────────────────
   {d:'2026-04-05',t:'🪴 Umtopfen – Yucca & Ficus groß',f:'16:00',e:'16:45',c:'haushalt',n:'UMTOPFEN – Schritt für Schritt:\n\n1. Pflanze sanft aus Topf nehmen\n2. Alte Erde abschütteln, Wurzeln begutachten\n3. Tote/faulige Wurzeln (braun/schwarz/weich) abschneiden\n4. Drainage-Schicht in neuen Topf (Kiesel 2–3cm)\n5. Frische Universalerde einfüllen\n6. Pflanze einsetzen, Erde andrücken\n7. Gut angießen, dann 2 Wochen nicht düngen!\n8. Nicht in die pralle Sonne nach dem Umtopfen\n\n🌴 YUCCA: Topf nur 2–3cm größer\n🌿 FICUS GROSS: Sehr vorsichtig – mag keine Wurzelstörung!\n⚠️ Nach Umtopfen: Ficus kann Blätter abwerfen – normal!'},
 
+  {d:'2026-04-02',t:'🏡 Weidlingbach heute – nicht vergessen!',f:'11:15',e:'11:20',c:'weidlingbach',n:'Weidlingbach Ausräumen · Tag 3 · heute ab 13:30'},
+  {d:'2026-04-03',t:'🏡 Weidlingbach heute – nicht vergessen!',f:'12:15',e:'12:20',c:'weidlingbach',n:'Weidlingbach Ausräumen · Tag 4 · heute ab 14:30'},
+  {d:'2026-04-04',t:'🏡 Weidlingbach heute – nicht vergessen!',f:'10:00',e:'10:05',c:'weidlingbach',n:'Weidlingbach Ausräumen · Tag 5 · heute ab 10:00'},
   {d:'2026-04-06',t:'🪴 Umtopfen – Kakteen & Euphorbia',f:'10:00',e:'10:45',c:'haushalt',n:'UMTOPFEN KAKTEEN – Schritt für Schritt:\n\n⚠️ SCHUTZ: Dicke Handschuhe + gefaltetes Zeitungspapier als Griff!\n⚠️ EUPHORBIA: Zusätzlich Brille – Milchsaft giftig & reizt Augen!\n\n1. Kakteenerde verwenden (nicht Universalerde!)\n2. Drainage unbedingt: Kiesel 3–4cm\n3. Nach Umtopfen: 1 Woche NICHT gießen (Wunden heilen)\n4. Dann erst sparsam angießen\n\n🌵 Euphorbia (Kandelaber): Topf stabilisieren – sie ist kopfschwer!\n🌵 Großer Kaktus: Topf mit Steinen beschweren gegen Umkippen\n🌵 Kleinkakteen: alle in Kakteenerde'},
 
   {d:'2026-04-07',t:'🪴 Umtopfen – Orchideen & Weihnachtskaktus',f:'13:00',e:'13:30',c:'haushalt',n:'UMTOPFEN ORCHIDEEN:\n\n🌸 Orchidee weiß:\n1. NUR Orchideenrinde verwenden (keine normale Erde!)\n2. Tote Wurzeln entfernen (braun, hohl, papierartig)\n3. Transparenter Topf ideal – Wurzeln brauchen Licht!\n4. Nach Blüte: Stiel 1cm über unterster Verzweigung abschneiden\n   → oft kommt neuer Trieb!\n\n🌸 Orchidee lila (falls noch nicht erholt):\n→ Erst stabilisieren, dann umtopfen wenn Wurzeln erholt\n\n🌵 Weihnachtskaktus:\n1. Universalerde + etwas Sand mischen\n2. Topf nicht zu groß – blüht besser wenn wurzeleng!\n3. Nach Blüte: 2–3 Glieder abzwicken für buschigeren Wuchs'},
@@ -1559,6 +1562,7 @@ var FF=[
   {d:'2026-03-26',t:'✍️ Hospitationsprotokoll schreiben – Di 24.3.',f:'09:35',e:'10:05',c:'uniaufgaben',n:'Zeitnah schreiben – Eindrücke sind noch frisch!\nInhalte: Datum · Ort · Beobachter*in · Niveau · Unterrichtsstruktur (AVIVA) · Lernziele · Methoden · Sozialformen · eigene Beobachtungen\n→ Abgabe bis 16.4. auf Moodle'},
   {d:'2026-03-27',t:'🚗 Nani – außer Haus',f:'11:30',e:'14:30',c:'block',n:'Nani · außer Haus'},
   {d:'2026-03-27',t:'✍️ Selbstreflexion schreiben – Unterricht 25.3.',f:'14:35',e:'15:30',c:'uniaufgaben',n:'⚠️ Abgabe: 1 Woche nach Unterricht auf Moodle!\nLeitfragen:\n• Was ist gut gelaufen?\n• Was würde ich anders machen?\n• Haben die Lernenden die Lernziele erreicht?\n• Wie habe ich auf Unerwartetes reagiert?\n• Was nehme ich für Runde 2 mit?\nhttps://moodle.univie.ac.at/course/section.php?id=4673180'},
+  {d:'2026-04-01',t:'🛍️ Unterwäsche & Socken kaufen',f:'10:00',e:'10:30',c:'schreibtisch',n:'Erledigungen nach Morgenroutine'},
   {d:'2026-04-01',t:'🔴 DEADLINE: Selbstreflexion 25.3. auf Moodle',f:'23:00',e:'23:59',c:'uniaufgaben',n:'Selbstreflexion zum Unterricht 25.3. hochladen!\nhttps://moodle.univie.ac.at/course/section.php?id=4673180'},
 
   // Schriftliches Feedback der Beobachterin (Runde 1) verfassen
@@ -1607,26 +1611,11 @@ var FF=[
 
   // ── LERNPLAN BIS UNTERRICHTSPRAKTIKUM (08.03.–03.05.2026) ──────────
   {d:'2026-03-08',t:'📥 Lernplan-Start: Texte auf Moodle laden',f:'12:15',e:'13:15',c:'uniaufgaben',n:'Texte auf Moodle herunterladen + Lesegebruest oeffnen\nhttps://moodle.univie.ac.at'},
-  {d:'2026-03-09',t:'📖 Migration: Konzett (2019) lesen',f:'11:15',e:'13:15',c:'uniaufgaben',n:'Konzett (2019) lesen + Leitfragen ausfuellen\nModul: Migration, Flucht, Trauma · Abgabe So 29.03.'},
-  {d:'2026-03-10',t:'📖 Migration: Garcia (2017) lesen',f:'11:15',e:'13:15',c:'uniaufgaben',n:'Garcia (2017) lesen + Leitfragen ausfuellen\nModul: Migration, Flucht, Trauma · Abgabe So 29.03.'},
-  {d:'2026-03-11',t:'📖 Migration: Plutzar (2016/2019) lesen',f:'11:15',e:'13:15',c:'uniaufgaben',n:'Plutzar (2016 oder 2019) lesen + Leitfragen ausfuellen\nModul: Migration, Flucht, Trauma · Abgabe So 29.03.'},
   // ── NEUER LERNPLAN ab 18.03. ─────────────────────────────
   // MIGRATION (Abgabe So 29.03.)
-  {d:'2026-03-19',t:'📖 Migration: Konzett lesen + Leitfragen',f:'11:15',e:'13:00',c:'uniaufgaben',n:'Konzett (2019) lesen + Leitfragen ausfüllen\nModul: Migration, Flucht, Trauma · Abgabe So 29.03.'},
-  {d:'2026-03-19',t:'📖 Migration: Garcia lesen + Leitfragen',f:'17:30',e:'19:30',c:'uniaufgaben',n:'Garcia (2017) lesen + Leitfragen ausfüllen\nModul: Migration, Flucht, Trauma · Abgabe So 29.03.'},
-  {d:'2026-03-20',t:'📖 Migration: Don Bosco + Logbuch Neuland',f:'12:15',e:'13:15',c:'uniaufgaben',n:'Don Bosco + Logbuch Neuland durchsehen + Notizen\nModul: Migration, Flucht, Trauma · Abgabe So 29.03.'},
   
   
-  {d:'2026-03-25',t:'✍️ Migration: Abschnitt 2 schreiben',f:'11:35',e:'13:30',c:'uniaufgaben',n:'Abschnitt 2 schreiben (Don Bosco & Logbuch Neuland)\nModul: Migration, Flucht, Trauma · Abgabe So 29.03.'},
-  {d:'2026-03-26',t:'✍️ Migration: Abschnitt 3 schreiben',f:'08:00',e:'09:00',c:'uniaufgaben',n:'Abschnitt 3 schreiben (Plutzar einbeziehen)\nModul: Migration, Flucht, Trauma · Abgabe So 29.03.'},
-  {d:'2026-03-27',t:'✍️ Migration: Überarbeiten + Zitate + Quellen',f:'14:35',e:'15:30',c:'uniaufgaben',n:'Überarbeiten, Zitate prüfen, Quellenangaben ergänzen\nModul: Migration, Flucht, Trauma · Abgabe So 29.03.'},
-  {d:'2026-03-27',t:'✍️ Migration: Korrekturlesen + Layout',f:'15:30',e:'16:00',c:'uniaufgaben',n:'Korrekturlesen + finales Layout\nModul: Migration, Flucht, Trauma · Abgabe So 29.03.'},
-  {d:'2026-03-25',t:'✍️ Migration: Einleitung + Abschnitt 1',f:'19:00',e:'21:00',c:'uniaufgaben',n:'Migration, Flucht, Trauma · Einleitung + Abschnitt 1'},
   {d:'2026-03-26',t:'🚿 Körperpflege-Block',f:'10:05',e:'11:00',c:'fitness',n:'🦴 Kalkschulter-Übungen (10 Min)\n🚿 Duschen (15 Min)\n🧴 Körperöl + Selbstmassage (15 Min)\n🌸 Beckenboden (3 Min)\n🧖 Gesichtsyoga (15 Min)'},
-  {d:'2026-03-26',t:'✍️ Migration: Abschnitt 2 + 3',f:'11:00',e:'12:30',c:'uniaufgaben',n:'Migration, Flucht, Trauma · Abschnitt 2 + 3'},
-  {d:'2026-03-27',t:'✍️ Migration: Synthese + roter Faden',f:'14:35',e:'15:30',c:'uniaufgaben',n:'Migration, Flucht, Trauma · Synthese + roter Faden'},
-  {d:'2026-03-28',t:'✍️ Migration: Überarbeiten + Abgabe vorbereiten',f:'13:45',e:'14:45',c:'uniaufgaben',n:'Migration, Flucht, Trauma · Finalisieren für Abgabe So 29.3.'},
-  {d:'2026-03-29',t:'🔴 ABGABE: Migration auf Moodle hochladen',f:'10:00',e:'10:30',c:'uniaufgaben',n:'ABGABE Migration, Flucht, Trauma – auf Moodle hochladen!\nhttps://moodle.univie.ac.at'},
 
   // ÄSTHETISCHES LERNEN (Abgabe Sa 26.04.)
   {d:'2026-03-28',t:'🎨 Ästhetisches Lernen: Thema + Material suchen',f:'16:45',e:'18:45',c:'uniaufgaben',n:'Thema wählen + Material suchen (Bild, Film, Musik, Text?)\nModul: Ästhetisches Lernen · Abgabe Sa 26.04.'},
