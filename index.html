@@ -1701,41 +1701,41 @@ function kw(d){var dt=new Date(d);dt.setHours(0,0,0,0);dt.setDate(dt.getDate()+3
 
 // ══ ERNÄHRUNGSPLAN ══
 var MEAL_PLAN = {
-  1: { // Woche 1 — Hafer & Hülsenfrüchte
-    1:{frueh:'Haferbrei mit Apfel & Zimt · Leinsamen · ungesüßt',mittag:'Rote-Linsen-Bowl · Reis, rote Linsen, Karotte, Spinat, Cumin, Zitrone',abend:'Vollkornbrot mit Hummus & Rohkost · Gurke, Radieschen, Paprika'},
-    2:{frueh:'Joghurt (natur) mit Beeren & Haferflocken · Leinsamen',mittag:'Kichererbsen-Bowl · Quinoa, Kichererbsen, Brokkoli, Paprika, Tahini',abend:'Zucchini-Tomaten-Pfanne · Vollkornreis, Knoblauch, Basilikum'},
-    3:{frueh:'Haferbrei mit Birne & Zimt · Leinsamen',mittag:'Pasta mit frischer Tomatensauce · Vollkornnudeln, Rucola, Knoblauch ★ GENUSS',abend:'Rote-Bete-Suppe · Ingwer, Kurkuma, Vollkornbrot'},
-    4:{frueh:'Haferbrei mit Leinsamen & Zimt · Walnüsse',mittag:'Brokkoli-Süßkartoffel-Bowl · Dinkelreis, Brokkoli, Süßkartoffel, Sesam',abend:'Hummus auf Vollkornbrot · Tomate & Schnittlauch'},
-    5:{frueh:'Porridge mit Heidelbeeren & Leinsamen',mittag:'Quinoa-Buddha-Bowl · Quinoa, Kichererbsen, Blattgemüse, Tahini, Zitrone',abend:'Linsensuppe mit Vollkornbrot · rote Linsen, Karotte, Ingwer'},
-    6:{frueh:'Vollkorntoast mit Mandelmus & Beeren · Chiasamen',mittag:'Jause: Hummus-Wrap · Vollkorn, Apfel, Walnüsse',abend:'Kürbis-Linsen-Bowl · Vollkornreis, Kürbis, rote Linsen, Kreuzkümmel'},
-    0:{frueh:'GENUSS: Rührei mit Gemüse · Vollkornbrot',mittag:'Rote-Linsen-Dal mit Basmatireis · Spinat, Kurkuma, Ingwer, Kokosmilch',abend:'Joghurt mit Beeren & Walnüssen'}
+  1: { // Woche 1
+    1:{frueh:'Haferbrei mit Apfel & Zimt · Leinsamen · Mandelmus',mittag:'Erdäpfelgulasch · Kartoffeln, Zwiebel, Paprikapulver, Kümmel, Majoran',abend:'Vogerlsalat mit Kürbiskernöl · Feldsalat, Kürbiskerne, Apfel, Vollkornweckerl'},
+    2:{frueh:'Joghurt mit Beeren & Haferflocken · Leinsamen · Hanfsamen',mittag:'Pasta e Fagioli · Vollkornnudeln, weiße Bohnen, Tomate, Rosmarin, Knoblauch',abend:'Bruschetta mit Rucola & Tomate · Vollkornbrot, Olivenöl, Basilikum'},
+    3:{frueh:'Porridge mit Beeren & Walnüssen · Chiasamen',mittag:'Gebratener Gemüsereis · Vollkornreis, Brokkoli, Karotte, Ei, Ingwer, Sesam',abend:'Miso-Suppe mit Tofu & Wakame · Frühlingszwiebeln'},
+    4:{frueh:'Haferbrei mit Birne & Leinsamen · Walnüsse',mittag:'Veggie-Wrap mit schwarzen Bohnen · Tortilla, Mais, Paprika, Tomate, Koriander',abend:'Gemüse-Quesadilla · Tortilla, Paprika, Mais, wenig Käse, Joghurt-Dip'},
+    5:{frueh:'Joghurt mit Beeren & Haferflocken · Leinsamen',mittag:'Rotes Linsen-Dal · Basmati, rote Linsen, Kurkuma, Ingwer, Kokosmilch',abend:'Aloo Gobi (Kartoffel-Karfiol) · Kurkuma, Kreuzkümmel, Tomate, Vollkornbrot'},
+    6:{frueh:'Topfenpalatschinken ★ GENUSS · Topfen, Beeren, Honig',mittag:'Semmelknödel mit Tomatensauce & Spinat · Knödel, Tomaten, Basilikum',abend:'Erdäpfelsalat mit Kürbiskernöl · Zwiebel, Essig, Kümmel, Schnittlauch'},
+    0:{frueh:'Pizza auf Vollkornteig ★ GENUSS · Tomatensauce, Mozzarella, Rucola',mittag:'Ribollita · weiße Bohnen, Wirsing, Tomate, Knoblauch, Olivenöl',abend:'Joghurt mit Walnüssen & Beeren · Leinsamen, Honig'}
   },
-  2: { // Woche 2 — Quinoa & Blattgemüse
-    1:{frueh:'Haferbrei mit Birne & Walnüssen · Leinsamen',mittag:'Spinat-Kichererbsen-Bowl · Quinoa, Babyspinat, Kichererbsen, Tomate, Zitrone',abend:'Tomatensuppe (frisch) · Basilikum, Vollkornbrot'},
-    2:{frueh:'Joghurt mit Himbeeren & Haferflocken · Chiasamen',mittag:'Pasta mit Gemüse-Pesto · Vollkornnudeln, Rucola, Walnuss-Pesto ★ GENUSS',abend:'Rote-Bete-Salat · Walnüsse, Apfel, Zitronendressing, Vollkornbrot'},
-    3:{frueh:'Haferbrei mit Apfelmus & Zimt · Walnüsse',mittag:'Brokkoli-Kartoffel-Bowl · Vollkornreis, Brokkoli, Kartoffel, Sesam, Zitrone',abend:'Linsensalat mit Vollkornbrot · grüne Linsen, Paprika, Petersilie'},
-    4:{frueh:'Porridge mit Aprikose & Zimt · Leinsamen',mittag:'Marokkanische Kichererbsen-Bowl · Couscous, Kichererbsen, Paprika, Kreuzkümmel',abend:'Kürbissuppe · Ingwer, Kurkuma, Vollkornbrot'},
-    5:{frueh:'Vollkornbrot mit Nussmus & Tomate',mittag:'Grüne Buddha-Bowl · Dinkelreis, Erbsen, Spinat, Gurke, Tahini-Zitronendressing',abend:'Rührei mit Spinat & Tomate · Vollkorntoast'},
-    6:{frueh:'Joghurt mit Müsli (vor Abfahrt)',mittag:'Jause: Hummus-Vollkornbrot, Nüsse, Obst',abend:'Süßkartoffel-Linsen-Bowl · Hirse, Süßkartoffel, rote Linsen, Kurkuma'},
-    0:{frueh:'GENUSS: Pancakes aus Haferflocken · Beeren, Leinsamen',mittag:'Gemüse-Flammkuchen · Vollkornteig, Joghurt-Basis, Zucchini, Zwiebel ★ GENUSS',abend:'Joghurt mit Früchten & Chiasamen'}
+  2: { // Woche 2
+    1:{frueh:'Haferbrei mit Birne & Walnüssen · Leinsamen',mittag:'Ramen-Suppe · Soba-Nudeln, Tofu, Pak Choi, Ei, Ingwer, Miso-Brühe',abend:'Edamame mit Reiscrackern · Sojasoße, Ingwer'},
+    2:{frueh:'Joghurt mit Himbeeren & Haferflocken · Chiasamen · Hanfsamen',mittag:'Käsespätzle ★ GENUSS · Vollkornspätzle, wenig Bergkäse, Röstzwiebeln',abend:'Brettljause vegetarisch · Vollkornbrot, Radieschen, Aufstrich, Gurke'},
+    3:{frueh:'Porridge mit Apfel & Chiasamen · Mandelmus',mittag:'Veggie-Burrito · Tortilla, Vollkornreis, Kidneybohnen, Paprika, Mais',abend:'Tomaten-Bohnen-Suppe · Kidneybohnen, Tomate, Paprika, Kreuzkümmel'},
+    4:{frueh:'Haferbrei mit Apfel & Leinsamen · Hanfsamen',mittag:'Gnocchi mit Tomatensauce & Spinat · Kartoffelgnocchi, Knoblauch, Basilikum',abend:'Caprese mit Vollkornbrot · Tomate, Mozzarella, Basilikum, Olivenöl'},
+    5:{frueh:'Joghurt mit Beeren & Haferflocken · Leinsamen',mittag:'Spinatknödel mit Butterröstzwiebeln · Spinat, Ei, wenig Käse, Sauerrahm',abend:'Vollkornweckerl mit Topfenaufstrich · Kräutertopfen, Radieschen, Gurke'},
+    6:{frueh:'Vollkorntoast mit Mandelmus & Beeren · Chiasamen',mittag:'Veggie-Burger ★ GENUSS · Vollkornbun, Kichererbsen-Patty, Salat, Rote Bete',abend:'Gemischter Salat mit Walnüssen & Ei · Rucola, Tomate, Gurke'},
+    0:{frueh:'Hafer-Waffeln mit Beeren ★ GENUSS · Vollkornmehl, Haferflocken, Ahornsirup',mittag:'Kichererbsen-Curry (Chana Masala) · Basmati, Tomate, Zwiebel, Garam Masala',abend:'Joghurt mit Beeren & Leinsamen · Honig'}
   },
-  3: { // Woche 3 — Beeren & Vollkorn
-    1:{frueh:'Haferbrei mit Apfel & Chiasamen · Leinsamen',mittag:'Tofu-Gemüse-Bowl · Vollkornreis, Tofu gebraten, Brokkoli, Karotte, Ingwer, Sesam',abend:'Vollkornbrot mit Rote-Linsen-Aufstrich · Paprika, Gurke'},
-    2:{frueh:'Porridge mit gemischten Beeren & Walnüssen · Hanfsamen',mittag:'Kürbis-Kichererbsen-Bowl · Quinoa, Kürbis, Kichererbsen, Rucola, Kurkuma',abend:'Zucchini-Suppe · Knoblauch, Basilikum, Vollkornbrot'},
-    3:{frueh:'Joghurt mit Beeren & Haferflocken · Leinsamen',mittag:'Käsespätzle light · wenig Käse, viel Röstzwiebel, grüner Salat ★ GENUSS',abend:'Rührei mit Spinat & Tomate · Vollkorntoast'},
-    4:{frueh:'Haferbrei mit Leinsamen & Apfel · Walnüsse',mittag:'Linsen-Spinat-Bowl · Hirse, braune Linsen, Babyspinat, Tomate, Tahini',abend:'Brokkoli-Kartoffelsuppe · Olivenöl, Knoblauch, Vollkornbrot'},
-    5:{frueh:'Porridge mit Himbeeren & Leinsamen · Chiasamen',mittag:'Mexikanische Bowl · Vollkornreis, schwarze Bohnen, Mais, Paprika, Koriander, Limette',abend:'Hummus mit Gemüsesticks & Vollkornbrot · Karotte, Gurke, Paprika'},
-    6:{frueh:'Joghurt mit Müsli (vor Abfahrt)',mittag:'Jause: Hummus-Vollkornbrot, Nüsse, Birne',abend:'Indische Linsen-Bowl (Dal) · Basmati, rote Linsen, Kurkuma, Ingwer, Spinat'},
-    0:{frueh:'GENUSS: Waffeln aus Hafermehl · Beeren, Leinsamen',mittag:'Kichererbsen-Tomaten-Curry · Basmati, Spinat, Kurkuma, Koriander, Ingwer',abend:'Joghurt mit Beeren & Leinsamen'}
+  3: { // Woche 3
+    1:{frueh:'Haferbrei mit Mango & Chiasamen · Leinsamen · Kardamom',mittag:'Palak Paneer · Basmati, Spinat, Paneer, Kurkuma, Ingwer, Garam Masala',abend:'Dhal-Suppe mit Vollkornbrot · gelbe Linsen, Karotte, Kurkuma, Koriander'},
+    2:{frueh:'Joghurt mit Beeren & Haferflocken · Leinsamen · Hanfsamen',mittag:'Tiroler Gröstl vegetarisch · Bratkartoffeln, Ei, Zwiebel, Kümmel, Petersilie',abend:'Kürbiscremesuppe · Ingwer, Kurkuma, Kürbiskerne, Vollkornweckerl'},
+    3:{frueh:'Porridge mit Birne & Walnüssen · Chiasamen · Vanille',mittag:'Vollkorn-Penne Arrabbiata · Tomate, Chili, Knoblauch, Olivenöl, Rucola',abend:'Minestrone mit Vollkornbrot · Bohnen, Zucchini, Tomate, Karotte, Basilikum'},
+    4:{frueh:'Haferbrei mit Beeren & Hanfsamen · Leinsamen',mittag:'Thai-Gemüsecurry · Jasminreis, Süßkartoffel, Brokkoli, Kokosmilch, Currypaste',abend:'Frühlingsrollen (gebacken) · Reispapier, Karotte, Gurke, Rucola, Erdnusssauce'},
+    5:{frueh:'Joghurt mit Beeren & Haferflocken · Chiasamen',mittag:'Enchiladas mit Kidneybohnen · Tortilla, Paprika, Tomatensauce, wenig Käse',abend:'Hummus mit Gemüsesticks & Vollkornbrot · Karotte, Gurke, Paprika'},
+    6:{frueh:'Germknödel ★ GENUSS · Vollkornmehl, Powidl, Mohnbutter',mittag:'Grüner Salat mit Ei & Weckerl · Blattsalat, Ei, Gurke, Radieschen, Kürbiskernöl',abend:'Liptauer auf Vollkornbrot · Topfen, Paprikapulver, Kümmel, Schnittlauch'},
+    0:{frueh:'Hafer-Pancakes mit Beeren ★ GENUSS · Haferflocken, Ei, Joghurt',mittag:'Black-Bean-Burger ★ GENUSS · Vollkornbun, schwarze Bohnen, Mais, Paprika',abend:'Joghurt mit Beeren & Leinsamen · Honig, Walnüsse'}
   },
-  4: { // Woche 4 — Hirse & Bowls
-    1:{frueh:'Haferbrei mit Heidelbeeren & Walnüssen · Leinsamen',mittag:'Hirse-Gemüse-Bowl · Hirse, Zucchini, Paprika, Spinat, Sesam, Zitronendressing',abend:'Rote-Linsen-Suppe · Karotte, Ingwer, Kurkuma, Vollkornbrot'},
-    2:{frueh:'Joghurt mit Granola, Beeren & Walnüssen',mittag:'Quinoa-Gemüse-Bowl · Quinoa, Brokkoli, Karotte, Ingwer, Kurkuma, Sesam',abend:'Mandelmus auf Vollkornbrot · Tomate & Basilikum'},
-    3:{frueh:'Haferbrei mit Apfel & Zimt · Chiasamen',mittag:'Tortellini mit frischer Tomatensauce · viel Gemüse ★ GENUSS',abend:'Joghurt oder Obst & Nüsse'},
-    4:{frueh:'Porridge mit Apfel & Leinsamen · Walnüsse',mittag:'Linsen-Süßkartoffel-Bowl · Vollkornreis, rote Linsen, Süßkartoffel, Cumin, Koriander',abend:'Rote-Linsen-Aufstrich · Gurke & Kräuter · Knäckebrot'},
-    5:{frueh:'Vollkornbrot mit Nussmus & Tomate',mittag:'Pizza vegetarisch · Vollkornteig, wenig Käse, viel Gemüse ★ GENUSS',abend:'Joghurt oder Obst'},
-    6:{frueh:'Joghurt mit Müsli (vor Abfahrt)',mittag:'Jause: Hummus-Sandwich · Vollkorn, Nüsse, Apfel',abend:'Warme Linsen-Gemüsepfanne · Hirse, Kurkuma, Koriander'},
-    0:{frueh:'GENUSS: Großes vegetarisches Frühstück · 1 Ei, Gemüse, Vollkornbrot',mittag:'Buddha-Bowl · Quinoa, Kichererbsen, Ofengemüse, Tahini-Dressing',abend:'Joghurt oder Früchte'}
+  4: { // Woche 4
+    1:{frueh:'Haferbrei mit Walnüssen & Leinsamen · Kiwi',mittag:'Risotto mit Brokkoli & Zitrone · Vollkornreis, Parmesan (wenig), Olivenöl',abend:'Zucchini-Tomate-Suppe · Basilikum, Knoblauch, Olivenöl, Vollkornbrot'},
+    2:{frueh:'Joghurt mit Beeren & Haferflocken · Leinsamen · Hanfsamen',mittag:'Pad Thai vegetarisch · Reisnudeln, Tofu, Ei, Sojasprossen, Erdnüsse, Limette',abend:'Edamame & Reiscracker · Sesam, Sojasoße'},
+    3:{frueh:'Porridge mit Chiasamen & Aprikose · Mandelmus',mittag:'Kartoffelsuppe mit Brot · Erdäpfel, Sellerie, Karotte, Majoran, Kümmel',abend:'Spinat-Ei-Pfanne · Vollkorntoast, Knoblauch, Olivenöl, Muskatnuss'},
+    4:{frueh:'Haferbrei mit Beeren & Hanfsamen · Chiasamen',mittag:'Veggie-Tacos · Mais-Tortillas, Rote Bete, schwarze Bohnen, Koriander, Limette',abend:'Rote-Bete-Suppe mit Vollkornbrot · Ingwer, Kokos light, Koriander'},
+    5:{frueh:'Joghurt mit Beeren & Haferflocken · Leinsamen',mittag:'Kaspressknödel auf Salat ★ · Bergkäseknödel, Feldsalat, Kürbiskernöl, Essig',abend:'Hummus-Wrap mit Rohkost · Tortilla, Hummus, Rucola, Gurke, Paprika'},
+    6:{frueh:'Masala-Omelette ★ GENUSS · Ei, Zwiebel, Chili, Koriander, Kurkuma',mittag:'Saag Aloo · Kartoffeln, Spinat, Kurkuma, Kreuzkümmel, Knoblauch, Ingwer',abend:'Joghurt-Raita mit Vollkornbrot · Joghurt, Gurke, Kreuzkümmel, Minze'},
+    0:{frueh:'Kaiserschmarrn ★ GENUSS · Vollkornmehl, Ei, Joghurt, Zwetschgenröster',mittag:'Tafelspitz-Suppe vegetarisch · Gemüsebrühe, Karotte, Sellerie, Petersilwurzel',abend:'Joghurt mit Walnüssen & Beeren · Leinsamen, Honig'}
   }
 };
 
