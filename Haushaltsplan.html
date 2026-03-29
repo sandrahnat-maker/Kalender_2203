@@ -199,12 +199,16 @@ var WEEKLY = {
      voice:"Vorzimmer. Schuhe wegr\u00e4umen und Boden fegen. Vier Minuten."},
     {id:13,t:"Mist rausbringen",                m:3,  tip:"Alle Eimer leeren",
      voice:"M\u00fcll rausbringen. Alle Eimer leeren und neue S\u00e4cke einlegen. Drei Minuten."},
+    {id:14,t:"B\u00fcgeln",                             m:30, tip:"W\u00f6chentlich Mo \u2013 Hemden, Blusen, Hosen",
+     voice:"B\u00fcgeln. W\u00f6chentlicher B\u00fcgelblock. Dreißig Minuten."},
   ],
   2: [ // DIENSTAG
     {id:20,t:"Schlafzimmer: Staub wischen",     m:5,  tip:"Schr\u00e4nke oben, Nachttische, Spiegel",
      voice:"Schlafzimmer. Staub wischen. Schr\u00e4nke, Nachttische und Spiegel. F\u00fcnf Minuten."},
     {id:21,t:"Schlafzimmer saugen",             m:8,  tip:"Unter dem Bett \u2013 Staubsammler",
      voice:"Schlafzimmer saugen. Bitte unter das Bett saugen \u2013 dort sammelt sich am meisten Staub. Acht Minuten."},
+    {id:22,t:"Schuhe putzen",                      m:5,  tip:"Stra\u00dfenschuhe reinigen & pflegen",
+     voice:"Schuhe putzen. Stra\u00dfenschuhe reinigen, bei Bedarf eincremen und pflegen. F\u00fcnf Minuten."},
   ],
   3: [ // MITTWOCH
     {id:30,t:"Bad: Badewanne reinigen",         m:6,  tip:"Reiniger einwirken lassen, dann schrubben",
@@ -364,17 +368,20 @@ function setDone(id, monthly, val) { checked[(monthly?'m_':'t_')+id] = val; save
 // ── TASKS ─────────────────────────────────────────────────────────────────
 function getTasks() {
   var out = [];
-  // 1. Wäsche zuerst (nur an Wäsche-Tagen)
+  // 1. Lüften immer zuerst
+  var lueften = DAILY.find(function(t){ return t.id === 5; });
+  if (lueften) out.push({task:lueften, monthly:false});
+  // 2. Wäsche (nur an Wäsche-Tagen)
   if (WAESCHE_DAYS.indexOf(selDay) >= 0) {
     var wt = WAESCHE_TYPES[selDay];
     var wtask = wt ? {id:22, t:wt.t, m:5, tip:wt.tip, voice:wt.voice} : WAESCHE_TASK;
     out.push({task:wtask, monthly:false});
   }
-  // 2. Wochenschwerpunkt
+  // 3. Wochenschwerpunkt
   var weekly = WEEKLY[selDay] || [];
   weekly.forEach(function(t){ out.push({task:t, monthly:false}); });
-  // 3. Täglich (Lüften, Katzenklo, Bett, Küche)
-  DAILY.forEach(function(t){ out.push({task:t, monthly:false}); });
+  // 4. Täglich (ohne Lüften, da bereits oben)
+  DAILY.filter(function(t){ return t.id !== 5; }).forEach(function(t){ out.push({task:t, monthly:false}); });
   return out;
 }
 function getMonthlyForDay() {
