@@ -73,7 +73,8 @@ main{padding:.8rem .9rem 1rem;max-width:540px;margin:0 auto}
 .toggle-sw.on::after{left:16px}
 
 /* ── MICRO-STEPS PANEL ── */
-.steps-panel{background:var(--surface);border:1px solid rgba(139,106,62,.25);border-radius:14px;margin-bottom:.9rem;overflow:hidden;box-shadow:0 2px 16px rgba(139,106,62,.08)}
+.steps-panel{background:var(--surface);border:1px solid rgba(139,106,62,.25);border-radius:14px;margin-bottom:.9rem;overflow:hidden;box-shadow:0 2px 16px rgba(139,106,62,.08);position:relative;z-index:10}
+.steps-panel.hidden{display:none!important}
 .steps-header{padding:.75rem 1rem .6rem;background:rgba(139,106,62,.06);border-bottom:1px solid rgba(139,106,62,.12)}
 .steps-task-name{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;color:var(--text)}
 .steps-meta{font-size:.6rem;color:var(--muted);margin-top:.1rem}
@@ -192,7 +193,7 @@ main{padding:.8rem .9rem 1rem;max-width:540px;margin:0 auto}
   </div>
 
   <!-- MICRO-STEPS PANEL (wird dynamisch befüllt) -->
-  <div class="steps-panel" id="stepsPanel" style="display:none">
+  <div class="steps-panel hidden" id="stepsPanel">
     <div class="steps-header">
       <div class="steps-task-name" id="stTaskName"></div>
       <div class="steps-meta" id="stTaskMeta"></div>
@@ -201,7 +202,7 @@ main{padding:.8rem .9rem 1rem;max-width:540px;margin:0 auto}
         <div class="steps-prog-lbl" id="stProgLbl">0/0</div>
       </div>
     </div>
-    <div class="utensils-block" id="utensilsBlock" style="display:none">
+    <div class="utensils-block hidden" id="utensilsBlock">
       <div class="utensils-label">🧹 Benötigte Utensilien</div>
       <div class="utensils-list" id="utensilsList"></div>
     </div>
@@ -389,7 +390,7 @@ var STEPS = {
     ]
   },
   // SCHUHE PUTZEN
-  22: {
+  23: {
     utensilien: ["Schuhbürste", "Schuhcreme (passende Farbe)", "Altes Tuch oder Zeitungspapier"],
     steps: [
       {text: "Schuhe herausholen – alle die gereinigt werden", detail: "Auf Zeitungspapier stellen"},
@@ -774,7 +775,7 @@ var WEEKLY = {
   2: [
     {id:20,t:"Schlafzimmer: Staub wischen",m:5,tip:"Schränke oben, Nachttische, Spiegel",voice:"Schlafzimmer. Staub wischen. Fünf Minuten."},
     {id:21,t:"Schlafzimmer saugen",m:8,tip:"Unter dem Bett – Staubsammler",voice:"Schlafzimmer saugen. Unter das Bett saugen. Acht Minuten."},
-    {id:22,t:"Schuhe putzen",m:5,tip:"Straßenschuhe reinigen & pflegen",voice:"Schuhe putzen. Straßenschuhe reinigen. Fünf Minuten."},
+    {id:23,t:"Schuhe putzen",m:5,tip:"Straßenschuhe reinigen & pflegen",voice:"Schuhe putzen. Straßenschuhe reinigen. Fünf Minuten."},
   ],
   3: [
     {id:30,t:"Bad: Badewanne reinigen",m:6,tip:"Reiniger einwirken lassen, dann schrubben",voice:"Badezimmer. Badewanne reinigen. Sechs Minuten."},
@@ -945,8 +946,8 @@ function openSteps(taskId) {
   }
 
   renderStepsPanel();
-  document.getElementById('stepsPanel').style.display = 'block';
-  document.getElementById('stepsPanel').scrollIntoView({behavior:'smooth', block:'start'});
+  document.getElementById('stepsPanel').classList.remove('hidden');
+  document.getElementById('stepsPanel').scrollIntoView({behavior:'smooth', block:'nearest'});
 
   if (voiceOn) {
     var task = findTask(taskId);
@@ -981,12 +982,12 @@ function renderStepsPanel() {
   var uBlock = document.getElementById('utensilsBlock');
   var uList = document.getElementById('utensilsList');
   if (data.utensilien && data.utensilien.length > 0) {
-    uBlock.style.display = 'block';
+    uBlock.classList.remove('hidden');
     uList.innerHTML = data.utensilien.map(function(u){
       return '<span class="utensil-chip">🧹 '+u+'</span>';
     }).join('');
   } else {
-    uBlock.style.display = 'none';
+    uBlock.classList.add('hidden');
   }
 
   // Steps
@@ -1088,7 +1089,7 @@ function jumpStep(idx) {
 
 function closeSteps() {
   stepsMode = false;
-  document.getElementById('stepsPanel').style.display = 'none';
+  document.getElementById('stepsPanel').classList.add('hidden');
 }
 
 function skipFromSteps() {
