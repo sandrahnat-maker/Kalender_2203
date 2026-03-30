@@ -216,65 +216,20 @@ body{background:var(--bg);font-family:var(--font-dm);color:var(--text);display:f
 <script>
 var CATS={morgen:{l:'Morgen',c:'#7B5EA7'},unipraesenz:{l:'Uni-Präsenz',c:'#2E5FA8'},uniaufgaben:{l:'Uni-Aufgaben',c:'#C9A800'},vhs:{l:'VHS/Unterricht',c:'#3A8C5C'},schreibtisch:{l:'Schreibtischblock',c:'#2A9D8F'},mittagspause:{l:'Mittagspause',c:'#8B6A3E'},haushalt:{l:'Haushalt/Familie',c:'#D4845A'},fitness:{l:'Ich',c:'#7B5EA7'},abend:{l:'Abend',c:'#9B6BB5'},weidlingbach:{l:'Weidlingbach',c:'#C0392B'},freizeit:{l:'Freizeit/Soziales',c:'#9B6BB5'},extra:{l:'Extra',c:'#4A7FA8'},block:{l:'Blockzeit',c:'#999999'}};
 var RR=[
-  {t:'🐾 Lotte – Waldspaziergang heute?',f:'07:28',e:'07:30',c:'morgen',w:[1,3,5],n:'Jeden 2. Tag · heute wäre ein Spaziergang-Tag 🐕'},
   {t:'Euthyrox (nüchtern)',f:'07:30',e:'07:35',c:'morgen',w:[1,2,3,4,5]},
-  {t:'🐾 Lotte – Waldspaziergang heute?',f:'08:58',e:'09:00',c:'morgen',w:[0],n:'Jeden 2. Tag · heute wäre ein Spaziergang-Tag 🐕'},
+  {t:'🌅 Morgenroutine',f:'07:35',e:'09:34',c:'morgen',w:[1,2,3,4,5],n:'Euthyrox nüchtern · Rückenübungen · Rudi Magenschutz\nWiegen · Knirscherschiene · Blutdruck messen\nWasser + Sertralin · Frühstück + Tee · Obst + Rhodiola\nKaffee · Katzen füttern + Medikamente · Anulind\nBad früh · Spaziergang Lotte · Kiefer entspannen'},
   {t:'Euthyrox (nüchtern)',f:'09:00',e:'09:05',c:'morgen',w:[0]},
+  {t:'🌅 Morgenroutine',f:'09:05',e:'11:05',c:'morgen',w:[0],n:'Euthyrox nüchtern · Rückenübungen · Rudi Magenschutz\nWiegen · Knirscherschiene · Blutdruck messen\nWasser + Sertralin · Frühstück + Tee · Obst + Rhodiola\nKaffee · Katzen füttern + Medikamente · Anulind\nBad früh · Spaziergang Lotte · Kiefer entspannen'},
 
-  {t:'Rückenübungen',f:'07:35',e:'07:50',c:'morgen',w:[1,2,3,4,5]},
-  {t:'Rückenübungen',f:'09:05',e:'09:15',c:'morgen',w:[0]},
-  {t:'Rudi Magenschutz',f:'07:40',e:'07:45',c:'morgen',w:[1,2,3,4,5]},
-  {t:'Rudi Magenschutz',f:'09:15',e:'09:20',c:'morgen',w:[0]},
-  {t:'Wiegen',f:'07:45',e:'07:47',c:'morgen',w:[1,2,3,4,5]},
-  {t:'Wiegen',f:'09:20',e:'09:22',c:'morgen',w:[0]},
-  {t:'Knirscherschiene',f:'07:47',e:'07:50',c:'morgen',w:[1,2,3,4,5]},
-  {t:'Knirscherschiene',f:'09:22',e:'09:25',c:'morgen',w:[0]},
-  {t:'Wasser + Sertralin vorbereiten',f:'07:50',e:'07:55',c:'morgen',w:[1,2,3,4,5]},
-  {t:'Wasser + Sertralin vorbereiten',f:'09:28',e:'09:33',c:'morgen',w:[0]},
-    {t:'🌺 Hibiskustee + Frühstück',f:'08:00',e:'08:20',c:'morgen',w:[1],n:'3 Tassen/Tag · Blutdruck -7 bis -13 mmHg\n1,25g Hibiskus · 6 Min ziehen · kalt oder warm\n⚠️ Nicht bei Hydrochlorothiazid – Arzt fragen!'},
-  {t:'🍵 Grüntee + Frühstück',f:'08:00',e:'08:20',c:'morgen',w:[2],n:'1-2 Tassen/Tag · LDL-Oxidation hemmen · Blutdruck\n70-80°C · 2-3 Min ziehen\n⚠️ Kann Betablocker abschwächen – Arzt fragen!'},
-  {t:'🟡 Kurkuma-Ingwer-Tee + Frühstück',f:'08:00',e:'08:20',c:'morgen',w:[3],n:'1 TL Kurkuma + 1cm Ingwer + Prise Pfeffer + Zitrone\nLp(a) + hs-CRP senken · täglich morgens ideal'},
-  {t:'🌺 Hibiskustee + Frühstück',f:'08:00',e:'08:20',c:'morgen',w:[4],n:'3 Tassen/Tag · Blutdruck -7 bis -13 mmHg\n1,25g Hibiskus · 6 Min ziehen · kalt oder warm\n⚠️ Nicht bei Hydrochlorothiazid – Arzt fragen!'},
-  {t:'🌹 Weißdorntee + Frühstück',f:'08:00',e:'08:20',c:'morgen',w:[5],n:'1-2 Tassen/Tag · Herz & Blutgefässe\nErweitert Herzkranzgefässe · aus Blüten + Blättern'},
-  // ── ZWISCHENMAHLZEITEN – Vormittag & Nachmittag ─────────────
+    // ── ZWISCHENMAHLZEITEN – Vormittag & Nachmittag ─────────────
   // Mo: Apfel + Mandelmus · Kiwi + Leinsamen
-  {t:'🍎 Apfel + Mandelmus',f:'08:20',e:'08:25',c:'morgen',w:[1],n:'Apfel mit Schale · Pektin senkt Lp(a) + LDL · 1 TL Mandelmus'},
-  {t:'🍊 2 Kiwis + Chiasamen',f:'12:36',e:'12:41',c:'morgen',w:[1],n:'2 Kiwis · Vitamin C · mit Chiasamen'},
   // Di: Birne + Walnüsse · Beeren + Joghurt
-  {t:'🍐 Birne + Walnüsse',f:'08:20',e:'08:25',c:'morgen',w:[2],n:'Birne · Ballaststoffe · mit Walnüssen'},
-  {t:'🫐 Beeren + Joghurt',f:'13:05',e:'13:10',c:'morgen',w:[2],n:'Gemischte Beeren · Antioxidantien · mit Joghurt'},
   // Mi: Apfel + Walnüsse · Orange
-  {t:'🍎 Apfel + Walnüsse',f:'08:20',e:'08:25',c:'morgen',w:[3],n:'Apfel mit Schale · Pektin · mit Walnüssen'},
-  {t:'🍊 Orange',f:'13:05',e:'13:10',c:'morgen',w:[3],n:'Orange · Vitamin C · Flavonoide für Blutgefäße'},
   // Do: Beeren + Chiasamen · Birne + Mandelmus
-  {t:'🫐 Beeren + Chiasamen',f:'08:20',e:'08:25',c:'morgen',w:[4],n:'Beeren (frisch oder TK) · Antioxidantien · mit Chiasamen'},
-  {t:'🍐 Birne + Mandelmus',f:'13:35',e:'13:40',c:'morgen',w:[4],n:'Birne · Ballaststoffe · mit Mandelmus'},
   // Fr: Kiwi + Leinsamen · Apfel
-  {t:'🥝 Kiwi + Leinsamen',f:'08:20',e:'08:25',c:'morgen',w:[5],n:'Kiwi · Vitamin C + K · mit Leinsamen'},
-  {t:'🍎 Apfel',f:'14:05',e:'14:10',c:'morgen',w:[5],n:'Apfel mit Schale · Pektin senkt Lp(a) + LDL'},
   // Sa: Beeren + Nussmus
   // So: eigene Slots nach Meditation
-  {t:'🍊 Orange',f:'09:53',e:'09:58',c:'morgen',w:[0],n:'Orange · Vitamin C · Flavonoide'},
-  {t:'🫐 Beeren + Chiasamen',f:'14:55',e:'15:00',c:'morgen',w:[0],n:'Gemischte Beeren · Antioxidantien · mit Chiasamen'},
-  {t:'💊 Rhodiola (Avitale)',f:'08:20',e:'08:22',c:'morgen',w:[1,2,3,4,5],n:'Avitale Rhodiola Rosea · 200mg · nach dem Frühstück'},
-  {t:'💊 Rhodiola (Avitale)',f:'12:34',e:'12:36',c:'morgen',w:[1],n:'Avitale Rhodiola Rosea · 200mg · nach dem Mittagessen'},
-  {t:'💊 Rhodiola (Avitale)',f:'13:05',e:'13:07',c:'morgen',w:[2],n:'Avitale Rhodiola Rosea · 200mg · nach dem Mittagessen'},
-  {t:'💊 Rhodiola (Avitale)',f:'13:05',e:'13:07',c:'morgen',w:[3],n:'Avitale Rhodiola Rosea · 200mg · nach dem Mittagessen'},
-  {t:'💊 Rhodiola (Avitale)',f:'13:35',e:'13:37',c:'morgen',w:[4],n:'Avitale Rhodiola Rosea · 200mg · nach dem Mittagessen'},
-  {t:'💊 Rhodiola (Avitale)',f:'14:05',e:'14:07',c:'morgen',w:[5],n:'Avitale Rhodiola Rosea · 200mg · nach dem Mittagessen'},
-  {t:'💊 Rhodiola (Avitale)',f:'14:55',e:'14:57',c:'morgen',w:[0],n:'Avitale Rhodiola Rosea · 200mg · nach dem Mittagessen'},
-  {t:'Kaffee',f:'08:22',e:'08:32',c:'morgen',w:[1,2,3,4,5]},
-  {t:'💊 Anulind',f:'08:47',e:'08:49',c:'morgen',w:[1,2,3,4,5],n:'Anulind · nach Katzen füttern'},
-  {t:'Bad früh',f:'08:49',e:'09:04',c:'morgen',w:[1,2,3,4,5]},
-  {t:'💊 Rhodiola (Avitale)',f:'10:03',e:'10:05',c:'morgen',w:[0],n:'Avitale Rhodiola Rosea · 200mg · nach dem Frühstück'},
 
-  {t:'🟡 Kurkuma-Ingwer-Tee + Frühstück',f:'09:33',e:'09:53',c:'morgen',w:[0],n:'1 TL Kurkuma + 1cm Ingwer + Prise Pfeffer + Zitrone\nLp(a) + hs-CRP senken · entspannt in Ruhe trinken'},
-  {t:'Kaffee',f:'09:53',e:'10:03',c:'morgen',w:[0]},
-  {t:'Katzen füttern + Medikamente',f:'08:32',e:'08:47',c:'morgen',w:[1,2,3,4,5]},
-  {t:'Katzen füttern + Medikamente',f:'10:05',e:'10:20',c:'morgen',w:[0]},
-  {t:'💊 Anulind',f:'10:20',e:'10:22',c:'morgen',w:[0],n:'Anulind · nach Katzen füttern'},
-  {t:'Bad früh',f:'10:22',e:'10:35',c:'morgen',w:[0]},
-  {t:'🐾 Lotte – Morgenrunde + Medikamente',f:'10:35',e:'11:05',c:'morgen',w:[0],n:'Spaziergang · Medikamente Lotte geben'},
   {t:'Waldspaziergang Lotte',f:'15:07',e:'16:07',c:'fitness',w:[0]},
   {t:'🛁 Sitzbad',f:'19:04',e:'19:16',c:'fitness',w:[1]},
   {t:'🚿 Körperpflege-Block',f:'19:31',e:'21:11',c:'fitness',w:[1],n:'🦴 Kalkschulter-Übungen (15 Min)\n🚿 Duschen + Haare waschen (25 Min)\n🧴 Körperöl + Selbstmassage (15 Min)\n🌸 Beckenboden (3 Min)\n🧖 Gesichtsyoga (15 Min)\n🧘 Meditation (15 Min)'},
@@ -285,8 +240,8 @@ var RR=[
   {t:'🚿 Körperpflege-Block',f:'19:30',e:'20:45',c:'fitness',w:[4],n:'🦴 Kalkschulter-Übungen (15 Min)\n🚿 Duschen (15 Min)\n🧴 Körperöl + Selbstmassage (15 Min)\n🌸 Beckenboden (3 Min)\n🧖 Gesichtsyoga (15 Min)\n🧘 Meditation (15 Min)'},
   {t:'🚿 Körperpflege-Block',f:'20:04',e:'21:39',c:'fitness',w:[5],n:'🦴 Kalkschulter-Übungen (15 Min)\n🚿 Duschen + Haare waschen (20 Min)\n🧴 Körperöl + Selbstmassage (15 Min)\n🌸 Beckenboden (3 Min)\n🧖 Gesichtsyoga (15 Min)\n🧘 Meditation (15 Min)'},
   {t:'🚿 Körperpflege-Block',f:'19:15',e:'21:00',c:'fitness',w:[0],n:'🚿 Duschen + Haare waschen (20 Min)\n🧴 Körperöl + Selbstmassage (15 Min)\n🧘 Meditation (nach Yoga)'},
-  {t:'🌸 Beckenboden-Übungen',f:'18:40',e:'18:43',c:'fitness',w:[0],n:'3 Min · Beckenbodenmuskel anspannen · 5 Sek halten · 10x · schnelle Impulse 10x'},
-  {t:'🧘 Cool-Down Dehnen',f:'18:53',e:'19:03',c:'fitness',w:[0],n:'10 Min · Dehnplan · Yoga Cool-Down'},
+  {t:'🌸 Beckenboden-Übungen',f:'17:40',e:'17:43',c:'fitness',w:[0],n:'3 Min · Beckenbodenmuskel anspannen · 5 Sek halten · 10x · schnelle Impulse 10x'},
+  {t:'🧘 Cool-Down Dehnen',f:'17:30',e:'17:40',c:'fitness',w:[0],n:'10 Min · Dehnplan · Yoga Cool-Down'},
   {t:'Tag planen',f:'16:42',e:'16:57',c:'schreibtisch',w:[0]},
   {t:'Katzen versorgen',f:'22:00',e:'22:05',c:'abend',w:[0,1,2,3,4,5]},
   {t:'Lotte füttern',f:'22:05',e:'22:15',c:'abend',w:[0,1,2,3,4,5]},
@@ -294,30 +249,29 @@ var RR=[
   {t:'💊 Anulind',f:'22:44',e:'22:46',c:'abend',w:[0,1,2,3,4,5],n:'Anulind · vor dem Schlafen'},
   {t:'💊 Atorvastatin + Melatonin-Spray',f:'22:46',e:'22:47',c:'abend',w:[0,1,2,3,4,5],n:'Atorvastatin 1 Tablette · Melatonin-Spray 2 Hübe · direkt vor dem Schlafen'},
   {t:'Schlafen gehen',f:'23:02',e:'23:30',c:'abend',w:[0,1,2,3,4,5]},
-  {t:'🐾 Lotte – Morgenrunde + Medikamente',f:'09:04',e:'09:34',c:'morgen',w:[1,2,3,4,5],n:'Spaziergang · Medikamente Lotte geben'},
 
-  {t:'Muskeltraining 20 Min',f:'18:32',e:'18:52',c:'fitness',w:[1]},
-  {t:'Muskeltraining 20 Min',f:'19:07',e:'19:27',c:'fitness',w:[5]},
-  {t:'Surfbalanceboard 30 Min',f:'19:05',e:'19:35',c:'fitness',w:[3]},
-  {t:'Yoga Mady Morrison',f:'18:10',e:'18:40',c:'fitness',w:[0]},
+  {t:'Muskeltraining 20 Min',f:'16:30',e:'16:50',c:'fitness',w:[1]},
+  {t:'Muskeltraining 20 Min',f:'16:30',e:'16:50',c:'fitness',w:[5]},
+  {t:'Surfbalanceboard 30 Min',f:'16:30',e:'17:00',c:'fitness',w:[3]},
+  {t:'Yoga Mady Morrison',f:'17:00',e:'17:30',c:'fitness',w:[0]},
   {t:'🏠 Wohnung',f:'13:55',e:'14:40',c:'haushalt',w:[1]},
-  {t:'🏠 Wohnung',f:'18:00',e:'18:45',c:'haushalt',w:[2],n:'🥿 Schuhe putzen nicht vergessen · Haushaltsplan Di'},
+  {t:'🏠 Wohnung',f:'16:00',e:'16:45',c:'haushalt',w:[2],n:'🥿 Schuhe putzen nicht vergessen · Haushaltsplan Di'},
   // Sa 28.3. – Schreibtischblock Erledigungen
   // Sa 28.3. – Ich-Block: Muskeltraining + Haarmaske
   // So 29.3. – Surfbalanceboard im Ich-Block
 
-  {t:'🏠 Wohnung',f:'18:05',e:'18:50',c:'haushalt',w:[3]},
+  {t:'🏠 Wohnung',f:'17:35',e:'18:00',c:'haushalt',w:[3]},
   
-  {t:'🏠 Wohnung',f:'18:00',e:'18:50',c:'haushalt',w:[5]},
+  {t:'🏠 Wohnung',f:'17:00',e:'17:30',c:'haushalt',w:[5]},
   
   {t:'🏡 Weidlingbach Ausräumen',f:'14:30',e:'16:30',c:'weidlingbach',w:[0]},
-  {t:'🏠 Wohnung',f:'17:02',e:'17:52',c:'haushalt',w:[0]},
-  {t:'Mittagessen und Pause',f:'14:25',e:'14:55',c:'mittagspause',w:[0]},
-  {t:'Mittagessen und Pause',f:'12:04',e:'12:34',c:'mittagspause',w:[1]},
-  {t:'Mittagessen und Pause',f:'13:05',e:'13:35',c:'mittagspause',w:[3]},
-  {t:'Mittagessen und Pause',f:'13:35',e:'14:05',c:'mittagspause',w:[5]},
-  {t:'Mittagessen und Pause',f:'13:05',e:'13:35',c:'mittagspause',w:[4]},
-  {t:'Mittagessen und Pause',f:'12:35',e:'13:05',c:'mittagspause',w:[2]},
+  {t:'🏠 Wohnung',f:'13:00',e:'13:45',c:'haushalt',w:[0]},
+  {t:'Mittagessen und Pause',f:'14:25',e:'14:55',c:'mittagspause',w:[0],n:'💊 Rhodiola direkt danach · 🫐 Obst/Snack'},
+  {t:'Mittagessen und Pause',f:'12:04',e:'12:34',c:'mittagspause',w:[1],n:'💊 Rhodiola direkt danach · 🍊 Obst/Snack · Rudi Gabapentin'},
+  {t:'Mittagessen und Pause',f:'13:05',e:'13:35',c:'mittagspause',w:[3],n:'💊 Rhodiola direkt danach · 🍊 Obst/Snack · Rudi Gabapentin'},
+  {t:'Mittagessen und Pause',f:'13:35',e:'14:05',c:'mittagspause',w:[5],n:'💊 Rhodiola direkt danach · 🍎 Obst/Snack'},
+  {t:'Mittagessen und Pause',f:'13:05',e:'13:35',c:'mittagspause',w:[4],n:'💊 Rhodiola direkt danach · 🍐 Obst/Snack · Rudi Gabapentin'},
+  {t:'Mittagessen und Pause',f:'12:35',e:'13:05',c:'mittagspause',w:[2],n:'💊 Rhodiola direkt danach · 🫐 Obst/Snack · Rudi Gabapentin'},
   {t:'🛍️ Unterwäsche & Socken kaufen',f:'13:05',e:'13:35',c:'haushalt',w:[2],n:'Nach dem Mittagessen · wenn Bedarf · dm / C&A / Baumärkte'},
 
 
@@ -326,22 +280,30 @@ var RR=[
   {t:'Abendessen mit Thomas',f:'18:00',e:'18:30',c:'freizeit',w:[0,1,2,3,4,5,6]},
   {t:'🔒 Freizeit',f:'21:00',e:'22:00',c:'block',w:[0,1,2,3,4,5,6]},
   {t:'Meditation',f:'14:47',e:'15:02',c:'fitness',w:[0]},
+  {t:'🎨 Freie Zeit / Kunstzeit',f:'11:05',e:'14:00',c:'freizeit',w:[0],n:'Atelier · Lesen · Spaziergang · was die Seele braucht · kein Programm'},
+  {t:'💆 Wochenpflege-Block',f:'21:00',e:'22:15',c:'fitness',w:[0],n:'🧴 Haarmaske Protein (30 Min) · Kopfhautmassage\n🚿 Dusche + Körperpeeling · Wochenpflege Gesicht\n🦶 Fußpflege · Nagelpflege · Olivenöl-Bad'},
   {t:'Kunstzeit',f:'21:00',e:'23:00',c:'fitness',w:[0]},
 
   // Donnerstag: Einkaufsliste
   {t:'🏠 Haushaltsblock',f:'16:35',e:'17:35',c:'haushalt',w:[4],n:'🏠 Wohnung aufräumen (45 Min)\n🛒 Einkaufsliste erstellen (15 Min)'},
   // Wöchentliche Pflege Sonntag
-  {t:'Dusche & Körperpeeling (1×/Woche)',f:'21:35',e:'21:55',c:'morgen',w:[0]},
-  {t:'Wochenpflege Gesicht: Peeling + Maske + Heimneedling',f:'21:55',e:'22:25',c:'morgen',w:[0]},
-  {t:'Fußpflege – Hornhaut & Fersen (1×/Woche)',f:'22:25',e:'22:27',c:'morgen',w:[0]},
   // SAMSTAG (Uni-Tag)
 
   {t:'Katzen versorgen',f:'22:00',e:'22:05',c:'abend',w:[6]},
 
   // Mittags-Fütterung täglich 18:00
+  {t:'Euthyrox (nüchtern)',f:'09:00',e:'09:05',c:'morgen',w:[6]},
+  {t:'🌅 Morgenroutine',f:'09:05',e:'11:05',c:'morgen',w:[6],n:'Euthyrox nüchtern · Rückenübungen · Rudi Magenschutz\nWiegen · Knirscherschiene · Blutdruck messen\nWasser + Sertralin · Frühstück + Tee · Obst + Rhodiola\nKaffee · Katzen füttern + Medikamente · Anulind\nBad früh · Spaziergang Lotte · Kiefer entspannen'},
+  {t:'🗂️ Schreibtischblock',f:'11:05',e:'13:00',c:'block',w:[6],n:'📚 Uni-Aufgaben · 📋 Kursvorbereitung · 📧 Mails · Erledigungen'},
+  {t:'Mittagessen und Pause',f:'13:00',e:'13:30',c:'mittagspause',w:[6],n:'💊 Rhodiola direkt danach · Obst/Snack'},
+  {t:'🏠 Haushaltsblock',f:'14:00',e:'16:00',c:'haushalt',w:[6],n:'🏠 Wohnung · Putzen · Bügeln · Einkaufsliste'},
+  {t:'💪 Muskeltraining 20 Min',f:'16:00',e:'16:20',c:'fitness',w:[6]},
+  {t:'🧘 Cool-Down Dehnen',f:'16:20',e:'16:30',c:'fitness',w:[6],n:'10 Min · Dehnplan · Kraft-Muskeln ausdehn'},
+  {t:'🚿 Körperpflege-Block',f:'16:30',e:'18:00',c:'fitness',w:[6],n:'🛁 Sitzbad · Duschen · Körperöl · Beckenboden · Gesichtsyoga · Meditation'},
+  {t:'🎨 Kunstzeit / Freizeit',f:'20:00',e:'22:00',c:'freizeit',w:[6],n:'Atelier · Lesen · Kreativzeit · was die Seele braucht'},
   {t:'Katzen füttern',f:'18:00',e:'18:15',c:'abend',w:[0,1,4,5,6]},
   {t:'Katzen füttern',f:'18:10',e:'18:25',c:'abend',w:[2]},
-  {t:'🌿 Pflanzen düngen & gießen',f:'19:00',e:'19:15',c:'haushalt',w:[2],n:'Gießen + bei Bedarf düngen · Frühjahr/Sommer: alle 2 Wo. düngen'},
+  {t:'🌿 Pflanzen düngen & gießen',f:'15:45',e:'16:00',c:'haushalt',w:[2],n:'Gießen + bei Bedarf düngen · Frühjahr/Sommer: alle 2 Wo. düngen'},
   {t:'Katzen füttern',f:'18:50',e:'19:05',c:'abend',w:[3]},
   {t:'Lotte füttern',f:'22:05',e:'22:15',c:'abend',w:[6]},
   {t:'Bad und Zähne',f:'22:35',e:'22:45',c:'abend',w:[6]},
@@ -353,7 +315,7 @@ var RR=[
   // DIENSTAG (w:2): 1,5 Std ST-Block fertigstellen + kopieren, 1,5 Std nach Kurs Ordner
   // ── VHS DIENSTAG – Fixtermine ab 31.03. ─────────────────────
     // ── VHS MITTWOCH – Fixtermine ab 01.04. ─────────────────────
-  {t:'📦 Spielmaterialien + Ordner einsortieren',f:'17:50',e:'19:20',c:'vhs',w:[2],n:'Spielmaterialien fertig machen · Unterlagen in Ordner einsortieren\n→ Danach alle Kurse vollständig vorbereitet!'},
+  {t:'📦 Spielmaterialien + Ordner einsortieren',f:'12:00',e:'12:30',c:'schreibtisch',w:[2],n:'Spielmaterialien fertig machen · Unterlagen in Ordner einsortieren\n→ Danach alle Kurse vollständig vorbereitet!'},
   // UNI-AUFGABEN Di-Fr
   // ── HAAR & NAGELPFLEGE ────────────────────────────────────
   // Täglich: Nagelöl & Handcreme abends (VOR Bad und Zähne)
@@ -369,19 +331,15 @@ var RR=[
   {t:'Haar-Ölbehandlung (Arganöl intensiv, 1×/Woche)',f:'19:37',e:'19:52',c:'fitness',w:[5]},
 
   // So: Nagelpflege-Ritual (nach Fußpflege)
-  {t:'Nagelpflege: Olivenöl-Bad · Nagelhaut · Feilen · Handpflege',f:'22:26',e:'22:28',c:'morgen',w:[0]},
 
   // ── MONATLICHE PFLEGE (1. Sonntag im Monat) ─────────────────
   // Proteinmaske Haare: 1× monatlich (So ~13:55 nach Fußpflege)
-  {t:'Haarmaske Protein – DIY (Ei+Honig+Olivenöl, 30 Min)',f:'21:00',e:'21:30',c:'morgen',w:[0],n:'Nur 1× pro Monat! Danach Feuchtigkeitsmaske verwenden'},
 
   // Kopfhautmassage: 1× monatlich (So ~14:25)
-  {t:'Kopfhautmassage mit Süßmandelöl (5 Min)',f:'21:30',e:'21:35',c:'morgen',w:[0],n:'Kreisende Bewegungen – fördert Haarwachstum ab Mitte 50'},
   {t:'🛁 Sitzbad',f:'19:03',e:'19:15',c:'fitness',w:[0],n:'10 Min · warmes Wasser (37°C) · entspannt & fördert Durchblutung'},
 
   // ── BECKENBODEN (täglich außer Samstag) ─────────────────────────────────
 
-  {t:'Rudi Gabapentin',f:'12:32',e:'12:34',c:'mittagspause',w:[0,1,2,3,4,5,6]},
 
   // ── KÖRPERÖL + MASSAGE nach jeder Dusche ──────────────────
 
@@ -413,7 +371,7 @@ var RR=[
   // ── PFLANZEN GIESSSEN – wöchentlich vor Haushalt ──────────
   // Mo: vor Staubsaugen (10:20) → 10:05
   {t:'🌿 Pflanzen gießen',f:'13:40',e:'13:55',c:'haushalt',w:[1],n:'Yucca, Ficus klein & groß: wenn Erde oben trocken → gießen\nOrchideen: 10 Min ins Wasser tauchen, dann abtropfen lassen\nKakteen & Euphorbia: nur alle 2–3 Wochen!\n\n🚨 Orchidee lila – Notfallcheck:\n→ Wurzeln vertrocknet? 30 Min einweichen!\n→ Tote Wurzeln (braun/schwarz) abschneiden\n→ Gesunde Wurzeln = grün wenn nass, silbrig wenn trocken\n→ Heller Standort ohne direkte Sonne · kein Staunass!'},
-  {t:'🌿 Pflanzen gießen',f:'18:00',e:'18:05',c:'haushalt',w:[3],n:'Weihnachtskaktus: wenn Erde zur Hälfte trocken\nFicus: gleichmäßig feucht, nie staunass\nKakteen: nur wenn komplett trocken (alle 2–3 Wo.)'},
+  {t:'🌿 Pflanzen gießen',f:'17:20',e:'17:35',c:'haushalt',w:[3],n:'Weihnachtskaktus: wenn Erde zur Hälfte trocken\nFicus: gleichmäßig feucht, nie staunass\nKakteen: nur wenn komplett trocken (alle 2–3 Wo.'},
 
   // ── BLOCKZEITEN VHS inkl. Fahrtzeiten ──────────────────────
   // Mo: ab 13.04. als Fixtermine (30.03+06.04 Osterferien, 25.05 Pfingstmontag)
@@ -423,8 +381,6 @@ var RR=[
 
 
   // ── BLUTDRUCK MESSEN (täglich nach Wiegen) ──────────────────────────────
-  {t:'🩺 Blutdruck messen',f:'07:47',e:'07:50',c:'morgen',w:[1,2,3,4,5],n:'Sitzen · 5 Min ruhig warten · 2x messen · Werte notieren'},
-  {t:'🩺 Blutdruck messen',f:'09:25',e:'09:28',c:'morgen',w:[0],n:'Sitzen · 5 Min ruhig warten · 2x messen · Werte notieren'},
 
   // ── WOCHENRÜCKBLICK (So morgens) ─────────────────────────────────────────
   {t:'📓 Wochenrückblick',f:'16:07',e:'16:27',c:'extra',w:[0],n:'Was lief gut? · Was möchte ich nächste Woche anders? · 3 Dinge wofür ich dankbar bin\n🗂️ Schreibtischblock'},
@@ -437,17 +393,16 @@ var RR=[
 
   // ── FINANZEN (1x/Monat) → FF-Einträge ────────────────────────────────────
   // ── SCHREIBTISCHBLOCK (Mo–Fr, nach Ich-Block) ───────────────────────────
-  {t:'🗂️ Schreibtischblock',f:'09:34',e:'10:19',c:'block',w:[1],n:'📅 Tag planen · 📚 Uni-Aufgaben · 📧 Mails · 💰 Finanzen · 🏥 Arzttermine'},
-  {t:'🗂️ Schreibtischblock',f:'11:00',e:'12:35',c:'block',w:[2],n:'📅 Tag planen · 📚 Uni-Aufgaben · 📧 Mails · 📄 Unterlagen · Erledigungen\n💰 Finanzen-Check · 🌿 Weleda Nachschub – BIPA App prüfen\n🌿 Team Dr. Joseph Bestellung – über Christina prüfen'},
-  {t:'🗂️ Schreibtischblock',f:'11:35',e:'13:00',c:'block',w:[3],n:'📅 Tag planen · 📚 Uni-Aufgaben · 📧 Mails · Erledigungen'},
-  {t:'🗂️ Schreibtischblock',f:'11:15',e:'13:05',c:'block',w:[4],n:'📅 Tag planen · 📚 Uni-Aufgaben · 📧 Mails · 🛒 Einkaufsliste · 💊 Tiere Medikamente · 🍖 Futter prüfen'},
-  {t:'🗂️ Schreibtischblock',f:'12:15',e:'13:30',c:'block',w:[5],n:'📅 Tag planen · 📚 Uni-Aufgaben · 📧 Mails · 📋 Wochenplanung'},
+  {t:'🗂️ Schreibtischblock',f:'09:34',e:'12:00',c:'block',w:[1],n:'📚 Uni-Aufgaben · 📋 Kursvorbereitung · 📧 Mails · 💰 Finanzen-Check · 🏥 Arzttermine · Erledigungen'},
+  {t:'🗂️ Schreibtischblock',f:'09:34',e:'12:35',c:'block',w:[2],n:'📚 Uni-Aufgaben · 📋 Kursvorbereitung · 📄 Unterlagen+Kopieren · 📦 Spielmaterialien einsortieren · 📧 Mails · Erledigungen\n🌿 Weleda Nachschub – BIPA App prüfen · 🌿 Team Dr. Joseph – über Christina prüfen'},
+  {t:'🗂️ Schreibtischblock',f:'09:34',e:'13:00',c:'block',w:[3],n:'📚 Uni-Aufgaben · 📋 Kursvorbereitung · 📧 Mails · Erledigungen'},
+  {t:'🗂️ Schreibtischblock',f:'09:34',e:'13:05',c:'block',w:[4],n:'📚 Uni-Aufgaben · 📋 Kursvorbereitung · 📧 Mails · 🛒 Einkaufsliste · 💊 Tiere Medikamente+Futter prüfen · Erledigungen'},
+  {t:'🗂️ Schreibtischblock',f:'09:34',e:'13:30',c:'block',w:[5],n:'📚 Uni-Aufgaben · 📋 Kursvorbereitung · 🖨️ Unterlagen+Kopieren · 📧 Mails · 📋 Wochenplanung · Erledigungen'},
 
   // ── KAUMUSKEL-MASSAGE (Bruxismus, abends) ────────────────────────────────
   {t:'😮 Kaumuskel-Massage',f:'22:30',e:'22:35',c:'abend',w:[0,1,2,3,4,5,6],n:'Daumen innen an Wangenschleimhaut · sanft drücken · 1 Min je Seite · löst Verspannungen vom Knirschen'},
 
   // ── KIEFER ENTSPANNEN (tagsüber) ─────────────────────────────────────────
-  {t:'😮 Kiefer entspannen',f:'15:00',e:'15:02',c:'morgen',w:[1,3,4],n:'Lippen zu · Zähne auseinander · Kaumuskel bewusst entspannen'},
 
 
 
@@ -456,15 +411,14 @@ var RR=[
   {t:'🛁 Sitzbad',f:'19:52',e:'20:04',c:'fitness',w:[5],n:'10 Min · warmes Wasser (37°C) · Hamamelis-Zusatz möglich · entspannt & fördert Durchblutung · danach sanft trocken tupfen'},
 
   {t:'🏠 Wohnung schrittweise gestalten',f:'14:40',e:'14:55',c:'haushalt',w:[1],n:'15 Min täglich · einen kleinen Bereich verschönern · aufräumen · dekorieren · kein Stress'},
-  {t:'🏠 Wohnung schrittweise gestalten',f:'18:45',e:'19:00',c:'haushalt',w:[2],n:'15 Min täglich · einen kleinen Bereich verschönern · aufräumen · dekorieren · kein Stress'},
-  {t:'🏠 Wohnung schrittweise gestalten',f:'18:50',e:'19:05',c:'haushalt',w:[3],n:'15 Min täglich · einen kleinen Bereich verschönern · aufräumen · dekorieren · kein Stress'},
+  {t:'🏠 Wohnung schrittweise gestalten',f:'15:30',e:'15:45',c:'haushalt',w:[2],n:'15 Min täglich · einen kleinen Bereich verschönern · aufräumen · dekorieren · kein Stress'},
+  {t:'🏠 Wohnung schrittweise gestalten',f:'15:30',e:'15:45',c:'haushalt',w:[3],n:'15 Min täglich · einen kleinen Bereich verschönern · aufräumen · dekorieren · kein Stress'},
   {t:'🏠 Wohnung schrittweise gestalten',f:'17:35',e:'17:50',c:'haushalt',w:[4],n:'15 Min täglich · einen kleinen Bereich verschönern · aufräumen · dekorieren · kein Stress'},
-  {t:'🏠 Wohnung schrittweise gestalten',f:'18:50',e:'19:05',c:'haushalt',w:[5],n:'15 Min täglich · einen kleinen Bereich verschönern · aufräumen · dekorieren · kein Stress'},
-  {t:'🏠 Wohnung schrittweise gestalten',f:'17:52',e:'18:07',c:'haushalt',w:[0],n:'15 Min täglich · einen kleinen Bereich verschönern · aufräumen · dekorieren · kein Stress'},
+  {t:'🏠 Wohnung schrittweise gestalten',f:'15:30',e:'15:45',c:'haushalt',w:[5],n:'15 Min täglich · einen kleinen Bereich verschönern · aufräumen · dekorieren · kein Stress'},
   // ── DEHNEN nach Sport ────────────────────────────────────────────────────
-  {t:'🧘 Cool-Down Dehnen',f:'18:52',e:'19:02',c:'fitness',w:[1],n:'10 Min · Dehnplan · Kraft-Muskeln ausdehn'},
-  {t:'🧘 Cool-Down Dehnen',f:'19:27',e:'19:37',c:'fitness',w:[5],n:'10 Min · Dehnplan · Kraft-Muskeln ausdehn'},
-  {t:'🧘 Cool-Down Dehnen',f:'19:35',e:'19:45',c:'fitness',w:[3],n:'10 Min · Dehnplan · Balance & Surf Cool-Down'},
+  {t:'🧘 Cool-Down Dehnen',f:'16:50',e:'17:00',c:'fitness',w:[1],n:'10 Min · Dehnplan · Kraft-Muskeln ausdehn'},
+  {t:'🧘 Cool-Down Dehnen',f:'16:50',e:'17:00',c:'fitness',w:[5],n:'10 Min · Dehnplan · Kraft-Muskeln ausdehn'},
+  {t:'🧘 Cool-Down Dehnen',f:'17:10',e:'17:20',c:'fitness',w:[3],n:'10 Min · Dehnplan · Balance & Surf Cool-Down'},
   // ── ORGA TIERE (Donnerstag) ─────────────────────────────────────────────
 
   {d:'2026-06-06',t:'🚿 Körperpflege-Block',f:'20:12',e:'21:42',c:'fitness',n:'Duschen + Haare · Körperöl · Gesichtsyoga · Meditation'},
@@ -744,8 +698,8 @@ var FF=[
   {d:'2026-03-29',t:'Surfbalanceboard 30 Min',f:'16:30',e:'17:00',c:'fitness',n:'Nachgeholt von Mi 25.3.'},
   {d:'2026-03-31',t:'📓 Wochenrückblick',f:'16:07',e:'16:27',c:'extra',n:'Nachgeholt von So 29.3. · Was lief gut? · Was nächste Woche anders?'},
   {d:'2026-03-31',t:'🫶 Soziales diese Woche?',f:'16:27',e:'16:42',c:'extra',n:'Nachgeholt von So 29.3. · Wen möchte ich diese Woche sehen oder anrufen?'},
-  {d:'2026-03-31',t:'🏄 Surfbalanceboard 30 Min',f:'19:05',e:'19:35',c:'fitness',n:'Nachgeholt von So 29.3.'},
-  {d:'2026-03-31',t:'🧘 Yoga Mady Morrison',f:'18:10',e:'18:40',c:'fitness',n:'Nachgeholt von So 29.3.'},
+  {d:'2026-03-31',t:'🏄 Surfbalanceboard 30 Min',f:'16:30',e:'17:00',c:'fitness',n:'Nachgeholt von So 29.3.'},
+  {d:'2026-03-31',t:'🧘 Yoga Mady Morrison',f:'17:00',e:'17:30',c:'fitness',n:'Nachgeholt von So 29.3.'},
   {d:'2026-03-31',t:'🐾 Waldspaziergang Lotte',f:'15:07',e:'16:07',c:'fitness',n:'Nachgeholt von So 29.3.'},
   {d:'2026-03-31',t:'🐣 Osterputz & Osterdeko',f:'18:45',e:'19:30',c:'haushalt',n:'Wohnung für Ostern herrichten · Deko aufstellen · gehört zum Haushaltsblock (Wohnung)'},
   {d:'2026-03-31',t:'✍️ Hospitationsprotokoll schreiben – Di 24.3.',f:'11:00',e:'12:30',c:'uniaufgaben',n:'Noch nicht erledigt – nachholen!\nInhalte: Datum · Ort · Beobachter*in · Niveau · Unterrichtsstruktur (AVIVA) · Lernziele · Methoden · Sozialformen · eigene Beobachtungen & Fragen\n→ Abgabe bis 16.4. auf Moodle\nhttps://moodle.univie.ac.at/course/section.php?id=4673180'},
@@ -968,6 +922,7 @@ var FF=[
   {d:'2026-03-28',t:'📋 Erledigungen – Anrufe & Mails',f:'11:00',e:'11:15',c:'schreibtisch',n:'📞 Augenarzt Flo + ich (Dr. Seher)\n📞 Friseur (Juni/Juli)\n📧 Re Strafregisterauszug an VHS'},
   {d:'2026-03-28',t:'🛒 Einkaufen: BIPA + Unterwäsche + Fressnapf',f:'11:15',e:'12:45',c:'haushalt',n:'🐾 Fressnapf: Katzenfutter + Bedarf\n🌱 Katzengras kaufen + austauschen\n🛒 BIPA: Pflegeprodukte\n👕 Unterwäsche + Socken kaufen'},
   
+  {d:'2026-03-30',t:'🗂️ System Kursmaterial aufbauen',f:'15:00',e:'16:00',c:'schreibtisch',n:'Chaos im Kursmaterial → System entwickeln\n🏫 Johann Hoffmann Platz · Singrienergasse · Rosasgasse\n→ Was liegt wo? · Ordner/Mappen einteilen · Übersicht erstellen'},
   {d:'2026-03-30',t:'📋 Erledigungen – Anrufe',f:'10:19',e:'11:04',c:'schreibtisch',n:'📞 ZA + Mundhygiene Flo vereinbaren\n📞 Dr. Pressevertrieb anrufen'},
   {d:'2026-03-31',t:'📋 Erledigungen – Anrufe & Mails',f:'12:30',e:'13:15',c:'schreibtisch',n:'📞 Augenarzt Flo + ich – Dr. Seher\n📞 Friseur (Termin Juni/Juli)\n📧 Re Strafregisterauszug an VHS senden'},
   {d:'2026-04-02',t:'🏡 Weidlingbach – Langer Block',f:'10:00',e:'17:00',c:'weidlingbach',n:'Weidlingbach Ausräumen · alleine + Lotte · 7 Stunden · letzter Aufräumtag'},
