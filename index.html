@@ -1466,7 +1466,7 @@ function importFile(input){
       t.style.cssText='position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;border-radius:12px;padding:.6rem 1.2rem;font-size:.85rem;font-weight:600;z-index:99999;box-shadow:0 4px 16px rgba(0,0,0,.2)';
       t.textContent='📂 '+count+' Einträge wiederhergestellt!';
       document.body.appendChild(t);
-      setTimeout(function(){t.style.transition='opacity .4s';t.style.opacity='0';setTimeout(function(){t.remove();render();},400);},2500);
+      setTimeout(function(){t.style.transition='opacity .4s';t.style.opacity='0';setTimeout(function(){t.remove();},400);},2500);
     }catch(err){
       alert('Fehler beim Laden: Ungültige Datei.');
     }
@@ -2041,6 +2041,18 @@ function moveEvDate(id,oldDate,newDate){
   sUE();render();
 }
 
+var _wakeLock = null;
+async function _requestWakeLock() {
+  try {
+    if ('wakeLock' in navigator) {
+      _wakeLock = await navigator.wakeLock.request('screen');
+    }
+  } catch(e) {}
+}
+function _releaseWakeLock() {
+  if (_wakeLock) { try { _wakeLock.release(); } catch(e) {} _wakeLock = null; }
+}
+
 function openApp(key, title) {
   var url = 'https://sandrahnat-maker.github.io/Kalender_2203/' + key + '.html';
   document.getElementById('popup-topbar-title').innerHTML = title || key;
@@ -2049,6 +2061,7 @@ function openApp(key, title) {
   frame.innerHTML = '<iframe src="' + url + '" style="width:100%;height:100%;border:none;display:block" allow="speech-synthesis"></iframe>';
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
+  _requestWakeLock();
 }
 function openAppDay(key, dateStr) {
   var kw11 = new Date('2026-03-09T00:00:00');
@@ -2074,6 +2087,7 @@ function closePopup() {
   document.getElementById('popup-overlay').classList.remove('open');
   document.getElementById('popup-frame-content').innerHTML = '';
   document.body.style.overflow = '';
+  _releaseWakeLock();
 }
 
 // ── PFLANZEN GALERIE ──────────────────────────────────────
@@ -2255,7 +2269,7 @@ APPS_EXTRA = {};
     </div>
   </div>
 </div>
-<div id="popup-overlay" onclick="if(event.target===this)closePopup()">
+<div id="popup-overlay" onclick="event.stopPropagation()">
   <div id="popup-box">
     <div id="popup-topbar">
       <span id="popup-topbar-title">App</span>
