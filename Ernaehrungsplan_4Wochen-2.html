@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Ernährung &amp; Einkauf</title>
+<title>Ern&#228;hrung &amp; Einkauf</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Segoe UI',system-ui,sans-serif;background:#F5F0EA;color:#1A1A2E;padding-bottom:2rem}
@@ -56,13 +56,24 @@ main{max-width:600px;margin:0 auto;padding:.8rem}
 .brand-title{font-weight:700;font-size:.82rem}.brand-sub{font-size:.68rem;opacity:.8;margin-top:.1rem}
 .brand-where{font-size:.65rem;color:#888;margin-top:.15rem;font-family:sans-serif}
 .pflege-app{font-size:.65rem;font-weight:700;margin-top:.15rem}
+
+.mr{cursor:pointer;position:relative;transition:background .15s}
+.mr:active{background:rgba(0,0,0,.04)}
+.mr.done .mn{text-decoration:line-through;opacity:.45}
+.mr.done .md{opacity:.35}
+.mr .meal-chk{width:18px;height:18px;border-radius:5px;border:1.5px solid #ccc;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.7rem;margin-right:.4rem;transition:all .15s;background:#fff}
+.mr.done .meal-chk{background:#2E7D4F;border-color:#2E7D4F;color:#fff}
+.week-current-badge{background:#2E7D32;color:#fff;border-radius:8px;padding:.25rem .6rem;font-size:.65rem;font-weight:700;margin-left:.4rem}
+.wk-header{display:flex;align-items:center;gap:.4rem;margin-bottom:.5rem;padding:.3rem .2rem}
+.wk-title{font-size:.75rem;font-weight:700;color:#8B6020}
+.wk-date{font-size:.65rem;color:#999}
 </style>
 </head>
 <body>
 <header>
-  <h1>&#x1F957; Ernährung &amp; Einkauf</h1>
+  <h1>&#x1F957; Ern&#228;hrung &amp; Einkauf</h1>
   <div class="app-tabs">
-    <button class="app-tab on" onclick="switchApp('ep',this)">&#x1F957; Ernährungsplan</button>
+    <button class="app-tab on" onclick="switchApp('ep',this)">&#x1F957; Ern&#228;hrungsplan</button>
     <button class="app-tab" onclick="switchApp('el',this)">&#x1F6D2; Einkaufsliste</button>
   </div>
 </header>
@@ -77,354 +88,354 @@ main{max-width:600px;margin:0 auto;padding:.8rem}
 </div>
 
 <!-- WOCHE 1 -->
-<div class="wk" id="wk1" style="--wc:#8B6020">
+<div class="wk" id="wk1" data-week="1" style="--wc:#8B6020">
 
-<div class="dc"><div class="dh"><span class="dn">Montag 🇦🇹</span><span class="b bh">österreichisch</span></div><div class="ms">
-  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Haferbrei mit Apfel & Zimt</div><div class="md">1 EL Leinsamen · 1 EL Mandelmus</div></div></div>
+<div class="dc"><div class="dh"><span class="dn">Montag &#127462;&#127481;</span><span class="b bh">&#246;sterreichisch</span></div><div class="ms">
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Haferbrei mit Apfel & Zimt</div><div class="md">1 EL Leinsamen &#183; 1 EL Mandelmus</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Vormittag</span><div class="mc"><div class="mn">Birne + Walnüsse</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Vormittag</span><div class="mc"><div class="mn">Birne + Waln&#252;sse</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Erdäpfelgulasch mit Vollkornbrot</div><div class="md">Kartoffeln · Zwiebel · Paprikapulver · Kümmel · Majoran</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Mittag</span><div class="mc"><div class="mn">Erd&#228;pfelgulasch mit Vollkornbrot</div><div class="md">Kartoffeln &#183; Zwiebel &#183; Paprikapulver &#183; K&#252;mmel &#183; Majoran</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Apfel + Chiasamen</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Apfel + Chiasamen</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Vogerlsalat mit Kürbiskernöl</div><div class="md">Feldsalat · Kürbiskerne · Apfel · Vollkornweckerl</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Abend</span><div class="mc"><div class="mn">Vogerlsalat mit K&#252;rbiskern&#246;l</div><div class="md">Feldsalat &#183; K&#252;rbiskerne &#183; Apfel &#183; Vollkornweckerl</div></div></div>
 </div></div>
 
-<div class="dc"><div class="dh"><span class="dn">Dienstag 🇮🇹</span><span class="b bi">italienisch</span></div><div class="ms">
-  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Joghurt mit Beeren & Haferflocken</div><div class="md">1 EL Leinsamen · 1 TL Hanfsamen</div></div></div>
+<div class="dc"><div class="dh"><span class="dn">Dienstag &#127470;&#127481;</span><span class="b bi">italienisch</span></div><div class="ms">
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Joghurt mit Beeren & Haferflocken</div><div class="md">1 EL Leinsamen &#183; 1 TL Hanfsamen</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Vormittag</span><div class="mc"><div class="mn">Orange + Mandeln</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Vormittag</span><div class="mc"><div class="mn">Orange + Mandeln</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Pasta e Fagioli</div><div class="md">Vollkornnudeln · weiße Bohnen · Tomate · Rosmarin · Knoblauch · Olivenöl</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Mittag</span><div class="mc"><div class="mn">Pasta e Fagioli</div><div class="md">Vollkornnudeln &#183; wei&#223;e Bohnen &#183; Tomate &#183; Rosmarin &#183; Knoblauch &#183; Oliven&#246;l</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Kiwi + Joghurt</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Kiwi + Joghurt</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Bruschetta mit Rucola & Tomate</div><div class="md">Vollkornbrot · Olivenöl · Basilikum · Knoblauch</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Abend</span><div class="mc"><div class="mn">Bruschetta mit Rucola & Tomate</div><div class="md">Vollkornbrot &#183; Oliven&#246;l &#183; Basilikum &#183; Knoblauch</div></div></div>
 </div></div>
 
-<div class="dc"><div class="dh"><span class="dn">Mittwoch 🍜</span><span class="b bt">asiatisch</span></div><div class="ms">
-  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Porridge mit Beeren & Walnüssen</div><div class="md">1 EL Chiasamen · Zimt</div></div></div>
+<div class="dc"><div class="dh"><span class="dn">Mittwoch &#127836;</span><span class="b bt">asiatisch</span></div><div class="ms">
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Porridge mit Beeren & Waln&#252;ssen</div><div class="md">1 EL Chiasamen &#183; Zimt</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Vormittag</span><div class="mc"><div class="mn">Apfel + Mandelmus</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Vormittag</span><div class="mc"><div class="mn">Apfel + Mandelmus</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Gebratener Gemüsereis</div><div class="md">Vollkornreis · Brokkoli · Karotte · Ei · Ingwer · Sojasoße (wenig) · Sesam</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Mittag</span><div class="mc"><div class="mn">Gebratener Gem&#252;sereis</div><div class="md">Vollkornreis &#183; Brokkoli &#183; Karotte &#183; Ei &#183; Ingwer &#183; Sojaso&#223;e (wenig) &#183; Sesam</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Beeren + Chiasamen</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Beeren + Chiasamen</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Miso-Suppe mit Tofu & Wakame</div><div class="md">Frühlingszwiebeln · Reiswafferl</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Abend</span><div class="mc"><div class="mn">Miso-Suppe mit Tofu & Wakame</div><div class="md">Fr&#252;hlingszwiebeln &#183; Reiswafferl</div></div></div>
 </div></div>
 
-<div class="dc"><div class="dh"><span class="dn">Donnerstag 🌮</span><span class="b bm">mexikanisch</span></div><div class="ms">
-  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Haferbrei mit Birne & Leinsamen</div><div class="md">1 EL Walnüsse · ungesüßt</div></div></div>
+<div class="dc"><div class="dh"><span class="dn">Donnerstag &#127790;</span><span class="b bm">mexikanisch</span></div><div class="ms">
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Haferbrei mit Birne & Leinsamen</div><div class="md">1 EL Waln&#252;sse &#183; unges&#252;&#223;t</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Vormittag</span><div class="mc"><div class="mn">Beeren + Joghurt</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Vormittag</span><div class="mc"><div class="mn">Beeren + Joghurt</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Veggie-Wrap mit schwarzen Bohnen</div><div class="md">Vollkorntortilla · schwarze Bohnen · Mais · Paprika · Tomate · Koriander · Limette</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Mittag</span><div class="mc"><div class="mn">Veggie-Wrap mit schwarzen Bohnen</div><div class="md">Vollkorntortilla &#183; schwarze Bohnen &#183; Mais &#183; Paprika &#183; Tomate &#183; Koriander &#183; Limette</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Orange + Walnüsse</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Orange + Waln&#252;sse</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Gemüse-Quesadilla</div><div class="md">Vollkorntortilla · Paprika · Mais · wenig Käse · Joghurt-Dip</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Abend</span><div class="mc"><div class="mn">Gem&#252;se-Quesadilla</div><div class="md">Vollkorntortilla &#183; Paprika &#183; Mais &#183; wenig K&#228;se &#183; Joghurt-Dip</div></div></div>
 </div></div>
 
-<div class="dc"><div class="dh"><span class="dn">Freitag 🇮🇳</span><span class="b ba">indisch</span></div><div class="ms">
-  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Joghurt mit Beeren & Haferflocken</div><div class="md">1 EL Leinsamen</div></div></div>
+<div class="dc"><div class="dh"><span class="dn">Freitag &#127470;&#127475;</span><span class="b ba">indisch</span></div><div class="ms">
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Joghurt mit Beeren & Haferflocken</div><div class="md">1 EL Leinsamen</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Vormittag</span><div class="mc"><div class="mn">Kiwi + Chiasamen</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Vormittag</span><div class="mc"><div class="mn">Kiwi + Chiasamen</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Rotes Linsen-Dal</div><div class="md">Basmati · rote Linsen · Kurkuma · Ingwer · Koriander · Kokosmilch light</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Mittag</span><div class="mc"><div class="mn">Rotes Linsen-Dal</div><div class="md">Basmati &#183; rote Linsen &#183; Kurkuma &#183; Ingwer &#183; Koriander &#183; Kokosmilch light</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Birne + Mandelmus</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Birne + Mandelmus</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Aloo Gobi (Kartoffel-Karfiol)</div><div class="md">Kartoffel · Karfiol · Kreuzkümmel · Kurkuma · Tomate · Vollkornbrot</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Abend</span><div class="mc"><div class="mn">Aloo Gobi (Kartoffel-Karfiol)</div><div class="md">Kartoffel &#183; Karfiol &#183; Kreuzk&#252;mmel &#183; Kurkuma &#183; Tomate &#183; Vollkornbrot</div></div></div>
 </div></div>
 
-<div class="dc"><div class="dh"><span class="dn">Samstag 🇦🇹</span><span class="b bt">entspannt · österreichisch</span></div><div class="ms">
-  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn g">Topfenpalatschinken</div><div class="md">Vollkornmehl · Topfen · Beeren · wenig Honig</div></div></div>
+<div class="dc"><div class="dh"><span class="dn">Samstag &#127462;&#127481;</span><span class="b bt">entspannt &#183; &#246;sterreichisch</span></div><div class="ms">
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn g">Topfenpalatschinken</div><div class="md">Vollkornmehl &#183; Topfen &#183; Beeren &#183; wenig Honig</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Vormittag</span><div class="mc"><div class="mn">Apfel + Walnüsse</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Vormittag</span><div class="mc"><div class="mn">Apfel + Waln&#252;sse</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Semmelknödel mit Tomatensauce & Spinat</div><div class="md">Knödel aus Vollkornweckerln · frische Tomaten · Spinat · Knoblauch · Basilikum</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Mittag</span><div class="mc"><div class="mn">Semmelkn&#246;del mit Tomatensauce & Spinat</div><div class="md">Kn&#246;del aus Vollkornweckerln &#183; frische Tomaten &#183; Spinat &#183; Knoblauch &#183; Basilikum</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Beeren + Joghurt</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Beeren + Joghurt</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Erdäpfelsalat mit Kürbiskernöl</div><div class="md">Kartoffeln · Zwiebel · Essig · Kümmel · Schnittlauch</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Abend</span><div class="mc"><div class="mn">Erd&#228;pfelsalat mit K&#252;rbiskern&#246;l</div><div class="md">Kartoffeln &#183; Zwiebel &#183; Essig &#183; K&#252;mmel &#183; Schnittlauch</div></div></div>
 </div></div>
 
-<div class="dc"><div class="dh"><span class="dn">Sonntag 🇮🇹</span><span class="b bi">Genuss · italienisch</span></div><div class="ms">
-  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn g">Pizza auf Vollkornteig</div><div class="md">Tomatensauce · wenig Mozzarella · Rucola · Basilikum</div></div></div>
+<div class="dc"><div class="dh"><span class="dn">Sonntag &#127470;&#127481;</span><span class="b bi">Genuss &#183; italienisch</span></div><div class="ms">
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn g">Pizza auf Vollkornteig</div><div class="md">Tomatensauce &#183; wenig Mozzarella &#183; Rucola &#183; Basilikum</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Vormittag</span><div class="mc"><div class="mn">Orange + Chiasamen</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Vormittag</span><div class="mc"><div class="mn">Orange + Chiasamen</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Ribollita (toskanische Gemüsesuppe)</div><div class="md">weiße Bohnen · Wirsing · Tomate · Knoblauch · Olivenöl · Vollkornbrot</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Mittag</span><div class="mc"><div class="mn">Ribollita (toskanische Gem&#252;sesuppe)</div><div class="md">wei&#223;e Bohnen &#183; Wirsing &#183; Tomate &#183; Knoblauch &#183; Oliven&#246;l &#183; Vollkornbrot</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Kiwi + Mandeln</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Kiwi + Mandeln</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Joghurt mit Walnüssen & Beeren</div><div class="md">1 EL Leinsamen · wenig Honig</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Abend</span><div class="mc"><div class="mn">Joghurt mit Waln&#252;ssen & Beeren</div><div class="md">1 EL Leinsamen &#183; wenig Honig</div></div></div>
 </div></div>
 </div>
 
 <!-- WOCHE 2 -->
-<div class="wk" id="wk2" style="--wc:#2E7D4F">
+<div class="wk" id="wk2" data-week="2" style="--wc:#2E7D4F">
 
-<div class="dc"><div class="dh"><span class="dn">Montag 🍜</span><span class="b bt">asiatisch</span></div><div class="ms">
-  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Haferbrei mit Birne & Walnüssen</div><div class="md">1 EL Leinsamen · Zimt</div></div></div>
+<div class="dc"><div class="dh"><span class="dn">Montag &#127836;</span><span class="b bt">asiatisch</span></div><div class="ms">
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Haferbrei mit Birne & Waln&#252;ssen</div><div class="md">1 EL Leinsamen &#183; Zimt</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Vormittag</span><div class="mc"><div class="mn">Kiwi + Leinsamen</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Vormittag</span><div class="mc"><div class="mn">Kiwi + Leinsamen</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Ramen-Suppe (vegetarisch)</div><div class="md">Soba-Nudeln · Tofu · Pak Choi · Ei · Ingwer · Miso-Brühe · Sesam</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Mittag</span><div class="mc"><div class="mn">Ramen-Suppe (vegetarisch)</div><div class="md">Soba-Nudeln &#183; Tofu &#183; Pak Choi &#183; Ei &#183; Ingwer &#183; Miso-Br&#252;he &#183; Sesam</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Beeren + Joghurt</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Beeren + Joghurt</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Edamame mit Reiscrackern</div><div class="md">Edamame · wenig Sojasoße · Ingwer</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Abend</span><div class="mc"><div class="mn">Edamame mit Reiscrackern</div><div class="md">Edamame &#183; wenig Sojaso&#223;e &#183; Ingwer</div></div></div>
 </div></div>
 
-<div class="dc"><div class="dh"><span class="dn">Dienstag 🇦🇹</span><span class="b bh">österreichisch</span></div><div class="ms">
-  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Joghurt mit Himbeeren & Haferflocken</div><div class="md">1 EL Chiasamen · 1 EL Hanfsamen</div></div></div>
+<div class="dc"><div class="dh"><span class="dn">Dienstag &#127462;&#127481;</span><span class="b bh">&#246;sterreichisch</span></div><div class="ms">
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Joghurt mit Himbeeren & Haferflocken</div><div class="md">1 EL Chiasamen &#183; 1 EL Hanfsamen</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Vormittag</span><div class="mc"><div class="mn">Apfel + Walnüsse</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Vormittag</span><div class="mc"><div class="mn">Apfel + Waln&#252;sse</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Käsespätzle (leichte Version)</div><div class="md">Vollkornspätzle · wenig Bergkäse · Röstzwiebeln · grüner Salat</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Mittag</span><div class="mc"><div class="mn">K&#228;sesp&#228;tzle (leichte Version)</div><div class="md">Vollkornsp&#228;tzle &#183; wenig Bergk&#228;se &#183; R&#246;stzwiebeln &#183; gr&#252;ner Salat</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Birne + Mandelmus</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Birne + Mandelmus</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Brettljause vegetarisch</div><div class="md">Vollkornbrot · Radieschen · Aufstrich · Gurke · Schnittlauch</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Abend</span><div class="mc"><div class="mn">Brettljause vegetarisch</div><div class="md">Vollkornbrot &#183; Radieschen &#183; Aufstrich &#183; Gurke &#183; Schnittlauch</div></div></div>
 </div></div>
 
-<div class="dc"><div class="dh"><span class="dn">Mittwoch 🌮</span><span class="b bm">mexikanisch</span></div><div class="ms">
-  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Porridge mit Apfel & Chiasamen</div><div class="md">1 EL Mandelmus</div></div></div>
+<div class="dc"><div class="dh"><span class="dn">Mittwoch &#127790;</span><span class="b bm">mexikanisch</span></div><div class="ms">
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Porridge mit Apfel & Chiasamen</div><div class="md">1 EL Mandelmus</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Vormittag</span><div class="mc"><div class="mn">Orange + Walnüsse</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Vormittag</span><div class="mc"><div class="mn">Orange + Waln&#252;sse</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Veggie-Burrito</div><div class="md">Vollkorntortilla · Vollkornreis · Kidneybohnen · Paprika · Mais · Joghurt-Limetten-Sauce</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Mittag</span><div class="mc"><div class="mn">Veggie-Burrito</div><div class="md">Vollkorntortilla &#183; Vollkornreis &#183; Kidneybohnen &#183; Paprika &#183; Mais &#183; Joghurt-Limetten-Sauce</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Kiwi + Chiasamen</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Kiwi + Chiasamen</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Tomaten-Bohnen-Suppe</div><div class="md">Kidneybohnen · Tomate · Paprika · Kreuzkümmel · Vollkornbrot</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Abend</span><div class="mc"><div class="mn">Tomaten-Bohnen-Suppe</div><div class="md">Kidneybohnen &#183; Tomate &#183; Paprika &#183; Kreuzk&#252;mmel &#183; Vollkornbrot</div></div></div>
 </div></div>
 
-<div class="dc"><div class="dh"><span class="dn">Donnerstag 🇮🇹</span><span class="b bi">italienisch</span></div><div class="ms">
-  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Haferbrei mit Apfel & Leinsamen</div><div class="md">1 TL Hanfsamen · ungesüßt</div></div></div>
+<div class="dc"><div class="dh"><span class="dn">Donnerstag &#127470;&#127481;</span><span class="b bi">italienisch</span></div><div class="ms">
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Haferbrei mit Apfel & Leinsamen</div><div class="md">1 TL Hanfsamen &#183; unges&#252;&#223;t</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Vormittag</span><div class="mc"><div class="mn">Beeren + Chiasamen</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Vormittag</span><div class="mc"><div class="mn">Beeren + Chiasamen</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Gnocchi mit Tomatensauce & Spinat</div><div class="md">Kartoffelgnocchi · frische Tomaten · Spinat · Knoblauch · Basilikum</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Mittag</span><div class="mc"><div class="mn">Gnocchi mit Tomatensauce & Spinat</div><div class="md">Kartoffelgnocchi &#183; frische Tomaten &#183; Spinat &#183; Knoblauch &#183; Basilikum</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Apfel + Mandelmus</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Apfel + Mandelmus</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Caprese mit Vollkornbrot</div><div class="md">Tomate · wenig Mozzarella · Basilikum · Olivenöl</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Abend</span><div class="mc"><div class="mn">Caprese mit Vollkornbrot</div><div class="md">Tomate &#183; wenig Mozzarella &#183; Basilikum &#183; Oliven&#246;l</div></div></div>
 </div></div>
 
-<div class="dc"><div class="dh"><span class="dn">Freitag 🇦🇹</span><span class="b bh">österreichisch</span></div><div class="ms">
-  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Joghurt mit Beeren & Haferflocken</div><div class="md">1 EL Leinsamen</div></div></div>
+<div class="dc"><div class="dh"><span class="dn">Freitag &#127462;&#127481;</span><span class="b bh">&#246;sterreichisch</span></div><div class="ms">
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Joghurt mit Beeren & Haferflocken</div><div class="md">1 EL Leinsamen</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Vormittag</span><div class="mc"><div class="mn">Birne + Walnüsse</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Vormittag</span><div class="mc"><div class="mn">Birne + Waln&#252;sse</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Spinatknödel mit Butterröstzwiebeln</div><div class="md">Spinat · Vollkornbrot · Ei · wenig Käse · Röstzwiebeln · Sauerrahm</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Mittag</span><div class="mc"><div class="mn">Spinatkn&#246;del mit Butterr&#246;stzwiebeln</div><div class="md">Spinat &#183; Vollkornbrot &#183; Ei &#183; wenig K&#228;se &#183; R&#246;stzwiebeln &#183; Sauerrahm</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Orange + Chiasamen</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Orange + Chiasamen</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Vollkornweckerl mit Topfenaufstrich</div><div class="md">Kräutertopfen · Radieschen · Schnittlauch · Gurke</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Abend</span><div class="mc"><div class="mn">Vollkornweckerl mit Topfenaufstrich</div><div class="md">Kr&#228;utertopfen &#183; Radieschen &#183; Schnittlauch &#183; Gurke</div></div></div>
 </div></div>
 
-<div class="dc"><div class="dh"><span class="dn">Samstag 🍔</span><span class="b bt">entspannt · Burger</span></div><div class="ms">
-  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Vollkorntoast mit Mandelmus & Beeren</div><div class="md">1 EL Chiasamen · Hibiskustee</div></div></div>
+<div class="dc"><div class="dh"><span class="dn">Samstag &#127828;</span><span class="b bt">entspannt &#183; Burger</span></div><div class="ms">
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Vollkorntoast mit Mandelmus & Beeren</div><div class="md">1 EL Chiasamen &#183; Hibiskustee</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Vormittag</span><div class="mc"><div class="mn">Orange + Walnüsse</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Vormittag</span><div class="mc"><div class="mn">Orange + Waln&#252;sse</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn g">Veggie-Burger</div><div class="md">Vollkornbun · Kichererbsen-Patty · Salat · Tomate · Rote Bete · Joghurt-Sauce</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Mittag</span><div class="mc"><div class="mn g">Veggie-Burger</div><div class="md">Vollkornbun &#183; Kichererbsen-Patty &#183; Salat &#183; Tomate &#183; Rote Bete &#183; Joghurt-Sauce</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Beeren + Chiasamen</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Beeren + Chiasamen</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Gemischter Salat mit Walnüssen & Ei</div><div class="md">Rucola · Tomate · Gurke · Vollkornbrot</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Abend</span><div class="mc"><div class="mn">Gemischter Salat mit Waln&#252;ssen & Ei</div><div class="md">Rucola &#183; Tomate &#183; Gurke &#183; Vollkornbrot</div></div></div>
 </div></div>
 
-<div class="dc"><div class="dh"><span class="dn">Sonntag 🇮🇳</span><span class="b ba">Genuss · indisch</span></div><div class="ms">
-  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn g">Hafer-Waffeln mit Beeren</div><div class="md">Vollkornmehl · Haferflocken · Leinsamen · wenig Ahornsirup</div></div></div>
+<div class="dc"><div class="dh"><span class="dn">Sonntag &#127470;&#127475;</span><span class="b ba">Genuss &#183; indisch</span></div><div class="ms">
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn g">Hafer-Waffeln mit Beeren</div><div class="md">Vollkornmehl &#183; Haferflocken &#183; Leinsamen &#183; wenig Ahornsirup</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Vormittag</span><div class="mc"><div class="mn">Birne + Mandelmus</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Vormittag</span><div class="mc"><div class="mn">Birne + Mandelmus</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Kichererbsen-Curry (Chana Masala)</div><div class="md">Basmati · Kichererbsen · Tomate · Zwiebel · Garam Masala · Ingwer · Koriander</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Mittag</span><div class="mc"><div class="mn">Kichererbsen-Curry (Chana Masala)</div><div class="md">Basmati &#183; Kichererbsen &#183; Tomate &#183; Zwiebel &#183; Garam Masala &#183; Ingwer &#183; Koriander</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Apfel + Walnüsse</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Apfel + Waln&#252;sse</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Joghurt mit Beeren & Leinsamen</div><div class="md">wenig Honig</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Abend</span><div class="mc"><div class="mn">Joghurt mit Beeren & Leinsamen</div><div class="md">wenig Honig</div></div></div>
 </div></div>
 </div>
 
 <!-- WOCHE 3 -->
-<div class="wk" id="wk3" style="--wc:#7B5EA7">
+<div class="wk" id="wk3" data-week="3" style="--wc:#7B5EA7">
 
-<div class="dc"><div class="dh"><span class="dn">Montag 🇮🇳</span><span class="b ba">indisch</span></div><div class="ms">
-  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Haferbrei mit Mango & Chiasamen</div><div class="md">1 EL Leinsamen · Kardamom</div></div></div>
+<div class="dc"><div class="dh"><span class="dn">Montag &#127470;&#127475;</span><span class="b ba">indisch</span></div><div class="ms">
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Haferbrei mit Mango & Chiasamen</div><div class="md">1 EL Leinsamen &#183; Kardamom</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Vormittag</span><div class="mc"><div class="mn">Apfel + Walnüsse</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Vormittag</span><div class="mc"><div class="mn">Apfel + Waln&#252;sse</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Palak Paneer (Spinat-Käse)</div><div class="md">Basmati · Spinat · Paneer · Kurkuma · Ingwer · Garam Masala</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Mittag</span><div class="mc"><div class="mn">Palak Paneer (Spinat-K&#228;se)</div><div class="md">Basmati &#183; Spinat &#183; Paneer &#183; Kurkuma &#183; Ingwer &#183; Garam Masala</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Beeren + Joghurt</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Beeren + Joghurt</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Dhal-Suppe mit Vollkornbrot</div><div class="md">gelbe Linsen · Karotte · Kurkuma · Koriander</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Abend</span><div class="mc"><div class="mn">Dhal-Suppe mit Vollkornbrot</div><div class="md">gelbe Linsen &#183; Karotte &#183; Kurkuma &#183; Koriander</div></div></div>
 </div></div>
 
-<div class="dc"><div class="dh"><span class="dn">Dienstag 🇦🇹</span><span class="b bh">österreichisch</span></div><div class="ms">
-  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Joghurt mit Beeren & Haferflocken</div><div class="md">1 EL Leinsamen · 1 TL Hanfsamen</div></div></div>
+<div class="dc"><div class="dh"><span class="dn">Dienstag &#127462;&#127481;</span><span class="b bh">&#246;sterreichisch</span></div><div class="ms">
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Joghurt mit Beeren & Haferflocken</div><div class="md">1 EL Leinsamen &#183; 1 TL Hanfsamen</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Vormittag</span><div class="mc"><div class="mn">Birne + Chiasamen</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Vormittag</span><div class="mc"><div class="mn">Birne + Chiasamen</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Tiroler Gröstl (vegetarisch)</div><div class="md">Bratkartoffeln · Ei · Zwiebel · Kümmel · Petersilie · Radieschen</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Mittag</span><div class="mc"><div class="mn">Tiroler Gr&#246;stl (vegetarisch)</div><div class="md">Bratkartoffeln &#183; Ei &#183; Zwiebel &#183; K&#252;mmel &#183; Petersilie &#183; Radieschen</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Kiwi + Mandeln</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Kiwi + Mandeln</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Kürbiscremesuppe</div><div class="md">Ingwer · Kurkuma · Kürbiskerne · Vollkornweckerl</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Abend</span><div class="mc"><div class="mn">K&#252;rbiscremesuppe</div><div class="md">Ingwer &#183; Kurkuma &#183; K&#252;rbiskerne &#183; Vollkornweckerl</div></div></div>
 </div></div>
 
-<div class="dc"><div class="dh"><span class="dn">Mittwoch 🇮🇹</span><span class="b bi">italienisch</span></div><div class="ms">
-  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Porridge mit Birne & Walnüssen</div><div class="md">1 EL Chiasamen · Vanille</div></div></div>
+<div class="dc"><div class="dh"><span class="dn">Mittwoch &#127470;&#127481;</span><span class="b bi">italienisch</span></div><div class="ms">
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Porridge mit Birne & Waln&#252;ssen</div><div class="md">1 EL Chiasamen &#183; Vanille</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Vormittag</span><div class="mc"><div class="mn">Orange + Leinsamen</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Vormittag</span><div class="mc"><div class="mn">Orange + Leinsamen</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Vollkorn-Penne Arrabbiata</div><div class="md">Vollkornnudeln · Tomate · Chili · Knoblauch · Olivenöl · Rucola</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Mittag</span><div class="mc"><div class="mn">Vollkorn-Penne Arrabbiata</div><div class="md">Vollkornnudeln &#183; Tomate &#183; Chili &#183; Knoblauch &#183; Oliven&#246;l &#183; Rucola</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Beeren + Chiasamen</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Beeren + Chiasamen</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Minestrone mit Vollkornbrot</div><div class="md">Bohnen · Zucchini · Tomate · Karotte · Baslikum · Olivenöl</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Abend</span><div class="mc"><div class="mn">Minestrone mit Vollkornbrot</div><div class="md">Bohnen &#183; Zucchini &#183; Tomate &#183; Karotte &#183; Baslikum &#183; Oliven&#246;l</div></div></div>
 </div></div>
 
-<div class="dc"><div class="dh"><span class="dn">Donnerstag 🍜</span><span class="b bt">asiatisch</span></div><div class="ms">
-  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Haferbrei mit Beeren & Hanfsamen</div><div class="md">1 EL Leinsamen · Zimt</div></div></div>
+<div class="dc"><div class="dh"><span class="dn">Donnerstag &#127836;</span><span class="b bt">asiatisch</span></div><div class="ms">
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Haferbrei mit Beeren & Hanfsamen</div><div class="md">1 EL Leinsamen &#183; Zimt</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Vormittag</span><div class="mc"><div class="mn">Apfel + Walnüsse</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Vormittag</span><div class="mc"><div class="mn">Apfel + Waln&#252;sse</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Thai-Gemüsecurry</div><div class="md">Jasminreis · Süßkartoffel · Brokkoli · Kokosmilch light · grüne Currypaste · Limette</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Mittag</span><div class="mc"><div class="mn">Thai-Gem&#252;securry</div><div class="md">Jasminreis &#183; S&#252;&#223;kartoffel &#183; Brokkoli &#183; Kokosmilch light &#183; gr&#252;ne Currypaste &#183; Limette</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Birne + Joghurt</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Birne + Joghurt</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Frühlingsrollen (gebacken)</div><div class="md">Reispapier · Karotte · Gurke · Rucola · Sesam · Erdnusssauce</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Abend</span><div class="mc"><div class="mn">Fr&#252;hlingsrollen (gebacken)</div><div class="md">Reispapier &#183; Karotte &#183; Gurke &#183; Rucola &#183; Sesam &#183; Erdnusssauce</div></div></div>
 </div></div>
 
-<div class="dc"><div class="dh"><span class="dn">Freitag 🌮</span><span class="b bm">mexikanisch</span></div><div class="ms">
-  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Joghurt mit Beeren & Haferflocken</div><div class="md">1 EL Chiasamen</div></div></div>
+<div class="dc"><div class="dh"><span class="dn">Freitag &#127790;</span><span class="b bm">mexikanisch</span></div><div class="ms">
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Joghurt mit Beeren & Haferflocken</div><div class="md">1 EL Chiasamen</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Vormittag</span><div class="mc"><div class="mn">Kiwi + Chiasamen</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Vormittag</span><div class="mc"><div class="mn">Kiwi + Chiasamen</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Enchiladas mit Kidneybohnen</div><div class="md">Vollkorntortilla · Kidneybohnen · Paprika · Tomatensauce · wenig Käse · Koriander</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Mittag</span><div class="mc"><div class="mn">Enchiladas mit Kidneybohnen</div><div class="md">Vollkorntortilla &#183; Kidneybohnen &#183; Paprika &#183; Tomatensauce &#183; wenig K&#228;se &#183; Koriander</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Orange + Mandeln</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Orange + Mandeln</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Hummus mit Gemüsesticks & Vollkornbrot</div><div class="md">Karotte · Gurke · Paprika · Tomate · Limette</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Abend</span><div class="mc"><div class="mn">Hummus mit Gem&#252;sesticks & Vollkornbrot</div><div class="md">Karotte &#183; Gurke &#183; Paprika &#183; Tomate &#183; Limette</div></div></div>
 </div></div>
 
-<div class="dc"><div class="dh"><span class="dn">Samstag 🇦🇹</span><span class="b bt">entspannt · österreichisch</span></div><div class="ms">
-  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn g">Germknödel (leicht)</div><div class="md">Vollkornmehl · Powidl · wenig Mohnbutter · gedämpft</div></div></div>
+<div class="dc"><div class="dh"><span class="dn">Samstag &#127462;&#127481;</span><span class="b bt">entspannt &#183; &#246;sterreichisch</span></div><div class="ms">
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn g">Germkn&#246;del (leicht)</div><div class="md">Vollkornmehl &#183; Powidl &#183; wenig Mohnbutter &#183; ged&#228;mpft</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Vormittag</span><div class="mc"><div class="mn">Beeren + Joghurt</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Vormittag</span><div class="mc"><div class="mn">Beeren + Joghurt</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Grüner Salat mit Ei & Weckerl</div><div class="md">Blattsalat · hart gekochtes Ei · Gurke · Radieschen · Kürbiskernöl · Essig</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Mittag</span><div class="mc"><div class="mn">Gr&#252;ner Salat mit Ei & Weckerl</div><div class="md">Blattsalat &#183; hart gekochtes Ei &#183; Gurke &#183; Radieschen &#183; K&#252;rbiskern&#246;l &#183; Essig</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Apfel + Walnüsse</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Apfel + Waln&#252;sse</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Liptauer auf Vollkornbrot</div><div class="md">Topfen · Paprikapulver · Kümmel · Schnittlauch · Radieschen</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Abend</span><div class="mc"><div class="mn">Liptauer auf Vollkornbrot</div><div class="md">Topfen &#183; Paprikapulver &#183; K&#252;mmel &#183; Schnittlauch &#183; Radieschen</div></div></div>
 </div></div>
 
-<div class="dc"><div class="dh"><span class="dn">Sonntag 🍔</span><span class="b bi">Genuss · Burger</span></div><div class="ms">
-  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn g">Hafer-Pancakes mit Beeren</div><div class="md">Haferflocken · Ei · Joghurt · wenig Ahornsirup</div></div></div>
+<div class="dc"><div class="dh"><span class="dn">Sonntag &#127828;</span><span class="b bi">Genuss &#183; Burger</span></div><div class="ms">
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn g">Hafer-Pancakes mit Beeren</div><div class="md">Haferflocken &#183; Ei &#183; Joghurt &#183; wenig Ahornsirup</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Vormittag</span><div class="mc"><div class="mn">Kiwi + Leinsamen</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Vormittag</span><div class="mc"><div class="mn">Kiwi + Leinsamen</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn g">Black-Bean-Burger</div><div class="md">Vollkornbun · schwarze Bohnen · Mais · Paprika · Joghurt-Sauce · Coleslaw</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Mittag</span><div class="mc"><div class="mn g">Black-Bean-Burger</div><div class="md">Vollkornbun &#183; schwarze Bohnen &#183; Mais &#183; Paprika &#183; Joghurt-Sauce &#183; Coleslaw</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Birne + Chiasamen</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Birne + Chiasamen</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Joghurt mit Beeren & Leinsamen</div><div class="md">wenig Honig · Walnüsse</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Abend</span><div class="mc"><div class="mn">Joghurt mit Beeren & Leinsamen</div><div class="md">wenig Honig &#183; Waln&#252;sse</div></div></div>
 </div></div>
 </div>
 
 <!-- WOCHE 4 -->
-<div class="wk" id="wk4" style="--wc:#C0703A">
+<div class="wk" id="wk4" data-week="4" style="--wc:#C0703A">
 
-<div class="dc"><div class="dh"><span class="dn">Montag 🇮🇹</span><span class="b bi">italienisch</span></div><div class="ms">
-  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Haferbrei mit Walnüssen & Leinsamen</div><div class="md">1 Kiwi dazu · ungesüßt</div></div></div>
+<div class="dc"><div class="dh"><span class="dn">Montag &#127470;&#127481;</span><span class="b bi">italienisch</span></div><div class="ms">
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Haferbrei mit Waln&#252;ssen & Leinsamen</div><div class="md">1 Kiwi dazu &#183; unges&#252;&#223;t</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Vormittag</span><div class="mc"><div class="mn">Beeren + Chiasamen</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Vormittag</span><div class="mc"><div class="mn">Beeren + Chiasamen</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Risotto mit Brokkoli & Zitrone</div><div class="md">Vollkornreis · Brokkoli · Parmesan (wenig) · Zitrone · Olivenöl</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Mittag</span><div class="mc"><div class="mn">Risotto mit Brokkoli & Zitrone</div><div class="md">Vollkornreis &#183; Brokkoli &#183; Parmesan (wenig) &#183; Zitrone &#183; Oliven&#246;l</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Apfel + Mandelmus</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Apfel + Mandelmus</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Zucchini-Tomate-Suppe</div><div class="md">Basilikum · Knoblauch · Olivenöl · Vollkornbrot</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Abend</span><div class="mc"><div class="mn">Zucchini-Tomate-Suppe</div><div class="md">Basilikum &#183; Knoblauch &#183; Oliven&#246;l &#183; Vollkornbrot</div></div></div>
 </div></div>
 
-<div class="dc"><div class="dh"><span class="dn">Dienstag 🍜</span><span class="b bt">asiatisch</span></div><div class="ms">
-  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Joghurt mit Beeren & Haferflocken</div><div class="md">1 EL Leinsamen · 1 TL Hanfsamen</div></div></div>
+<div class="dc"><div class="dh"><span class="dn">Dienstag &#127836;</span><span class="b bt">asiatisch</span></div><div class="ms">
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Joghurt mit Beeren & Haferflocken</div><div class="md">1 EL Leinsamen &#183; 1 TL Hanfsamen</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Vormittag</span><div class="mc"><div class="mn">Birne + Walnüsse</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Vormittag</span><div class="mc"><div class="mn">Birne + Waln&#252;sse</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Pad Thai (vegetarisch)</div><div class="md">Reisnudeln · Tofu · Ei · Sojasprossen · Frühlingszwiebeln · Erdnüsse · Limette</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Mittag</span><div class="mc"><div class="mn">Pad Thai (vegetarisch)</div><div class="md">Reisnudeln &#183; Tofu &#183; Ei &#183; Sojasprossen &#183; Fr&#252;hlingszwiebeln &#183; Erdn&#252;sse &#183; Limette</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Orange + Chiasamen</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Orange + Chiasamen</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Edamame & Reiscracker</div><div class="md">Sesam · Sojasoße (wenig)</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Abend</span><div class="mc"><div class="mn">Edamame & Reiscracker</div><div class="md">Sesam &#183; Sojaso&#223;e (wenig)</div></div></div>
 </div></div>
 
-<div class="dc"><div class="dh"><span class="dn">Mittwoch 🇦🇹</span><span class="b bh">österreichisch</span></div><div class="ms">
-  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Porridge mit Chiasamen & Aprikose</div><div class="md">1 EL Mandelmus · Zimt</div></div></div>
+<div class="dc"><div class="dh"><span class="dn">Mittwoch &#127462;&#127481;</span><span class="b bh">&#246;sterreichisch</span></div><div class="ms">
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Porridge mit Chiasamen & Aprikose</div><div class="md">1 EL Mandelmus &#183; Zimt</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Vormittag</span><div class="mc"><div class="mn">Kiwi + Leinsamen</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Vormittag</span><div class="mc"><div class="mn">Kiwi + Leinsamen</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Kartoffelsuppe mit Brot</div><div class="md">Erdäpfel · Sellerie · Karotte · Majoran · Kümmel · Vollkornweckerl</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Mittag</span><div class="mc"><div class="mn">Kartoffelsuppe mit Brot</div><div class="md">Erd&#228;pfel &#183; Sellerie &#183; Karotte &#183; Majoran &#183; K&#252;mmel &#183; Vollkornweckerl</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Beeren + Joghurt</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Beeren + Joghurt</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Spinat-Ei-Pfanne</div><div class="md">Vollkorntoast · Knoblauch · Olivenöl · Muskatnuss</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Abend</span><div class="mc"><div class="mn">Spinat-Ei-Pfanne</div><div class="md">Vollkorntoast &#183; Knoblauch &#183; Oliven&#246;l &#183; Muskatnuss</div></div></div>
 </div></div>
 
-<div class="dc"><div class="dh"><span class="dn">Donnerstag 🌮</span><span class="b bm">mexikanisch</span></div><div class="ms">
-  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Haferbrei mit Beeren & Hanfsamen</div><div class="md">1 EL Chiasamen · Zimt</div></div></div>
+<div class="dc"><div class="dh"><span class="dn">Donnerstag &#127790;</span><span class="b bm">mexikanisch</span></div><div class="ms">
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Haferbrei mit Beeren & Hanfsamen</div><div class="md">1 EL Chiasamen &#183; Zimt</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Vormittag</span><div class="mc"><div class="mn">Apfel + Walnüsse</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Vormittag</span><div class="mc"><div class="mn">Apfel + Waln&#252;sse</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Veggie-Tacos</div><div class="md">Mais-Tortillas · Rote-Bete · schwarze Bohnen · Koriander · Limette · Joghurt</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Mittag</span><div class="mc"><div class="mn">Veggie-Tacos</div><div class="md">Mais-Tortillas &#183; Rote-Bete &#183; schwarze Bohnen &#183; Koriander &#183; Limette &#183; Joghurt</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Birne + Chiasamen</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Birne + Chiasamen</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Rote-Bete-Suppe mit Vollkornbrot</div><div class="md">Ingwer · Kokos light · Koriander</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Abend</span><div class="mc"><div class="mn">Rote-Bete-Suppe mit Vollkornbrot</div><div class="md">Ingwer &#183; Kokos light &#183; Koriander</div></div></div>
 </div></div>
 
-<div class="dc"><div class="dh"><span class="dn">Freitag 🇦🇹</span><span class="b bh">österreichisch</span></div><div class="ms">
-  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn">Joghurt mit Beeren & Haferflocken</div><div class="md">1 EL Leinsamen</div></div></div>
+<div class="dc"><div class="dh"><span class="dn">Freitag &#127462;&#127481;</span><span class="b bh">&#246;sterreichisch</span></div><div class="ms">
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn">Joghurt mit Beeren & Haferflocken</div><div class="md">1 EL Leinsamen</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Vormittag</span><div class="mc"><div class="mn">Orange + Walnüsse</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Vormittag</span><div class="mc"><div class="mn">Orange + Waln&#252;sse</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Kaspressknödel auf Salat</div><div class="md">Bergkäseknödel (gebraten) · Feldsalat · Kürbiskernöl · Essig</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Mittag</span><div class="mc"><div class="mn">Kaspresskn&#246;del auf Salat</div><div class="md">Bergk&#228;sekn&#246;del (gebraten) &#183; Feldsalat &#183; K&#252;rbiskern&#246;l &#183; Essig</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Beeren + Chiasamen</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Beeren + Chiasamen</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Hummus-Wrap mit Rohkost</div><div class="md">Vollkorntortilla · Hummus · Rucola · Gurke · Paprika · Radieschen</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Abend</span><div class="mc"><div class="mn">Hummus-Wrap mit Rohkost</div><div class="md">Vollkorntortilla &#183; Hummus &#183; Rucola &#183; Gurke &#183; Paprika &#183; Radieschen</div></div></div>
 </div></div>
 
-<div class="dc"><div class="dh"><span class="dn">Samstag 🇮🇳</span><span class="b bt">entspannt · indisch</span></div><div class="ms">
-  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn g">Masala-Omelette</div><div class="md">Ei · Zwiebel · Chili · Koriander · Kurkuma · Vollkorntoast</div></div></div>
+<div class="dc"><div class="dh"><span class="dn">Samstag &#127470;&#127475;</span><span class="b bt">entspannt &#183; indisch</span></div><div class="ms">
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn g">Masala-Omelette</div><div class="md">Ei &#183; Zwiebel &#183; Chili &#183; Koriander &#183; Kurkuma &#183; Vollkorntoast</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Vormittag</span><div class="mc"><div class="mn">Apfel + Mandeln</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Vormittag</span><div class="mc"><div class="mn">Apfel + Mandeln</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Saag Aloo (Spinat-Erdäpfel)</div><div class="md">Kartoffeln · Spinat · Kurkuma · Kreuzkümmel · Knoblauch · Ingwer · Vollkornbrot</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Mittag</span><div class="mc"><div class="mn">Saag Aloo (Spinat-Erd&#228;pfel)</div><div class="md">Kartoffeln &#183; Spinat &#183; Kurkuma &#183; Kreuzk&#252;mmel &#183; Knoblauch &#183; Ingwer &#183; Vollkornbrot</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Beeren + Joghurt</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Beeren + Joghurt</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Joghurt-Raita mit Vollkornbrot</div><div class="md">Joghurt · Gurke · Kreuzkümmel · Minze</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Abend</span><div class="mc"><div class="mn">Joghurt-Raita mit Vollkornbrot</div><div class="md">Joghurt &#183; Gurke &#183; Kreuzk&#252;mmel &#183; Minze</div></div></div>
 </div></div>
 
-<div class="dc"><div class="dh"><span class="dn">Sonntag 🇦🇹</span><span class="b bi">Genuss · österreichisch</span></div><div class="ms">
-  <div class="mr"><span class="lb">Früh</span><div class="mc"><div class="mn g">Kaiserschmarrn (leicht)</div><div class="md">Vollkornmehl · Ei · Joghurt · Zwetschgenröster · wenig Staubzucker</div></div></div>
+<div class="dc"><div class="dh"><span class="dn">Sonntag &#127462;&#127481;</span><span class="b bi">Genuss &#183; &#246;sterreichisch</span></div><div class="ms">
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Fr&#252;h</span><div class="mc"><div class="mn g">Kaiserschmarrn (leicht)</div><div class="md">Vollkornmehl &#183; Ei &#183; Joghurt &#183; Zwetschgenr&#246;ster &#183; wenig Staubzucker</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Vormittag</span><div class="mc"><div class="mn">Birne + Walnüsse</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Vormittag</span><div class="mc"><div class="mn">Birne + Waln&#252;sse</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Mittag</span><div class="mc"><div class="mn">Tafelspitz-Suppe (vegetarisch)</div><div class="md">Gemüsebrühe · Karotte · Sellerie · Petersilwurzel · Vollkornbrot · Schnittlauch</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Mittag</span><div class="mc"><div class="mn">Tafelspitz-Suppe (vegetarisch)</div><div class="md">Gem&#252;sebr&#252;he &#183; Karotte &#183; Sellerie &#183; Petersilwurzel &#183; Vollkornbrot &#183; Schnittlauch</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Kiwi + Chiasamen</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Nachmittag</span><div class="mc"><div class="mn">Kiwi + Chiasamen</div></div></div>
   <div class="dv"></div>
-  <div class="mr"><span class="lb">Abend</span><div class="mc"><div class="mn">Joghurt mit Walnüssen & Beeren</div><div class="md">1 EL Leinsamen · wenig Honig</div></div></div>
+  <div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb">Abend</span><div class="mc"><div class="mn">Joghurt mit Waln&#252;ssen & Beeren</div><div class="md">1 EL Leinsamen &#183; wenig Honig</div></div></div>
 </div></div>
 </div>
 
@@ -463,29 +474,29 @@ main{max-width:600px;margin:0 auto;padding:.8rem}
   <div class="tip-box">&#128048; <b>Nur tierversuchsfreie Produkte</b> - PETA zertifiziert.<br>Lavera: NATRUE. Benecos: BDIH. Kein China-Verkauf.</div>
 </div>
 </div><div class="dc"><div class="dh"><span class="dn">&#x1FAD0; Beeren</span><span class="b bh">1 Portion t&#xe4;glich</span></div>
-<div class="ms"><div class="mr"><span class="lb"></span><div class="mc"><div class="md">Heidelbeeren &#xb7; Himbeeren &#xb7; Erdbeeren &#xb7; Brombeeren &#xb7; &frac12; Tasse = 1 Portion<br>&#x2192; Fr&#xfc;hst&#xfc;ck oder Snack t&#xe4;glich</div></div></div></div></div>
+<div class="ms"><div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb"></span><div class="mc"><div class="md">Heidelbeeren &#xb7; Himbeeren &#xb7; Erdbeeren &#xb7; Brombeeren &#xb7; &frac12; Tasse = 1 Portion<br>&#x2192; Fr&#xfc;hst&#xfc;ck oder Snack t&#xe4;glich</div></div></div></div></div>
 <div class="dc"><div class="dh"><span class="dn">&#x1F34E; Obst</span><span class="b bh">3 Portionen t&#xe4;glich</span></div>
-<div class="ms"><div class="mr"><span class="lb"></span><div class="mc"><div class="md">Apfel &#xb7; Birne &#xb7; Orange &#xb7; Kiwi<br>&#x2192; Vormittag + Nachmittag + Fr&#xfc;hst&#xfc;ck</div></div></div></div></div>
+<div class="ms"><div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb"></span><div class="mc"><div class="md">Apfel &#xb7; Birne &#xb7; Orange &#xb7; Kiwi<br>&#x2192; Vormittag + Nachmittag + Fr&#xfc;hst&#xfc;ck</div></div></div></div></div>
 <div class="dc"><div class="dh"><span class="dn">&#x1F966; Kreuzbl&#xfc;tler</span><span class="b bh">1 Portion t&#xe4;glich</span></div>
-<div class="ms"><div class="mr"><span class="lb"></span><div class="mc"><div class="md">Brokkoli &#xb7; Rucola &#xb7; Radieschen &#xb7; Kohl &#xb7; Rote Bete-Bl&#xe4;tter</div></div></div></div></div>
+<div class="ms"><div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb"></span><div class="mc"><div class="md">Brokkoli &#xb7; Rucola &#xb7; Radieschen &#xb7; Kohl &#xb7; Rote Bete-Bl&#xe4;tter</div></div></div></div></div>
 <div class="dc"><div class="dh"><span class="dn">&#x1F96C; Blattgem&#xfc;se</span><span class="b bh">2 Portionen t&#xe4;glich</span></div>
-<div class="ms"><div class="mr"><span class="lb"></span><div class="mc"><div class="md">Spinat &#xb7; Rucola &#xb7; Feldsalat &#xb7; Mangold &#xb7; 1 Tasse roh = 1 Portion</div></div></div></div></div>
+<div class="ms"><div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb"></span><div class="mc"><div class="md">Spinat &#xb7; Rucola &#xb7; Feldsalat &#xb7; Mangold &#xb7; 1 Tasse roh = 1 Portion</div></div></div></div></div>
 <div class="dc"><div class="dh"><span class="dn">&#x1F955; Anderes Gem&#xfc;se</span><span class="b bh">2 Portionen t&#xe4;glich</span></div>
-<div class="ms"><div class="mr"><span class="lb"></span><div class="mc"><div class="md">Karotte &#xb7; Paprika &#xb7; Zucchini &#xb7; K&#xfc;rbis &#xb7; S&#xfc;&#xdf;kartoffel &#xb7; Tomate</div></div></div></div></div>
+<div class="ms"><div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb"></span><div class="mc"><div class="md">Karotte &#xb7; Paprika &#xb7; Zucchini &#xb7; K&#xfc;rbis &#xb7; S&#xfc;&#xdf;kartoffel &#xb7; Tomate</div></div></div></div></div>
 <div class="dc"><div class="dh"><span class="dn">&#x1FAD8; H&#xfc;lsenfr&#xfc;chte</span><span class="b bh">3 Portionen t&#xe4;glich</span></div>
-<div class="ms"><div class="mr"><span class="lb"></span><div class="mc"><div class="md">Linsen &#xb7; Kichererbsen &#xb7; Bohnen &#xb7; Hummus &#xb7; &frac12; Tasse = 1 Portion</div></div></div></div></div>
+<div class="ms"><div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb"></span><div class="mc"><div class="md">Linsen &#xb7; Kichererbsen &#xb7; Bohnen &#xb7; Hummus &#xb7; &frac12; Tasse = 1 Portion</div></div></div></div></div>
 <div class="dc"><div class="dh"><span class="dn">&#x1F330; N&#xfc;sse &amp; Samen</span><span class="b bh">1 Portion t&#xe4;glich</span></div>
-<div class="ms"><div class="mr"><span class="lb"></span><div class="mc"><div class="md">Waln&#xfc;sse &#xb7; Mandeln &#xb7; Leinsamen &#xb7; Chiasamen &#xb7; Hanfsamen &#xb7; Sesam</div></div></div></div></div>
+<div class="ms"><div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb"></span><div class="mc"><div class="md">Waln&#xfc;sse &#xb7; Mandeln &#xb7; Leinsamen &#xb7; Chiasamen &#xb7; Hanfsamen &#xb7; Sesam</div></div></div></div></div>
 <div class="dc"><div class="dh"><span class="dn">&#x1F33E; Vollkorn</span><span class="b bh">3 Portionen t&#xe4;glich</span></div>
-<div class="ms"><div class="mr"><span class="lb"></span><div class="mc"><div class="md">Haferflocken &#xb7; Vollkornbrot &#xb7; Vollkornnudeln &#xb7; Reis &#xb7; Dinkel</div></div></div></div></div>
+<div class="ms"><div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb"></span><div class="mc"><div class="md">Haferflocken &#xb7; Vollkornbrot &#xb7; Vollkornnudeln &#xb7; Reis &#xb7; Dinkel</div></div></div></div></div>
 <div class="dc"><div class="dh"><span class="dn">&#x1F33F; Kr&#xe4;uter &amp; Gew&#xfc;rze</span><span class="b bh">t&#xe4;glich</span></div>
-<div class="ms"><div class="mr"><span class="lb"></span><div class="mc"><div class="md">Kurkuma &#xb7; Ingwer &#xb7; Knoblauch &#xb7; Basilikum &#xb7; Petersilie<br>&#x26a0;&#xfe0f; Kurkuma + Pfeffer = st&#xe4;rkere Wirkung</div></div></div></div></div>
+<div class="ms"><div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb"></span><div class="mc"><div class="md">Kurkuma &#xb7; Ingwer &#xb7; Knoblauch &#xb7; Basilikum &#xb7; Petersilie<br>&#x26a0;&#xfe0f; Kurkuma + Pfeffer = st&#xe4;rkere Wirkung</div></div></div></div></div>
 <div class="dc"><div class="dh"><span class="dn">&#x1f4a7; Getr&#xe4;nke</span><span class="b bh">5 Gl&#xe4;ser t&#xe4;glich</span></div>
-<div class="ms"><div class="mr"><span class="lb"></span><div class="mc"><div class="md">Wasser &#xb7; Hibiskustee (RR-senkend!) &#xb7; Gr&#xfc;ntee &#xb7; Kr&#xe4;utertee<br>&#x26a0;&#xfe0f; kein Alkohol &#xb7; wenig Kaffee (max. 1&#x2013;2/Tag)</div></div></div></div></div>
+<div class="ms"><div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb"></span><div class="mc"><div class="md">Wasser &#xb7; Hibiskustee (RR-senkend!) &#xb7; Gr&#xfc;ntee &#xb7; Kr&#xe4;utertee<br>&#x26a0;&#xfe0f; kein Alkohol &#xb7; wenig Kaffee (max. 1&#x2013;2/Tag)</div></div></div></div></div>
 <div class="dc"><div class="dh"><span class="dn">&#x1f48a; B12 &amp; Vit. D</span><span class="b bh">t&#xe4;glich</span></div>
-<div class="ms"><div class="mr"><span class="lb"></span><div class="mc"><div class="md">B12: mit Fr&#xfc;hst&#xfc;ck &#xb7; Vitamin D: mit fetthaltiger Mahlzeit</div></div></div></div></div>
+<div class="ms"><div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb"></span><div class="mc"><div class="md">B12: mit Fr&#xfc;hst&#xfc;ck &#xb7; Vitamin D: mit fetthaltiger Mahlzeit</div></div></div></div></div>
 <div class="dc"><div class="dh"><span class="dn">&#x1f3c3; Bewegung</span><span class="b bh">t&#xe4;glich</span></div>
-<div class="ms"><div class="mr"><span class="lb"></span><div class="mc"><div class="md">Spaziergang mit Lotte &#xb7; Muskeltraining &#xb7; Yoga &#xb7; Balanceboard</div></div></div></div></div>
+<div class="ms"><div class="mr" onclick="toggleMeal(this)"><span class="meal-chk"></span><span class="lb"></span><div class="mc"><div class="md">Spaziergang mit Lotte &#xb7; Muskeltraining &#xb7; Yoga &#xb7; Balanceboard</div></div></div></div></div>
 <div style="background:#FFF3E0;border-radius:10px;padding:.5rem .75rem;margin-top:.8rem;font-size:.68rem;line-height:1.5;border:1px solid #f0d0a0;color:#C0703A">
   <strong>&#x26a0;&#xfe0f; Blutdruck &amp; Cholesterin:</strong><br>
   Kein extra Salz &#xb7; wenig K&#xe4;se &#xb7; kein Kokos&#xf6;l &#xb7; Oliven&#xf6;l &#xb7; Waln&#xfc;sse t&#xe4;glich &#xb7; Hibiskustee t&#xe4;glich &#xb7; Leinsamen t&#xe4;glich
@@ -509,268 +520,268 @@ function epSW(n,btn){
 
 const ZUTATEN_WOCHE = {
   1: [
-    { name: "Haferflocken (500g)", detail: "Mo/Do Frühstück · Porridge", group: "\uD83C\uDF5E Brot & Getreide" },
-    { name: "Vollkornmehl (500g)", detail: "Sa: Topfenpalatschinken · So: Pizzateig", group: "\uD83C\uDF5E Brot & Getreide" },
-    { name: "Vollkornweckerl (6 Stk)", detail: "Mo Abend: Vogerlsalat · Sa: Semmelknödel · So: Ribollita", group: "\uD83C\uDF5E Brot & Getreide" },
-    { name: "Vollkornbrot", detail: "Di: Bruschetta · So: Ribollita", group: "\uD83C\uDF5E Brot & Getreide" },
+    { name: "Haferflocken (500g)", detail: "Mo/Do Fr&#252;hst&#252;ck &#183; Porridge", group: "\uD83C\uDF5E Brot & Getreide" },
+    { name: "Vollkornmehl (500g)", detail: "Sa: Topfenpalatschinken &#183; So: Pizzateig", group: "\uD83C\uDF5E Brot & Getreide" },
+    { name: "Vollkornweckerl (6 Stk)", detail: "Mo Abend: Vogerlsalat &#183; Sa: Semmelkn&#246;del &#183; So: Ribollita", group: "\uD83C\uDF5E Brot & Getreide" },
+    { name: "Vollkornbrot", detail: "Di: Bruschetta &#183; So: Ribollita", group: "\uD83C\uDF5E Brot & Getreide" },
     { name: "Vollkorntortilla (Packung)", detail: "Do Mittag+Abend: Wrap & Quesadilla", group: "\uD83C\uDF5E Brot & Getreide" },
     { name: "Reiswafferl", detail: "Mi Abend: Miso-Suppe", group: "\uD83C\uDF5E Brot & Getreide" },
     { name: "Vollkornnudeln (500g)", detail: "Di Mittag: Pasta e Fagioli", group: "\uD83C\uDF5D Nudeln & Reis" },
-    { name: "Vollkornreis (500g)", detail: "Mi Mittag: Gebratener Gemüsereis", group: "\uD83C\uDF5D Nudeln & Reis" },
+    { name: "Vollkornreis (500g)", detail: "Mi Mittag: Gebratener Gem&#252;sereis", group: "\uD83C\uDF5D Nudeln & Reis" },
     { name: "Basmati (500g)", detail: "Fr Mittag: Rotes Linsen-Dal", group: "\uD83C\uDF5D Nudeln & Reis" },
-    { name: "Naturjoghurt (750g)", detail: "Di/Do/Fr/Sa/So täglich", group: "\uD83E\uDD5A Eier & Milch" },
-    { name: "Topfen (250g)", detail: "Sa Früh: Palatschinken", group: "\uD83E\uDDC0 Käse & Frischkäse" },
-    { name: "Mozzarella (125g)", detail: "So Früh: Pizza", group: "\uD83E\uDDC0 Käse & Frischkäse" },
-    { name: "Eier (6 Stk)", detail: "Mi: Gemüsereis", group: "\uD83E\uDD5A Eier & Milch" },
-    { name: "Weiße Bohnen (2 Dosen)", detail: "Di: Pasta e Fagioli · So: Ribollita", group: "\uD83E\uDD6B Hülsenfrüchte & Konserven" },
-    { name: "Rote Linsen (Packung)", detail: "Fr Mittag: Linsen-Dal", group: "\uD83E\uDD6B Hülsenfrüchte & Konserven" },
-    { name: "Schwarze Bohnen (Dose)", detail: "Do: Veggie-Wrap", group: "\uD83E\uDD6B Hülsenfrüchte & Konserven" },
-    { name: "Mais (Dose)", detail: "Do: Wrap & Quesadilla", group: "\uD83E\uDD6B Hülsenfrüchte & Konserven" },
-    { name: "Dosentomaten / Passata", detail: "Di: Pasta · Sa: Knödelsauce", group: "\uD83E\uDD6B Hülsenfrüchte & Konserven" },
-    { name: "Miso-Paste", detail: "Mi Abend: Miso-Suppe", group: "\uD83E\uDD6B Hülsenfrüchte & Konserven" },
-    { name: "Tofu (Packung)", detail: "Mi Abend: Miso-Suppe", group: "\uD83E\uDD6B Hülsenfrüchte & Konserven" },
-    { name: "Wakame (getrocknete Algen)", detail: "Mi Abend: Miso-Suppe", group: "\uD83E\uDD6B Hülsenfrüchte & Konserven" },
-    { name: "Kokosmilch light (Dose)", detail: "Fr: Linsen-Dal", group: "\uD83E\uDD6B Hülsenfrüchte & Konserven" },
-    { name: "Kartoffeln (1kg)", detail: "Mo: Erdäpfelgulasch · Fr: Aloo Gobi · Sa: Erdäpfelsalat", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Karotten (3 Stk)", detail: "Mi: Gemüsereis", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Brokkoli (1 Kopf)", detail: "Mi Mittag: Gemüsereis", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Karfiol (1 Kopf)", detail: "Fr Abend: Aloo Gobi", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Spinat (Sackerl)", detail: "Sa: Semmelknödel-Sauce", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Wirsing", detail: "So Mittag: Ribollita", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Paprika (3 Stk)", detail: "Do: Wrap & Quesadilla", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Tomate (6 Stk)", detail: "Di: Bruschetta · Sa: Knödelsauce · So: Pizza", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Feldsalat (Sackerl)", detail: "Mo Abend: Vogerlsalat", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Rucola (Sackerl)", detail: "Di: Bruschetta · So: Pizza", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Zwiebel (4 Stk)", detail: "Mo: Gulasch · Di: Pasta · So: Ribollita", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Knoblauch", detail: "Di/Sa/So täglich", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Ingwer (Stück)", detail: "Mi: Gemüsereis · Fr: Dal", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Frühlingszwiebeln", detail: "Mi Abend: Miso-Suppe", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Äpfel (5 Stk)", detail: "Mo Früh+Abend · Mi Vormittag · Sa Vormittag", group: "\uD83C\uDF4E Obst" },
-    { name: "Birnen (4 Stk)", detail: "Do Früh · Fr Nachmittag · So Vormittag", group: "\uD83C\uDF4E Obst" },
+    { name: "Naturjoghurt (750g)", detail: "Di/Do/Fr/Sa/So t&#228;glich", group: "\uD83E\uDD5A Eier & Milch" },
+    { name: "Topfen (250g)", detail: "Sa Fr&#252;h: Palatschinken", group: "\uD83E\uDDC0 K&#228;se & Frischk&#228;se" },
+    { name: "Mozzarella (125g)", detail: "So Fr&#252;h: Pizza", group: "\uD83E\uDDC0 K&#228;se & Frischk&#228;se" },
+    { name: "Eier (6 Stk)", detail: "Mi: Gem&#252;sereis", group: "\uD83E\uDD5A Eier & Milch" },
+    { name: "Wei&#223;e Bohnen (2 Dosen)", detail: "Di: Pasta e Fagioli &#183; So: Ribollita", group: "\uD83E\uDD6B H&#252;lsenfr&#252;chte & Konserven" },
+    { name: "Rote Linsen (Packung)", detail: "Fr Mittag: Linsen-Dal", group: "\uD83E\uDD6B H&#252;lsenfr&#252;chte & Konserven" },
+    { name: "Schwarze Bohnen (Dose)", detail: "Do: Veggie-Wrap", group: "\uD83E\uDD6B H&#252;lsenfr&#252;chte & Konserven" },
+    { name: "Mais (Dose)", detail: "Do: Wrap & Quesadilla", group: "\uD83E\uDD6B H&#252;lsenfr&#252;chte & Konserven" },
+    { name: "Dosentomaten / Passata", detail: "Di: Pasta &#183; Sa: Kn&#246;delsauce", group: "\uD83E\uDD6B H&#252;lsenfr&#252;chte & Konserven" },
+    { name: "Miso-Paste", detail: "Mi Abend: Miso-Suppe", group: "\uD83E\uDD6B H&#252;lsenfr&#252;chte & Konserven" },
+    { name: "Tofu (Packung)", detail: "Mi Abend: Miso-Suppe", group: "\uD83E\uDD6B H&#252;lsenfr&#252;chte & Konserven" },
+    { name: "Wakame (getrocknete Algen)", detail: "Mi Abend: Miso-Suppe", group: "\uD83E\uDD6B H&#252;lsenfr&#252;chte & Konserven" },
+    { name: "Kokosmilch light (Dose)", detail: "Fr: Linsen-Dal", group: "\uD83E\uDD6B H&#252;lsenfr&#252;chte & Konserven" },
+    { name: "Kartoffeln (1kg)", detail: "Mo: Erd&#228;pfelgulasch &#183; Fr: Aloo Gobi &#183; Sa: Erd&#228;pfelsalat", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Karotten (3 Stk)", detail: "Mi: Gem&#252;sereis", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Brokkoli (1 Kopf)", detail: "Mi Mittag: Gem&#252;sereis", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Karfiol (1 Kopf)", detail: "Fr Abend: Aloo Gobi", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Spinat (Sackerl)", detail: "Sa: Semmelkn&#246;del-Sauce", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Wirsing", detail: "So Mittag: Ribollita", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Paprika (3 Stk)", detail: "Do: Wrap & Quesadilla", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Tomate (6 Stk)", detail: "Di: Bruschetta &#183; Sa: Kn&#246;delsauce &#183; So: Pizza", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Feldsalat (Sackerl)", detail: "Mo Abend: Vogerlsalat", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Rucola (Sackerl)", detail: "Di: Bruschetta &#183; So: Pizza", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Zwiebel (4 Stk)", detail: "Mo: Gulasch &#183; Di: Pasta &#183; So: Ribollita", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Knoblauch", detail: "Di/Sa/So t&#228;glich", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Ingwer (St&#252;ck)", detail: "Mi: Gem&#252;sereis &#183; Fr: Dal", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Fr&#252;hlingszwiebeln", detail: "Mi Abend: Miso-Suppe", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "&#196;pfel (5 Stk)", detail: "Mo Fr&#252;h+Abend &#183; Mi Vormittag &#183; Sa Vormittag", group: "\uD83C\uDF4E Obst" },
+    { name: "Birnen (4 Stk)", detail: "Do Fr&#252;h &#183; Fr Nachmittag &#183; So Vormittag", group: "\uD83C\uDF4E Obst" },
     { name: "Orangen (3 Stk)", detail: "Di/Do/So Vormittag", group: "\uD83C\uDF4E Obst" },
-    { name: "Kiwi (3 Stk)", detail: "Di Nachmittag · Fr Vormittag · So Nachmittag", group: "\uD83C\uDF4E Obst" },
-    { name: "Beeren gemischt TK (Beutel)", detail: "Mi/Sa/So täglich", group: "\uD83C\uDF4E Obst" },
-    { name: "Limette (2 Stk)", detail: "Do: Wrap · Fr: Aloo Gobi", group: "\uD83C\uDF4E Obst" },
-    { name: "Walnüsse (200g)", detail: "Mo/Do/Sa/So täglich · LDL senken", group: "\uD83E\uDD5C Nüsse & Samen" },
-    { name: "Mandeln (100g)", detail: "Di Vormittag · So Nachmittag", group: "\uD83E\uDD5C Nüsse & Samen" },
-    { name: "Mandelmus (Glas)", detail: "Mo/Mi/Fr Frühstück", group: "\uD83E\uDD5C Nüsse & Samen" },
-    { name: "Leinsamen geschrotet", detail: "täglich ins Frühstück", group: "\uD83E\uDD5C Nüsse & Samen" },
-    { name: "Chiasamen", detail: "Mi/Do/Fr Frühstück", group: "\uD83E\uDD5C Nüsse & Samen" },
-    { name: "Hanfsamen", detail: "Di Frühstück", group: "\uD83E\uDD5C Nüsse & Samen" },
-    { name: "Kürbiskerne", detail: "Mo Abend: Vogerlsalat", group: "\uD83E\uDD5C Nüsse & Samen" },
-    { name: "Sesam", detail: "Mi: Gemüsereis · Miso-Suppe", group: "\uD83E\uDD5C Nüsse & Samen" },
-    { name: "Olivenöl", detail: "täglich kochen", group: "\uD83E\uDDC2 Gewürze & Öl" },
-    { name: "Kürbiskernöl", detail: "Mo Abend: Vogerlsalat · Sa Abend", group: "\uD83E\uDDC2 Gewürze & Öl" },
-    { name: "Kurkuma", detail: "Fr: Dal · Aloo Gobi", group: "\uD83E\uDDC2 Gewürze & Öl" },
-    { name: "Kreuzkümmel / Kümmel", detail: "Mo: Gulasch · Fr: Aloo Gobi · Sa: Erdäpfelsalat", group: "\uD83E\uDDC2 Gewürze & Öl" },
-    { name: "Paprikapulver", detail: "Mo: Erdäpfelgulasch", group: "\uD83E\uDDC2 Gewürze & Öl" },
-    { name: "Majoran", detail: "Mo: Gulasch", group: "\uD83E\uDDC2 Gewürze & Öl" },
-    { name: "Koriander gemahlen", detail: "Fr: Dal", group: "\uD83E\uDDC2 Gewürze & Öl" },
-    { name: "Zimt", detail: "Mo/Mi/Do Frühstück", group: "\uD83E\uDDC2 Gewürze & Öl" },
-    { name: "Sojasoße (wenig)", detail: "Mi: Gemüsereis · Miso-Suppe", group: "\uD83E\uDDC2 Gewürze & Öl" },
-    { name: "Honig (Glas)", detail: "Sa: Palatschinken · So: Joghurt", group: "\uD83E\uDDC2 Gewürze & Öl" },
-    { name: "Essig", detail: "Sa: Erdäpfelsalat", group: "\uD83E\uDDC2 Gewürze & Öl" },
-    { name: "Basilikum (frisch)", detail: "Di: Bruschetta · Sa: Knödelsauce · So: Pizza", group: "\uD83C\uDF3F Kräuter" },
-    { name: "Rosmarin", detail: "Di: Pasta e Fagioli", group: "\uD83C\uDF3F Kräuter" },
-    { name: "Schnittlauch", detail: "Sa: Erdäpfelsalat", group: "\uD83C\uDF3F Kräuter" },
-    { name: "Koriander (frisch)", detail: "Do: Wrap · Fr: Aloo Gobi", group: "\uD83C\uDF3F Kräuter" },
+    { name: "Kiwi (3 Stk)", detail: "Di Nachmittag &#183; Fr Vormittag &#183; So Nachmittag", group: "\uD83C\uDF4E Obst" },
+    { name: "Beeren gemischt TK (Beutel)", detail: "Mi/Sa/So t&#228;glich", group: "\uD83C\uDF4E Obst" },
+    { name: "Limette (2 Stk)", detail: "Do: Wrap &#183; Fr: Aloo Gobi", group: "\uD83C\uDF4E Obst" },
+    { name: "Waln&#252;sse (200g)", detail: "Mo/Do/Sa/So t&#228;glich &#183; LDL senken", group: "\uD83E\uDD5C N&#252;sse & Samen" },
+    { name: "Mandeln (100g)", detail: "Di Vormittag &#183; So Nachmittag", group: "\uD83E\uDD5C N&#252;sse & Samen" },
+    { name: "Mandelmus (Glas)", detail: "Mo/Mi/Fr Fr&#252;hst&#252;ck", group: "\uD83E\uDD5C N&#252;sse & Samen" },
+    { name: "Leinsamen geschrotet", detail: "t&#228;glich ins Fr&#252;hst&#252;ck", group: "\uD83E\uDD5C N&#252;sse & Samen" },
+    { name: "Chiasamen", detail: "Mi/Do/Fr Fr&#252;hst&#252;ck", group: "\uD83E\uDD5C N&#252;sse & Samen" },
+    { name: "Hanfsamen", detail: "Di Fr&#252;hst&#252;ck", group: "\uD83E\uDD5C N&#252;sse & Samen" },
+    { name: "K&#252;rbiskerne", detail: "Mo Abend: Vogerlsalat", group: "\uD83E\uDD5C N&#252;sse & Samen" },
+    { name: "Sesam", detail: "Mi: Gem&#252;sereis &#183; Miso-Suppe", group: "\uD83E\uDD5C N&#252;sse & Samen" },
+    { name: "Oliven&#246;l", detail: "t&#228;glich kochen", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "K&#252;rbiskern&#246;l", detail: "Mo Abend: Vogerlsalat &#183; Sa Abend", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "Kurkuma", detail: "Fr: Dal &#183; Aloo Gobi", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "Kreuzk&#252;mmel / K&#252;mmel", detail: "Mo: Gulasch &#183; Fr: Aloo Gobi &#183; Sa: Erd&#228;pfelsalat", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "Paprikapulver", detail: "Mo: Erd&#228;pfelgulasch", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "Majoran", detail: "Mo: Gulasch", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "Koriander gemahlen", detail: "Fr: Dal", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "Zimt", detail: "Mo/Mi/Do Fr&#252;hst&#252;ck", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "Sojaso&#223;e (wenig)", detail: "Mi: Gem&#252;sereis &#183; Miso-Suppe", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "Honig (Glas)", detail: "Sa: Palatschinken &#183; So: Joghurt", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "Essig", detail: "Sa: Erd&#228;pfelsalat", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "Basilikum (frisch)", detail: "Di: Bruschetta &#183; Sa: Kn&#246;delsauce &#183; So: Pizza", group: "\uD83C\uDF3F Kr&#228;uter" },
+    { name: "Rosmarin", detail: "Di: Pasta e Fagioli", group: "\uD83C\uDF3F Kr&#228;uter" },
+    { name: "Schnittlauch", detail: "Sa: Erd&#228;pfelsalat", group: "\uD83C\uDF3F Kr&#228;uter" },
+    { name: "Koriander (frisch)", detail: "Do: Wrap &#183; Fr: Aloo Gobi", group: "\uD83C\uDF3F Kr&#228;uter" },
   ],
   2: [
-    { name: "Haferflocken (500g)", detail: "Mo/Do Frühstück", group: "\uD83C\uDF5E Brot & Getreide" },
-    { name: "Vollkorntoast / Brot", detail: "Sa Früh: Toast · Di: Brettljause", group: "\uD83C\uDF5E Brot & Getreide" },
+    { name: "Haferflocken (500g)", detail: "Mo/Do Fr&#252;hst&#252;ck", group: "\uD83C\uDF5E Brot & Getreide" },
+    { name: "Vollkorntoast / Brot", detail: "Sa Fr&#252;h: Toast &#183; Di: Brettljause", group: "\uD83C\uDF5E Brot & Getreide" },
     { name: "Vollkornweckerl (4 Stk)", detail: "Fr: Topfenaufstrich", group: "\uD83C\uDF5E Brot & Getreide" },
     { name: "Vollkornbun (2 Stk)", detail: "Sa Mittag: Veggie-Burger", group: "\uD83C\uDF5E Brot & Getreide" },
     { name: "Vollkorntortilla (Packung)", detail: "Mi: Burrito", group: "\uD83C\uDF5E Brot & Getreide" },
     { name: "Vollkornmehl", detail: "So: Hafer-Waffeln", group: "\uD83C\uDF5E Brot & Getreide" },
     { name: "Reiscracker", detail: "Mo Abend: Edamame", group: "\uD83C\uDF5E Brot & Getreide" },
-    { name: "Vollkornspätzle (Packung)", detail: "Di Mittag: Käsespätzle", group: "\uD83C\uDF5D Nudeln & Reis" },
+    { name: "Vollkornsp&#228;tzle (Packung)", detail: "Di Mittag: K&#228;sesp&#228;tzle", group: "\uD83C\uDF5D Nudeln & Reis" },
     { name: "Soba-Nudeln (Packung)", detail: "Mo Mittag: Ramen-Suppe", group: "\uD83C\uDF5D Nudeln & Reis" },
     { name: "Vollkornreis (500g)", detail: "Mi: Burrito", group: "\uD83C\uDF5D Nudeln & Reis" },
     { name: "Kartoffelgnocchi (Packung)", detail: "Do Mittag: Gnocchi", group: "\uD83C\uDF5D Nudeln & Reis" },
     { name: "Basmati (500g)", detail: "So: Chana Masala", group: "\uD83C\uDF5D Nudeln & Reis" },
-    { name: "Naturjoghurt (750g)", detail: "Di/Mi/Fr/Sa/So täglich", group: "\uD83E\uDD5A Eier & Milch" },
-    { name: "Topfen (250g)", detail: "Fr Abend: Topfenaufstrich", group: "\uD83E\uDDC0 Käse & Frischkäse" },
-    { name: "Mozzarella (125g)", detail: "Do Abend: Caprese", group: "\uD83E\uDDC0 Käse & Frischkäse" },
-    { name: "Bergkäse (Stück)", detail: "Di Mittag: Käsespätzle", group: "\uD83E\uDDC0 Käse & Frischkäse" },
-    { name: "Eier (6 Stk)", detail: "Mo: Ramen · Sa: Burger-Salat", group: "\uD83E\uDD5A Eier & Milch" },
-    { name: "Sauerrahm", detail: "Fr: Spinatknödel", group: "\uD83E\uDD5A Eier & Milch" },
-    { name: "Kidneybohnen (2 Dosen)", detail: "Mi: Burrito · Mi Abend: Suppe", group: "\uD83E\uDD6B Hülsenfrüchte & Konserven" },
-    { name: "Kichererbsen (Dose)", detail: "Sa: Veggie-Burger Patty · So: Chana Masala", group: "\uD83E\uDD6B Hülsenfrüchte & Konserven" },
-    { name: "Mais (Dose)", detail: "Mi: Burrito", group: "\uD83E\uDD6B Hülsenfrüchte & Konserven" },
-    { name: "Dosentomaten", detail: "Do: Gnocchi-Sauce · Mi: Bohnensuppe · So: Chana Masala", group: "\uD83E\uDD6B Hülsenfrüchte & Konserven" },
-    { name: "Miso-Paste", detail: "Mo: Ramen-Brühe", group: "\uD83E\uDD6B Hülsenfrüchte & Konserven" },
-    { name: "Tofu (Packung)", detail: "Mo: Ramen-Suppe", group: "\uD83E\uDD6B Hülsenfrüchte & Konserven" },
-    { name: "Edamame (TK)", detail: "Mo Abend", group: "\uD83E\uDD6B Hülsenfrüchte & Konserven" },
-    { name: "Pak Choi", detail: "Mo: Ramen-Suppe", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Spinat (Sackerl)", detail: "Do: Gnocchi · Fr: Spinatknödel", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Paprika (3 Stk)", detail: "Mi: Burrito · Mi Abend: Bohnensuppe", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Tomate (5 Stk)", detail: "Do: Gnocchi · Do: Caprese · Sa: Burger", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Gurke (2 Stk)", detail: "Di: Brettljause · Fr: Topfenweckerl", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Radieschen", detail: "Di: Brettljause · Fr: Topfenweckerl", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Rote Bete (Dose)", detail: "Sa: Veggie-Burger", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Rucola (Sackerl)", detail: "Sa: Burger · So: Waffeln-Beilage", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Zwiebel (3 Stk)", detail: "Di: Käsespätzle Röstzwiebeln · So: Curry", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Knoblauch", detail: "Do: Gnocchi · Mi Abend: Suppe", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Ingwer (Stück)", detail: "Mo: Ramen · So: Curry", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Frühlingszwiebeln", detail: "Mo: Ramen", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Birnen (4 Stk)", detail: "Mo Früh · Di Nachmittag · So Vormittag", group: "\uD83C\uDF4E Obst" },
-    { name: "Äpfel (4 Stk)", detail: "Di/Do/Sa/So Vormittag", group: "\uD83C\uDF4E Obst" },
+    { name: "Naturjoghurt (750g)", detail: "Di/Mi/Fr/Sa/So t&#228;glich", group: "\uD83E\uDD5A Eier & Milch" },
+    { name: "Topfen (250g)", detail: "Fr Abend: Topfenaufstrich", group: "\uD83E\uDDC0 K&#228;se & Frischk&#228;se" },
+    { name: "Mozzarella (125g)", detail: "Do Abend: Caprese", group: "\uD83E\uDDC0 K&#228;se & Frischk&#228;se" },
+    { name: "Bergk&#228;se (St&#252;ck)", detail: "Di Mittag: K&#228;sesp&#228;tzle", group: "\uD83E\uDDC0 K&#228;se & Frischk&#228;se" },
+    { name: "Eier (6 Stk)", detail: "Mo: Ramen &#183; Sa: Burger-Salat", group: "\uD83E\uDD5A Eier & Milch" },
+    { name: "Sauerrahm", detail: "Fr: Spinatkn&#246;del", group: "\uD83E\uDD5A Eier & Milch" },
+    { name: "Kidneybohnen (2 Dosen)", detail: "Mi: Burrito &#183; Mi Abend: Suppe", group: "\uD83E\uDD6B H&#252;lsenfr&#252;chte & Konserven" },
+    { name: "Kichererbsen (Dose)", detail: "Sa: Veggie-Burger Patty &#183; So: Chana Masala", group: "\uD83E\uDD6B H&#252;lsenfr&#252;chte & Konserven" },
+    { name: "Mais (Dose)", detail: "Mi: Burrito", group: "\uD83E\uDD6B H&#252;lsenfr&#252;chte & Konserven" },
+    { name: "Dosentomaten", detail: "Do: Gnocchi-Sauce &#183; Mi: Bohnensuppe &#183; So: Chana Masala", group: "\uD83E\uDD6B H&#252;lsenfr&#252;chte & Konserven" },
+    { name: "Miso-Paste", detail: "Mo: Ramen-Br&#252;he", group: "\uD83E\uDD6B H&#252;lsenfr&#252;chte & Konserven" },
+    { name: "Tofu (Packung)", detail: "Mo: Ramen-Suppe", group: "\uD83E\uDD6B H&#252;lsenfr&#252;chte & Konserven" },
+    { name: "Edamame (TK)", detail: "Mo Abend", group: "\uD83E\uDD6B H&#252;lsenfr&#252;chte & Konserven" },
+    { name: "Pak Choi", detail: "Mo: Ramen-Suppe", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Spinat (Sackerl)", detail: "Do: Gnocchi &#183; Fr: Spinatkn&#246;del", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Paprika (3 Stk)", detail: "Mi: Burrito &#183; Mi Abend: Bohnensuppe", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Tomate (5 Stk)", detail: "Do: Gnocchi &#183; Do: Caprese &#183; Sa: Burger", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Gurke (2 Stk)", detail: "Di: Brettljause &#183; Fr: Topfenweckerl", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Radieschen", detail: "Di: Brettljause &#183; Fr: Topfenweckerl", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Rote Bete (Dose)", detail: "Sa: Veggie-Burger", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Rucola (Sackerl)", detail: "Sa: Burger &#183; So: Waffeln-Beilage", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Zwiebel (3 Stk)", detail: "Di: K&#228;sesp&#228;tzle R&#246;stzwiebeln &#183; So: Curry", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Knoblauch", detail: "Do: Gnocchi &#183; Mi Abend: Suppe", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Ingwer (St&#252;ck)", detail: "Mo: Ramen &#183; So: Curry", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Fr&#252;hlingszwiebeln", detail: "Mo: Ramen", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Birnen (4 Stk)", detail: "Mo Fr&#252;h &#183; Di Nachmittag &#183; So Vormittag", group: "\uD83C\uDF4E Obst" },
+    { name: "&#196;pfel (4 Stk)", detail: "Di/Do/Sa/So Vormittag", group: "\uD83C\uDF4E Obst" },
     { name: "Orangen (3 Stk)", detail: "Mi/Fr/Sa Vormittag", group: "\uD83C\uDF4E Obst" },
     { name: "Kiwi (3 Stk)", detail: "Mo/Mi Vormittag", group: "\uD83C\uDF4E Obst" },
-    { name: "Himbeeren TK", detail: "Di Früh: Joghurt", group: "\uD83C\uDF4E Obst" },
-    { name: "Beeren gemischt TK", detail: "Fr/Sa/So täglich", group: "\uD83C\uDF4E Obst" },
+    { name: "Himbeeren TK", detail: "Di Fr&#252;h: Joghurt", group: "\uD83C\uDF4E Obst" },
+    { name: "Beeren gemischt TK", detail: "Fr/Sa/So t&#228;glich", group: "\uD83C\uDF4E Obst" },
     { name: "Limette (2 Stk)", detail: "Mi: Burrito-Sauce", group: "\uD83C\uDF4E Obst" },
-    { name: "Walnüsse (200g)", detail: "Mo/Di/Sa/So täglich", group: "\uD83E\uDD5C Nüsse & Samen" },
-    { name: "Mandelmus (Glas)", detail: "Mi/Do/Sa Frühstück", group: "\uD83E\uDD5C Nüsse & Samen" },
-    { name: "Leinsamen geschrotet", detail: "Mo/Do/Fr täglich", group: "\uD83E\uDD5C Nüsse & Samen" },
-    { name: "Chiasamen", detail: "Di/Mi/Sa Frühstück", group: "\uD83E\uDD5C Nüsse & Samen" },
-    { name: "Hanfsamen", detail: "Di/Do Frühstück", group: "\uD83E\uDD5C Nüsse & Samen" },
-    { name: "Sesam", detail: "Mo: Ramen", group: "\uD83E\uDD5C Nüsse & Samen" },
-    { name: "Olivenöl", detail: "täglich", group: "\uD83E\uDDC2 Gewürze & Öl" },
-    { name: "Kreuzkümmel", detail: "Mi: Bohnensuppe", group: "\uD83E\uDDC2 Gewürze & Öl" },
-    { name: "Garam Masala", detail: "So: Chana Masala", group: "\uD83E\uDDC2 Gewürze & Öl" },
-    { name: "Kurkuma", detail: "So: Chana Masala", group: "\uD83E\uDDC2 Gewürze & Öl" },
-    { name: "Sojasoße", detail: "Mo: Ramen · Mo Abend: Edamame", group: "\uD83E\uDDC2 Gewürze & Öl" },
-    { name: "Honig / Ahornsirup", detail: "So: Waffeln", group: "\uD83E\uDDC2 Gewürze & Öl" },
-    { name: "Basilikum (frisch)", detail: "Do: Gnocchi · Do: Caprese", group: "\uD83C\uDF3F Kräuter" },
-    { name: "Koriander (frisch)", detail: "Mi: Burrito · So: Curry", group: "\uD83C\uDF3F Kräuter" },
-    { name: "Schnittlauch", detail: "Di: Brettljause · Fr: Topfenweckerl", group: "\uD83C\uDF3F Kräuter" },
+    { name: "Waln&#252;sse (200g)", detail: "Mo/Di/Sa/So t&#228;glich", group: "\uD83E\uDD5C N&#252;sse & Samen" },
+    { name: "Mandelmus (Glas)", detail: "Mi/Do/Sa Fr&#252;hst&#252;ck", group: "\uD83E\uDD5C N&#252;sse & Samen" },
+    { name: "Leinsamen geschrotet", detail: "Mo/Do/Fr t&#228;glich", group: "\uD83E\uDD5C N&#252;sse & Samen" },
+    { name: "Chiasamen", detail: "Di/Mi/Sa Fr&#252;hst&#252;ck", group: "\uD83E\uDD5C N&#252;sse & Samen" },
+    { name: "Hanfsamen", detail: "Di/Do Fr&#252;hst&#252;ck", group: "\uD83E\uDD5C N&#252;sse & Samen" },
+    { name: "Sesam", detail: "Mo: Ramen", group: "\uD83E\uDD5C N&#252;sse & Samen" },
+    { name: "Oliven&#246;l", detail: "t&#228;glich", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "Kreuzk&#252;mmel", detail: "Mi: Bohnensuppe", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "Garam Masala", detail: "So: Chana Masala", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "Kurkuma", detail: "So: Chana Masala", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "Sojaso&#223;e", detail: "Mo: Ramen &#183; Mo Abend: Edamame", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "Honig / Ahornsirup", detail: "So: Waffeln", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "Basilikum (frisch)", detail: "Do: Gnocchi &#183; Do: Caprese", group: "\uD83C\uDF3F Kr&#228;uter" },
+    { name: "Koriander (frisch)", detail: "Mi: Burrito &#183; So: Curry", group: "\uD83C\uDF3F Kr&#228;uter" },
+    { name: "Schnittlauch", detail: "Di: Brettljause &#183; Fr: Topfenweckerl", group: "\uD83C\uDF3F Kr&#228;uter" },
   ],
   3: [
-    { name: "Haferflocken (500g)", detail: "Mo/Do/Fr Frühstück", group: "\uD83C\uDF5E Brot & Getreide" },
-    { name: "Vollkornbrot / Weckerl", detail: "Di/Mi/Fr/Sa/So täglich", group: "\uD83C\uDF5E Brot & Getreide" },
-    { name: "Vollkornmehl", detail: "Sa: Germknödel", group: "\uD83C\uDF5E Brot & Getreide" },
+    { name: "Haferflocken (500g)", detail: "Mo/Do/Fr Fr&#252;hst&#252;ck", group: "\uD83C\uDF5E Brot & Getreide" },
+    { name: "Vollkornbrot / Weckerl", detail: "Di/Mi/Fr/Sa/So t&#228;glich", group: "\uD83C\uDF5E Brot & Getreide" },
+    { name: "Vollkornmehl", detail: "Sa: Germkn&#246;del", group: "\uD83C\uDF5E Brot & Getreide" },
     { name: "Vollkorntortilla (Packung)", detail: "Fr: Enchiladas", group: "\uD83C\uDF5E Brot & Getreide" },
-    { name: "Reispapier", detail: "Do Abend: Frühlingsrollen", group: "\uD83C\uDF5E Brot & Getreide" },
+    { name: "Reispapier", detail: "Do Abend: Fr&#252;hlingsrollen", group: "\uD83C\uDF5E Brot & Getreide" },
     { name: "Vollkornnudeln (500g)", detail: "Mi: Penne Arrabbiata", group: "\uD83C\uDF5D Nudeln & Reis" },
     { name: "Jasminreis (500g)", detail: "Do: Thai-Curry", group: "\uD83C\uDF5D Nudeln & Reis" },
     { name: "Basmati (500g)", detail: "Mo: Palak Paneer", group: "\uD83C\uDF5D Nudeln & Reis" },
-    { name: "Naturjoghurt (750g)", detail: "Mo/Di/Do/Fr/Sa/So täglich", group: "\uD83E\uDD5A Eier & Milch" },
-    { name: "Paneer (200g)", detail: "Mo: Palak Paneer", group: "\uD83E\uDDC0 Käse & Frischkäse" },
-    { name: "Topfen (250g)", detail: "Sa: Liptauer", group: "\uD83E\uDDC0 Käse & Frischkäse" },
-    { name: "Eier (6 Stk)", detail: "Di: Gröstl · Sa: Salat mit Ei · So: Pancakes", group: "\uD83E\uDD5A Eier & Milch" },
-    { name: "Gelbe Linsen (Packung)", detail: "Mo Abend: Dhal-Suppe", group: "\uD83E\uDD6B Hülsenfrüchte & Konserven" },
-    { name: "Kidneybohnen (Dose)", detail: "Fr: Enchiladas", group: "\uD83E\uDD6B Hülsenfrüchte & Konserven" },
-    { name: "Bohnen gemischt (Dose)", detail: "Mi: Minestrone", group: "\uD83E\uDD6B Hülsenfrüchte & Konserven" },
-    { name: "Hummus (Becher)", detail: "Fr Abend: Gemüsesticks", group: "\uD83E\uDD6B Hülsenfrüchte & Konserven" },
-    { name: "Dosentomaten / Passata", detail: "Mi: Arrabbiata · Mi: Minestrone · Fr: Enchiladas", group: "\uD83E\uDD6B Hülsenfrüchte & Konserven" },
-    { name: "Kokosmilch light (Dose)", detail: "Do: Thai-Curry", group: "\uD83E\uDD6B Hülsenfrüchte & Konserven" },
-    { name: "Grüne Currypaste", detail: "Do: Thai-Curry", group: "\uD83E\uDD6B Hülsenfrüchte & Konserven" },
-    { name: "Erdnussmus / Erdnusssauce", detail: "Do Abend: Frühlingsrollen", group: "\uD83E\uDD6B Hülsenfrüchte & Konserven" },
-    { name: "Spinat (Sackerl)", detail: "Mo: Palak Paneer", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Kartoffeln (800g)", detail: "Di: Tiroler Gröstl", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Kürbis (mittel o. TK)", detail: "Di Abend: Kürbiscremesuppe", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Süßkartoffel (2 Stk)", detail: "Do: Thai-Curry", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Brokkoli (1 Kopf)", detail: "Do: Thai-Curry", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Zucchini (2 Stk)", detail: "Mi: Minestrone", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Karotten (3 Stk)", detail: "Mo: Dhal · Mi: Minestrone · Do: Frühlingsrollen", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Paprika (3 Stk)", detail: "Fr: Enchiladas · Fr Abend: Gemüsesticks", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Tomate (4 Stk)", detail: "Mi: Arrabbiata · Mi: Minestrone", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Gurke (2 Stk)", detail: "Do: Frühlingsrollen · Fr Abend: Gemüsesticks", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Radieschen", detail: "Di: Gröstl · Sa: Salat", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Rucola (Sackerl)", detail: "Mi: Arrabbiata · Do: Frühlingsrollen", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Blattsalat (Kopf)", detail: "Sa: Grüner Salat mit Ei", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Zwiebel (3 Stk)", detail: "Di: Gröstl · Fr: Enchiladas", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Knoblauch", detail: "Mi: Arrabbiata · Sa: Liptauer", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Ingwer (Stück)", detail: "Di: Kürbissuppe · Mo: Palak Paneer · Do: Curry", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Mango (frisch o. TK)", detail: "Mo Früh: Haferbrei", group: "\uD83C\uDF4E Obst" },
-    { name: "Äpfel (4 Stk)", detail: "Mo/Do/Sa Vormittag", group: "\uD83C\uDF4E Obst" },
-    { name: "Birnen (4 Stk)", detail: "Mi Früh · Di/So Nachmittag", group: "\uD83C\uDF4E Obst" },
-    { name: "Orangen (3 Stk)", detail: "Mi Vormittag · Fr/Sa Nachmittag", group: "\uD83C\uDF4E Obst" },
+    { name: "Naturjoghurt (750g)", detail: "Mo/Di/Do/Fr/Sa/So t&#228;glich", group: "\uD83E\uDD5A Eier & Milch" },
+    { name: "Paneer (200g)", detail: "Mo: Palak Paneer", group: "\uD83E\uDDC0 K&#228;se & Frischk&#228;se" },
+    { name: "Topfen (250g)", detail: "Sa: Liptauer", group: "\uD83E\uDDC0 K&#228;se & Frischk&#228;se" },
+    { name: "Eier (6 Stk)", detail: "Di: Gr&#246;stl &#183; Sa: Salat mit Ei &#183; So: Pancakes", group: "\uD83E\uDD5A Eier & Milch" },
+    { name: "Gelbe Linsen (Packung)", detail: "Mo Abend: Dhal-Suppe", group: "\uD83E\uDD6B H&#252;lsenfr&#252;chte & Konserven" },
+    { name: "Kidneybohnen (Dose)", detail: "Fr: Enchiladas", group: "\uD83E\uDD6B H&#252;lsenfr&#252;chte & Konserven" },
+    { name: "Bohnen gemischt (Dose)", detail: "Mi: Minestrone", group: "\uD83E\uDD6B H&#252;lsenfr&#252;chte & Konserven" },
+    { name: "Hummus (Becher)", detail: "Fr Abend: Gem&#252;sesticks", group: "\uD83E\uDD6B H&#252;lsenfr&#252;chte & Konserven" },
+    { name: "Dosentomaten / Passata", detail: "Mi: Arrabbiata &#183; Mi: Minestrone &#183; Fr: Enchiladas", group: "\uD83E\uDD6B H&#252;lsenfr&#252;chte & Konserven" },
+    { name: "Kokosmilch light (Dose)", detail: "Do: Thai-Curry", group: "\uD83E\uDD6B H&#252;lsenfr&#252;chte & Konserven" },
+    { name: "Gr&#252;ne Currypaste", detail: "Do: Thai-Curry", group: "\uD83E\uDD6B H&#252;lsenfr&#252;chte & Konserven" },
+    { name: "Erdnussmus / Erdnusssauce", detail: "Do Abend: Fr&#252;hlingsrollen", group: "\uD83E\uDD6B H&#252;lsenfr&#252;chte & Konserven" },
+    { name: "Spinat (Sackerl)", detail: "Mo: Palak Paneer", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Kartoffeln (800g)", detail: "Di: Tiroler Gr&#246;stl", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "K&#252;rbis (mittel o. TK)", detail: "Di Abend: K&#252;rbiscremesuppe", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "S&#252;&#223;kartoffel (2 Stk)", detail: "Do: Thai-Curry", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Brokkoli (1 Kopf)", detail: "Do: Thai-Curry", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Zucchini (2 Stk)", detail: "Mi: Minestrone", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Karotten (3 Stk)", detail: "Mo: Dhal &#183; Mi: Minestrone &#183; Do: Fr&#252;hlingsrollen", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Paprika (3 Stk)", detail: "Fr: Enchiladas &#183; Fr Abend: Gem&#252;sesticks", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Tomate (4 Stk)", detail: "Mi: Arrabbiata &#183; Mi: Minestrone", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Gurke (2 Stk)", detail: "Do: Fr&#252;hlingsrollen &#183; Fr Abend: Gem&#252;sesticks", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Radieschen", detail: "Di: Gr&#246;stl &#183; Sa: Salat", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Rucola (Sackerl)", detail: "Mi: Arrabbiata &#183; Do: Fr&#252;hlingsrollen", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Blattsalat (Kopf)", detail: "Sa: Gr&#252;ner Salat mit Ei", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Zwiebel (3 Stk)", detail: "Di: Gr&#246;stl &#183; Fr: Enchiladas", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Knoblauch", detail: "Mi: Arrabbiata &#183; Sa: Liptauer", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Ingwer (St&#252;ck)", detail: "Di: K&#252;rbissuppe &#183; Mo: Palak Paneer &#183; Do: Curry", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Mango (frisch o. TK)", detail: "Mo Fr&#252;h: Haferbrei", group: "\uD83C\uDF4E Obst" },
+    { name: "&#196;pfel (4 Stk)", detail: "Mo/Do/Sa Vormittag", group: "\uD83C\uDF4E Obst" },
+    { name: "Birnen (4 Stk)", detail: "Mi Fr&#252;h &#183; Di/So Nachmittag", group: "\uD83C\uDF4E Obst" },
+    { name: "Orangen (3 Stk)", detail: "Mi Vormittag &#183; Fr/Sa Nachmittag", group: "\uD83C\uDF4E Obst" },
     { name: "Kiwi (3 Stk)", detail: "Di/Fr Vormittag", group: "\uD83C\uDF4E Obst" },
-    { name: "Beeren gemischt TK", detail: "Mo/Di/Fr/Sa täglich", group: "\uD83C\uDF4E Obst" },
-    { name: "Limette (2 Stk)", detail: "Do: Thai-Curry · Fr: Enchiladas", group: "\uD83C\uDF4E Obst" },
-    { name: "Walnüsse (200g)", detail: "Mo/Do/Sa täglich", group: "\uD83E\uDD5C Nüsse & Samen" },
-    { name: "Mandeln (100g)", detail: "Di/Fr Nachmittag", group: "\uD83E\uDD5C Nüsse & Samen" },
-    { name: "Leinsamen geschrotet", detail: "Mo/Do/Fr täglich", group: "\uD83E\uDD5C Nüsse & Samen" },
-    { name: "Chiasamen", detail: "Mi/Fr Frühstück", group: "\uD83E\uDD5C Nüsse & Samen" },
-    { name: "Hanfsamen", detail: "Di Frühstück", group: "\uD83E\uDD5C Nüsse & Samen" },
-    { name: "Kürbiskerne", detail: "Di: Kürbissuppe · Sa: Salat", group: "\uD83E\uDD5C Nüsse & Samen" },
-    { name: "Sesam", detail: "Do: Frühlingsrollen", group: "\uD83E\uDD5C Nüsse & Samen" },
-    { name: "Olivenöl", detail: "täglich", group: "\uD83E\uDDC2 Gewürze & Öl" },
-    { name: "Kürbiskernöl", detail: "Sa: Salat", group: "\uD83E\uDDC2 Gewürze & Öl" },
-    { name: "Kurkuma", detail: "Mo: Palak · Di: Suppe · Do: Curry", group: "\uD83E\uDDC2 Gewürze & Öl" },
-    { name: "Garam Masala", detail: "Mo: Palak Paneer", group: "\uD83E\uDDC2 Gewürze & Öl" },
-    { name: "Kümmel", detail: "Di: Gröstl", group: "\uD83E\uDDC2 Gewürze & Öl" },
-    { name: "Paprikapulver", detail: "Sa: Liptauer", group: "\uD83E\uDDC2 Gewürze & Öl" },
-    { name: "Chili (Flocken)", detail: "Mi: Arrabbiata", group: "\uD83E\uDDC2 Gewürze & Öl" },
-    { name: "Kardamom", detail: "Mo Früh: Haferbrei", group: "\uD83E\uDDC2 Gewürze & Öl" },
-    { name: "Vanille", detail: "Mi Früh: Porridge", group: "\uD83E\uDDC2 Gewürze & Öl" },
-    { name: "Essig", detail: "Sa: Salat", group: "\uD83E\uDDC2 Gewürze & Öl" },
-    { name: "Powidl (Glas)", detail: "Sa: Germknödel", group: "\uD83E\uDDC2 Gewürze & Öl" },
-    { name: "Mohn", detail: "Sa: Germknödel-Mohnbutter", group: "\uD83E\uDDC2 Gewürze & Öl" },
-    { name: "Petersilie (frisch)", detail: "Di: Gröstl", group: "\uD83C\uDF3F Kräuter" },
-    { name: "Koriander (frisch)", detail: "Mo: Dhal · Fr: Enchiladas", group: "\uD83C\uDF3F Kräuter" },
-    { name: "Basilikum (frisch)", detail: "Mi: Minestrone", group: "\uD83C\uDF3F Kräuter" },
-    { name: "Schnittlauch", detail: "Sa: Liptauer", group: "\uD83C\uDF3F Kräuter" },
+    { name: "Beeren gemischt TK", detail: "Mo/Di/Fr/Sa t&#228;glich", group: "\uD83C\uDF4E Obst" },
+    { name: "Limette (2 Stk)", detail: "Do: Thai-Curry &#183; Fr: Enchiladas", group: "\uD83C\uDF4E Obst" },
+    { name: "Waln&#252;sse (200g)", detail: "Mo/Do/Sa t&#228;glich", group: "\uD83E\uDD5C N&#252;sse & Samen" },
+    { name: "Mandeln (100g)", detail: "Di/Fr Nachmittag", group: "\uD83E\uDD5C N&#252;sse & Samen" },
+    { name: "Leinsamen geschrotet", detail: "Mo/Do/Fr t&#228;glich", group: "\uD83E\uDD5C N&#252;sse & Samen" },
+    { name: "Chiasamen", detail: "Mi/Fr Fr&#252;hst&#252;ck", group: "\uD83E\uDD5C N&#252;sse & Samen" },
+    { name: "Hanfsamen", detail: "Di Fr&#252;hst&#252;ck", group: "\uD83E\uDD5C N&#252;sse & Samen" },
+    { name: "K&#252;rbiskerne", detail: "Di: K&#252;rbissuppe &#183; Sa: Salat", group: "\uD83E\uDD5C N&#252;sse & Samen" },
+    { name: "Sesam", detail: "Do: Fr&#252;hlingsrollen", group: "\uD83E\uDD5C N&#252;sse & Samen" },
+    { name: "Oliven&#246;l", detail: "t&#228;glich", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "K&#252;rbiskern&#246;l", detail: "Sa: Salat", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "Kurkuma", detail: "Mo: Palak &#183; Di: Suppe &#183; Do: Curry", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "Garam Masala", detail: "Mo: Palak Paneer", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "K&#252;mmel", detail: "Di: Gr&#246;stl", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "Paprikapulver", detail: "Sa: Liptauer", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "Chili (Flocken)", detail: "Mi: Arrabbiata", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "Kardamom", detail: "Mo Fr&#252;h: Haferbrei", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "Vanille", detail: "Mi Fr&#252;h: Porridge", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "Essig", detail: "Sa: Salat", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "Powidl (Glas)", detail: "Sa: Germkn&#246;del", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "Mohn", detail: "Sa: Germkn&#246;del-Mohnbutter", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "Petersilie (frisch)", detail: "Di: Gr&#246;stl", group: "\uD83C\uDF3F Kr&#228;uter" },
+    { name: "Koriander (frisch)", detail: "Mo: Dhal &#183; Fr: Enchiladas", group: "\uD83C\uDF3F Kr&#228;uter" },
+    { name: "Basilikum (frisch)", detail: "Mi: Minestrone", group: "\uD83C\uDF3F Kr&#228;uter" },
+    { name: "Schnittlauch", detail: "Sa: Liptauer", group: "\uD83C\uDF3F Kr&#228;uter" },
   ],
   4: [
-    { name: "Haferflocken (500g)", detail: "Mo/Do Frühstück", group: "\uD83C\uDF5E Brot & Getreide" },
-    { name: "Vollkornbrot / Weckerl", detail: "Mi/Do/Fr/So täglich", group: "\uD83C\uDF5E Brot & Getreide" },
-    { name: "Vollkorntoast", detail: "Mi Abend: Spinat-Ei · Sa: Masala-Omelette", group: "\uD83C\uDF5E Brot & Getreide" },
-    { name: "Vollkorntortilla (Packung)", detail: "Do: Tacos · Fr: Hummus-Wrap", group: "\uD83C\uDF5E Brot & Getreide" },
+    { name: "Haferflocken (500g)", detail: "Mo/Do Fr&#252;hst&#252;ck", group: "\uD83C\uDF5E Brot & Getreide" },
+    { name: "Vollkornbrot / Weckerl", detail: "Mi/Do/Fr/So t&#228;glich", group: "\uD83C\uDF5E Brot & Getreide" },
+    { name: "Vollkorntoast", detail: "Mi Abend: Spinat-Ei &#183; Sa: Masala-Omelette", group: "\uD83C\uDF5E Brot & Getreide" },
+    { name: "Vollkorntortilla (Packung)", detail: "Do: Tacos &#183; Fr: Hummus-Wrap", group: "\uD83C\uDF5E Brot & Getreide" },
     { name: "Mais-Tortillas", detail: "Do: Veggie-Tacos", group: "\uD83C\uDF5E Brot & Getreide" },
     { name: "Vollkornmehl", detail: "So: Kaiserschmarrn", group: "\uD83C\uDF5E Brot & Getreide" },
     { name: "Reiscracker", detail: "Di Abend: Edamame", group: "\uD83C\uDF5E Brot & Getreide" },
     { name: "Basmati (500g)", detail: "Mo: Risotto", group: "\uD83C\uDF5D Nudeln & Reis" },
     { name: "Reisnudeln (Packung)", detail: "Di: Pad Thai", group: "\uD83C\uDF5D Nudeln & Reis" },
-    { name: "Naturjoghurt (750g)", detail: "Di/Mi/Fr/Sa/So täglich", group: "\uD83E\uDD5A Eier & Milch" },
-    { name: "Parmesan (gerieben)", detail: "Mo: Risotto", group: "\uD83E\uDDC0 Käse & Frischkäse" },
-    { name: "Bergkäse (Stück)", detail: "Fr: Kaspressknödel", group: "\uD83E\uDDC0 Käse & Frischkäse" },
-    { name: "Eier (8 Stk)", detail: "Di: Pad Thai · Mi: Spinat-Ei · Sa: Omelette · So: Kaiserschmarrn", group: "\uD83E\uDD5A Eier & Milch" },
-    { name: "Schwarze Bohnen (2 Dosen)", detail: "Do: Veggie-Tacos", group: "\uD83E\uDD6B Hülsenfrüchte & Konserven" },
-    { name: "Hummus (Becher)", detail: "Fr Abend: Hummus-Wrap", group: "\uD83E\uDD6B Hülsenfrüchte & Konserven" },
-    { name: "Dosentomaten", detail: "Mo Abend: Zucchini-Suppe · Do Abend: Rote-Bete-Suppe", group: "\uD83E\uDD6B Hülsenfrüchte & Konserven" },
-    { name: "Kokosmilch light (Dose)", detail: "Do Abend: Rote-Bete-Suppe", group: "\uD83E\uDD6B Hülsenfrüchte & Konserven" },
-    { name: "Sojasprossen (Dose/frisch)", detail: "Di: Pad Thai", group: "\uD83E\uDD6B Hülsenfrüchte & Konserven" },
-    { name: "Edamame (TK)", detail: "Di Abend", group: "\uD83E\uDD6B Hülsenfrüchte & Konserven" },
-    { name: "Brokkoli (1 Kopf)", detail: "Mo: Risotto", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Spinat (Sackerl)", detail: "Mi Abend: Spinat-Ei · Sa: Saag Aloo", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Kartoffeln (800g)", detail: "Sa: Saag Aloo", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Rote Bete (Dose/frisch)", detail: "Do: Tacos · Do Abend: Suppe", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Zucchini (2 Stk)", detail: "Mo Abend: Suppe", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Tomate (5 Stk)", detail: "Mo Abend: Suppe", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Paprika (2 Stk)", detail: "Fr: Hummus-Wrap", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Gurke (2 Stk)", detail: "Fr: Hummus-Wrap · Sa: Raita", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Radieschen", detail: "Fr: Hummus-Wrap", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Rucola (Sackerl)", detail: "Fr: Hummus-Wrap", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Feldsalat (Sackerl)", detail: "Fr: Kaspressknödel auf Salat", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Zwiebel (3 Stk)", detail: "Sa: Omelette · Sa: Saag Aloo", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Knoblauch", detail: "Mi: Spinat-Ei · Sa: Saag Aloo", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Ingwer (Stück)", detail: "Do Abend: Suppe · Sa: Saag Aloo", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Frühlingszwiebeln", detail: "Di: Pad Thai", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Sellerie (Stange)", detail: "So: Tafelspitz-Suppe", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Karotten (2 Stk)", detail: "So: Tafelspitz-Suppe", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Petersilwurzel", detail: "So: Tafelspitz-Suppe", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Chili (frisch o. Flocken)", detail: "Sa: Masala-Omelette", group: "\uD83E\uDD66 Gemüse" },
-    { name: "Äpfel (3 Stk)", detail: "Do/Sa Vormittag", group: "\uD83C\uDF4E Obst" },
-    { name: "Birnen (3 Stk)", detail: "Mo Vormittag · Do Nachmittag · So Vormittag", group: "\uD83C\uDF4E Obst" },
+    { name: "Naturjoghurt (750g)", detail: "Di/Mi/Fr/Sa/So t&#228;glich", group: "\uD83E\uDD5A Eier & Milch" },
+    { name: "Parmesan (gerieben)", detail: "Mo: Risotto", group: "\uD83E\uDDC0 K&#228;se & Frischk&#228;se" },
+    { name: "Bergk&#228;se (St&#252;ck)", detail: "Fr: Kaspresskn&#246;del", group: "\uD83E\uDDC0 K&#228;se & Frischk&#228;se" },
+    { name: "Eier (8 Stk)", detail: "Di: Pad Thai &#183; Mi: Spinat-Ei &#183; Sa: Omelette &#183; So: Kaiserschmarrn", group: "\uD83E\uDD5A Eier & Milch" },
+    { name: "Schwarze Bohnen (2 Dosen)", detail: "Do: Veggie-Tacos", group: "\uD83E\uDD6B H&#252;lsenfr&#252;chte & Konserven" },
+    { name: "Hummus (Becher)", detail: "Fr Abend: Hummus-Wrap", group: "\uD83E\uDD6B H&#252;lsenfr&#252;chte & Konserven" },
+    { name: "Dosentomaten", detail: "Mo Abend: Zucchini-Suppe &#183; Do Abend: Rote-Bete-Suppe", group: "\uD83E\uDD6B H&#252;lsenfr&#252;chte & Konserven" },
+    { name: "Kokosmilch light (Dose)", detail: "Do Abend: Rote-Bete-Suppe", group: "\uD83E\uDD6B H&#252;lsenfr&#252;chte & Konserven" },
+    { name: "Sojasprossen (Dose/frisch)", detail: "Di: Pad Thai", group: "\uD83E\uDD6B H&#252;lsenfr&#252;chte & Konserven" },
+    { name: "Edamame (TK)", detail: "Di Abend", group: "\uD83E\uDD6B H&#252;lsenfr&#252;chte & Konserven" },
+    { name: "Brokkoli (1 Kopf)", detail: "Mo: Risotto", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Spinat (Sackerl)", detail: "Mi Abend: Spinat-Ei &#183; Sa: Saag Aloo", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Kartoffeln (800g)", detail: "Sa: Saag Aloo", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Rote Bete (Dose/frisch)", detail: "Do: Tacos &#183; Do Abend: Suppe", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Zucchini (2 Stk)", detail: "Mo Abend: Suppe", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Tomate (5 Stk)", detail: "Mo Abend: Suppe", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Paprika (2 Stk)", detail: "Fr: Hummus-Wrap", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Gurke (2 Stk)", detail: "Fr: Hummus-Wrap &#183; Sa: Raita", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Radieschen", detail: "Fr: Hummus-Wrap", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Rucola (Sackerl)", detail: "Fr: Hummus-Wrap", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Feldsalat (Sackerl)", detail: "Fr: Kaspresskn&#246;del auf Salat", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Zwiebel (3 Stk)", detail: "Sa: Omelette &#183; Sa: Saag Aloo", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Knoblauch", detail: "Mi: Spinat-Ei &#183; Sa: Saag Aloo", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Ingwer (St&#252;ck)", detail: "Do Abend: Suppe &#183; Sa: Saag Aloo", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Fr&#252;hlingszwiebeln", detail: "Di: Pad Thai", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Sellerie (Stange)", detail: "So: Tafelspitz-Suppe", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Karotten (2 Stk)", detail: "So: Tafelspitz-Suppe", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Petersilwurzel", detail: "So: Tafelspitz-Suppe", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Chili (frisch o. Flocken)", detail: "Sa: Masala-Omelette", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "&#196;pfel (3 Stk)", detail: "Do/Sa Vormittag", group: "\uD83C\uDF4E Obst" },
+    { name: "Birnen (3 Stk)", detail: "Mo Vormittag &#183; Do Nachmittag &#183; So Vormittag", group: "\uD83C\uDF4E Obst" },
     { name: "Orangen (2 Stk)", detail: "Di/Mi Nachmittag", group: "\uD83C\uDF4E Obst" },
-    { name: "Kiwi (3 Stk)", detail: "Mo Vormittag · So Nachmittag", group: "\uD83C\uDF4E Obst" },
-    { name: "Beeren gemischt TK", detail: "Mi/Fr/Sa/So täglich", group: "\uD83C\uDF4E Obst" },
-    { name: "Limette (2 Stk)", detail: "Di: Pad Thai · Do: Tacos", group: "\uD83C\uDF4E Obst" },
-    { name: "Zwetschgenröster (Glas)", detail: "So: Kaiserschmarrn", group: "\uD83C\uDF4E Obst" },
-    { name: "Walnüsse (200g)", detail: "Mo/Di/So täglich", group: "\uD83E\uDD5C Nüsse & Samen" },
-    { name: "Mandeln (100g)", detail: "Sa Vormittag", group: "\uD83E\uDD5C Nüsse & Samen" },
-    { name: "Mandelmus (Glas)", detail: "Mo/Mi Frühstück", group: "\uD83E\uDD5C Nüsse & Samen" },
-    { name: "Leinsamen geschrotet", detail: "Mo/Fr/So täglich", group: "\uD83E\uDD5C Nüsse & Samen" },
-    { name: "Chiasamen", detail: "Do Frühstück", group: "\uD83E\uDD5C Nüsse & Samen" },
-    { name: "Hanfsamen", detail: "Di/Do Frühstück", group: "\uD83E\uDD5C Nüsse & Samen" },
-    { name: "Sesam", detail: "Di Abend: Edamame", group: "\uD83E\uDD5C Nüsse & Samen" },
-    { name: "Erdnüsse (ungesalzen)", detail: "Di: Pad Thai", group: "\uD83E\uDD5C Nüsse & Samen" },
-    { name: "Olivenöl", detail: "täglich", group: "\uD83E\uDDC2 Gewürze & Öl" },
-    { name: "Kürbiskernöl", detail: "Fr: Kaspressknödel-Salat", group: "\uD83E\uDDC2 Gewürze & Öl" },
-    { name: "Kurkuma", detail: "Sa: Omelette · Sa: Saag Aloo", group: "\uD83E\uDDC2 Gewürze & Öl" },
-    { name: "Kreuzkümmel", detail: "Sa: Saag Aloo · Sa: Raita", group: "\uD83E\uDDC2 Gewürze & Öl" },
-    { name: "Muskatnuss", detail: "Mi: Spinat-Ei-Pfanne", group: "\uD83E\uDDC2 Gewürze & Öl" },
-    { name: "Sojasoße", detail: "Di: Pad Thai · Di Abend: Edamame", group: "\uD83E\uDDC2 Gewürze & Öl" },
-    { name: "Honig (Glas)", detail: "So: Kaiserschmarrn", group: "\uD83E\uDDC2 Gewürze & Öl" },
-    { name: "Essig", detail: "Fr: Kaspressknödel-Salat", group: "\uD83E\uDDC2 Gewürze & Öl" },
-    { name: "Schnittlauch (frisch)", detail: "So: Tafelspitz-Suppe", group: "\uD83C\uDF3F Kräuter" },
-    { name: "Koriander (frisch)", detail: "Sa: Omelette · Do: Tacos", group: "\uD83C\uDF3F Kräuter" },
-    { name: "Petersilie (frisch)", detail: "So: Tafelspitz-Suppe", group: "\uD83C\uDF3F Kräuter" },
-    { name: "Minze (frisch o. TK)", detail: "Sa: Raita", group: "\uD83C\uDF3F Kräuter" },
-    { name: "Basilikum (frisch)", detail: "Mo Abend: Zucchini-Suppe", group: "\uD83C\uDF3F Kräuter" },
+    { name: "Kiwi (3 Stk)", detail: "Mo Vormittag &#183; So Nachmittag", group: "\uD83C\uDF4E Obst" },
+    { name: "Beeren gemischt TK", detail: "Mi/Fr/Sa/So t&#228;glich", group: "\uD83C\uDF4E Obst" },
+    { name: "Limette (2 Stk)", detail: "Di: Pad Thai &#183; Do: Tacos", group: "\uD83C\uDF4E Obst" },
+    { name: "Zwetschgenr&#246;ster (Glas)", detail: "So: Kaiserschmarrn", group: "\uD83C\uDF4E Obst" },
+    { name: "Waln&#252;sse (200g)", detail: "Mo/Di/So t&#228;glich", group: "\uD83E\uDD5C N&#252;sse & Samen" },
+    { name: "Mandeln (100g)", detail: "Sa Vormittag", group: "\uD83E\uDD5C N&#252;sse & Samen" },
+    { name: "Mandelmus (Glas)", detail: "Mo/Mi Fr&#252;hst&#252;ck", group: "\uD83E\uDD5C N&#252;sse & Samen" },
+    { name: "Leinsamen geschrotet", detail: "Mo/Fr/So t&#228;glich", group: "\uD83E\uDD5C N&#252;sse & Samen" },
+    { name: "Chiasamen", detail: "Do Fr&#252;hst&#252;ck", group: "\uD83E\uDD5C N&#252;sse & Samen" },
+    { name: "Hanfsamen", detail: "Di/Do Fr&#252;hst&#252;ck", group: "\uD83E\uDD5C N&#252;sse & Samen" },
+    { name: "Sesam", detail: "Di Abend: Edamame", group: "\uD83E\uDD5C N&#252;sse & Samen" },
+    { name: "Erdn&#252;sse (ungesalzen)", detail: "Di: Pad Thai", group: "\uD83E\uDD5C N&#252;sse & Samen" },
+    { name: "Oliven&#246;l", detail: "t&#228;glich", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "K&#252;rbiskern&#246;l", detail: "Fr: Kaspresskn&#246;del-Salat", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "Kurkuma", detail: "Sa: Omelette &#183; Sa: Saag Aloo", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "Kreuzk&#252;mmel", detail: "Sa: Saag Aloo &#183; Sa: Raita", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "Muskatnuss", detail: "Mi: Spinat-Ei-Pfanne", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "Sojaso&#223;e", detail: "Di: Pad Thai &#183; Di Abend: Edamame", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "Honig (Glas)", detail: "So: Kaiserschmarrn", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "Essig", detail: "Fr: Kaspresskn&#246;del-Salat", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "Schnittlauch (frisch)", detail: "So: Tafelspitz-Suppe", group: "\uD83C\uDF3F Kr&#228;uter" },
+    { name: "Koriander (frisch)", detail: "Sa: Omelette &#183; Do: Tacos", group: "\uD83C\uDF3F Kr&#228;uter" },
+    { name: "Petersilie (frisch)", detail: "So: Tafelspitz-Suppe", group: "\uD83C\uDF3F Kr&#228;uter" },
+    { name: "Minze (frisch o. TK)", detail: "Sa: Raita", group: "\uD83C\uDF3F Kr&#228;uter" },
+    { name: "Basilikum (frisch)", detail: "Mo Abend: Zucchini-Suppe", group: "\uD83C\uDF3F Kr&#228;uter" },
   ],
 };
 
@@ -819,6 +830,7 @@ const REINIGUNGS_ITEMS = [
 
 
 // Welche Wochen sind aktuell? sind aktuell? (berechne live)
+function getWeekInfo() { return getCurrentWeeks(); }
 function getMealWeekNum(date) {
   const kw11_2026 = new Date("2026-03-09T00:00:00");
   const diff = Math.floor((date - kw11_2026) / (7 * 864e5));
@@ -1128,6 +1140,89 @@ window.addEventListener('message', function(e) {
   }
 });
 var sW = epSW;
+
+// ── MAHLZEITEN ABHAKEN ────────────────────────────────────────────
+var MEAL_KEY = 'ep_meals_v1';
+function getMealChecked(){
+  try{ return JSON.parse(localStorage.getItem(MEAL_KEY)||'{}'); }catch(e){ return {}; }
+}
+function saveMealChecked(d){ try{ localStorage.setItem(MEAL_KEY, JSON.stringify(d)); }catch(e){} }
+
+function getMealId(el){
+  // Build unique ID from week + day index + meal row index
+  var wk = el.closest('.wk');
+  var dc = el.closest('.dc');
+  var wkId = wk ? wk.id : 'wk?';
+  var dcIdx = wk ? Array.from(wk.querySelectorAll('.dc')).indexOf(dc) : 0;
+  var mrIdx = dc ? Array.from(dc.querySelectorAll('.mr')).indexOf(el) : 0;
+  return wkId + '_d' + dcIdx + '_m' + mrIdx;
+}
+
+function toggleMeal(el){
+  var id = getMealId(el);
+  var d = getMealChecked();
+  if(d[id]){ delete d[id]; el.classList.remove('done'); }
+  else{ d[id]=1; el.classList.add('done'); }
+  saveMealChecked(d);
+  updateMealChk(el, !!d[id]);
+}
+
+function updateMealChk(el, done){
+  var chk = el.querySelector('.meal-chk');
+  if(chk) chk.textContent = done ? '✓' : '';
+}
+
+function restoreMealChecks(){
+  var d = getMealChecked();
+  document.querySelectorAll('.mr').forEach(function(el){
+    var id = getMealId(el);
+    if(d[id]){ el.classList.add('done'); updateMealChk(el, true); }
+  });
+}
+
+// ── AKTUELLE WOCHE BADGE ──────────────────────────────────────────
+function markCurrentWeek(){
+  var info = getWeekInfo();
+  var cw = info.currentWeek;
+  // Add "Aktuelle Woche" badge to week button
+  document.querySelectorAll('.wtb').forEach(function(btn, i){
+    var w = i+1;
+    if(w === cw){
+      if(!btn.querySelector('.week-current-badge')){
+        var badge = document.createElement('span');
+        badge.className = 'week-current-badge';
+        badge.textContent = '✓ Jetzt';
+        btn.appendChild(badge);
+      }
+    }
+  });
+  // Add week label to each week section
+  document.querySelectorAll('.wk').forEach(function(wkEl){
+    var wNum = parseInt(wkEl.dataset.week);
+    if(!wkEl.querySelector('.wk-header')){
+      var hdr = document.createElement('div');
+      hdr.className = 'wk-header';
+      var title = document.createElement('span');
+      title.className = 'wk-title';
+      title.textContent = 'Woche ' + wNum;
+      hdr.appendChild(title);
+      if(wNum === cw){
+        var curr = document.createElement('span');
+        curr.className = 'week-current-badge';
+        curr.textContent = '● Aktuelle Woche';
+        hdr.appendChild(curr);
+      }
+      wkEl.insertBefore(hdr, wkEl.firstChild);
+    }
+  });
+}
+
+// Init
+document.addEventListener('DOMContentLoaded', function(){
+  restoreMealChecks();
+  markCurrentWeek();
+});
+
 </script>
 </body>
 </html>

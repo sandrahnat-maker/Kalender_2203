@@ -455,7 +455,9 @@ function getKW(date) {
   return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
 }
 
-var checked = {};
+var EL_KEY = 'einkauf_checked_v1';
+var checked = (function(){ try{ return JSON.parse(localStorage.getItem(EL_KEY)||'{}'); }catch(e){ return {}; } })();
+function saveChecked(){ try{ localStorage.setItem(EL_KEY, JSON.stringify(checked)); }catch(e){} }
 var mainTab = 0;
 var weekTab = 'diese';
 var weekInfo = getCurrentWeeks();
@@ -483,6 +485,7 @@ function switchWeek(w) {
 function toggleFood(wk, idx) {
   var k = 'f_'+wk+'_'+idx;
   checked[k] = !checked[k];
+  saveChecked();
   renderFood();
 }
 
@@ -536,6 +539,7 @@ function resetWeek() {
 function togglePflege(catId, idx) {
   var k = 'p_'+catId+'_'+idx;
   checked[k] = !checked[k];
+  saveChecked();
   renderPflege();
 }
 
