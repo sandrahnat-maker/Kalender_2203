@@ -85,6 +85,7 @@ display:flex;align-items:flex-start;border-top:1px solid var(--border)}
 .dev{display:flex;align-items:stretch;margin:2px 4px;border-radius:8px;overflow:hidden;min-height:50px;position:relative}
 .dev.done{opacity:.4}
 .dev.done .det{text-decoration:line-through}
+@keyframes praiseIn{from{transform:translateX(-50%) scale(0.5);opacity:0}to{transform:translateX(-50%) scale(1);opacity:1}}
 .dbar{width:4px;flex-shrink:0}
 .dbody{padding-left:22px;flex:1;padding:.4rem .6rem;cursor:pointer}
 .detime{font-size:.62rem;color:var(--muted)}
@@ -1351,10 +1352,10 @@ function rDay(c){
     h+=' data-to="'+(ev.to||'')+'"';
     h+=' data-dur="'+(hm(ev.to||ev.from)-hm(ev.from))+'"';
     h+=' style="position:absolute;top:'+top+'px;height:'+ht+'px;left:0;right:0;';
-    h+='background:'+col+'18;border:1px solid '+col+'44;border-left:3px solid '+col+';border-radius:6px;overflow:hidden;cursor:pointer;box-sizing:border-box;">';
+    h+='background:'+col+'18;border:1px solid '+col+'44;border-left:3px solid '+col+';border-radius:6px;overflow:hidden;cursor:pointer;box-sizing:border-box;'+(done?'outline:2px solid var(--green);':'')+'">';
     h+='<div style="padding:.25rem .5rem;height:100%;display:flex;flex-direction:column;justify-content:flex-start;">';
     h+='<div style="font-size:.6rem;color:'+col+';white-space:nowrap;overflow:hidden">'+ev.from+(ev.to?'–'+ev.to:'')+(dl?' · '+dl:'')+'</div>';
-    h+='<div style="font-size:.82rem;font-weight:700;color:var(--text);line-height:1.2;margin-top:.1rem">'+(done?'✅ ':'')+ev.title+'</div>';
+    h+='<div data-title style="font-size:.82rem;font-weight:700;color:var(--text);line-height:1.2;margin-top:.1rem">'+(done?'✅ ':'')+ev.title+'</div>';
     h+='</div>';
     h+='</div>';
   });
@@ -1486,9 +1487,167 @@ function showDet(id,date,from,to,el){
   var itemCount=0;
 
   // Helper: add one checklist item
+  function showPraise(){
+    var styles=[
+      // 1: Konfetti-Regen
+      function(){
+        var overlay=document.createElement('div');
+        overlay.style.cssText='position:fixed;inset:0;pointer-events:none;z-index:99999;overflow:hidden';
+        document.body.appendChild(overlay);
+        var colors=['#8B6020','#2E7D4F','#B85C30','#7D3C98','#2D6A9F','#E91E63','#FF9800'];
+        for(var i=0;i<60;i++){
+          (function(i){
+            var el=document.createElement('div');
+            var size=(Math.random()*8+5)+'px';
+            el.style.cssText='position:absolute;width:'+size+';height:'+size+';border-radius:'+(Math.random()>0.5?'50%':'2px')+';background:'+colors[Math.floor(Math.random()*colors.length)]+';left:'+(Math.random()*100)+'%;top:-20px;opacity:1;transition:none';
+            overlay.appendChild(el);
+            setTimeout(function(){
+              el.style.transition='transform 2.5s ease-in, opacity 2s ease-in';
+              el.style.transform='translateY('+(window.innerHeight+40)+'px) rotate('+(Math.random()*720)+'deg)';
+              el.style.opacity='0';
+            }, Math.random()*600);
+          })(i);
+        }
+        var msg=document.createElement('div');
+        msg.style.cssText='position:fixed;top:30%;left:50%;transform:translateX(-50%);background:#fff;border-radius:20px;padding:1.2rem 2rem;box-shadow:0 8px 32px rgba(0,0,0,0.18);font-size:1.3rem;font-weight:700;color:var(--accent);text-align:center;z-index:100000;animation:praiseIn .3s ease';
+        msg.innerHTML='🎉 Geschafft!<br><span style="font-size:.9rem;font-weight:400;color:var(--muted)">Du rockst das!</span>';
+        document.body.appendChild(msg);
+        setTimeout(function(){overlay.remove();msg.remove();},3000);
+      },
+      // 2: Emoji-Explosion aus der Mitte
+      function(){
+        var emojis=['⭐','🌟','✨','💫','🌸','🦋','🎊','💪','🏆','❤️'];
+        var container=document.createElement('div');
+        container.style.cssText='position:fixed;inset:0;pointer-events:none;z-index:99999;overflow:hidden';
+        document.body.appendChild(container);
+        for(var i=0;i<15;i++){
+          (function(i){
+            var el=document.createElement('div');
+            var angle=Math.random()*360;
+            var dist=80+Math.random()*120;
+            var dx=Math.cos(angle*Math.PI/180)*dist;
+            var dy=Math.sin(angle*Math.PI/180)*dist;
+            el.style.cssText='position:fixed;left:50%;top:50%;font-size:'+(1.2+Math.random()*1.2)+'rem;transform:translate(-50%,-50%);transition:none;opacity:1';
+            el.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+            container.appendChild(el);
+            setTimeout(function(){
+              el.style.transition='transform 1.2s ease-out, opacity 1s ease-in 0.4s';
+              el.style.transform='translate(calc(-50% + '+dx+'px), calc(-50% + '+dy+'px)) scale(0.5)';
+              el.style.opacity='0';
+            },20+i*30);
+          })(i);
+        }
+        var msg=document.createElement('div');
+        msg.style.cssText='position:fixed;top:35%;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#8B6020,#B85C30);color:#fff;border-radius:20px;padding:1.2rem 2rem;font-size:1.2rem;font-weight:700;text-align:center;z-index:100000;box-shadow:0 8px 32px rgba(0,0,0,0.2)';
+        msg.innerHTML='✨ Wunderschön erledigt!<br><span style="font-size:.85rem;font-weight:400;opacity:.85">Sandra, du bist großartig! 💛</span>';
+        document.body.appendChild(msg);
+        setTimeout(function(){
+          msg.style.transition='opacity .5s';msg.style.opacity='0';
+          container.style.transition='opacity .5s';container.style.opacity='0';
+          setTimeout(function(){msg.remove();container.remove();},500);
+        },2500);
+      },
+      // 3: Pulsierender Kreis + Text
+      function(){
+        var ring=document.createElement('div');
+        ring.style.cssText='position:fixed;top:50%;left:50%;width:0;height:0;border-radius:50%;background:rgba(46,125,79,0.15);transform:translate(-50%,-50%);z-index:99998;pointer-events:none;transition:width 0.6s ease,height 0.6s ease,opacity 0.6s ease 0.5s';
+        document.body.appendChild(ring);
+        setTimeout(function(){ring.style.width='120vw';ring.style.height='120vw';ring.style.opacity='0';},20);
+        var msgs=['Super Sandra! 🌟','Ja!! Das hast du toll gemacht! 🎯','Hammer! Weiter so! 💪','Perfekt erledigt! 🏆','Du bist unaufhaltbar! 🚀'];
+        var msg=document.createElement('div');
+        msg.style.cssText='position:fixed;bottom:25%;left:50%;transform:translateX(-50%);background:#2E7D4F;color:#fff;border-radius:16px;padding:1rem 1.8rem;font-size:1.1rem;font-weight:700;text-align:center;z-index:100000;box-shadow:0 6px 24px rgba(0,0,0,0.2);animation:praiseIn .3s ease';
+        msg.textContent=msgs[Math.floor(Math.random()*msgs.length)];
+        document.body.appendChild(msg);
+        setTimeout(function(){
+          msg.style.transition='transform .4s ease, opacity .4s ease';
+          msg.style.transform='translateX(-50%) translateY(20px)';
+          msg.style.opacity='0';
+          setTimeout(function(){msg.remove();ring.remove();},400);
+        },2500);
+      },
+      // 4: Stempel-Animation
+      function(){
+        var stamp=document.createElement('div');
+        stamp.style.cssText='position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(3) rotate(-15deg);opacity:0;z-index:100000;font-size:4rem;pointer-events:none;transition:transform .25s cubic-bezier(.17,.67,.35,1.5),opacity .2s';
+        stamp.textContent='✅';
+        document.body.appendChild(stamp);
+        setTimeout(function(){stamp.style.transform='translate(-50%,-50%) scale(1) rotate(-15deg)';stamp.style.opacity='1';},20);
+        var label=document.createElement('div');
+        label.style.cssText='position:fixed;top:calc(50% + 3.5rem);left:50%;transform:translateX(-50%);background:#fff;border:3px solid var(--green);color:var(--green);border-radius:12px;padding:.6rem 1.4rem;font-size:1rem;font-weight:800;letter-spacing:.05em;z-index:100000;opacity:0;transition:opacity .3s .2s';
+        label.textContent='ERLEDIGT!';
+        document.body.appendChild(label);
+        setTimeout(function(){label.style.opacity='1';},200);
+        setTimeout(function(){
+          stamp.style.transition='transform .3s ease, opacity .3s ease';
+          stamp.style.transform='translate(-50%,-50%) scale(2) rotate(-15deg)';
+          stamp.style.opacity='0';
+          label.style.transition='opacity .3s';label.style.opacity='0';
+          setTimeout(function(){stamp.remove();label.remove();},300);
+        },2000);
+      },
+      // 5: Feuerwerk von unten
+      function(){
+        var container=document.createElement('div');
+        container.style.cssText='position:fixed;inset:0;pointer-events:none;z-index:99999;overflow:hidden';
+        document.body.appendChild(container);
+        var colors=['#FFD700','#FF6B6B','#4ECDC4','#45B7D1','#96CEB4','#FFEAA7','#DDA0DD'];
+        function burst(x,y){
+          for(var i=0;i<20;i++){
+            var el=document.createElement('div');
+            var angle=Math.random()*360;
+            var dist=40+Math.random()*80;
+            var dx=Math.cos(angle*Math.PI/180)*dist;
+            var dy=Math.sin(angle*Math.PI/180)*dist;
+            el.style.cssText='position:absolute;width:6px;height:6px;border-radius:50%;background:'+colors[Math.floor(Math.random()*colors.length)]+';left:'+x+'px;top:'+y+'px;opacity:1';
+            container.appendChild(el);
+            setTimeout(function(el,dx,dy){
+              el.style.transition='transform 1s ease-out, opacity .8s ease .2s';
+              el.style.transform='translate('+dx+'px,'+dy+'px)';
+              el.style.opacity='0';
+            }.bind(null,el,dx,dy),10);
+          }
+        }
+        burst(window.innerWidth*0.3, window.innerHeight*0.4);
+        setTimeout(function(){burst(window.innerWidth*0.7, window.innerHeight*0.35);},300);
+        setTimeout(function(){burst(window.innerWidth*0.5, window.innerHeight*0.25);},600);
+        var msg=document.createElement('div');
+        msg.style.cssText='position:fixed;top:40%;left:50%;transform:translateX(-50%);background:#1A1A2E;color:#FFD700;border-radius:20px;padding:1.2rem 2rem;font-size:1.2rem;font-weight:700;text-align:center;z-index:100000;box-shadow:0 8px 32px rgba(0,0,0,0.3)';
+        msg.innerHTML='🎆 Feuerwerk für Sandra!<br><span style="font-size:.85rem;color:#fff;font-weight:400">Brilliant gemacht! 🌙</span>';
+        document.body.appendChild(msg);
+        setTimeout(function(){
+          msg.style.transition='opacity .5s';msg.style.opacity='0';
+          setTimeout(function(){msg.remove();container.remove();},500);
+        },3000);
+      }
+    ];
+    // Pick random style
+    styles[Math.floor(Math.random()*styles.length)]();
+  }
+
+  function checkAllDone(){
+    var now=JSON.parse(localStorage.getItem(storKey)||'{}');
+    var total=cl.querySelectorAll('li[data-chk-idx]').length;
+    if(total===0)return;
+    var doneCount=Object.keys(now).filter(function(k){return now[k];}).length;
+    var allDone=(doneCount>=total);
+    var wasDone=chkd(id,date);
+    stSet(ckKey(id,date), allDone?'1':'0');
+    var card=document.getElementById('d_'+id.replace(/[^a-zA-Z0-9]/g,'_'));
+    if(card){
+      card.classList.toggle('done',allDone);
+      card.style.outline=allDone?'2px solid var(--green)':'';
+      var titleEl=card.querySelector('[data-title]');
+      if(titleEl){
+        var t=titleEl.textContent.replace(/^✅ /,'');
+        titleEl.textContent=allDone?'✅ '+t:t;
+      }
+    }
+    if(allDone && !wasDone) showPraise();
+  }
   function addItem(text, idx, extraNote, clickFn){
     var isChecked=!!checked[idx];
     var li=document.createElement('li');
+    li.setAttribute('data-chk-idx', idx);
     if(isChecked)li.className='checked';
     var label=text+(extraNote?'<br><small style="color:var(--muted);font-size:.75rem">'+extraNote+'</small>':'');
     li.innerHTML='<span class="chk-box">'+(isChecked?'✓':'')+'</span><span>'+label+'</span>';
@@ -1499,6 +1658,7 @@ function showDet(id,date,from,to,el){
       localStorage.setItem(storKey,JSON.stringify(now));
       li.className=now[idx]?'checked':'';
       li.querySelector('.chk-box').textContent=now[idx]?'✓':'';
+      checkAllDone();
     };
     cl.appendChild(li);
     return idx+1;
@@ -1617,7 +1777,13 @@ function showDet(id,date,from,to,el){
     cl.appendChild(li);
   }
 
-  // Block → App links
+  // Apply initial done-state visual to calendar card
+  (function(){
+    var card=document.getElementById('d_'+id.replace(/[^a-zA-Z0-9]/g,'_'));
+    if(card && chkd(id,date)){
+      card.style.outline='2px solid var(--green)';
+    }
+  })();
   var BLOCK_APPS = {
     '🌅 Morgenroutine':     [{label:'🥗 Ernährungsplan',  app:'Ernaehrungsplan_4Wochen'},
                               {label:'🧘 Meditation',        app:'Meditation'},
