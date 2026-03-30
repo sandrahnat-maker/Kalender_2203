@@ -86,7 +86,21 @@ body{background:var(--bg);font-family:var(--font-dm);color:var(--text);display:f
 .dbody{padding-left:22px;flex:1;padding:.4rem .6rem;cursor:pointer}
 .detime{font-size:.62rem;color:var(--muted)}
 .det{font-size:.84rem;font-weight:600;margin-top:.1rem}
-.denote{font-size:.68rem;color:var(--muted);margin-top:.1rem}
+.denote{display:none}
+#det-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:900;align-items:flex-end;justify-content:center}
+#det-overlay.open{display:flex}
+#det-box{background:#fff;border-radius:20px 20px 0 0;width:100%;max-width:600px;padding:1.2rem 1rem 2.5rem;max-height:80vh;overflow-y:auto}
+#det-box .det-time{font-size:.72rem;color:var(--muted);margin-bottom:.2rem}
+#det-box .det-title{font-size:1.05rem;font-weight:700;margin-bottom:.8rem;color:var(--text)}
+#det-box .det-checklist{list-style:none;padding:0;margin:0}
+#det-box .det-checklist li{display:flex;align-items:flex-start;gap:.6rem;padding:.5rem 0;border-bottom:1px solid var(--border);font-size:.84rem;line-height:1.4;color:var(--text);cursor:pointer}
+#det-box .det-checklist li:last-child{border-bottom:none}
+#det-box .det-checklist li.checked{color:var(--muted);text-decoration:line-through}
+#det-box .det-checklist li .chk-box{flex-shrink:0;width:20px;height:20px;border-radius:5px;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.75rem;transition:all .15s}
+#det-box .det-checklist li.checked .chk-box{background:var(--accent);border-color:var(--accent);color:#fff}
+#det-box .det-btns{display:flex;gap:.6rem;margin-top:1rem}
+#det-box .det-btn{flex:1;padding:.55rem;border-radius:10px;border:1.5px solid var(--border);background:var(--surface);font-size:.85rem;cursor:pointer;font-family:var(--font-dm)}
+#det-box .det-btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
 .chk{background:none;border:2px solid var(--border);border-radius:8px;font-size:1.5rem;cursor:pointer;padding:0 .5rem;flex-shrink:0;display:flex;align-items:center;justify-content:center;min-width:54px;color:var(--muted);transition:all .15s;margin:4px}
 .chk.on{border-color:var(--green);color:var(--green);background:#F0FBF4}
 /* FAB */
@@ -562,52 +576,19 @@ var FF=[
   {d:'2026-03-21',t:'Spaziergang Lotte',f:'08:20',e:'08:50',c:'fitness',n:'Direkt nach Fertig machen'},
   {d:'2026-03-21',t:'💊 Rhodiola (Avitale)',f:'13:01',e:'13:02',c:'morgen',n:'Avitale Rhodiola Rosea · 200mg · morgens NICHT abends nehmen'},
   {d:'2026-04-11',t:'Euthyrox (nüchtern)',f:'06:30',e:'06:35',c:'morgen'},
-  {d:'2026-04-11',t:'Rückenübungen',f:'06:35',e:'06:50',c:'morgen'},
-  {d:'2026-04-11',t:'Rudi Magenschutz',f:'06:40',e:'06:45',c:'morgen'},
-  {d:'2026-04-11',t:'Wiegen',f:'06:45',e:'06:47',c:'morgen'},
-  {d:'2026-04-11',t:'Knirscherschiene',f:'06:47',e:'06:50',c:'morgen'},
-  {d:'2026-04-11',t:'🩺 Blutdruck messen',f:'06:47',e:'06:50',c:'morgen',n:'Sitzen · 5 Min ruhig warten · 2x messen · Werte notieren'},
-  {d:'2026-04-11',t:'Wasser + Sertralin vorbereiten',f:'06:50',e:'06:55',c:'morgen'},
-  {d:'2026-04-11',t:'🍵 Grüntee + Frühstück',f:'07:00',e:'07:20',c:'morgen',n:'1-2 Tassen/Tag · LDL-Oxidation hemmen · Blutdruck\n70-80°C · 2-3 Min ziehen\n⚠️ Kann Betablocker abschwächen – Arzt fragen!'},
-  {d:'2026-04-11',t:'Katzen füttern + Medikamente',f:'07:15',e:'07:30',c:'morgen'},
-  {d:'2026-04-11',t:'🫐 Beeren + Mandelmus',f:'07:20',e:'07:25',c:'morgen',n:'Beeren · Antioxidantien · mit Mandelmus'},
-  {d:'2026-04-11',t:'Kaffee',f:'07:20',e:'07:30',c:'morgen'},
-  {d:'2026-04-11',t:'💊 Rhodiola (Avitale)',f:'07:25',e:'07:27',c:'morgen',n:'Avitale Rhodiola Rosea · 200mg · nach dem Frühstück'},
-  {d:'2026-04-11',t:'💊 Anulind',f:'07:32',e:'07:34',c:'morgen',n:'Anulind · nach Katzen füttern'},
-  {d:'2026-04-11',t:'Bad früh',f:'07:45',e:'08:00',c:'morgen'},
-  {d:'2026-04-11',t:'Spaziergang Lotte',f:'08:20',e:'08:50',c:'fitness',n:'Direkt nach Fertig machen'},
+              {d:'2026-04-11',t:'🍵 Grüntee + Frühstück',f:'07:00',e:'07:20',c:'morgen',n:'1-2 Tassen/Tag · LDL-Oxidation hemmen · Blutdruck\n70-80°C · 2-3 Min ziehen\n⚠️ Kann Betablocker abschwächen – Arzt fragen!'},
+        {d:'2026-04-11',t:'💊 Rhodiola (Avitale)',f:'07:25',e:'07:27',c:'morgen',n:'Avitale Rhodiola Rosea · 200mg · nach dem Frühstück'},
+      {d:'2026-04-11',t:'Spaziergang Lotte',f:'08:20',e:'08:50',c:'fitness',n:'Direkt nach Fertig machen'},
   {d:'2026-04-11',t:'💊 Rhodiola (Avitale)',f:'13:01',e:'13:02',c:'morgen',n:'Avitale Rhodiola Rosea · 200mg · morgens NICHT abends nehmen'},
   {d:'2026-04-18',t:'Euthyrox (nüchtern)',f:'06:30',e:'06:35',c:'morgen'},
-  {d:'2026-04-18',t:'Rückenübungen',f:'06:35',e:'06:50',c:'morgen'},
-  {d:'2026-04-18',t:'Rudi Magenschutz',f:'06:40',e:'06:45',c:'morgen'},
-  {d:'2026-04-18',t:'Wiegen',f:'06:45',e:'06:47',c:'morgen'},
-  {d:'2026-04-18',t:'Knirscherschiene',f:'06:47',e:'06:50',c:'morgen'},
-  {d:'2026-04-18',t:'🩺 Blutdruck messen',f:'06:47',e:'06:50',c:'morgen',n:'Sitzen · 5 Min ruhig warten · 2x messen · Werte notieren'},
-  {d:'2026-04-18',t:'Wasser + Sertralin vorbereiten',f:'06:50',e:'06:55',c:'morgen'},
-  {d:'2026-04-18',t:'🍵 Grüntee + Frühstück',f:'07:00',e:'07:20',c:'morgen',n:'1-2 Tassen/Tag · LDL-Oxidation hemmen · Blutdruck\n70-80°C · 2-3 Min ziehen\n⚠️ Kann Betablocker abschwächen – Arzt fragen!'},
-  {d:'2026-04-18',t:'Katzen füttern + Medikamente',f:'07:15',e:'07:30',c:'morgen'},
-  {d:'2026-04-18',t:'🫐 Beeren + Mandelmus',f:'07:20',e:'07:25',c:'morgen',n:'Beeren · Antioxidantien · mit Mandelmus'},
-  {d:'2026-04-18',t:'Kaffee',f:'07:20',e:'07:30',c:'morgen'},
-  {d:'2026-04-18',t:'💊 Rhodiola (Avitale)',f:'07:25',e:'07:27',c:'morgen',n:'Avitale Rhodiola Rosea · 200mg · nach dem Frühstück'},
-  {d:'2026-04-18',t:'💊 Anulind',f:'07:32',e:'07:34',c:'morgen',n:'Anulind · nach Katzen füttern'},
-  {d:'2026-04-18',t:'Bad früh',f:'07:45',e:'08:00',c:'morgen'},
-  {d:'2026-04-18',t:'Spaziergang Lotte',f:'08:20',e:'08:50',c:'fitness',n:'Direkt nach Fertig machen'},
+              {d:'2026-04-18',t:'🍵 Grüntee + Frühstück',f:'07:00',e:'07:20',c:'morgen',n:'1-2 Tassen/Tag · LDL-Oxidation hemmen · Blutdruck\n70-80°C · 2-3 Min ziehen\n⚠️ Kann Betablocker abschwächen – Arzt fragen!'},
+        {d:'2026-04-18',t:'💊 Rhodiola (Avitale)',f:'07:25',e:'07:27',c:'morgen',n:'Avitale Rhodiola Rosea · 200mg · nach dem Frühstück'},
+      {d:'2026-04-18',t:'Spaziergang Lotte',f:'08:20',e:'08:50',c:'fitness',n:'Direkt nach Fertig machen'},
   {d:'2026-04-18',t:'💊 Rhodiola (Avitale)',f:'13:01',e:'13:02',c:'morgen',n:'Avitale Rhodiola Rosea · 200mg · morgens NICHT abends nehmen'},
   {d:'2026-04-25',t:'Euthyrox (nüchtern)',f:'06:30',e:'06:35',c:'morgen'},
-  {d:'2026-04-25',t:'Rückenübungen',f:'06:35',e:'06:50',c:'morgen'},
-  {d:'2026-04-25',t:'Rudi Magenschutz',f:'06:40',e:'06:45',c:'morgen'},
-  {d:'2026-04-25',t:'Wiegen',f:'06:45',e:'06:47',c:'morgen'},
-  {d:'2026-04-25',t:'Knirscherschiene',f:'06:47',e:'06:50',c:'morgen'},
-  {d:'2026-04-25',t:'🩺 Blutdruck messen',f:'06:47',e:'06:50',c:'morgen',n:'Sitzen · 5 Min ruhig warten · 2x messen · Werte notieren'},
-  {d:'2026-04-25',t:'Wasser + Sertralin vorbereiten',f:'06:50',e:'06:55',c:'morgen'},
-  {d:'2026-04-25',t:'🍵 Grüntee + Frühstück',f:'07:00',e:'07:20',c:'morgen',n:'1-2 Tassen/Tag · LDL-Oxidation hemmen · Blutdruck\n70-80°C · 2-3 Min ziehen\n⚠️ Kann Betablocker abschwächen – Arzt fragen!'},
-  {d:'2026-04-25',t:'Katzen füttern + Medikamente',f:'07:15',e:'07:30',c:'morgen'},
-  {d:'2026-04-25',t:'🫐 Beeren + Mandelmus',f:'07:20',e:'07:25',c:'morgen',n:'Beeren · Antioxidantien · mit Mandelmus'},
-  {d:'2026-04-25',t:'Kaffee',f:'07:20',e:'07:30',c:'morgen'},
-  {d:'2026-04-25',t:'💊 Rhodiola (Avitale)',f:'07:25',e:'07:27',c:'morgen',n:'Avitale Rhodiola Rosea · 200mg · nach dem Frühstück'},
-  {d:'2026-04-25',t:'💊 Anulind',f:'07:32',e:'07:34',c:'morgen',n:'Anulind · nach Katzen füttern'},
-  {d:'2026-04-25',t:'Bad früh',f:'07:45',e:'08:00',c:'morgen'},
-  {d:'2026-04-25',t:'Spaziergang Lotte',f:'08:20',e:'08:50',c:'fitness',n:'Direkt nach Fertig machen'},
+              {d:'2026-04-25',t:'🍵 Grüntee + Frühstück',f:'07:00',e:'07:20',c:'morgen',n:'1-2 Tassen/Tag · LDL-Oxidation hemmen · Blutdruck\n70-80°C · 2-3 Min ziehen\n⚠️ Kann Betablocker abschwächen – Arzt fragen!'},
+        {d:'2026-04-25',t:'💊 Rhodiola (Avitale)',f:'07:25',e:'07:27',c:'morgen',n:'Avitale Rhodiola Rosea · 200mg · nach dem Frühstück'},
+      {d:'2026-04-25',t:'Spaziergang Lotte',f:'08:20',e:'08:50',c:'fitness',n:'Direkt nach Fertig machen'},
   {d:'2026-04-25',t:'💊 Rhodiola (Avitale)',f:'13:01',e:'13:02',c:'morgen',n:'Avitale Rhodiola Rosea · 200mg · morgens NICHT abends nehmen'},
   {d:'2026-05-09',t:'Euthyrox (nüchtern)',f:'06:30',e:'06:35',c:'morgen'},
   {d:'2026-05-09',t:'Rückenübungen',f:'06:35',e:'06:50',c:'morgen'},
@@ -703,22 +684,7 @@ var FF=[
   {d:'2026-03-31',t:'🐾 Waldspaziergang Lotte',f:'15:07',e:'16:07',c:'fitness',n:'Nachgeholt von So 29.3.'},
   {d:'2026-03-31',t:'🐣 Osterputz & Osterdeko',f:'18:45',e:'19:30',c:'haushalt',n:'Wohnung für Ostern herrichten · Deko aufstellen · gehört zum Haushaltsblock (Wohnung)'},
   {d:'2026-03-31',t:'✍️ Hospitationsprotokoll schreiben – Di 24.3.',f:'11:00',e:'12:30',c:'uniaufgaben',n:'Noch nicht erledigt – nachholen!\nInhalte: Datum · Ort · Beobachter*in · Niveau · Unterrichtsstruktur (AVIVA) · Lernziele · Methoden · Sozialformen · eigene Beobachtungen & Fragen\n→ Abgabe bis 16.4. auf Moodle\nhttps://moodle.univie.ac.at/course/section.php?id=4673180'},
-  {d:'2026-04-13',t:'🎒 Fertigmachen & Tasche packen',f:'13:00',e:'13:30',c:'morgen'},
-  {d:'2026-04-13',t:'🚗 Fahrt zur VHS',f:'13:30',e:'14:00',c:'block'},
-  {d:'2026-04-13',t:'📚 VHS Kurs: Johann-Hoffmann-Platz',f:'14:00',e:'16:00',c:'vhs',n:'🏫 Johann-Hoffmann-Platz'},
-  {d:'2026-04-13',t:'🚗 Heimfahrt VHS',f:'16:00',e:'16:30',c:'block'},
-  {d:'2026-04-13',t:'✅ Abschluss: Johann-Hoffmann-Platz',f:'16:30',e:'16:45',c:'vhs',n:'Anwesenheit eintragen · Notizen sichern'},
-  {d:'2026-04-20',t:'🎒 Fertigmachen & Tasche packen',f:'13:00',e:'13:30',c:'morgen'},
-  {d:'2026-04-20',t:'🚗 Fahrt zur VHS',f:'13:30',e:'14:00',c:'block'},
-  {d:'2026-04-20',t:'📚 VHS Kurs: Johann-Hoffmann-Platz',f:'14:00',e:'16:00',c:'vhs',n:'🏫 Johann-Hoffmann-Platz'},
-  {d:'2026-04-20',t:'🚗 Heimfahrt VHS',f:'16:00',e:'16:30',c:'block'},
-  {d:'2026-04-20',t:'✅ Abschluss: Johann-Hoffmann-Platz',f:'16:30',e:'16:45',c:'vhs',n:'Anwesenheit eintragen · Notizen sichern'},
-  {d:'2026-04-27',t:'🎒 Fertigmachen & Tasche packen',f:'13:00',e:'13:30',c:'morgen'},
-  {d:'2026-04-27',t:'🚗 Fahrt zur VHS',f:'13:30',e:'14:00',c:'block'},
-  {d:'2026-04-27',t:'📚 VHS Kurs: Johann-Hoffmann-Platz',f:'14:00',e:'16:00',c:'vhs',n:'🏫 Johann-Hoffmann-Platz'},
-  {d:'2026-04-27',t:'🚗 Heimfahrt VHS',f:'16:00',e:'16:30',c:'block'},
-  {d:'2026-04-27',t:'✅ Abschluss: Johann-Hoffmann-Platz',f:'16:30',e:'16:45',c:'vhs',n:'Anwesenheit eintragen · Notizen sichern'},
-  {d:'2026-04-27',t:'🏫 Einschulung Lernbetreuer*innen Teil 2',f:'16:30',e:'19:30',c:'unipraesenz',n:'Pädagogische Zugänge · VHS Lernhilfe\n📍 Veranstaltungszentrum Praterstern · Praterstern 1, 1020 Wien\n⏰ Einlass ab 16:30 zur Registrierung · Beginn 17:00\n⚠️ Vollständige Anwesenheit erforderlich'},
+                                {d:'2026-04-27',t:'🏫 Einschulung Lernbetreuer*innen Teil 2',f:'16:30',e:'19:30',c:'unipraesenz',n:'Pädagogische Zugänge · VHS Lernhilfe\n📍 Veranstaltungszentrum Praterstern · Praterstern 1, 1020 Wien\n⏰ Einlass ab 16:30 zur Registrierung · Beginn 17:00\n⚠️ Vollständige Anwesenheit erforderlich'},
   {d:'2026-05-04',t:'🎒 Fertigmachen & Tasche packen',f:'13:00',e:'13:30',c:'morgen'},
   {d:'2026-05-04',t:'🚗 Fahrt zur VHS',f:'13:30',e:'14:00',c:'block'},
   {d:'2026-05-04',t:'📚 VHS Kurs: Johann-Hoffmann-Platz',f:'14:00',e:'16:00',c:'vhs',n:'🏫 Johann-Hoffmann-Platz'},
@@ -739,40 +705,7 @@ var FF=[
   {d:'2026-05-25',t:'📚 VHS Kurs: Johann-Hoffmann-Platz',f:'14:00',e:'16:00',c:'vhs',n:'🏫 Johann-Hoffmann-Platz'},
   {d:'2026-05-25',t:'🚗 Heimfahrt VHS',f:'16:00',e:'16:30',c:'block'},
   {d:'2026-05-25',t:'✅ Abschluss: Johann-Hoffmann-Platz',f:'16:30',e:'16:45',c:'vhs',n:'Anwesenheit eintragen · Notizen sichern'},
-  {d:'2026-04-14',t:'📋 Unterlagen fertigstellen + Kopieren',f:'11:15',e:'12:45',c:'vhs',n:'Unterlagen fertig · Kopien für alle Kurse machen\n🏫 Singrienergasse · Rosasgasse · Johann Hoffmann Platz'},
-  {d:'2026-04-14',t:'🎒 Fertigmachen & Tasche packen',f:'13:00',e:'13:30',c:'morgen',n:'30 Min vor VHS-Abfahrt · Tasche checken · fertig machen'},
-  {d:'2026-04-14',t:'🚗 Fahrt zur VHS',f:'13:30',e:'14:30',c:'block'},
-  {d:'2026-04-14',t:'📚 VHS Kurs: Johannagasse',f:'14:30',e:'17:30',c:'vhs',n:'🏫 Johannagasse'},
-  {d:'2026-04-14',t:'🚗 Heimfahrt VHS',f:'17:30',e:'17:50',c:'block'},
-  {d:'2026-04-14',t:'✅ Abschluss online: Johannagasse',f:'17:50',e:'18:05',c:'vhs',n:'Anwesenheit online eintragen · Notizen sichern\n🏫 Johannagasse'},
-  {d:'2026-04-15',t:'🎒 Fertigmachen & Tasche packen',f:'13:00',e:'13:30',c:'morgen',n:'30 Min vor VHS-Abfahrt · Tasche checken · fertig machen'},
-  {d:'2026-04-15',t:'🚗 Fahrt zur VHS',f:'13:30',e:'14:00',c:'block'},
-  {d:'2026-04-15',t:'📚 VHS Kurse: Singrienergasse',f:'14:00',e:'18:00',c:'vhs',n:'🏫 Singrienergasse Gr. 1/2 (14:00–16:00)\n🏫 Singrienergasse Gr. 3 (16:00–18:00)'},
-  {d:'2026-04-15',t:'🚗 Heimfahrt VHS',f:'18:00',e:'18:30',c:'block'},
-  {d:'2026-04-15',t:'✅ Abschluss: Singrienergasse',f:'18:30',e:'18:45',c:'vhs',n:'Anwesenheit eintragen · Notizen sichern · Materialien wegräumen\n🏫 Singrienergasse Gr. 1/2 + Gr. 3'},
-  {d:'2026-04-21',t:'📋 Unterlagen fertigstellen + Kopieren',f:'11:15',e:'12:45',c:'vhs',n:'Unterlagen fertig · Kopien für alle Kurse machen\n🏫 Singrienergasse · Rosasgasse · Johann Hoffmann Platz'},
-  {d:'2026-04-21',t:'🎒 Fertigmachen & Tasche packen',f:'13:00',e:'13:30',c:'morgen',n:'30 Min vor VHS-Abfahrt · Tasche checken · fertig machen'},
-  {d:'2026-04-21',t:'🚗 Fahrt zur VHS',f:'13:30',e:'14:30',c:'block'},
-  {d:'2026-04-21',t:'📚 VHS Kurs: Johannagasse',f:'14:30',e:'17:30',c:'vhs',n:'🏫 Johannagasse'},
-  {d:'2026-04-21',t:'🚗 Heimfahrt VHS',f:'17:30',e:'17:50',c:'block'},
-  {d:'2026-04-21',t:'✅ Abschluss online: Johannagasse',f:'17:50',e:'18:05',c:'vhs',n:'Anwesenheit online eintragen · Notizen sichern\n🏫 Johannagasse'},
-  {d:'2026-04-22',t:'🎒 Fertigmachen & Tasche packen',f:'13:00',e:'13:30',c:'morgen',n:'30 Min vor VHS-Abfahrt · Tasche checken · fertig machen'},
-  {d:'2026-04-22',t:'🚗 Fahrt zur VHS',f:'13:30',e:'14:00',c:'block'},
-  {d:'2026-04-22',t:'📚 VHS Kurse: Singrienergasse',f:'14:00',e:'18:00',c:'vhs',n:'🏫 Singrienergasse Gr. 1/2 (14:00–16:00)\n🏫 Singrienergasse Gr. 3 (16:00–18:00)'},
-  {d:'2026-04-22',t:'🚗 Heimfahrt VHS',f:'18:00',e:'18:30',c:'block'},
-  {d:'2026-04-22',t:'✅ Abschluss: Singrienergasse',f:'18:30',e:'18:45',c:'vhs',n:'Anwesenheit eintragen · Notizen sichern · Materialien wegräumen\n🏫 Singrienergasse Gr. 1/2 + Gr. 3'},
-  {d:'2026-04-28',t:'📋 Unterlagen fertigstellen + Kopieren',f:'11:15',e:'12:45',c:'vhs',n:'Unterlagen fertig · Kopien für alle Kurse machen\n🏫 Singrienergasse · Rosasgasse · Johann Hoffmann Platz'},
-  {d:'2026-04-28',t:'🎒 Fertigmachen & Tasche packen',f:'13:00',e:'13:30',c:'morgen',n:'30 Min vor VHS-Abfahrt · Tasche checken · fertig machen'},
-  {d:'2026-04-28',t:'🚗 Fahrt zur VHS',f:'13:30',e:'14:30',c:'block'},
-  {d:'2026-04-28',t:'📚 VHS Kurs: Johannagasse',f:'14:30',e:'17:30',c:'vhs',n:'🏫 Johannagasse'},
-  {d:'2026-04-28',t:'🚗 Heimfahrt VHS',f:'17:30',e:'17:50',c:'block'},
-  {d:'2026-04-28',t:'✅ Abschluss online: Johannagasse',f:'17:50',e:'18:05',c:'vhs',n:'Anwesenheit online eintragen · Notizen sichern\n🏫 Johannagasse'},
-  {d:'2026-04-29',t:'🎒 Fertigmachen & Tasche packen',f:'13:00',e:'13:30',c:'morgen',n:'30 Min vor VHS-Abfahrt · Tasche checken · fertig machen'},
-  {d:'2026-04-29',t:'🚗 Fahrt zur VHS',f:'13:30',e:'14:00',c:'block'},
-  {d:'2026-04-29',t:'📚 VHS Kurse: Singrienergasse',f:'14:00',e:'18:00',c:'vhs',n:'🏫 Singrienergasse Gr. 1/2 (14:00–16:00)\n🏫 Singrienergasse Gr. 3 (16:00–18:00)'},
-  {d:'2026-04-29',t:'🚗 Heimfahrt VHS',f:'18:00',e:'18:30',c:'block'},
-  {d:'2026-04-29',t:'✅ Abschluss: Singrienergasse',f:'18:30',e:'18:45',c:'vhs',n:'Anwesenheit eintragen · Notizen sichern · Materialien wegräumen\n🏫 Singrienergasse Gr. 1/2 + Gr. 3'},
-  {d:'2026-05-05',t:'📋 Unterlagen fertigstellen + Kopieren',f:'11:15',e:'12:45',c:'vhs',n:'Unterlagen fertig · Kopien für alle Kurse machen\n🏫 Singrienergasse · Rosasgasse · Johann Hoffmann Platz'},
+                                            {d:'2026-05-05',t:'📋 Unterlagen fertigstellen + Kopieren',f:'11:15',e:'12:45',c:'vhs',n:'Unterlagen fertig · Kopien für alle Kurse machen\n🏫 Singrienergasse · Rosasgasse · Johann Hoffmann Platz'},
   {d:'2026-05-05',t:'🎒 Fertigmachen & Tasche packen',f:'13:00',e:'13:30',c:'morgen',n:'30 Min vor VHS-Abfahrt · Tasche checken · fertig machen'},
   {d:'2026-05-05',t:'🚗 Fahrt zur VHS',f:'13:30',e:'14:30',c:'block'},
   {d:'2026-05-05',t:'📚 VHS Kurs: Johannagasse',f:'14:30',e:'17:30',c:'vhs',n:'🏫 Johannagasse'},
@@ -816,22 +749,7 @@ var FF=[
   {d:'2026-05-27',t:'📚 VHS Kurse: Singrienergasse',f:'14:00',e:'18:00',c:'vhs',n:'🏫 Singrienergasse Gr. 1/2 (14:00–16:00)\n🏫 Singrienergasse Gr. 3 (16:00–18:00)'},
   {d:'2026-05-27',t:'🚗 Heimfahrt VHS',f:'18:00',e:'18:30',c:'block'},
   {d:'2026-05-27',t:'✅ Abschluss: Singrienergasse',f:'18:30',e:'18:45',c:'vhs',n:'Anwesenheit eintragen · Notizen sichern · Materialien wegräumen\n🏫 Singrienergasse Gr. 1/2 + Gr. 3'},
-  {d:'2026-04-13',t:'🎒 Fertigmachen & Tasche packen',f:'12:45',e:'13:15',c:'morgen',n:'30 Min vor VHS-Abfahrt · Tasche checken · fertig machen'},
-  {d:'2026-04-13',t:'🚗 Fahrt zur VHS',f:'13:15',e:'14:00',c:'block'},
-  {d:'2026-04-13',t:'📚 VHS Kurs: Johann-Hoffmann-Platz',f:'14:00',e:'16:00',c:'vhs',n:'🏫 Johann Hoffmann Platz Gr. 1/2'},
-  {d:'2026-04-13',t:'🚗 Heimfahrt VHS',f:'16:00',e:'16:45',c:'block'},
-  {d:'2026-04-13',t:'✅ Abschluss: Johann-Hoffmann-Platz',f:'16:45',e:'17:00',c:'vhs',n:'Anwesenheit eintragen · Notizen sichern · Materialien wegräumen\n🏫 Johann Hoffmann Platz Gr. 1/2'},
-  {d:'2026-04-20',t:'🎒 Fertigmachen & Tasche packen',f:'12:45',e:'13:15',c:'morgen',n:'30 Min vor VHS-Abfahrt · Tasche checken · fertig machen'},
-  {d:'2026-04-20',t:'🚗 Fahrt zur VHS',f:'13:15',e:'14:00',c:'block'},
-  {d:'2026-04-20',t:'📚 VHS Kurs: Johann-Hoffmann-Platz',f:'14:00',e:'16:00',c:'vhs',n:'🏫 Johann Hoffmann Platz Gr. 1/2'},
-  {d:'2026-04-20',t:'🚗 Heimfahrt VHS',f:'16:00',e:'16:45',c:'block'},
-  {d:'2026-04-20',t:'✅ Abschluss: Johann-Hoffmann-Platz',f:'16:45',e:'17:00',c:'vhs',n:'Anwesenheit eintragen · Notizen sichern · Materialien wegräumen\n🏫 Johann Hoffmann Platz Gr. 1/2'},
-  {d:'2026-04-27',t:'🎒 Fertigmachen & Tasche packen',f:'12:45',e:'13:15',c:'morgen',n:'30 Min vor VHS-Abfahrt · Tasche checken · fertig machen'},
-  {d:'2026-04-27',t:'🚗 Fahrt zur VHS',f:'13:15',e:'14:00',c:'block'},
-  {d:'2026-04-27',t:'📚 VHS Kurs: Johann-Hoffmann-Platz',f:'14:00',e:'16:00',c:'vhs',n:'🏫 Johann Hoffmann Platz Gr. 1/2'},
-  {d:'2026-04-27',t:'🚗 Heimfahrt VHS',f:'16:00',e:'16:45',c:'block'},
-  {d:'2026-04-27',t:'✅ Abschluss: Johann-Hoffmann-Platz',f:'16:45',e:'17:00',c:'vhs',n:'Anwesenheit eintragen · Notizen sichern · Materialien wegräumen\n🏫 Johann Hoffmann Platz Gr. 1/2'},
-  {d:'2026-05-04',t:'🎒 Fertigmachen & Tasche packen',f:'12:45',e:'13:15',c:'morgen',n:'30 Min vor VHS-Abfahrt · Tasche checken · fertig machen'},
+                          {d:'2026-05-04',t:'🎒 Fertigmachen & Tasche packen',f:'12:45',e:'13:15',c:'morgen',n:'30 Min vor VHS-Abfahrt · Tasche checken · fertig machen'},
   {d:'2026-05-04',t:'🚗 Fahrt zur VHS',f:'13:15',e:'14:00',c:'block'},
   {d:'2026-05-04',t:'📚 VHS Kurs: Johann-Hoffmann-Platz',f:'14:00',e:'16:00',c:'vhs',n:'🏫 Johann Hoffmann Platz Gr. 1/2'},
   {d:'2026-05-04',t:'🚗 Heimfahrt VHS',f:'16:00',e:'16:45',c:'block'},
@@ -846,22 +764,7 @@ var FF=[
   {d:'2026-05-18',t:'📚 VHS Kurs: Johann-Hoffmann-Platz',f:'14:00',e:'16:00',c:'vhs',n:'🏫 Johann Hoffmann Platz Gr. 1/2'},
   {d:'2026-05-18',t:'🚗 Heimfahrt VHS',f:'16:00',e:'16:45',c:'block'},
   {d:'2026-05-18',t:'✅ Abschluss: Johann-Hoffmann-Platz',f:'16:45',e:'17:00',c:'vhs',n:'Anwesenheit eintragen · Notizen sichern · Materialien wegräumen\n🏫 Johann Hoffmann Platz Gr. 1/2'},
-  {d:'2026-04-16',t:'🎒 Fertigmachen & Tasche packen',f:'13:10',e:'13:40',c:'morgen',n:'30 Min vor VHS-Abfahrt · Tasche checken · fertig machen'},
-  {d:'2026-04-16',t:'🚗 Fahrt zur VHS',f:'13:40',e:'14:00',c:'block'},
-  {d:'2026-04-16',t:'📚 VHS Kurs: Rosasgasse',f:'14:00',e:'16:00',c:'vhs',n:'🏫 Rosasgasse Gr. 1–4'},
-  {d:'2026-04-16',t:'🚗 Heimfahrt VHS',f:'16:00',e:'16:20',c:'block'},
-  {d:'2026-04-16',t:'✅ Abschluss: Rosasgasse',f:'16:20',e:'16:35',c:'vhs',n:'Anwesenheit eintragen · Notizen sichern · Materialien wegräumen\n🏫 Rosasgasse Gr. 1–4'},
-  {d:'2026-04-23',t:'🎒 Fertigmachen & Tasche packen',f:'13:10',e:'13:40',c:'morgen',n:'30 Min vor VHS-Abfahrt · Tasche checken · fertig machen'},
-  {d:'2026-04-23',t:'🚗 Fahrt zur VHS',f:'13:40',e:'14:00',c:'block'},
-  {d:'2026-04-23',t:'📚 VHS Kurs: Rosasgasse',f:'14:00',e:'16:00',c:'vhs',n:'🏫 Rosasgasse Gr. 1–4'},
-  {d:'2026-04-23',t:'🚗 Heimfahrt VHS',f:'16:00',e:'16:20',c:'block'},
-  {d:'2026-04-23',t:'✅ Abschluss: Rosasgasse',f:'16:20',e:'16:35',c:'vhs',n:'Anwesenheit eintragen · Notizen sichern · Materialien wegräumen\n🏫 Rosasgasse Gr. 1–4'},
-  {d:'2026-04-30',t:'🎒 Fertigmachen & Tasche packen',f:'13:10',e:'13:40',c:'morgen',n:'30 Min vor VHS-Abfahrt · Tasche checken · fertig machen'},
-  {d:'2026-04-30',t:'🚗 Fahrt zur VHS',f:'13:40',e:'14:00',c:'block'},
-  {d:'2026-04-30',t:'📚 VHS Kurs: Rosasgasse',f:'14:00',e:'16:00',c:'vhs',n:'🏫 Rosasgasse Gr. 1–4'},
-  {d:'2026-04-30',t:'🚗 Heimfahrt VHS',f:'16:00',e:'16:20',c:'block'},
-  {d:'2026-04-30',t:'✅ Abschluss: Rosasgasse',f:'16:20',e:'16:35',c:'vhs',n:'Anwesenheit eintragen · Notizen sichern · Materialien wegräumen\n🏫 Rosasgasse Gr. 1–4'},
-  {d:'2026-05-07',t:'🎒 Fertigmachen & Tasche packen',f:'13:10',e:'13:40',c:'morgen',n:'30 Min vor VHS-Abfahrt · Tasche checken · fertig machen'},
+                          {d:'2026-05-07',t:'🎒 Fertigmachen & Tasche packen',f:'13:10',e:'13:40',c:'morgen',n:'30 Min vor VHS-Abfahrt · Tasche checken · fertig machen'},
   {d:'2026-05-07',t:'🚗 Fahrt zur VHS',f:'13:40',e:'14:00',c:'block'},
   {d:'2026-05-07',t:'📚 VHS Kurs: Rosasgasse',f:'14:00',e:'16:00',c:'vhs',n:'🏫 Rosasgasse Gr. 1–4'},
   {d:'2026-05-07',t:'🚗 Heimfahrt VHS',f:'16:00',e:'16:20',c:'block'},
@@ -925,34 +828,131 @@ var FF=[
   {d:'2026-03-30',t:'🗂️ System Kursmaterial aufbauen',f:'15:00',e:'16:00',c:'schreibtisch',n:'Chaos im Kursmaterial → System entwickeln\n🏫 Johann Hoffmann Platz · Singrienergasse · Rosasgasse\n→ Was liegt wo? · Ordner/Mappen einteilen · Übersicht erstellen'},
   {d:'2026-03-30',t:'📋 Erledigungen – Anrufe',f:'10:19',e:'11:04',c:'schreibtisch',n:'📞 ZA + Mundhygiene Flo vereinbaren\n📞 Dr. Pressevertrieb anrufen'},
   {d:'2026-03-31',t:'📋 Erledigungen – Anrufe & Mails',f:'12:30',e:'13:15',c:'schreibtisch',n:'📞 Augenarzt Flo + ich – Dr. Seher\n📞 Friseur (Termin Juni/Juli)\n📧 Re Strafregisterauszug an VHS senden'},
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+  {d:'2026-04-13',t:'🏫 VHS: Johann-Hoffmann-Platz',f:'12:45',e:'17:00',c:'vhs',n:'Tasche packen · Unterlagen prüfen\nAnfahrt (30 Min)\n🏫 Kurs: Johann-Hoffmann-Platz (14:00–16:00)\nRückfahrt (30 Min)\nAnwesenheit eintragen · Notizen sichern'},
+  {d:'2026-04-14',t:'🏫 VHS: Johannagasse',f:'11:15',e:'18:05',c:'vhs',n:'Unterlagen fertigstellen + Kopieren\nTasche packen · Anfahrt (60 Min)\n🏫 Kurs: Johannagasse (14:30–17:30)\nRückfahrt (20 Min)\nAbschluss online eintragen · Notizen sichern'},
+  {d:'2026-04-15',t:'🏫 VHS: Singrienergasse',f:'13:00',e:'18:45',c:'vhs',n:'Tasche packen · Unterlagen prüfen\nAnfahrt (30 Min)\n🏫 Kurse: Singrienergasse Gr. 1/2 (14:00–18:00)\nRückfahrt (30 Min)\nAnwesenheit eintragen · Materialien wegräumen'},
+  {d:'2026-04-16',t:'🏫 VHS: Rosasgasse',f:'13:10',e:'16:35',c:'vhs',n:'Tasche packen · Unterlagen prüfen\nAnfahrt (20 Min)\n🏫 Kurs: Rosasgasse Gr. 1–4 (14:00–16:00)\nRückfahrt (20 Min)\nAnwesenheit eintragen · Notizen sichern'},
+  {d:'2026-04-20',t:'🏫 VHS: Johann-Hoffmann-Platz',f:'12:45',e:'17:00',c:'vhs',n:'Tasche packen · Unterlagen prüfen\nAnfahrt (30 Min)\n🏫 Kurs: Johann-Hoffmann-Platz (14:00–16:00)\nRückfahrt (30 Min)\nAnwesenheit eintragen · Notizen sichern'},
+  {d:'2026-04-21',t:'🏫 VHS: Johannagasse',f:'11:15',e:'18:05',c:'vhs',n:'Unterlagen fertigstellen + Kopieren\nTasche packen · Anfahrt (60 Min)\n🏫 Kurs: Johannagasse (14:30–17:30)\nRückfahrt (20 Min)\nAbschluss online eintragen · Notizen sichern'},
+  {d:'2026-04-22',t:'🏫 VHS: Singrienergasse',f:'13:00',e:'18:45',c:'vhs',n:'Tasche packen · Unterlagen prüfen\nAnfahrt (30 Min)\n🏫 Kurse: Singrienergasse Gr. 1/2 (14:00–18:00)\nRückfahrt (30 Min)\nAnwesenheit eintragen · Materialien wegräumen'},
+  {d:'2026-04-23',t:'🏫 VHS: Rosasgasse',f:'13:10',e:'16:35',c:'vhs',n:'Tasche packen · Unterlagen prüfen\nAnfahrt (20 Min)\n🏫 Kurs: Rosasgasse Gr. 1–4 (14:00–16:00)\nRückfahrt (20 Min)\nAnwesenheit eintragen · Notizen sichern'},
+  {d:'2026-04-27',t:'🏫 VHS: Johann-Hoffmann-Platz',f:'12:45',e:'17:00',c:'vhs',n:'Tasche packen · Unterlagen prüfen\nAnfahrt (30 Min)\n🏫 Kurs: Johann-Hoffmann-Platz (14:00–16:00)\nRückfahrt (30 Min)\nAnwesenheit eintragen · Notizen sichern'},
+  {d:'2026-04-28',t:'🏫 VHS: Johannagasse',f:'11:15',e:'18:05',c:'vhs',n:'Unterlagen fertigstellen + Kopieren\nTasche packen · Anfahrt (60 Min)\n🏫 Kurs: Johannagasse (14:30–17:30)\nRückfahrt (20 Min)\nAbschluss online eintragen · Notizen sichern'},
+  {d:'2026-04-29',t:'🏫 VHS: Singrienergasse',f:'13:00',e:'18:45',c:'vhs',n:'Tasche packen · Unterlagen prüfen\nAnfahrt (30 Min)\n🏫 Kurse: Singrienergasse Gr. 1/2 (14:00–18:00)\nRückfahrt (30 Min)\nAnwesenheit eintragen · Materialien wegräumen'},
+  {d:'2026-04-30',t:'🏫 VHS: Rosasgasse',f:'13:10',e:'16:35',c:'vhs',n:'Tasche packen · Unterlagen prüfen\nAnfahrt (20 Min)\n🏫 Kurs: Rosasgasse Gr. 1–4 (14:00–16:00)\nRückfahrt (20 Min)\nAnwesenheit eintragen · Notizen sichern'},
   {d:'2026-04-02',t:'🏡 Weidlingbach – Langer Block',f:'10:00',e:'17:00',c:'weidlingbach',n:'Weidlingbach Ausräumen · alleine + Lotte · 7 Stunden · letzter Aufräumtag'},
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
   {d:'2026-04-02',t:'🚗 Abfahrt nach Weidlingbach',f:'09:00',e:'09:45',c:'weidlingbach',n:'45 Min Fahrt · Lotte mitnehmen · Kopfhörer + Guide-App starten'},
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
   {d:'2026-04-02',t:'🏡 Weidlingbach: Vorzimmer + Wohnzimmer',f:'10:00',e:'11:30',c:'weidlingbach',n:'Vorzimmer: Kartons raus · Kabel · Kommode leeren\nWohnzimmer: Tisch + Boden + Sofa · Bücher · Bilder reduzieren · Antike Highlights'},
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
   {d:'2026-04-02',t:'🏡 Weidlingbach: Kabinett + Schlafzimmer',f:'11:30',e:'12:30',c:'weidlingbach',n:'Kabinett: Sofa + Vitrine + Schrankraum\nSchlafzimmer: Pflegebett raus · Tisch leeren · Bilder reduzieren'},
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
   {d:'2026-04-02',t:'☕ Pause + Lotte',f:'12:30',e:'13:00',c:'weidlingbach',n:'Kurze Pause · Lotte rauslassen · durchatmen'},
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
   {d:'2026-04-02',t:'🏡 Weidlingbach: Bad + WC + Küche',f:'13:00',e:'14:30',c:'weidlingbach',n:'Bad: alles vom Waschtisch · Dusche leeren · putzen\nWC: putzen · aufräumen\nKüche: alle Flächen leeren · Spüle · Fenster'},
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
   {d:'2026-04-02',t:'🏡 Weidlingbach: Garage + Eingang + Feinschliff',f:'14:30',e:'16:30',c:'weidlingbach',n:'Garage: Rollstuhl + Gehilfen raus · Boden\nEingang: Laub · Sticker von Fenstern · Türe putzen\nFeinschliff: Kontrollrunde alle Räume · Wendeltreppe · Fotos machen!'},
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
+ ,
   {d:'2026-04-02',t:'🚗 Heimfahrt',f:'16:30',e:'17:15',c:'weidlingbach',n:'45 Min Fahrt zurück'},
   {d:'2026-04-03',t:'🚗 Thomas von AMA abholen',f:'14:00',e:'14:30',c:'freizeit',n:'AMA → dann gemeinsam mit Flo nach Weidlingbach'},
   {d:'2026-04-04',t:'Euthyrox (nüchtern)',f:'09:00',e:'09:05',c:'morgen'},
-  {d:'2026-04-04',t:'Rückenübungen',f:'09:05',e:'09:20',c:'morgen'},
-  {d:'2026-04-04',t:'Rudi Magenschutz',f:'09:10',e:'09:15',c:'morgen'},
-  {d:'2026-04-04',t:'Wiegen',f:'09:15',e:'09:17',c:'morgen'},
-  {d:'2026-04-04',t:'Knirscherschiene',f:'09:17',e:'09:20',c:'morgen'},
-  {d:'2026-04-04',t:'🩺 Blutdruck messen',f:'09:17',e:'09:20',c:'morgen'},
-  {d:'2026-04-04',t:'Wasser + Sertralin vorbereiten',f:'09:20',e:'09:25',c:'morgen'},
-  {d:'2026-04-04',t:'🍵 Grüntee + Frühstück',f:'09:30',e:'09:50',c:'morgen'},
-  {d:'2026-04-04',t:'Katzen füttern + Medikamente',f:'09:45',e:'10:00',c:'morgen'},
-  {d:'2026-04-04',t:'🫐 Beeren + Mandelmus',f:'09:50',e:'09:55',c:'morgen'},
-  {d:'2026-03-30',t:'✍️ Selbstreflexion schreiben – Unterricht 25.3.',f:'11:04',e:'12:04',c:'uniaufgaben',n:'Frist: Sa 1.4. · nachgeholt von So 29.3. · 1 Stunde einplanen'},
+                    {d:'2026-03-30',t:'✍️ Selbstreflexion schreiben – Unterricht 25.3.',f:'11:04',e:'12:04',c:'uniaufgaben',n:'Frist: Sa 1.4. · nachgeholt von So 29.3. · 1 Stunde einplanen'},
   {d:'2026-03-30',t:'💆 Wochenpflege Gesicht: Peeling + Maske + Heimneedling',f:'21:11',e:'21:41',c:'fitness',n:'Nachgeholt von So 29.3.'},
   {d:'2026-03-30',t:'🥿 Fußpflege – Hornhaut & Fersen',f:'21:41',e:'21:43',c:'fitness',n:'Nachgeholt von So 29.3.'},
   {d:'2026-03-31',t:'💅 Nagelpflege: Olivenöl-Bad · Nagelhaut · Feilen · Handpflege',f:'20:47',e:'21:10',c:'fitness',n:'Nachgeholt von So 29.3.'},
   
   {d:'2026-04-04',t:'💊 Rhodiola (Avitale)',f:'09:55',e:'09:57',c:'morgen'},
-  {d:'2026-04-04',t:'💊 Anulind',f:'10:02',e:'10:04',c:'morgen'},
-  {d:'2026-04-04',t:'Bad früh',f:'10:15',e:'10:30',c:'morgen'},
-  {d:'2026-04-04',t:'Spaziergang Lotte',f:'10:50',e:'11:20',c:'fitness'},
+      {d:'2026-04-04',t:'Spaziergang Lotte',f:'10:50',e:'11:20',c:'fitness'},
   {d:'2026-04-04',t:'💊 Rhodiola (Avitale)',f:'15:31',e:'15:32',c:'morgen'},
   {d:'2026-05-02',t:'Euthyrox (nüchtern)',f:'09:00',e:'09:05',c:'morgen'},
   {d:'2026-05-02',t:'Rückenübungen',f:'09:05',e:'09:20',c:'morgen'},
@@ -1019,8 +1019,8 @@ var FF=[
   {d:'2026-06-06',t:'Spaziergang Lotte',f:'10:50',e:'11:20',c:'fitness'},
   {d:'2026-06-06',t:'💊 Rhodiola (Avitale)',f:'15:31',e:'15:32',c:'morgen'},
   {d:'2026-04-04',t:'🍱 Mittagspause',f:'12:30',e:'13:00',c:'mittagspause'},
-  {d:'2026-04-04',t:'📚 Uni-Aufgaben',f:'13:00',e:'17:00',c:'uniaufgaben',n:'Schreibtischblock · 4h'},
-  {d:'2026-04-04',t:'📚 Uni-Aufgaben',f:'17:00',e:'19:00',c:'uniaufgaben',n:'Schreibtischblock · 2h'},
+  {d:'2026-04-04',t:'📚 Uni-Aufgaben',f:'13:00',e:'17:00',c:'schreibtisch',n:'Schreibtischblock · 4h'},
+  {d:'2026-04-04',t:'📚 Uni-Aufgaben',f:'17:00',e:'19:00',c:'schreibtisch',n:'Schreibtischblock · 2h'},
   {d:'2026-04-04',t:'🏠 Haushalt',f:'19:00',e:'20:00',c:'haushalt',n:'Wohnung · Putzen · Pflanzen · Wäsche'},
   {d:'2026-04-04',t:'🛁 Sitzbad',f:'20:00',e:'20:12',c:'fitness'},
   {d:'2026-04-04',t:'🚿 Körperpflege-Block',f:'20:12',e:'21:42',c:'fitness',n:'Duschen + Haare · Körperöl · Gesichtsyoga · Meditation'},
@@ -1453,17 +1453,17 @@ var FF=[
   {d:'2026-04-01',t:'🔴 DEADLINE: Selbstreflexion 25.3. auf Moodle',f:'23:00',e:'23:59',c:'uniaufgaben',n:'Selbstreflexion zum Unterricht 25.3. hochladen!\nhttps://moodle.univie.ac.at/course/section.php?id=4673180'},
 
   // Schriftliches Feedback der Beobachterin (Runde 1) verfassen
-  {d:'2026-04-08',t:'✍️ Schriftl. Feedback Beobachtung Runde 1 verfassen',f:'13:00',e:'14:15',c:'uniaufgaben',n:'Schriftliche Rückmeldung zur Unterrichtsbeobachtung Runde 1.\nBasis: Notizen aus Feedbackgespräch vom 25.3.\nInhalte: Beobachtungen zur Unterrichtsstruktur, Lernzielerreichung, Methoden, Auftreten, Stärken & Entwicklungsfelder\n→ Abgabe bis 16.4. auf Moodle'},
+  {d:'2026-04-08',t:'✍️ Schriftl. Feedback Beobachtung Runde 1 verfassen',f:'13:00',e:'14:15',c:'schreibtisch',n:'Schriftliche Rückmeldung zur Unterrichtsbeobachtung Runde 1.\nBasis: Notizen aus Feedbackgespräch vom 25.3.\nInhalte: Beobachtungen zur Unterrichtsstruktur, Lernzielerreichung, Methoden, Auftreten, Stärken & Entwicklungsfelder\n→ Abgabe bis 16.4. auf Moodle'},
 
   // ── ABGABE RUNDE 1: bis 16.4.2026 ──────────────────────────
-  {d:'2026-04-14',t:'⚠️ Abgabe Runde 1 vorbereiten – Checkliste',f:'13:15',e:'14:30',c:'uniaufgaben',n:'Alles für Abgabe bis 16.4. zusammenstellen:\n✅ Hospitationsprotokoll Di 24.3.\n✅ Hospitationsprotokoll (2. – falls vorhanden)\n✅ Lehrskizze + Materialien Mi 25.3.\n✅ Selbstreflexion Mi 25.3.\n✅ Schriftliches Feedback Beobachtung Runde 1\nhttps://moodle.univie.ac.at/course/section.php?id=4673180'},
+  {d:'2026-04-14',t:'⚠️ Abgabe Runde 1 vorbereiten – Checkliste',f:'13:15',e:'14:30',c:'schreibtisch',n:'Alles für Abgabe bis 16.4. zusammenstellen:\n✅ Hospitationsprotokoll Di 24.3.\n✅ Hospitationsprotokoll (2. – falls vorhanden)\n✅ Lehrskizze + Materialien Mi 25.3.\n✅ Selbstreflexion Mi 25.3.\n✅ Schriftliches Feedback Beobachtung Runde 1\nhttps://moodle.univie.ac.at/course/section.php?id=4673180'},
   {d:'2026-04-16',t:'🔴 DEADLINE: Abgabe Runde 1 auf Moodle',f:'22:00',e:'23:59',c:'uniaufgaben',n:'Hochladen auf Moodle (bis Mitternacht!):\n✅ 2 Hospitationsprotokolle\n✅ 1 Lehrskizze + Materialien\n✅ 1 Selbstreflexion\n✅ 1 schriftliches Feedback Runde 1\nhttps://moodle.univie.ac.at/course/section.php?id=4673180'},
 
   // ── DURCHGANG 2: 22.4. – 17.6.2026 ─────────────────────────
 
   // Vorbereitung Unterricht Mo 11.5. → Zoom bis spätestens Mo 4.5.
-  {d:'2026-04-27',t:'📧 Mail: Zoom-Termin anfragen – Unterricht 11.5.',f:'11:15',e:'11:30',c:'uniaufgaben',n:'Mail an Vanessa: vanessa.winkler@univie.ac.at\nBetreff: Besprechung Lehrskizze 11.5. – [Dein Name]\nZoom-Termin für Lehrskizzen-Besprechung anfragen.\nTermin sollte bis spätestens Do 7.5. stattfinden.'},
-  {d:'2026-04-29',t:'📝 Lehrskizze ausarbeiten – Unterricht 11.5.',f:'11:15',e:'13:00',c:'uniaufgaben',n:'Lehrskizze für Mo 11.5. fertig ausarbeiten.\nAuf Erkenntnissen aus Runde 1 aufbauen!\nGlobales Lernziel · A1.1 · Ute Bock\nPufferaktivitäten & Zusatzmaterial einplanen.\nMaterialien & Arbeitsblätter vorbereiten.'},
+  {d:'2026-04-27',t:'📧 Mail: Zoom-Termin anfragen – Unterricht 11.5.',f:'11:15',e:'11:30',c:'schreibtisch',n:'Mail an Vanessa: vanessa.winkler@univie.ac.at\nBetreff: Besprechung Lehrskizze 11.5. – [Dein Name]\nZoom-Termin für Lehrskizzen-Besprechung anfragen.\nTermin sollte bis spätestens Do 7.5. stattfinden.'},
+  {d:'2026-04-29',t:'📝 Lehrskizze ausarbeiten – Unterricht 11.5.',f:'11:15',e:'13:00',c:'schreibtisch',n:'Lehrskizze für Mo 11.5. fertig ausarbeiten.\nAuf Erkenntnissen aus Runde 1 aufbauen!\nGlobales Lernziel · A1.1 · Ute Bock\nPufferaktivitäten & Zusatzmaterial einplanen.\nMaterialien & Arbeitsblätter vorbereiten.'},
   {d:'2026-05-04',t:'🖥️ ZOOM: Lehrskizzen-Besprechung Runde 2',f:'10:00',e:'10:45',c:'unipraesenz',n:'⚠️ Platzhalter – genaue Zeit mit Vanessa vereinbaren!\nVorbereitung:\n• Lehrskizze nochmals durchlesen\n• Offene Fragen notieren\n• Arbeitsblätter & Materialien fertig haben'},
   {d:'2026-05-04',t:'📝 Lehrskizze finalisieren nach Zoom',f:'11:00',e:'12:00',c:'uniaufgaben',n:'Feedback aus Zoom einarbeiten.\nLehrskizze für Moodle-Upload fertigmachen.\nArbeitsblätter drucken & Kopien vorbereiten.'},
   {d:'2026-05-10',t:'📋 Lehrskizze auf Moodle hochladen – bis 18:00!',f:'17:00',e:'17:15',c:'uniaufgaben',n:'⚠️ Bis 18:00 Uhr auf Moodle hochladen!\nhttps://moodle.univie.ac.at/course/section.php?id=4673180\nKopien für Beobachter*innen vorbereiten!'},
@@ -1509,20 +1509,20 @@ var FF=[
   {d:'2026-03-29',t:'🎨 Ästhetisches Lernen: Material + Lernziele',f:'10:30',e:'12:30',c:'uniaufgaben',n:'Material sichten + 2–3 Lernziele formulieren\nModul: Ästhetisches Lernen · Abgabe Sa 26.04.'},
   {d:'2026-03-29',t:'🎨 Ästhetisches Lernen: Aufgaben entwerfen',f:'12:30',e:'14:30',c:'uniaufgaben',n:'Aufgaben entwerfen\nModul: Ästhetisches Lernen · Abgabe Sa 26.04.'},
   {d:'2026-03-27',t:'🎨 Ästhetisches Lernen: Kommentar schreiben',f:'16:00',e:'17:00',c:'uniaufgaben',n:'Kommentar (ca. 1 Seite) schreiben\nModul: Ästhetisches Lernen · Abgabe Sa 26.04.'},
-  {d:'2026-04-10',t:'🎨 Ästhetisches Lernen: Aufgaben finalisieren',f:'12:15',e:'14:15',c:'uniaufgaben',n:'Aufgaben finalisieren + Lösungen + Quellenangaben\nModul: Ästhetisches Lernen · Abgabe Sa 26.04.'},
-  {d:'2026-04-13',t:'🎨 Ästhetisches Lernen: Letzte Überarbeitung',f:'12:15',e:'13:15',c:'uniaufgaben',n:'Letzte Überarbeitung falls nötig\nModul: Ästhetisches Lernen · Abgabe Sa 26.04.'},
+  {d:'2026-04-10',t:'🎨 Ästhetisches Lernen: Aufgaben finalisieren',f:'12:15',e:'14:15',c:'schreibtisch',n:'Aufgaben finalisieren + Lösungen + Quellenangaben\nModul: Ästhetisches Lernen · Abgabe Sa 26.04.'},
+  {d:'2026-04-13',t:'🎨 Ästhetisches Lernen: Letzte Überarbeitung',f:'12:15',e:'13:15',c:'schreibtisch',n:'Letzte Überarbeitung falls nötig\nModul: Ästhetisches Lernen · Abgabe Sa 26.04.'},
   {d:'2026-04-26',t:'🔴 ABGABE: Ästhetisches Lernen auf Moodle',f:'10:00',e:'10:30',c:'uniaufgaben',n:'ABGABE Ästhetisches Lernen – auf Moodle hochladen!\nhttps://moodle.univie.ac.at'},
 
   // GRAMMATIK (Abgabe So 12.04.)
   {d:'2026-03-30',t:'📖 Grammatik: Aufgabenstellung + Text wählen',f:'12:41',e:'14:11',c:'uniaufgaben',n:'Aufgabenstellung lesen + Hör- & Lesetext auswählen\nModul: Grammatik · Abgabe So 12.04.'},
-  {d:'2026-04-01',t:'📐 Grammatik: Analytischen Zyklus planen',f:'14:00',e:'16:00',c:'uniaufgaben',n:'Analytischen Zyklus planen (Niveau A + Niveau B)\nModul: Grammatik · Abgabe So 12.04.'},
-  {d:'2026-04-01',t:'📐 Grammatik: Suche-X + Tafelbild',f:'11:35',e:'13:35',c:'uniaufgaben',n:'Suche-X, Sammeln & Sortieren + Tafelbild skizzieren\nModul: Grammatik · Abgabe So 12.04.'},
-  {d:'2026-04-01',t:'📐 Grammatik: Regelbildung + Recycling',f:'13:35',e:'15:35',c:'uniaufgaben',n:'Regelbildung + Recyclingaktivität (weiße Inseln)\nModul: Grammatik · Abgabe So 12.04.'},
-  {d:'2026-04-03',t:'📐 Grammatik: Dialog + freiere Aktivität',f:'12:15',e:'14:15',c:'uniaufgaben',n:'Dialog für Gesprächskonstruktion + freiere Aktivität\nModul: Grammatik · Abgabe So 12.04.'},
-  {d:'2026-04-01',t:'📐 Grammatik: Arbeitsblätter erstellen',f:'15:35',e:'16:35',c:'uniaufgaben',n:'Arbeitsblätter erstellen\nModul: Grammatik · Abgabe So 12.04.'},
-  {d:'2026-04-06',t:'📐 Grammatik: Überarbeiten + Hypothesen',f:'12:15',e:'14:15',c:'uniaufgaben',n:'Überarbeiten + Hypothesen & Regelformulierung ergänzen\nModul: Grammatik · Abgabe So 12.04.'},
-  {d:'2026-04-07',t:'📐 Grammatik: Korrekturlesen + Quellen',f:'11:15',e:'12:45',c:'uniaufgaben',n:'Korrekturlesen + Quellenangaben\nModul: Grammatik · Abgabe So 12.04.'},
-  {d:'2026-04-08',t:'📐 Grammatik: Finales Layout',f:'11:35',e:'12:35',c:'uniaufgaben',n:'Finales Layout + abgabebereit machen\nModul: Grammatik · Abgabe So 12.04.'},
+  {d:'2026-04-01',t:'📐 Grammatik: Analytischen Zyklus planen',f:'14:00',e:'16:00',c:'schreibtisch',n:'Analytischen Zyklus planen (Niveau A + Niveau B)\nModul: Grammatik · Abgabe So 12.04.'},
+  {d:'2026-04-01',t:'📐 Grammatik: Suche-X + Tafelbild',f:'11:35',e:'13:35',c:'schreibtisch',n:'Suche-X, Sammeln & Sortieren + Tafelbild skizzieren\nModul: Grammatik · Abgabe So 12.04.'},
+  {d:'2026-04-01',t:'📐 Grammatik: Regelbildung + Recycling',f:'13:35',e:'15:35',c:'schreibtisch',n:'Regelbildung + Recyclingaktivität (weiße Inseln)\nModul: Grammatik · Abgabe So 12.04.'},
+  {d:'2026-04-03',t:'📐 Grammatik: Dialog + freiere Aktivität',f:'12:15',e:'14:15',c:'schreibtisch',n:'Dialog für Gesprächskonstruktion + freiere Aktivität\nModul: Grammatik · Abgabe So 12.04.'},
+  {d:'2026-04-01',t:'📐 Grammatik: Arbeitsblätter erstellen',f:'15:35',e:'16:35',c:'schreibtisch',n:'Arbeitsblätter erstellen\nModul: Grammatik · Abgabe So 12.04.'},
+  {d:'2026-04-06',t:'📐 Grammatik: Überarbeiten + Hypothesen',f:'12:15',e:'14:15',c:'schreibtisch',n:'Überarbeiten + Hypothesen & Regelformulierung ergänzen\nModul: Grammatik · Abgabe So 12.04.'},
+  {d:'2026-04-07',t:'📐 Grammatik: Korrekturlesen + Quellen',f:'11:15',e:'12:45',c:'schreibtisch',n:'Korrekturlesen + Quellenangaben\nModul: Grammatik · Abgabe So 12.04.'},
+  {d:'2026-04-08',t:'📐 Grammatik: Finales Layout',f:'11:35',e:'12:35',c:'schreibtisch',n:'Finales Layout + abgabebereit machen\nModul: Grammatik · Abgabe So 12.04.'},
   {d:'2026-04-12',t:'🔴 ABGABE: Grammatik auf Moodle hochladen',f:'10:00',e:'10:30',c:'uniaufgaben',n:'ABGABE Grammatik & Grammatikunterricht – auf Moodle!\nhttps://moodle.univie.ac.at'},
   {d:'2026-05-03',t:'🎓 Unterrichtspraktikum Runde A',f:'09:00',e:'18:00',c:'unipraesenz',n:'Unterrichtspraktikum Runde A\nAlle Unterlagen bereit?'},
 
@@ -2147,7 +2147,7 @@ function rDay(c){
       var catCls=ev.cat==='unipraesenz'?' cat-unipraesenz':ev.cat==='uniaufgaben'?' cat-uniaufgaben':ev.cat==='vhs'?' cat-vhs':ev.cat==='schreibtisch'?' cat-schreibtisch':'';
       h+='<div class="dev'+catCls+(done?' done':'')+'" id="'+sid+'" data-evid="'+ev.id+'" data-date="'+date+'" data-from="'+ev.from+'" data-dur="'+(hm(ev.to||ev.from)-hm(ev.from))+'" style="background:'+col+'18;border:1px solid '+col+'33">'+
          '<div class="dbar" style="background:'+col+'"></div>'+'<span class="drag-handle" title="Verschieben">&#x28FF;</span>'+(getDragOverrides()[ev.id+'_'+date]?'<span style="position:absolute;right:22px;top:2px;font-size:.6rem;color:#888;cursor:pointer" onclick="event.stopPropagation();resetDragOverride(\''+ev.id+'\',\''+date+'\')" title="Zurücksetzen">&#x21BA;</span>':'')+
-         '<div class="dbody" onclick="openEdit(\''+ev.id+'\',\''+date+'\')">'+
+         '<div class="dbody" onclick="showDet(\''+ev.id+'\',\''+date+'\',\''+ev.from+'\',\''+ev.to+'\',this)">'+
          '<div class="detime">'+ev.from+(ev.to?'–'+ev.to:'')+(dl?' <span style="background:'+col+';color:#fff;font-size:.58rem;padding:1px 5px;border-radius:8px;margin-left:4px;opacity:.85">'+dl+'</span>':'')+'</div>'+
          '<div class="det">'+ev.title+'</div>'+
          (ev.note?'<div class="denote">'+ev.note+'</div>':'')+
@@ -2264,6 +2264,44 @@ function bldCats(sel){sel=sel||'extra';document.getElementById('mcats').innerHTM
 function selCat(btn){document.querySelectorAll('.cbt').forEach(function(b){b.classList.remove('sel')});btn.classList.add('sel')}
 function gCat(){var s=document.querySelector('.cbt.sel');return s?s.getAttribute('onclick').match(/'(\w+)'\)/)[1]:'extra'}
 function openAdd(date){EID=null;document.getElementById('mtitle').textContent='Neuer Termin';document.getElementById('etitle').value='';document.getElementById('edate').value=date||ds(CD);document.getElementById('efrom').value='';document.getElementById('eto').value='';document.getElementById('enote').value='';document.getElementById('bdel').style.display='none';bldCats('extra');document.getElementById('ov').classList.add('open')}
+function showDet(id,date,from,to,el){
+  var title='';var note='';
+  var allEvs=getEvs(date);
+  var found=allEvs.find(function(e){return e.id===id});
+  if(found){title=found.title;note=found.note||''}
+  document.getElementById('det-time').textContent=from+(to?'–'+to:'');
+  document.getElementById('det-title').textContent=title;
+  // Build checklist from note lines
+  var cl=document.getElementById('det-checklist');
+  cl.innerHTML='';
+  var storKey='chk_'+date+'_'+id;
+  var checked=JSON.parse(localStorage.getItem(storKey)||'{}');
+  if(note){
+    var items=note.split(/[\n·]/).map(function(s){return s.trim();}).filter(function(s){return s.length>0;});
+    items.forEach(function(item,i){
+      var isChecked=!!checked[i];
+      var li=document.createElement('li');
+      if(isChecked)li.className='checked';
+      li.innerHTML='<span class="chk-box">'+(isChecked?'✓':'')+'</span><span>'+item+'</span>';
+      li.onclick=function(){
+        var now=JSON.parse(localStorage.getItem(storKey)||'{}');
+        if(now[i]){delete now[i];}else{now[i]=1;}
+        localStorage.setItem(storKey,JSON.stringify(now));
+        li.className=now[i]?'checked':'';
+        li.querySelector('.chk-box').textContent=now[i]?'✓':'';
+      };
+      cl.appendChild(li);
+    });
+  } else {
+    var li=document.createElement('li');
+    li.style.color='var(--muted)';li.style.fontStyle='italic';
+    li.textContent='Keine Details vorhanden.';
+    cl.appendChild(li);
+  }
+  document.getElementById('det-edit-btn').onclick=function(){closeDet();openEdit(id,date)};
+  document.getElementById('det-overlay').classList.add('open');
+}
+function closeDet(){document.getElementById('det-overlay').classList.remove('open')}
 function openEdit(id,date){var ev=UE.find(function(e){return e.id===id});if(!ev){openAdd(date);return}EID=id;document.getElementById('mtitle').textContent='Bearbeiten';document.getElementById('etitle').value=ev.title;document.getElementById('edate').value=ev.date;document.getElementById('efrom').value=ev.from;document.getElementById('eto').value=ev.to||'';document.getElementById('enote').value=ev.note||'';document.getElementById('bdel').style.display='';bldCats(ev.cat||'extra');document.getElementById('ov').classList.add('open')}
 function closeM(){document.getElementById('ov').classList.remove('open')}
 document.getElementById('ov').addEventListener('click',function(e){if(e.target===this)closeM()});
@@ -2664,6 +2702,17 @@ APPS_EXTRA = {
 }, 100);
 </script>
 
+<div id="det-overlay" onclick="if(event.target===this)closeDet()">
+  <div id="det-box">
+    <div class="det-time" id="det-time"></div>
+    <div class="det-title" id="det-title"></div>
+    <ul class="det-checklist" id="det-checklist"></ul>
+    <div class="det-btns">
+      <button class="det-btn" onclick="closeDet()">Schließen</button>
+      <button class="det-btn primary" id="det-edit-btn">✏️ Bearbeiten</button>
+    </div>
+  </div>
+</div>
 <div id="popup-overlay" onclick="if(event.target===this)closePopup()">
   <div id="popup-box">
     <div id="popup-topbar">
