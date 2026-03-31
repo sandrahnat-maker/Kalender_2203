@@ -66,6 +66,18 @@
     font-family:'DM Sans',sans-serif;cursor:pointer;
     display:inline-flex;align-items:center;gap:.35rem;
   }
+  .btn-osmand-small{
+    background:#1a5c38;color:#fff;border:none;border-radius:20px;
+    padding:.4rem .95rem;font-size:.75rem;font-weight:700;
+    font-family:'DM Sans',sans-serif;cursor:pointer;
+    display:inline-flex;align-items:center;gap:.35rem;text-decoration:none;
+  }
+  .btn-osmand{
+    background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.5);
+    color:#fff;border-radius:30px;padding:.5rem 1.1rem;font-size:.82rem;font-weight:700;
+    font-family:'DM Sans',sans-serif;cursor:pointer;
+    display:inline-flex;align-items:center;gap:.4rem;text-decoration:none;
+  }
   .tip{text-align:center;font-size:.72rem;color:var(--muted);margin-top:1.4rem;line-height:1.6;}
 </style>
 </head>
@@ -79,7 +91,8 @@
   <div class="today-day" id="todayDay">–</div>
   <div class="today-route" id="todayRoute">–</div>
   <div class="btn-row">
-    <a id="btnMapsToday" href="#" target="_blank" class="btn-maps">🗺 Google Maps</a>
+    <a id="btnMapsToday" href="#" target="_blank" class="btn-maps">🗺 Navigation starten</a>
+    <a id="btnOsmandToday" href="#" target="_blank" class="btn-osmand">🧭 OsmAnd</a>
     <button class="btn-speak" id="btnSpeakToday" onclick="speakToday()">🔊 Vorlesen</button>
   </div>
 </div>
@@ -89,48 +102,56 @@
 <p class="tip">Tippe auf einen Tag zum Aufklappen<br>🗺 öffnet Google Maps mit Navigation · 🔊 liest die Route vor</p>
 
 <script>
+var BASE = 'https://raw.githubusercontent.com/sandrahnat-maker/Kalender_2203/main/';
 var ROUTES = [
   {
-    day:'Montag', short:'Mo', dur:'20 Min', dow:1,
-    text:'Magdalenenstr. → Linke Wienzeile → Naschpark entlang → Kettenbrückengasse → Stiegengasse → Magdalenenstr.',
-    speak:'Montags-Runde, 20 Minuten. Geh aus der Magdalenenstraße zur Linken Wienzeile. Dann den Naschpark entlang bis zur Kettenbrückengasse. Weiter durch die Stiegengasse zurück zur Magdalenenstraße.',
-    maps:'https://www.google.com/maps/dir/Magdalenenstra%C3%9Fe+4,+1060+Wien/Linke+Wienzeile,+1060+Wien/Naschpark,+1050+Wien/Kettenbr%C3%BCckengasse,+1050+Wien/Stiegengasse,+1060+Wien/Magdalenenstra%C3%9Fe+4,+1060+Wien/@48.1964,16.355,15z/am=t/data=!4m2!4m1!3e2'
+    day:'Montag', short:'Mo', dur:'~30 Min', dow:1,
+    text:'Magdalenenstr. → Stiegengasse → Theobaldgasse → Windmühlgasse → Amerlingstraße → Esterházypark außen → Millergasse → Magdalenenstr.',
+    speak:'Montags-Runde, etwa dreißig Minuten. Östliche Grün-Schleife. Geh aus der Magdalenenstraße die Stiegengasse hinauf. An der Theobaldgasse links – die ruhige Querverbindung. Dann die Windmühlgasse runter. In die Amerlingstraße abbiegen und am Esterházypark außen entlanggehen – schön grün! Auf der Millergasse zurück zur Magdalenenstraße.',
+    maps:'https://www.google.com/maps/dir/48.19772,16.35490/48.19940,16.35630/48.19870,16.35310/48.19720,16.35180/48.19600,16.35380/48.19772,16.35490/@48.198,16.354,16z/am=t/data=!4m2!4m1!3e2',
+    gpx:'Montag_Lottes_Runde.gpx'
   },
   {
-    day:'Dienstag', short:'Di', dur:'25 Min', dow:2,
-    text:'Magdalenenstr. → Millergasse → Esterházypark außen → Fillgradergasse → Laimgrubengasse → Magdalenenstr.',
-    speak:'Dienstags-Runde, 25 Minuten. Geh aus der Magdalenenstraße in die Millergasse. Den Esterházypark außen umgehen. Weiter durch die ruhige Fillgradergasse und die Laimgrubengasse zurück zur Magdalenenstraße.',
-    maps:'https://www.google.com/maps/dir/Magdalenenstra%C3%9Fe+4,+1060+Wien/Millergasse,+1060+Wien/Esterh%C3%A1zypark,+1060+Wien/Fillgradergasse,+1060+Wien/Laimgrubengasse,+1060+Wien/Magdalenenstra%C3%9Fe+4,+1060+Wien/@48.197,16.353,15z/am=t/data=!4m2!4m1!3e2'
+    day:'Dienstag', short:'Di', dur:'~30 Min', dow:2,
+    text:'Magdalenenstr. → Liniengasse → Haydngasse → Kaunitzgasse → Mollardgasse → Wallgasse → Sandwirtgasse → Magdalenenstr.',
+    speak:'Dienstags-Runde, etwa dreißig Minuten. Westliche Gassen-Schleife. Geh aus der Magdalenenstraße in die Liniengasse. Dann in die ruhige Haydngasse abbiegen. Weiter durch die Kaunitzgasse – sehr ruhig! Die Mollardgasse kurz queren. Durch die Wallgasse und die Sandwirtgasse zurück zur Magdalenenstraße.',
+    maps:'https://www.google.com/maps/dir/48.19772,16.35490/48.19900,16.35200/48.19750,16.34980/48.19580,16.34900/48.19480,16.35050/48.19530,16.35250/48.19640,16.35310/48.19772,16.35490/@48.197,16.352,16z/am=t/data=!4m2!4m1!3e2',
+    gpx:'Dienstag_Lottes_Runde.gpx'
   },
   {
-    day:'Mittwoch', short:'Mi', dur:'20 Min', dow:3,
-    text:'Magdalenenstr. → Windmühlgasse → Amerlingstraße → Therapiepark → Luftbadgasse → Millergasse → Magdalenenstr.',
-    speak:'Mittwochs-Runde, 20 Minuten. Geh aus der Magdalenenstraße in die Windmühlgasse. Weiter durch die Amerlingstraße zum Therapiepark. Dann durch die ruhige Luftbadgasse und die Millergasse zurück zur Magdalenenstraße.',
-    maps:'https://www.google.com/maps/dir/Magdalenenstra%C3%9Fe+4,+1060+Wien/Windm%C3%BChlgasse,+1060+Wien/Amerlingstra%C3%9Fe,+1060+Wien/Mariahilfer+Ruhe+und+Therapiepark,+1060+Wien/Luftbadgasse,+1060+Wien/Millergasse,+1060+Wien/Magdalenenstra%C3%9Fe+4,+1060+Wien/@48.197,16.352,15z/am=t/data=!4m2!4m1!3e2'
+    day:'Mittwoch', short:'Mi', dur:'~30 Min', dow:3,
+    text:'Magdalenenstr. → Millergasse → Fillgradergasse → Luftbadgasse → Therapiepark außen → Amerlingstraße → Theobaldgasse → Stiegengasse → Magdalenenstr.',
+    speak:'Mittwochs-Runde, etwa dreißig Minuten. Therapiepark-Schleife. Geh aus der Magdalenenstraße durch die Millergasse. In die Fillgradergasse biegen – schön ruhig. Weiter durch die Luftbadgasse zum Therapiepark. Den grünen Therapiepark außen entlang. Über die Amerlingstraße weiter in die Theobaldgasse. Dann die Stiegengasse zurück zur Magdalenenstraße.',
+    maps:'https://www.google.com/maps/dir/48.19772,16.35490/48.19630,16.35380/48.19540,16.35200/48.19490,16.35050/48.19620,16.35090/48.19780,16.35310/48.19900,16.35500/48.19772,16.35490/@48.197,16.352,16z/am=t/data=!4m2!4m1!3e2',
+    gpx:'Mittwoch_Lottes_Runde.gpx'
   },
   {
-    day:'Donnerstag', short:'Do', dur:'25 Min', dow:4,
-    text:'Magdalenenstr. → Liniengasse → Stiegengasse → Theobaldgasse → Windmühlgasse → Magdalenenstr.',
-    speak:'Donnerstags-Runde, 25 Minuten. Ruhige Gassen-Runde. Geh aus der Magdalenenstraße in die Liniengasse. Weiter durch die Stiegengasse und die Theobaldgasse. Dann durch die Windmühlgasse zurück zur Magdalenenstraße.',
-    maps:'https://www.google.com/maps/dir/Magdalenenstra%C3%9Fe+4,+1060+Wien/Liniengasse,+1060+Wien/Stiegengasse,+1060+Wien/Theobaldgasse,+1060+Wien/Windm%C3%BChlgasse,+1060+Wien/Magdalenenstra%C3%9Fe+4,+1060+Wien/@48.198,16.355,15z/am=t/data=!4m2!4m1!3e2'
+    day:'Donnerstag', short:'Do', dur:'~30 Min', dow:4,
+    text:'Magdalenenstr. → Windmühlgasse → Sandwirtgasse → Wallgasse → Aegidigasse → Laimgrubengasse → Fillgradergasse → Esterházypark außen → Millergasse → Magdalenenstr.',
+    speak:'Donnerstags-Runde, etwa dreißig Minuten. Laimgruben-Schleife. Geh aus der Magdalenenstraße die Windmühlgasse hinunter. Durch die Sandwirtgasse und Wallgasse. Weiter durch die ruhige Aegidigasse. Durch die Laimgrubengasse und die Fillgradergasse. Am Esterházypark außen entlang – grün! Auf der Millergasse zurück zur Magdalenenstraße.',
+    maps:'https://www.google.com/maps/dir/48.19772,16.35490/48.19820,16.35290/48.19640,16.35310/48.19530,16.35250/48.19480,16.35050/48.19540,16.35110/48.19560,16.35200/48.19650,16.35430/48.19772,16.35490/@48.197,16.352,16z/am=t/data=!4m2!4m1!3e2',
+    gpx:'Donnerstag_Lottes_Runde.gpx'
   },
   {
-    day:'Freitag', short:'Fr', dur:'20 Min', dow:5,
-    text:'Magdalenenstr. → Rechte Wienzeile → Alfred-Grünwald-Park außen → Kettenbrückengasse → Magdalenenstr.',
-    speak:'Freitags-Runde, 20 Minuten. Geh aus der Magdalenenstraße zur Rechten Wienzeile. Den Alfred-Grünwald-Park außen entlanggehen. Weiter bis zur Kettenbrückengasse zurück zur Magdalenenstraße.',
-    maps:'https://www.google.com/maps/dir/Magdalenenstra%C3%9Fe+4,+1060+Wien/Rechte+Wienzeile,+1050+Wien/Alfred-Gr%C3%BCnwald-Park,+1060+Wien/Kettenbr%C3%BCckengasse,+1050+Wien/Magdalenenstra%C3%9Fe+4,+1060+Wien/@48.196,16.357,15z/am=t/data=!4m2!4m1!3e2'
+    day:'Freitag', short:'Fr', dur:'~30 Min', dow:5,
+    text:'Magdalenenstr. → Millergasse → Esterházypark außen → Windmühlgasse → Chwallagasse → Liniengasse → Stiegengasse → Magdalenenstr.',
+    speak:'Freitags-Runde, etwa dreißig Minuten. Nordöstliche Schleife. Geh aus der Magdalenenstraße durch die Millergasse. Am Esterházypark außen entlang – grüner Start! Die Windmühlgasse hinaufgehen. In die ruhige Chwallagasse abbiegen. Durch die Liniengasse weiter. Dann die Stiegengasse zurück zur Magdalenenstraße.',
+    maps:'https://www.google.com/maps/dir/48.19772,16.35490/48.19630,16.35380/48.19720,16.35180/48.19820,16.35290/48.19950,16.35350/48.19900,16.35200/48.19900,16.35500/48.19772,16.35490/@48.198,16.353,16z/am=t/data=!4m2!4m1!3e2',
+    gpx:'Freitag_Lottes_Runde.gpx'
   },
   {
-    day:'Samstag', short:'Sa', dur:'30 Min', dow:6,
-    text:'Magdalenenstr. → Esterházygasse → Otto-Bauer-Gasse → Getreidemarkt → Resselpark außen → Operngasse → Linke Wienzeile → Magdalenenstr.',
-    speak:'Samstags-Runde, 30 Minuten. Geh aus der Magdalenenstraße in die Esterházygasse. Weiter durch die Otto-Bauer-Gasse zum Getreidemarkt. Den Resselpark außen umgehen. Dann durch die Operngasse und die Linke Wienzeile zurück zur Magdalenenstraße.',
-    maps:'https://www.google.com/maps/dir/Magdalenenstra%C3%9Fe+4,+1060+Wien/Esterh%C3%A1zygasse,+1060+Wien/Otto-Bauer-Gasse,+1060+Wien/Getreidemarkt,+1060+Wien/Resselpark,+1040+Wien/Operngasse,+1010+Wien/Linke+Wienzeile,+1060+Wien/Magdalenenstra%C3%9Fe+4,+1060+Wien/@48.198,16.36,15z/am=t/data=!4m2!4m1!3e2'
+    day:'Samstag', short:'Sa', dur:'~30 Min', dow:6,
+    text:'Magdalenenstr. → Stiegengasse → Liniengasse → Chwallagasse → Windmühlgasse → Amerlingstraße → Therapiepark außen → Luftbadgasse → Fillgradergasse → Laimgrubengasse → Sandwirtgasse → Magdalenenstr.',
+    speak:'Samstags-Runde, etwa dreißig Minuten. Die große Doppelpark-Runde! Geh aus der Magdalenenstraße die Stiegengasse hinauf. Durch die Liniengasse und Chwallagasse. Die Windmühlgasse hinunter zur Amerlingstraße. Am Therapiepark außen entlanggehen – grün! Durch die Luftbadgasse und Fillgradergasse. Weiter durch die Laimgrubengasse und Sandwirtgasse zurück zur Magdalenenstraße.',
+    maps:'https://www.google.com/maps/dir/48.19772,16.35490/48.19900,16.35500/48.19900,16.35200/48.19820,16.35290/48.19490,16.35050/48.19540,16.35110/48.19560,16.35200/48.19640,16.35310/48.19772,16.35490/@48.197,16.352,16z/am=t/data=!4m2!4m1!3e2',
+    gpx:'Samstag_Lottes_Runde.gpx'
   },
   {
-    day:'Sonntag', short:'So', dur:'30 Min', dow:0,
-    text:'Magdalenenstr. → Linke Wienzeile → Matzleinsdorf → Schönbrunner Str. → Magdalenenstr.',
-    speak:'Sonntags-Runde, 30 Minuten. Gemütliche Runde. Geh aus der Magdalenenstraße auf die Linke Wienzeile in Richtung Matzleinsdorf. Dann durch die Schönbrunner Straße zurück zur Magdalenenstraße.',
-    maps:'https://www.google.com/maps/dir/Magdalenenstra%C3%9Fe+4,+1060+Wien/Linke+Wienzeile+44,+1060+Wien/Linke+Wienzeile+80,+1050+Wien/Sch%C3%B6nbrunner+Stra%C3%9Fe+55,+1050+Wien/Magdalenenstra%C3%9Fe+4,+1060+Wien/@48.193,16.352,15z/am=t/data=!4m2!4m1!3e2'
+    day:'Sonntag', short:'So', dur:'~30 Min', dow:0,
+    text:'Magdalenenstr. → Sandwirtgasse → Aegidigasse → Laimgrubengasse → Fillgradergasse → Esterházypark außen → Amerlingstraße → Theobaldgasse → Liniengasse → Haydngasse → Magdalenenstr.',
+    speak:'Sonntags-Runde, etwa dreißig Minuten. Gemütliche Sonntagsrunde. Geh aus der Magdalenenstraße durch die Sandwirtgasse. Dann durch die ruhige Aegidigasse und die Laimgrubengasse. Die Fillgradergasse entlanggehen zum Esterházypark. Den Park außen umgehen – schön grün! Über die Amerlingstraße und Theobaldgasse in die Liniengasse. Durch die Haydngasse zurück zur Magdalenenstraße.',
+    maps:'https://www.google.com/maps/dir/48.19772,16.35490/48.19640,16.35310/48.19480,16.35050/48.19540,16.35110/48.19560,16.35200/48.19650,16.35430/48.19720,16.35180/48.19780,16.35310/48.19900,16.35200/48.19750,16.34980/48.19772,16.35490/@48.197,16.352,16z/am=t/data=!4m2!4m1!3e2',
+    gpx:'Sonntag_Lottes_Runde.gpx'
   }
 ];
 
@@ -188,10 +209,12 @@ function init() {
   document.getElementById('todayDay').textContent = today.day + ' · ' + today.dur;
   document.getElementById('todayRoute').innerHTML = formatRoute(today.text, true);
   document.getElementById('btnMapsToday').href = today.maps;
+  document.getElementById('btnOsmandToday').href = 'https://osmand.net/go?url=' + encodeURIComponent(BASE + today.gpx);
 
   var grid = document.getElementById('daysGrid');
   ROUTES.forEach(function(r) {
     var isToday = r.dow === dow;
+    var osmandUrl = 'https://osmand.net/go?url=' + encodeURIComponent(BASE + r.gpx);
     var card = document.createElement('div');
     card.className = 'day-card' + (isToday ? ' today-day open' : '');
     card.innerHTML =
@@ -208,7 +231,8 @@ function init() {
       '<div class="day-body">' +
         '<div class="route-text">' + formatRoute(r.text, false) + '</div>' +
         '<div class="btn-row-small">' +
-          '<a href="' + r.maps + '" target="_blank" class="btn-maps-small">🗺 Google Maps</a>' +
+          '<a href="' + r.maps + '" target="_blank" class="btn-maps-small">🗺 Maps</a>' +
+          '<a href="' + osmandUrl + '" target="_blank" class="btn-osmand-small">🧭 OsmAnd</a>' +
           '<button class="btn-speak-small" data-speak="' + r.speak.replace(/"/g,'&quot;') + '" onclick="speakText(this.dataset.speak, this)">🔊 Vorlesen</button>' +
         '</div>' +
       '</div>';
