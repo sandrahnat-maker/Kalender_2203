@@ -2309,8 +2309,7 @@ function showKompass(date) {
 
   var offen = allEvs.filter(function(ev) {
     if (chkd(ev.id, date)) return false;
-    var endM = ev.to ? hm(ev.to) : hm(ev.from) + 60;
-    return endM > nowMins;
+    return true;
   });
   offen.sort(function(a,b){ return hm(a.from) - hm(b.from); });
 
@@ -2331,67 +2330,80 @@ function showKompass(date) {
   popup.style.cssText = 'position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);width:calc(100% - 2rem);max-width:520px;background:#fff;border-radius:18px;box-shadow:0 8px 32px rgba(0,0,0,.22);z-index:500;overflow:hidden;animation:slideUp .3s ease';
 
   var header = document.createElement('div');
-  header.style.cssText = 'background:linear-gradient(135deg,#8B6020,#B85C30);color:#fff;padding:.75rem 1rem .6rem;display:flex;align-items:center;justify-content:space-between';
-
-  var headerInfo = document.createElement('div');
-  var lbl = document.createElement('div');
-  lbl.style.cssText = 'font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;opacity:.8;margin-bottom:.1rem';
-  lbl.textContent = '🧭 Was fühlt sich jetzt richtig an?';
-  var info = document.createElement('div');
-  info.style.cssText = 'font-size:.82rem;font-weight:600';
-  info.textContent = offen.length + ' offen · noch ' + zeitText + ' heute';
-  headerInfo.appendChild(lbl);
-  headerInfo.appendChild(info);
+  header.style.cssText = 'background:linear-gradient(135deg,#6B4510,#A04020);color:#fff;padding:1.2rem 1rem 1rem;position:relative';
 
   var closeBtn = document.createElement('button');
-  closeBtn.style.cssText = 'background:rgba(255,255,255,.2);border:none;color:#fff;width:28px;height:28px;border-radius:50%;font-size:1.1rem;cursor:pointer';
+  closeBtn.style.cssText = 'position:absolute;top:.6rem;right:.7rem;background:rgba(255,255,255,.15);border:none;color:#fff;width:30px;height:30px;border-radius:50%;font-size:1.2rem;cursor:pointer;line-height:1';
   closeBtn.textContent = '×';
   closeBtn.onclick = function() { popup.remove(); };
-
-  header.appendChild(headerInfo);
   header.appendChild(closeBtn);
-  popup.appendChild(header);
+
+  var kompassIcon = document.createElement('div');
+  kompassIcon.style.cssText = 'font-size:2rem;margin-bottom:.45rem;line-height:1';
+  kompassIcon.textContent = '🧭';
+  header.appendChild(kompassIcon);
 
   var frage = document.createElement('div');
-  frage.style.cssText = 'padding:.65rem 1rem .4rem;font-size:.78rem;color:#8A7D6A;font-style:italic';
+  frage.style.cssText = 'font-size:1.35rem;font-weight:800;letter-spacing:-.01em;line-height:1.2;color:#fff;margin-bottom:.35rem;font-family:var(--font-playfair)';
   frage.textContent = 'Was fühlt sich jetzt richtig an?';
-  popup.appendChild(frage);
+  header.appendChild(frage);
+
+  var info = document.createElement('div');
+  info.style.cssText = 'font-size:.78rem;opacity:.75;font-weight:500';
+  info.textContent = offen.length + ' offen · noch ' + zeitText + ' heute';
+  header.appendChild(info);
+
+  popup.appendChild(header);
 
   var list = document.createElement('div');
   list.style.cssText = 'padding:.2rem .7rem .8rem';
 
   var shown = offen.slice(0, 4);
-  shown.forEach(function(ev) {
-    var isNow = hm(ev.from) <= nowMins && (ev.to ? hm(ev.to) > nowMins : true);
+  function makeEvBtn(ev) {
+    var endM = ev.to ? hm(ev.to) : hm(ev.from) + 60;
+    var isNow = hm(ev.from) <= nowMins && endM > nowMins;
+    var isPast = endM <= nowMins;
+    var bg = isNow ? '#FDF8F0' : (isPast ? '#F2F0ED' : '#F7F2EB');
+    var border = isNow ? '#C4873A' : (isPast ? 'rgba(0,0,0,.06)' : 'rgba(0,0,0,.08)');
     var btn = document.createElement('button');
-    btn.style.cssText = 'display:flex;align-items:center;gap:.6rem;width:100%;background:' + (isNow ? '#FDF8F0' : '#F7F2EB') + ';border:1.5px solid ' + (isNow ? '#C4873A' : 'rgba(0,0,0,.08)') + ';border-radius:12px;padding:.55rem .8rem;margin-bottom:.4rem;cursor:pointer;text-align:left;font-family:var(--font-dm)';
-
+    btn.style.cssText = 'display:flex;align-items:center;gap:.6rem;width:100%;background:' + bg + ';border:1.5px solid ' + border + ';border-radius:12px;padding:.55rem .8rem;margin-bottom:.4rem;cursor:pointer;text-align:left;font-family:var(--font-dm);opacity:' + (isPast ? '.55' : '1');
     var time = document.createElement('span');
     time.style.cssText = 'font-size:.72rem;color:#8A7D6A;flex-shrink:0;min-width:38px';
     time.textContent = ev.from;
-
     var title = document.createElement('span');
     title.style.cssText = 'flex:1;font-size:.84rem;font-weight:600;color:#1A1A2E';
     title.textContent = ev.title;
-
     btn.appendChild(time);
     btn.appendChild(title);
-
     if (isNow) {
       var badge = document.createElement('span');
       badge.style.cssText = 'font-size:.62rem;background:#C4873A;color:#fff;border-radius:10px;padding:.1rem .45rem;flex-shrink:0';
       badge.textContent = 'Jetzt';
       btn.appendChild(badge);
+    } else if (isPast) {
+      var badge2 = document.createElement('span');
+      badge2.style.cssText = 'font-size:.62rem;background:rgba(0,0,0,.12);color:#666;border-radius:10px;padding:.1rem .45rem;flex-shrink:0';
+      badge2.textContent = 'verpasst';
+      btn.appendChild(badge2);
     }
+    btn.onclick = function() { popup.remove(); if(CV !== 'day') setV('day'); };
+    return btn;
+  }
 
-    btn.onclick = function() { popup.remove(); if(V !== 'day') setV('day'); };
-    list.appendChild(btn);
+  shown.forEach(function(ev) {
+    list.appendChild(makeEvBtn(ev));
   });
 
   if (offen.length > 4) {
-    var more = document.createElement('div');
-    more.style.cssText = 'text-align:center;font-size:.72rem;color:#8A7D6A;padding:.2rem 0 .3rem';
-    more.textContent = '+ ' + (offen.length - 4) + ' weitere';
+    var more = document.createElement('button');
+    more.style.cssText = 'display:block;width:100%;text-align:center;font-size:.78rem;color:#8B6020;padding:.35rem 0 .45rem;background:rgba(139,96,32,.08);border:1.5px dashed rgba(139,96,32,.3);border-radius:10px;cursor:pointer;font-family:var(--font-dm);font-weight:600;margin-top:.1rem';
+    more.textContent = '+ ' + (offen.length - 4) + ' weitere anzeigen';
+    more.onclick = function() {
+      more.remove();
+      offen.slice(4).forEach(function(ev) {
+        list.appendChild(makeEvBtn(ev));
+      });
+    };
     list.appendChild(more);
   }
 
@@ -2406,7 +2418,7 @@ function showKompass(date) {
       p.style.transform = 'translateX(-50%) translateY(20px)';
       setTimeout(function(){ if(p.parentNode) p.remove(); }, 400);
     }
-  }, 12000);
+  }, 20000);
 }
 
 // ── DRAG & DROP TOUCH LOGIC ───────────────────────────────────────────────
@@ -2503,6 +2515,7 @@ function resetDragOverride(evId, date) {
 render();
 setTimeout(initDragDrop, 500);
 renderOffeneBar();
+setTimeout(function(){ showKompass(ds(CD)); }, 1200);
 // Alle 60 Sekunden aktualisieren
 setInterval(renderOffeneBar, 60000);
 setTimeout(function(){
