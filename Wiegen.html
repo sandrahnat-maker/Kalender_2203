@@ -28,13 +28,23 @@ body{background:var(--bg);font-family:'DM Sans',sans-serif;color:var(--ink);padd
 .delta-down{color:var(--down-col)}
 .delta-same{color:var(--same-col)}
 
-/* INPUT */
+/* INPUT / STEPPER */
 .input-box{background:var(--cream);border-radius:14px;padding:.85rem 1.1rem;margin-bottom:.9rem;border:1.5px solid var(--gold-light)}
-.input-row{display:flex;gap:.5rem;align-items:flex-end}
-.input-row input{flex:1;border:1.5px solid #DDD;border-radius:10px;padding:.55rem .75rem;font-size:1rem;font-family:inherit;color:var(--ink);background:#fff;outline:none;-webkit-appearance:none}
-.input-row input:focus{border-color:var(--gold)}
-.input-unit{font-size:.8rem;color:var(--grey);padding-bottom:.6rem;flex-shrink:0}
-.input-btn{background:var(--gold);color:#fff;border:none;border-radius:10px;padding:.55rem 1.1rem;font-size:.85rem;font-weight:700;cursor:pointer;font-family:inherit;flex-shrink:0}
+
+/* DRUM PICKER */
+.drum-wrap{display:flex;align-items:center;justify-content:center;gap:.2rem;user-select:none;-webkit-user-select:none}
+.drum-sep{font-family:'DM Serif Display',serif;font-size:1.8rem;color:var(--ink);padding:0 .1rem;line-height:1}
+.drum-unit-lbl{font-size:.85rem;color:var(--grey);padding-left:.3rem;align-self:center}
+.drum{position:relative;width:4.2rem;height:154px;overflow:hidden;cursor:ns-resize;border-radius:12px;background:var(--ink)}
+.drum::before,.drum::after{content:'';position:absolute;left:0;right:0;height:2.2rem;z-index:2;pointer-events:none}
+.drum::before{top:0;background:linear-gradient(to bottom,rgba(26,26,46,.92),rgba(26,26,46,.0))}
+.drum::after{bottom:0;background:linear-gradient(to top,rgba(26,26,46,.92),rgba(26,26,46,.0))}
+.drum-selector{position:absolute;top:50%;left:.3rem;right:.3rem;height:44px;transform:translateY(-50%);border:2px solid var(--gold);border-radius:8px;z-index:1;pointer-events:none}
+.drum-inner{position:absolute;left:0;right:0;transition:transform .12s cubic-bezier(.25,.8,.25,1)}
+.drum-item{height:44px;display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:1.5rem;color:rgba(255,255,255,.35);transition:color .1s,font-size .1s}
+.drum-item.selected{color:#fff;font-size:1.75rem}
+
+.input-btn{background:var(--gold);color:#fff;border:none;border-radius:10px;padding:.6rem 1.3rem;font-size:.9rem;font-weight:700;cursor:pointer;font-family:inherit;width:100%;margin-top:.8rem}
 .input-btn:active{opacity:.85}
 .input-date{font-size:.72rem;color:var(--grey);margin-top:.4rem;text-align:center}
 
@@ -81,11 +91,13 @@ body{background:var(--bg);font-family:'DM Sans',sans-serif;color:var(--ink);padd
 </div>
 
 <div class="input-box">
-  <div class="input-row">
-    <input type="number" id="weightIn" step="0.1" min="30" max="200" placeholder="z.B. 68.5">
-    <span class="input-unit">kg</span>
-    <button class="input-btn" onclick="saveWeight()">Eintragen</button>
+  <div class="drum-wrap">
+    <div class="drum" id="drumKg"></div>
+    <div class="drum-sep">,</div>
+    <div class="drum" id="drumDez" style="width:3rem"></div>
+    <div class="drum-unit-lbl">kg</div>
   </div>
+  <button class="input-btn" onclick="saveWeight()">Eintragen</button>
   <div class="input-date" id="inputDate"></div>
 </div>
 
@@ -159,18 +171,167 @@ function daysBetween(a, b) {
   return Math.round((new Date(b) - new Date(a)) / 86400000);
 }
 
-// \u2500\u2500 INPUT \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+// ── DRUM PICKER (endlos, mit Übertrag) ─────────────────────────────────────
+var drumKgVal  = 70;
+var drumDezVal = 0;
+var _drumKgObj  = null;
+var _drumDezObj = null;
+var DRUM_IH = 44;
+var DRUM_REP = 40;
+
+function initStepper() {
+  if (entries.length > 0) {
+    var w = entries[0].w;
+    drumKgVal  = Math.max(30, Math.min(199, Math.floor(w)));
+    drumDezVal = Math.round((w - Math.floor(w)) * 10) % 10;
+  }
+  _drumKgObj  = makeDrum('drumKg',  30, 199, drumKgVal,  onKgChange);
+  _drumDezObj = makeDrum('drumDez',  0,   9, drumDezVal, onDezChange);
+}
+
+function onKgChange(v) { drumKgVal = v; }
+function onDezChange(v, steps) {
+  // steps = wie viele Schritte über die 0-9 Grenze gegangen wurde (positiv = aufwärts, negativ = abwärts)
+  drumDezVal = v;
+  if (steps !== 0 && _drumKgObj) {
+    var nk = drumKgVal + steps;
+    if (nk < 30) nk = 30;
+    if (nk > 199) nk = 199;
+    drumKgVal = nk;
+    _drumKgObj.scrollTo(nk, true);
+  }
+}
+
+function makeDrum(id, min, max, initVal, onChange) {
+  var el = document.getElementById(id);
+  var IH = DRUM_IH;
+  var count = max - min + 1;
+  var total = count * DRUM_REP;
+  var inner = document.createElement('div');
+  inner.className = 'drum-inner';
+  for (var i = 0; i < total; i++) {
+    var item = document.createElement('div');
+    item.className = 'drum-item';
+    item.textContent = min + (i % count);
+    inner.appendChild(item);
+  }
+  el.innerHTML = '';
+  var sel = document.createElement('div'); sel.className = 'drum-selector';
+  el.appendChild(sel); el.appendChild(inner);
+
+  var dH = el.offsetHeight || 154;
+  var cOff = dH / 2 - IH / 2;
+  // currentIdx zeigt auf die aktuell zentrierte Position in der langen Liste
+  var currentIdx = Math.floor(DRUM_REP / 2) * count + (initVal - min);
+  var curY = -(currentIdx * IH) + cOff;
+  inner.style.transition = 'none';
+  inner.style.transform = 'translateY(' + curY + 'px)';
+  hl();
+
+  function getY() {
+    var m = inner.style.transform.match(/-?[\d.]+/);
+    return m ? parseFloat(m[0]) : 0;
+  }
+  function idxFromY(y) { return Math.round((-y + cOff) / IH); }
+  function valFromIdx(idx) { return min + (((idx % count) + count) % count); }
+
+  function snap(y, anim) {
+    var newIdx = Math.max(0, Math.min(total - 1, idxFromY(y)));
+    var ny = -(newIdx * IH) + cOff;
+    inner.style.transition = anim ? 'transform .18s cubic-bezier(.25,.8,.25,1)' : 'none';
+    inner.style.transform = 'translateY(' + ny + 'px)';
+    curY = ny;
+
+    var newVal = valFromIdx(newIdx);
+    // Übertrag: wie oft wurde die 0-9 Grenze überquert?
+    // idxDiff Schritte durch eine count=10 Liste → floor(idxDiff/10) vollständige Durchläufe
+    // Plus: Teilübertrag wenn wir die Grenze 9→0 oder 0→9 überquert haben
+    var carry = 0;
+    if (id === 'drumDez') {
+      var idxDiff = newIdx - currentIdx;
+      // vollständige Durchläufe
+      var full = Math.floor(idxDiff / count);
+      // Rest: hat der Teilschritt die Grenze überquert?
+      var oldVal = valFromIdx(currentIdx);
+      var partial = 0;
+      if (idxDiff > 0 && newVal < oldVal) partial = +1;  // 9→0 aufwärts
+      if (idxDiff < 0 && newVal > oldVal) partial = -1;  // 0→9 abwärts
+      carry = full + partial;
+    }
+    currentIdx = newIdx;
+
+    setTimeout(hl, anim ? 20 : 0);
+    onChange(newVal, carry);
+  }
+
+  function hl() {
+    var y = getY();
+    var h = el.offsetHeight || 154;
+    var co = h / 2 - IH / 2;
+    var ci = Math.round((-y + co) / IH);
+    inner.querySelectorAll('.drum-item').forEach(function(it, i) {
+      it.classList.toggle('selected', i === ci);
+    });
+  }
+
+  var dSY, dSTY, drag = false;
+  el.addEventListener('touchstart', function(e) {
+    e.preventDefault(); drag = true;
+    dSY = e.touches[0].clientY; dSTY = getY();
+    inner.style.transition = 'none';
+  }, {passive: false});
+  el.addEventListener('touchmove', function(e) {
+    if (!drag) return; e.preventDefault();
+    curY = dSTY + (e.touches[0].clientY - dSY);
+    inner.style.transform = 'translateY(' + curY + 'px)'; hl();
+  }, {passive: false});
+  el.addEventListener('touchend', function() {
+    if (!drag) return; drag = false; snap(curY, true);
+  });
+  el.addEventListener('mousedown', function(e) {
+    e.preventDefault(); drag = true;
+    dSY = e.clientY; dSTY = getY();
+    inner.style.transition = 'none';
+  });
+  window.addEventListener('mousemove', function(e) {
+    if (!drag) return;
+    curY = dSTY + (e.clientY - dSY);
+    inner.style.transform = 'translateY(' + curY + 'px)'; hl();
+  });
+  window.addEventListener('mouseup', function() {
+    if (!drag) return; drag = false; snap(curY, true);
+  });
+  el.addEventListener('wheel', function(e) {
+    e.preventDefault();
+    snap(getY() - (e.deltaY > 0 ? 1 : -1) * IH, true);
+  }, {passive: false});
+
+  function scrollTo(val, anim) {
+    var cv = valFromIdx(currentIdx);
+    var diff = val - cv;
+    // kürzester Weg im Kreis
+    if (diff >  count / 2) diff -= count;
+    if (diff < -count / 2) diff += count;
+    var ni = Math.max(0, Math.min(total - 1, currentIdx + diff));
+    var ny = -(ni * IH) + cOff;
+    inner.style.transition = anim ? 'transform .22s cubic-bezier(.25,.8,.25,1)' : 'none';
+    inner.style.transform = 'translateY(' + ny + 'px)';
+    curY = ny;
+    currentIdx = ni;
+    setTimeout(hl, anim ? 25 : 0);
+  }
+  return { scrollTo: scrollTo };
+}
+
+// ── INPUT ─────────────────────────────────────────────────────────────────────
 function saveWeight() {
-  var v = parseFloat(document.getElementById('weightIn').value);
-  if (!v || v < 30 || v > 200) { alert('Bitte gueltiges Gewicht eingeben (30-200 kg)'); return; }
+  var v = drumKgVal + drumDezVal / 10;
   var t = today();
-  // Update or add today
   var idx = entries.findIndex(function(e){ return e.d === t; });
   if (idx >= 0) entries[idx].w = v;
   else entries.push({d: t, w: v});
   entries.sort(function(a,b){ return a.d < b.d ? 1 : -1; });
   saveData();
-  document.getElementById('weightIn').value = '';
   render();
 }
 
@@ -367,5 +528,11 @@ document.getElementById('inputDate').textContent =
 
 loadData();
 render();
+// initStepper nach erstem Paint, damit offsetHeight korrekt ist
+requestAnimationFrame(function() {
+  requestAnimationFrame(function() {
+    initStepper();
+  });
+});
 </script>
 </body></html>
