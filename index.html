@@ -2311,6 +2311,8 @@ function showKompass(date) {
 
   var offen = allEvs.filter(function(ev) {
     if (chkd(ev.id, date)) return false;
+    var endM = ev.to ? hm(ev.to) : hm(ev.from) + 60;
+    if (endM <= nowMins) return false;
     return true;
   });
   offen.sort(function(a,b){ return hm(a.from) - hm(b.from); });
@@ -2364,11 +2366,10 @@ function showKompass(date) {
   function makeEvBtn(ev) {
     var endM = ev.to ? hm(ev.to) : hm(ev.from) + 60;
     var isNow = hm(ev.from) <= nowMins && endM > nowMins;
-    var isPast = endM <= nowMins;
-    var bg = isNow ? '#FDF8F0' : (isPast ? '#F2F0ED' : '#F7F2EB');
-    var border = isNow ? '#C4873A' : (isPast ? 'rgba(0,0,0,.06)' : 'rgba(0,0,0,.08)');
+    var bg = isNow ? '#FDF8F0' : '#F7F2EB';
+    var border = isNow ? '#C4873A' : 'rgba(0,0,0,.08)';
     var btn = document.createElement('button');
-    btn.style.cssText = 'display:flex;align-items:center;gap:.6rem;width:100%;background:' + bg + ';border:1.5px solid ' + border + ';border-radius:12px;padding:.55rem .8rem;margin-bottom:.4rem;cursor:pointer;text-align:left;font-family:var(--font-dm);opacity:' + (isPast ? '.55' : '1');
+    btn.style.cssText = 'display:flex;align-items:center;gap:.6rem;width:100%;background:' + bg + ';border:1.5px solid ' + border + ';border-radius:12px;padding:.55rem .8rem;margin-bottom:.4rem;cursor:pointer;text-align:left;font-family:var(--font-dm);opacity:1';
     var time = document.createElement('span');
     time.style.cssText = 'font-size:.72rem;color:#8A7D6A;flex-shrink:0;min-width:38px';
     time.textContent = ev.from;
@@ -2382,11 +2383,6 @@ function showKompass(date) {
       badge.style.cssText = 'font-size:.62rem;background:#C4873A;color:#fff;border-radius:10px;padding:.1rem .45rem;flex-shrink:0';
       badge.textContent = 'Jetzt';
       btn.appendChild(badge);
-    } else if (isPast) {
-      var badge2 = document.createElement('span');
-      badge2.style.cssText = 'font-size:.62rem;background:rgba(0,0,0,.12);color:#666;border-radius:10px;padding:.1rem .45rem;flex-shrink:0';
-      badge2.textContent = 'verpasst';
-      btn.appendChild(badge2);
     }
     btn.onclick = function() { popup.remove(); if(CV !== 'day') setV('day'); };
     return btn;
