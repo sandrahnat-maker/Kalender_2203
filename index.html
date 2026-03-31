@@ -1436,6 +1436,7 @@ function rDay(c){
   var ALLOWED_TITLES=['🌅 Morgenroutine','🗂️ Schreibtischblock','🍽️ Mittagessen','🏠 Haushaltsblock','🐾 Tiere','💪 Sport','🚿 Pflege','🍴 Abendessen','🎨 Freizeit','🌙 Abendroutine'];
 
   var all=evs.filter(function(ev){
+    if(ev.cat==='extra') return true;
     if(ev.cat==='vhs'||ev.cat==='unipraesenz') return true;
     if(ALLOWED_TITLES.indexOf(ev.title)>=0) return true;
     return false;
@@ -1448,6 +1449,7 @@ function rDay(c){
   var ALWAYS_SHOW=['🌙 Abendroutine','🍴 Abendessen','🎨 Freizeit'];
 
   var visible=all.filter(function(ev){
+    if(ev.cat==='extra') return true;
     if(ev.cat==='vhs'||ev.cat==='unipraesenz') return true;
     if(fixedBlocks.length===0) return true;
     if(ALWAYS_SHOW.indexOf(ev.title)>=0) return true;
