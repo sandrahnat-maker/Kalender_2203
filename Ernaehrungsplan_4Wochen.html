@@ -462,7 +462,7 @@ main{max-width:600px;margin:0 auto;padding:.8rem}
     <button class="btn" onclick="clearDone()">Erledigte l&#246;schen</button>
     <button class="btn save" onclick="resetWeek()">Woche zur&#252;cksetzen</button>
   </div>
-  <div class="tip-box">&#128260; <b>Automatisch:</b> Zeigt Zutaten f&#252;r aktuelle + n&#228;chste Woche. Antippen = in den Warenkorb.</div>
+  <div class="tip-box">&#128260; <b>So geht's:</b> Zuhause abhaken, was du schon hast &rarr; dann <b>„Nur Kaufliste"</b> tippen &rarr; im Supermarkt siehst du nur noch, was fehlt.</div>
 </div>
 
 <div id="pflege-section" style="display:none">
@@ -520,7 +520,7 @@ function epSW(n,btn){
 
 const ZUTATEN_WOCHE = {
   1: [
-    { name: "Haferflocken (500g)", detail: "Mo/Do Fr&#252;hst&#252;ck &#183; Porridge", group: "\uD83C\uDF5E Brot & Getreide" },
+    { name: "Haferflocken (750g)", detail: "Mo/Mi/Do Fr&#252;hst&#252;ck &#183; Porridge", group: "\uD83C\uDF5E Brot & Getreide" },
     { name: "Vollkornmehl (500g)", detail: "Sa: Topfenpalatschinken &#183; So: Pizzateig", group: "\uD83C\uDF5E Brot & Getreide" },
     { name: "Vollkornweckerl (6 Stk)", detail: "Mo Abend: Vogerlsalat &#183; Sa: Semmelkn&#246;del &#183; So: Ribollita", group: "\uD83C\uDF5E Brot & Getreide" },
     { name: "Vollkornbrot", detail: "Di: Bruschetta &#183; So: Ribollita", group: "\uD83C\uDF5E Brot & Getreide" },
@@ -532,6 +532,7 @@ const ZUTATEN_WOCHE = {
     { name: "Naturjoghurt (750g)", detail: "Di/Do/Fr/Sa/So t&#228;glich", group: "\uD83E\uDD5A Eier & Milch" },
     { name: "Topfen (250g)", detail: "Sa Fr&#252;h: Palatschinken", group: "\uD83E\uDDC0 K&#228;se & Frischk&#228;se" },
     { name: "Mozzarella (125g)", detail: "So Fr&#252;h: Pizza", group: "\uD83E\uDDC0 K&#228;se & Frischk&#228;se" },
+    { name: "geriebener K&#228;se (100g)", detail: "Do Abend: Gem&#252;se-Quesadilla", group: "\uD83E\uDDC0 K&#228;se & Frischk&#228;se" },
     { name: "Eier (6 Stk)", detail: "Mi: Gem&#252;sereis", group: "\uD83E\uDD5A Eier & Milch" },
     { name: "Wei&#223;e Bohnen (2 Dosen)", detail: "Di: Pasta e Fagioli &#183; So: Ribollita", group: "\uD83E\uDD6B H&#252;lsenfr&#252;chte & Konserven" },
     { name: "Rote Linsen (Packung)", detail: "Fr Mittag: Linsen-Dal", group: "\uD83E\uDD6B H&#252;lsenfr&#252;chte & Konserven" },
@@ -694,7 +695,7 @@ const ZUTATEN_WOCHE = {
     { name: "Waln&#252;sse (200g)", detail: "Mo/Do/Sa t&#228;glich", group: "\uD83E\uDD5C N&#252;sse & Samen" },
     { name: "Mandeln (100g)", detail: "Di/Fr Nachmittag", group: "\uD83E\uDD5C N&#252;sse & Samen" },
     { name: "Leinsamen geschrotet", detail: "Mo/Do/Fr t&#228;glich", group: "\uD83E\uDD5C N&#252;sse & Samen" },
-    { name: "Chiasamen", detail: "Mi/Fr Fr&#252;hst&#252;ck", group: "\uD83E\uDD5C N&#252;sse & Samen" },
+    { name: "Chiasamen", detail: "Mi Fr&#252;hst&#252;ck", group: "\uD83E\uDD5C N&#252;sse & Samen" },
     { name: "Hanfsamen", detail: "Di Fr&#252;hst&#252;ck", group: "\uD83E\uDD5C N&#252;sse & Samen" },
     { name: "K&#252;rbiskerne", detail: "Di: K&#252;rbissuppe &#183; Sa: Salat", group: "\uD83E\uDD5C N&#252;sse & Samen" },
     { name: "Sesam", detail: "Do: Fr&#252;hlingsrollen", group: "\uD83E\uDD5C N&#252;sse & Samen" },
@@ -707,9 +708,10 @@ const ZUTATEN_WOCHE = {
     { name: "Chili (Flocken)", detail: "Mi: Arrabbiata", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
     { name: "Kardamom", detail: "Mo Fr&#252;h: Haferbrei", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
     { name: "Vanille", detail: "Mi Fr&#252;h: Porridge", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
-    { name: "Essig", detail: "Sa: Salat", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
     { name: "Powidl (Glas)", detail: "Sa: Germkn&#246;del", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
     { name: "Mohn", detail: "Sa: Germkn&#246;del-Mohnbutter", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "Ahornsirup", detail: "So: Hafer-Pancakes", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "Essig", detail: "Sa: Gr&#252;ner Salat", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
     { name: "Petersilie (frisch)", detail: "Di: Gr&#246;stl", group: "\uD83C\uDF3F Kr&#228;uter" },
     { name: "Koriander (frisch)", detail: "Mo: Dhal &#183; Fr: Enchiladas", group: "\uD83C\uDF3F Kr&#228;uter" },
     { name: "Basilikum (frisch)", detail: "Mi: Minestrone", group: "\uD83C\uDF3F Kr&#228;uter" },
@@ -718,17 +720,17 @@ const ZUTATEN_WOCHE = {
   4: [
     { name: "Haferflocken (500g)", detail: "Mo/Do Fr&#252;hst&#252;ck", group: "\uD83C\uDF5E Brot & Getreide" },
     { name: "Vollkornbrot / Weckerl", detail: "Mi/Do/Fr/So t&#228;glich", group: "\uD83C\uDF5E Brot & Getreide" },
-    { name: "Vollkorntoast", detail: "Mi Abend: Spinat-Ei &#183; Sa: Masala-Omelette", group: "\uD83C\uDF5E Brot & Getreide" },
+    { name: "Vollkorntoast", detail: "Mi Abend: Spinat-Ei-Pfanne &#183; Sa: Masala-Omelette", group: "\uD83C\uDF5E Brot & Getreide" },
     { name: "Vollkorntortilla (Packung)", detail: "Do: Tacos &#183; Fr: Hummus-Wrap", group: "\uD83C\uDF5E Brot & Getreide" },
     { name: "Mais-Tortillas", detail: "Do: Veggie-Tacos", group: "\uD83C\uDF5E Brot & Getreide" },
     { name: "Vollkornmehl", detail: "So: Kaiserschmarrn", group: "\uD83C\uDF5E Brot & Getreide" },
     { name: "Reiscracker", detail: "Di Abend: Edamame", group: "\uD83C\uDF5E Brot & Getreide" },
-    { name: "Basmati (500g)", detail: "Mo: Risotto", group: "\uD83C\uDF5D Nudeln & Reis" },
+    { name: "Risottoreis / Vollkornreis (500g)", detail: "Mo: Risotto mit Brokkoli", group: "\uD83C\uDF5D Nudeln & Reis" },
     { name: "Reisnudeln (Packung)", detail: "Di: Pad Thai", group: "\uD83C\uDF5D Nudeln & Reis" },
     { name: "Naturjoghurt (750g)", detail: "Di/Mi/Fr/Sa/So t&#228;glich", group: "\uD83E\uDD5A Eier & Milch" },
     { name: "Parmesan (gerieben)", detail: "Mo: Risotto", group: "\uD83E\uDDC0 K&#228;se & Frischk&#228;se" },
     { name: "Bergk&#228;se (St&#252;ck)", detail: "Fr: Kaspresskn&#246;del", group: "\uD83E\uDDC0 K&#228;se & Frischk&#228;se" },
-    { name: "Eier (8 Stk)", detail: "Di: Pad Thai &#183; Mi: Spinat-Ei &#183; Sa: Omelette &#183; So: Kaiserschmarrn", group: "\uD83E\uDD5A Eier & Milch" },
+    { name: "Eier (8 Stk)", detail: "Di: Pad Thai &#183; Mi: Spinat-Ei &#183; Sa: Masala-Omelette &#183; So: Kaiserschmarrn", group: "\uD83E\uDD5A Eier & Milch" },
     { name: "Schwarze Bohnen (2 Dosen)", detail: "Do: Veggie-Tacos", group: "\uD83E\uDD6B H&#252;lsenfr&#252;chte & Konserven" },
     { name: "Hummus (Becher)", detail: "Fr Abend: Hummus-Wrap", group: "\uD83E\uDD6B H&#252;lsenfr&#252;chte & Konserven" },
     { name: "Dosentomaten", detail: "Mo Abend: Zucchini-Suppe &#183; Do Abend: Rote-Bete-Suppe", group: "\uD83E\uDD6B H&#252;lsenfr&#252;chte & Konserven" },
@@ -746,7 +748,7 @@ const ZUTATEN_WOCHE = {
     { name: "Radieschen", detail: "Fr: Hummus-Wrap", group: "\uD83E\uDD66 Gem&#252;se" },
     { name: "Rucola (Sackerl)", detail: "Fr: Hummus-Wrap", group: "\uD83E\uDD66 Gem&#252;se" },
     { name: "Feldsalat (Sackerl)", detail: "Fr: Kaspresskn&#246;del auf Salat", group: "\uD83E\uDD66 Gem&#252;se" },
-    { name: "Zwiebel (3 Stk)", detail: "Sa: Omelette &#183; Sa: Saag Aloo", group: "\uD83E\uDD66 Gem&#252;se" },
+    { name: "Zwiebel (3 Stk)", detail: "Sa: Masala-Omelette &#183; Sa: Saag Aloo", group: "\uD83E\uDD66 Gem&#252;se" },
     { name: "Knoblauch", detail: "Mi: Spinat-Ei &#183; Sa: Saag Aloo", group: "\uD83E\uDD66 Gem&#252;se" },
     { name: "Ingwer (St&#252;ck)", detail: "Do Abend: Suppe &#183; Sa: Saag Aloo", group: "\uD83E\uDD66 Gem&#252;se" },
     { name: "Fr&#252;hlingszwiebeln", detail: "Di: Pad Thai", group: "\uD83E\uDD66 Gem&#252;se" },
@@ -761,6 +763,7 @@ const ZUTATEN_WOCHE = {
     { name: "Beeren gemischt TK", detail: "Mi/Fr/Sa/So t&#228;glich", group: "\uD83C\uDF4E Obst" },
     { name: "Limette (2 Stk)", detail: "Di: Pad Thai &#183; Do: Tacos", group: "\uD83C\uDF4E Obst" },
     { name: "Zwetschgenr&#246;ster (Glas)", detail: "So: Kaiserschmarrn", group: "\uD83C\uDF4E Obst" },
+    { name: "Aprikosen (TK o. Glas)", detail: "Mi Fr&#252;h: Porridge", group: "\uD83C\uDF4E Obst" },
     { name: "Waln&#252;sse (200g)", detail: "Mo/Di/So t&#228;glich", group: "\uD83E\uDD5C N&#252;sse & Samen" },
     { name: "Mandeln (100g)", detail: "Sa Vormittag", group: "\uD83E\uDD5C N&#252;sse & Samen" },
     { name: "Mandelmus (Glas)", detail: "Mo/Mi Fr&#252;hst&#252;ck", group: "\uD83E\uDD5C N&#252;sse & Samen" },
@@ -771,14 +774,15 @@ const ZUTATEN_WOCHE = {
     { name: "Erdn&#252;sse (ungesalzen)", detail: "Di: Pad Thai", group: "\uD83E\uDD5C N&#252;sse & Samen" },
     { name: "Oliven&#246;l", detail: "t&#228;glich", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
     { name: "K&#252;rbiskern&#246;l", detail: "Fr: Kaspresskn&#246;del-Salat", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
-    { name: "Kurkuma", detail: "Sa: Omelette &#183; Sa: Saag Aloo", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "Kurkuma", detail: "Sa: Masala-Omelette &#183; Sa: Saag Aloo", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
     { name: "Kreuzk&#252;mmel", detail: "Sa: Saag Aloo &#183; Sa: Raita", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
     { name: "Muskatnuss", detail: "Mi: Spinat-Ei-Pfanne", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
     { name: "Sojaso&#223;e", detail: "Di: Pad Thai &#183; Di Abend: Edamame", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
     { name: "Honig (Glas)", detail: "So: Kaiserschmarrn", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
+    { name: "Staubzucker", detail: "So: Kaiserschmarrn", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
     { name: "Essig", detail: "Fr: Kaspresskn&#246;del-Salat", group: "\uD83E\uDDC2 Gew&#252;rze & &#214;l" },
     { name: "Schnittlauch (frisch)", detail: "So: Tafelspitz-Suppe", group: "\uD83C\uDF3F Kr&#228;uter" },
-    { name: "Koriander (frisch)", detail: "Sa: Omelette &#183; Do: Tacos", group: "\uD83C\uDF3F Kr&#228;uter" },
+    { name: "Koriander (frisch)", detail: "Sa: Masala-Omelette &#183; Do: Tacos", group: "\uD83C\uDF3F Kr&#228;uter" },
     { name: "Petersilie (frisch)", detail: "So: Tafelspitz-Suppe", group: "\uD83C\uDF3F Kr&#228;uter" },
     { name: "Minze (frisch o. TK)", detail: "Sa: Raita", group: "\uD83C\uDF3F Kr&#228;uter" },
     { name: "Basilikum (frisch)", detail: "Mo Abend: Zucchini-Suppe", group: "\uD83C\uDF3F Kr&#228;uter" },
@@ -1009,7 +1013,17 @@ function getKW(date) {
   return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
 }
 
-var checked = {};
+var STORAGE_KEY = 'ep_checked_v1';
+var hideDone = false; // Modus: erledigte ausblenden
+
+function loadChecked() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch(e) { return {}; }
+}
+function saveChecked(c) {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(c)); } catch(e) {}
+}
+
+var checked = loadChecked();
 var mainTab = 0;
 var weekTab = 'diese';
 var weekInfo = getCurrentWeeks();
@@ -1037,53 +1051,68 @@ function switchWeek(w) {
 function toggleFood(wk, idx) {
   var k = 'f_'+wk+'_'+idx;
   checked[k] = !checked[k];
+  saveChecked(checked);
   renderFood();
 }
 
 function renderFood() {
   var wk = getWeekNum(weekTab);
   var lbl = weekTab === 'diese' ? weekInfo.currentLabel : weekInfo.nextLabel;
-  document.getElementById('weekInfo').textContent = 'Mahlzeitenplan Woche ' + wk + ' - ' + lbl;
+  document.getElementById('weekInfo').textContent = 'Mahlzeitenplan Woche ' + wk + ' \u00B7 ' + lbl;
   var items = (ZUTATEN_WOCHE[wk] || []).concat(NEM_ITEMS || []).concat(REINIGUNGS_ITEMS || []);
   var grouped = {};
   items.forEach(function(it, i) {
     if (!grouped[it.group]) grouped[it.group] = [];
     grouped[it.group].push({item: it, idx: i});
   });
+  var totalAll = items.length;
   var done = items.filter(function(_, i) { return !!checked['f_'+wk+'_'+i]; }).length;
-  var pct = items.length ? Math.round(done/items.length*100) : 0;
-  document.getElementById('foodCount').textContent = done + ' / ' + items.length;
+  var pct = totalAll ? Math.round(done/totalAll*100) : 0;
+  document.getElementById('foodCount').textContent = done + ' / ' + totalAll;
   document.getElementById('foodBar').style.width = pct + '%';
+
+  // Button-Label anpassen
+  var btnClear = document.querySelector('.btn:not(.save)');
+  if (btnClear) btnClear.textContent = hideDone ? '\u2715 Alle wieder zeigen' : '\uD83D\uDED2 Nur Kaufliste zeigen';
+
   var html = '';
   GROUP_ORDER.forEach(function(g) {
     if (!grouped[g]) return;
     var gc = GROUP_COLORS[g] || {bg:'#f5f5f5',accent:'#ccc',color:'#333'};
+    var visibleItems = grouped[g].filter(function(x){ return hideDone ? !checked['f_'+wk+'_'+x.idx] : true; });
+    if (visibleItems.length === 0) return; // Kategorie komplett erledigt – ausblenden
     var gDone = grouped[g].filter(function(x){ return !!checked['f_'+wk+'_'+x.idx]; }).length;
+    var gTotal = grouped[g].length;
     html += '<div class="group-hdr" style="background:'+gc.bg+';color:'+gc.color+'">';
-    html += '<span>'+g+'</span><span style="font-size:.65rem;opacity:.7">'+gDone+'/'+grouped[g].length+'</span></div>';
-    grouped[g].forEach(function(x) {
+    html += '<span>'+g+'</span><span style="font-size:.65rem;opacity:.7">'+gDone+'/'+gTotal+'</span></div>';
+    visibleItems.forEach(function(x) {
       var k = 'f_'+wk+'_'+x.idx;
       var d = !!checked[k];
       html += '<div class="item'+(d?' done':'')+'" onclick="toggleFood('+wk+','+x.idx+')">';
       html += '<div class="icb" style="background:'+(d?gc.color:'transparent')+';border:2px solid '+(d?gc.color:'#ccc')+'">';
-      if(d) html += 'v';
+      if(d) html += '\u2713';
       html += '</div><div><div class="iname">'+x.item.name+'</div>';
       if(x.item.detail) html += '<div class="idetail">'+x.item.detail+'</div>';
       html += '</div></div>';
     });
   });
+  if (html === '') html = '<div style="text-align:center;padding:1.5rem;color:#2E7D32;font-size:.85rem;font-weight:700">\u2705 Alles erledigt!</div>';
   document.getElementById('foodList').innerHTML = html;
 }
 
+// "Nur Kaufliste" / "Alle wieder zeigen" – blendet erledigte ein/aus
 function clearDone() {
-  var wk = getWeekNum(weekTab);
-  Object.keys(checked).forEach(function(k){ if(k.startsWith('f_'+wk+'_')) delete checked[k]; });
+  hideDone = !hideDone;
   renderFood();
 }
 
+// Woche zurücksetzen – alle Häkchen dieser Woche löschen
 function resetWeek() {
+  if (!confirm('Alle Häkchen dieser Woche löschen?')) return;
   var wk = getWeekNum(weekTab);
   Object.keys(checked).forEach(function(k){ if(k.startsWith('f_'+wk+'_')) delete checked[k]; });
+  hideDone = false;
+  saveChecked(checked);
   renderFood();
 }
 
