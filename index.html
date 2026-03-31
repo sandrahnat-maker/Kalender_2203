@@ -628,7 +628,7 @@ var FF=[
   {d:'2026-03-31',t:'🗂️ System Kursmaterial aufbauen',f:'13:00',e:'13:30',c:'schreibtisch',n:'Chaos im Kursmaterial → System entwickeln\n🏫 Johann Hoffmann Platz · Singrienergasse · Rosasgasse\n→ Was liegt wo? · Ordner/Mappen einteilen · Übersicht erstellen\n↩ nachgeholt von Mo 30.3.'},
   {d:'2026-03-31',t:'🍽️ Mittagessen',f:'13:30',e:'14:15',c:'mittagspause',n:'🍽 Iss heute den ersten Bissen wirklich langsam.\nMittagessen kochen\nPause – bewusst Abstand nehmen\nRhodiola (200mg) direkt nach dem Essen\nRudi Gabapentin – mit Futter verstecken'},
   {d:'2026-03-31',t:'🏠 Haushaltsblock',f:'14:15',e:'15:45',c:'haushalt',n:'Wohnung aufräumen\nPutzen (was nötig ist)\nBügeln\nPflanzen gießen\nEinkaufsliste erstellen\nWohnung schrittweise gestalten – 15 Min, ein Bereich'},
-  {d:'2026-03-31',t:'🛍️ Einkäufe',f:'15:45',e:'17:15',c:'extra',n:'🩸 Blutdruckmessgerät (Apotheke/DM/Bipa)\n🧦 Socken\n👙 BHs\n🧦 Strumpfhosen\n🐾 Fressnapf – Tierfutter/Bedarf'},
+  {d:'2026-03-31',t:'🛍️ Einkäufe',f:'15:45',e:'17:15',c:'schreibtisch',n:'🩸 Blutdruckmessgerät (Apotheke/DM/Bipa)\n🧦 Socken\n👙 BHs\n🧦 Strumpfhosen\n🐾 Fressnapf – Tierfutter/Bedarf'},
   {d:'2026-03-31',t:'🐾 Tiere',f:'17:15',e:'17:45',c:'haushalt',n:'Rudi füttern + Gabapentin (in Futter verstecken)\nTimmy füttern (Urinary-Futter)\nLotte füttern\nSpaziergang mit Lotte\nMedikamente Tiere prüfen\n── Pflege alle Tiere ──\n🐾 Krallenkontrolle – Rudi, Timmy, Lotte (bei Bedarf kürzen)\n── Förderung Katzen ──\n🎯 Schnüffelspiel – Futter in Papierröllchen/Eierkarton verstecken\n🪄 Zauberstab / Federwedel – 5 Min aktiv spielen\n📦 Neue Schachtel oder Tüte zum Erkunden hinstellen\n🧩 Intelligenzspielzeug / Leckerli-Puzzle\n💆 Fell bürsten + Kraulen (Bindung + Durchblutung)\n── Förderung & Pflege Lotte ──\n🪮 Fellpflege – Bürsten, Verfilzungen prüfen, Ohren + Augen kontrollieren\n👃 Schnüffelspaziergang – langsam, alles beschnuppern lassen\n🎾 Apportieren oder Suchspiel in Wohnung/Garten\n🧶 Schnüffelmatte oder Kong befüllen\n🐾 Neue Route beim Spaziergang'},
   {d:'2026-03-31',t:'🚿 Pflege',f:'17:45',e:'19:30',c:'fitness',n:'Sitzbad (10 Min – warmes Wasser 37°C)\nDuschen + Haare waschen\nKörperöl + Selbstmassage (15 Min)\nBeckenboden-Übungen (3 Min)\nKalkschulter-Übungen (15 Min)\nGesichtsyoga (15 Min)\nMeditation (15 Min)\nHaarmaske (wenn nötig – Mo Feuchtigkeitsmaske, Fr Öl)\nWochenpflege So: Peeling + Maske + Fußpflege + Nagelpflege'},
   {d:'2026-03-31',t:'🍴 Abendessen',f:'19:30',e:'21:00',c:'freizeit',n:'Kochen\nAbendessen mit Thomas\nKatzen füttern (18:00)\nEntspannen – kein Stress nach dem Essen'},
@@ -1436,7 +1436,6 @@ function rDay(c){
   var ALLOWED_TITLES=['🌅 Morgenroutine','🗂️ Schreibtischblock','🍽️ Mittagessen','🏠 Haushaltsblock','🐾 Tiere','💪 Sport','🚿 Pflege','🍴 Abendessen','🎨 Freizeit','🌙 Abendroutine'];
 
   var all=evs.filter(function(ev){
-    if(ev.cat==='extra') return true;
     if(ev.cat==='vhs'||ev.cat==='unipraesenz') return true;
     if(ALLOWED_TITLES.indexOf(ev.title)>=0) return true;
     return false;
@@ -1449,7 +1448,6 @@ function rDay(c){
   var ALWAYS_SHOW=['🌙 Abendroutine','🍴 Abendessen','🎨 Freizeit'];
 
   var visible=all.filter(function(ev){
-    if(ev.cat==='extra') return true;
     if(ev.cat==='vhs'||ev.cat==='unipraesenz') return true;
     if(fixedBlocks.length===0) return true;
     if(ALWAYS_SHOW.indexOf(ev.title)>=0) return true;
@@ -2312,8 +2310,7 @@ function showKompass(date) {
   var offen = allEvs.filter(function(ev) {
     if (chkd(ev.id, date)) return false;
     var endM = ev.to ? hm(ev.to) : hm(ev.from) + 60;
-    if (endM <= nowMins) return false;
-    return true;
+    return endM > nowMins;
   });
   offen.sort(function(a,b){ return hm(a.from) - hm(b.from); });
 
@@ -2334,74 +2331,67 @@ function showKompass(date) {
   popup.style.cssText = 'position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);width:calc(100% - 2rem);max-width:520px;background:#fff;border-radius:18px;box-shadow:0 8px 32px rgba(0,0,0,.22);z-index:500;overflow:hidden;animation:slideUp .3s ease';
 
   var header = document.createElement('div');
-  header.style.cssText = 'background:linear-gradient(135deg,#6B4510,#A04020);color:#fff;padding:1.2rem 1rem 1rem;position:relative';
+  header.style.cssText = 'background:linear-gradient(135deg,#8B6020,#B85C30);color:#fff;padding:.75rem 1rem .6rem;display:flex;align-items:center;justify-content:space-between';
+
+  var headerInfo = document.createElement('div');
+  var lbl = document.createElement('div');
+  lbl.style.cssText = 'font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;opacity:.8;margin-bottom:.1rem';
+  lbl.textContent = '🧭 Was weiß ich darüber, was jetzt richtig ist?';
+  var info = document.createElement('div');
+  info.style.cssText = 'font-size:.82rem;font-weight:600';
+  info.textContent = offen.length + ' offen · noch ' + zeitText + ' heute';
+  headerInfo.appendChild(lbl);
+  headerInfo.appendChild(info);
 
   var closeBtn = document.createElement('button');
-  closeBtn.style.cssText = 'position:absolute;top:.6rem;right:.7rem;background:rgba(255,255,255,.15);border:none;color:#fff;width:30px;height:30px;border-radius:50%;font-size:1.2rem;cursor:pointer;line-height:1';
+  closeBtn.style.cssText = 'background:rgba(255,255,255,.2);border:none;color:#fff;width:28px;height:28px;border-radius:50%;font-size:1.1rem;cursor:pointer';
   closeBtn.textContent = '×';
   closeBtn.onclick = function() { popup.remove(); };
-  header.appendChild(closeBtn);
 
-  var kompassIcon = document.createElement('div');
-  kompassIcon.style.cssText = 'font-size:2rem;margin-bottom:.45rem;line-height:1';
-  kompassIcon.textContent = '🧭';
-  header.appendChild(kompassIcon);
+  header.appendChild(headerInfo);
+  header.appendChild(closeBtn);
+  popup.appendChild(header);
 
   var frage = document.createElement('div');
-  frage.style.cssText = 'font-size:1.35rem;font-weight:800;letter-spacing:-.01em;line-height:1.2;color:#fff;margin-bottom:.35rem;font-family:var(--font-playfair)';
-  frage.textContent = 'Was fühlt sich jetzt richtig an?';
-  header.appendChild(frage);
-
-  var info = document.createElement('div');
-  info.style.cssText = 'font-size:.78rem;opacity:.75;font-weight:500';
-  info.textContent = offen.length + ' offen · noch ' + zeitText + ' heute';
-  header.appendChild(info);
-
-  popup.appendChild(header);
+  frage.style.cssText = 'padding:.65rem 1rem .4rem;font-size:.78rem;color:#8A7D6A;font-style:italic';
+  frage.textContent = 'Was weiß ich darüber, was jetzt richtig ist?';
+  popup.appendChild(frage);
 
   var list = document.createElement('div');
   list.style.cssText = 'padding:.2rem .7rem .8rem';
 
   var shown = offen.slice(0, 4);
-  function makeEvBtn(ev) {
-    var endM = ev.to ? hm(ev.to) : hm(ev.from) + 60;
-    var isNow = hm(ev.from) <= nowMins && endM > nowMins;
-    var bg = isNow ? '#FDF8F0' : '#F7F2EB';
-    var border = isNow ? '#C4873A' : 'rgba(0,0,0,.08)';
+  shown.forEach(function(ev) {
+    var isNow = hm(ev.from) <= nowMins && (ev.to ? hm(ev.to) > nowMins : true);
     var btn = document.createElement('button');
-    btn.style.cssText = 'display:flex;align-items:center;gap:.6rem;width:100%;background:' + bg + ';border:1.5px solid ' + border + ';border-radius:12px;padding:.55rem .8rem;margin-bottom:.4rem;cursor:pointer;text-align:left;font-family:var(--font-dm);opacity:1';
+    btn.style.cssText = 'display:flex;align-items:center;gap:.6rem;width:100%;background:' + (isNow ? '#FDF8F0' : '#F7F2EB') + ';border:1.5px solid ' + (isNow ? '#C4873A' : 'rgba(0,0,0,.08)') + ';border-radius:12px;padding:.55rem .8rem;margin-bottom:.4rem;cursor:pointer;text-align:left;font-family:var(--font-dm)';
+
     var time = document.createElement('span');
     time.style.cssText = 'font-size:.72rem;color:#8A7D6A;flex-shrink:0;min-width:38px';
     time.textContent = ev.from;
+
     var title = document.createElement('span');
     title.style.cssText = 'flex:1;font-size:.84rem;font-weight:600;color:#1A1A2E';
     title.textContent = ev.title;
+
     btn.appendChild(time);
     btn.appendChild(title);
+
     if (isNow) {
       var badge = document.createElement('span');
       badge.style.cssText = 'font-size:.62rem;background:#C4873A;color:#fff;border-radius:10px;padding:.1rem .45rem;flex-shrink:0';
       badge.textContent = 'Jetzt';
       btn.appendChild(badge);
     }
-    btn.onclick = function() { popup.remove(); if(CV !== 'day') setV('day'); };
-    return btn;
-  }
 
-  shown.forEach(function(ev) {
-    list.appendChild(makeEvBtn(ev));
+    btn.onclick = function() { popup.remove(); if(V !== 'day') setV('day'); };
+    list.appendChild(btn);
   });
 
   if (offen.length > 4) {
-    var more = document.createElement('button');
-    more.style.cssText = 'display:block;width:100%;text-align:center;font-size:.78rem;color:#8B6020;padding:.35rem 0 .45rem;background:rgba(139,96,32,.08);border:1.5px dashed rgba(139,96,32,.3);border-radius:10px;cursor:pointer;font-family:var(--font-dm);font-weight:600;margin-top:.1rem';
-    more.textContent = '+ ' + (offen.length - 4) + ' weitere anzeigen';
-    more.onclick = function() {
-      more.remove();
-      offen.slice(4).forEach(function(ev) {
-        list.appendChild(makeEvBtn(ev));
-      });
-    };
+    var more = document.createElement('div');
+    more.style.cssText = 'text-align:center;font-size:.72rem;color:#8A7D6A;padding:.2rem 0 .3rem';
+    more.textContent = '+ ' + (offen.length - 4) + ' weitere';
     list.appendChild(more);
   }
 
@@ -2416,7 +2406,7 @@ function showKompass(date) {
       p.style.transform = 'translateX(-50%) translateY(20px)';
       setTimeout(function(){ if(p.parentNode) p.remove(); }, 400);
     }
-  }, 20000);
+  }, 12000);
 }
 
 // ── DRAG & DROP TOUCH LOGIC ───────────────────────────────────────────────
@@ -2513,7 +2503,6 @@ function resetDragOverride(evId, date) {
 render();
 setTimeout(initDragDrop, 500);
 renderOffeneBar();
-setTimeout(function(){ showKompass(ds(CD)); }, 1200);
 // Alle 60 Sekunden aktualisieren
 setInterval(renderOffeneBar, 60000);
 setTimeout(function(){
